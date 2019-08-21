@@ -47,7 +47,7 @@
                             <a class="h6 post__author-name fn" href="#">JACK SCORPIO</a>
                             <div class="post__date">
                                 <time class="published" datetime="2017-03-24T18:18">
-                                    -  12 hours ago
+                                    - 12 hours ago
                                 </time>
                             </div>
                             <div class="post__location">Malaysia</div>
@@ -62,7 +62,10 @@
                             <div class="control-block-button post-control-button">
 
                                 <a href="#" class="post-add-icon inline-items">
-                                    <svg class="olymp-speech-balloon-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>
+                                    <svg class="olymp-speech-balloon-icon">
+                                        <use
+                                            xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
+                                    </svg>
                                     <span>105</span>
                                 </a>
 
@@ -76,7 +79,7 @@
                             </div>
 
                             <div class="post-content">
-                               {{challenge.description}}
+                                {{challenge.description}}
                             </div>
                         </div>
 
@@ -87,37 +90,44 @@
                             <ul>
                                 <li>
                                     <a href="#">
-                                        <img src="assets/img/icon-chat13.png" alt="icon" data-toggle="tooltip" data-placement="top" data-original-title="LOL">
+                                        <img src="assets/img/icon-chat13.png" alt="icon" data-toggle="tooltip"
+                                             data-placement="top" data-original-title="LOL">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <img src="assets/img/icon-chat15.png" alt="icon" data-toggle="tooltip" data-placement="top" data-original-title="Amazed">
+                                        <img src="assets/img/icon-chat15.png" alt="icon" data-toggle="tooltip"
+                                             data-placement="top" data-original-title="Amazed">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <img src="assets/img/icon-chat9.png" alt="icon" data-toggle="tooltip" data-placement="top" data-original-title="ANGER">
+                                        <img src="assets/img/icon-chat9.png" alt="icon" data-toggle="tooltip"
+                                             data-placement="top" data-original-title="ANGER">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <img src="assets/img/icon-chat4.png" alt="icon" data-toggle="tooltip" data-placement="top" data-original-title="joy">
+                                        <img src="assets/img/icon-chat4.png" alt="icon" data-toggle="tooltip"
+                                             data-placement="top" data-original-title="joy">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <img src="assets/img/icon-chat6.png" alt="icon" data-toggle="tooltip" data-placement="top" data-original-title="BAD">
+                                        <img src="assets/img/icon-chat6.png" alt="icon" data-toggle="tooltip"
+                                             data-placement="top" data-original-title="BAD">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <img src="assets/img/icon-chat26.png" alt="icon" data-toggle="tooltip" data-placement="top" data-original-title="LIKE">
+                                        <img src="assets/img/icon-chat26.png" alt="icon" data-toggle="tooltip"
+                                             data-placement="top" data-original-title="LIKE">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <img src="assets/img/icon-chat27.png" alt="icon" data-toggle="tooltip" data-placement="top" data-original-title="COOL">
+                                        <img src="assets/img/icon-chat27.png" alt="icon" data-toggle="tooltip"
+                                             data-placement="top" data-original-title="COOL">
                                     </a>
                                 </li>
                             </ul>
@@ -130,9 +140,9 @@
 
                 </div>
 
-            <!-- Comments Component-->
+                <!-- Comments Component-->
 
-            <Comments comment_type="challenge" :comment_type_id="selectedChallengeId"  />
+                <Comments comment_type="challenge" :comment_type_id="selectedChallengeId"/>
 
 
                 <!-- ... end Pagination -->
@@ -195,7 +205,8 @@
                                     <div class="comments-shared">
                                         <a href="#" class="post-add-icon inline-items">
                                             <svg class="olymp-speech-balloon-icon">
-                                                <use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
+                                                <use
+                                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
                                             </svg>
                                             <span>97</span>
                                         </a>
@@ -258,7 +269,8 @@
                                     <div class="comments-shared">
                                         <a href="#" class="post-add-icon inline-items">
                                             <svg class="olymp-speech-balloon-icon">
-                                                <use xlink:href="svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
+                                                <use
+                                                    xlink:href="svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
                                             </svg>
                                             <span>62</span>
                                         </a>
@@ -326,7 +338,8 @@
                                     <div class="comments-shared">
                                         <a href="#" class="post-add-icon inline-items">
                                             <svg class="olymp-speech-balloon-icon">
-                                                <use xlink:href="svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
+                                                <use
+                                                    xlink:href="svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
                                             </svg>
                                             <span>39</span>
                                         </a>
@@ -393,7 +406,8 @@
                                     <div class="comments-shared">
                                         <a href="#" class="post-add-icon inline-items">
                                             <svg class="olymp-speech-balloon-icon">
-                                                <use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
+                                                <use
+                                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
                                             </svg>
                                             <span>105</span>
                                         </a>
@@ -415,60 +429,58 @@
 </template>
 
 <script>
-    import Comments from './sub-components/Comments'; 
+    import Comments from './sub-components/Comments';
+
     export default {
         name: "ChallengeDetails",
-        components: { Comments },
+        components: {Comments},
         data() {
             return {
-                userLogin:false,
+                userLogin: false,
                 selectedChallengeSlug: '',
-                selectedChallengeId:'',
-                challenge:'',
-
+                selectedChallengeId: '',
+                challenge: '',
             }
         },
-        created() { 
+        created() {
             this.selectedChallengeId = this.$route.params.id;
             this.selectedChallengeSlug = this.$route.params.slug;
             this.userLogin = this.$store.getters.getLogin;
             this.userId = this.$store.getters.getUserId;
- 
-            let loader = this.$loading.show({
-                    container: this.fullPage ? null : this.$refs.file,
-                });
 
-                var bodyFormData = new FormData();
-                bodyFormData.set('id', this.selectedChallengeId);
-                this.axios({
-                        method: 'get',
-                        url: 'challenges/getDetails?id='+this.selectedChallengeId,
-                        data: bodyFormData
-                    })
-                    .then((response) => {
-                        loader.hide();
-                        console.log(response);
-                        if (response.status==200) {
-                            this.challenge = response.data;
-                         
-                        } 
-                        else if(response.status==401)
-                        {
-                            // console.log('in 401 response');
-                            //   this.$store.dispatch('destroyAccess');
-                            //     this.$toast.open({
-                            //     message: 'Please login to continue',
-                            //     type: 'success'
-                            // });
-                            //   this.$router.push('/login');
-                        }
-                        else {
-                           console.log('inelse boy');
-                        }
-                    })
-                    .catch(function(response) {
-                        loader.hide();
-                    });
+            let loader = this.$loading.show({
+                container: this.fullPage ? null : this.$refs.file,
+            });
+
+            let bodyFormData = new FormData();
+            bodyFormData.set('id', this.selectedChallengeId);
+            this.axios.get(`challenges/getDetails?id=${this.selectedChallengeId}`)
+            // this.axios({
+            //         method: 'get',
+            //         url: ''+this.selectedChallengeId,
+            //         data: bodyFormData
+            //     })
+                .then((response) => {
+                    loader.hide();
+                    console.log(response);
+                    if (response.status == 200) {
+                        this.challenge = response.data.data;
+
+                    } else if (response.status == 401) {
+                        // console.log('in 401 response');
+                        //   this.$store.dispatch('destroyAccess');
+                        //     this.$toast.open({
+                        //     message: 'Please login to continue',
+                        //     type: 'success'
+                        // });
+                        //   this.$router.push('/login');
+                    } else {
+                        console.log('inelse boy');
+                    }
+                })
+                .catch(function (response) {
+                    loader.hide();
+                });
         },
 
     }

@@ -22,10 +22,10 @@ use Actuallymab\LaravelComment\CanComment;
 
 class User extends Authenticatable
 {
-     use HasSlug,  Notifiable, Gamify;
-     use  EntrustUserTrait ;
-     use CanFollow, CanBeFollowed, CanBookmark, CanLike, CanFavorite, CanSubscribe, CanVote;
-     use  CanComment;
+    use HasSlug, Notifiable, Gamify;
+    use EntrustUserTrait;
+    use CanFollow, CanBeFollowed, CanBookmark, CanLike, CanFavorite, CanSubscribe, CanVote;
+    use CanComment;
 
     /**
      * The attributes that are mass assignable.
@@ -57,58 +57,58 @@ class User extends Authenticatable
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : \Spatie\Sluggable\SlugOptions
+    public function getSlugOptions(): \Spatie\Sluggable\SlugOptions
     {
         return \Spatie\Sluggable\SlugOptions::create()
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
 
-    public $success_message = ['status' => 1, 'message'=> 'record saved successfully', 'type'      => MSG_SUCCESS];
-    public $error_message = ['status' => 0, 'message'=> 'please try again later', 'type'      => MSG_ERROR];
+    public $success_message = ['status' => 1, 'message' => 'record saved successfully', 'type' => MSG_SUCCESS];
+    public $error_message = ['status' => 0, 'message' => 'please try again later', 'type' => MSG_ERROR];
 
     /**
      * This method will return the rule of the user
-     * @param  string $value [description]
+     * @param string $value [description]
      * @return [type]        [description]
      */
-    public function role($value='')
+    public function role($value = '')
     {
         return $this->belongsToMany('App\Role', 'role_user');
     }
 
     /**
      * This method will send the role name of the user
-     * @param  string $value [description]
+     * @param string $value [description]
      * @return [type]        [description]
      */
-    public function getRoleName($value='')
+    public function getRoleName($value = '')
     {
         $role = $this->role()->first();
-        if($role)
+        if ($role)
             return $role->display_name;
         return '-';
     }
 
     /**
      * This method will return the rule of the user
-     * @param  string $value [description]
+     * @param string $value [description]
      * @return [type]        [description]
      */
-    public function campaign($value='')
+    public function campaign($value = '')
     {
         return $this->belongsToMany('App\Campaign', 'campaign_user');
     }
 
     /**
      * This method will send the role name of the user
-     * @param  string $value [description]
+     * @param string $value [description]
      * @return [type]        [description]
      */
-    public function getCampaignName($value='')
+    public function getCampaignName($value = '')
     {
         $campaign = $this->campaign()->first();
-        if($campaign)
+        if ($campaign)
             return $campaign->campaign;
         return '-';
     }
@@ -120,59 +120,58 @@ class User extends Authenticatable
      */
     public function getEditPath()
     {
-        return URL_USERS_EDIT.$this->slug;
+        return URL_USERS_EDIT . $this->slug;
     }
 
     /**
      * This method will handle the total saving job of the module
      * Thsis accepts the UsersRequest Object
-     * @param  UsersRequest $request [description]
+     * @param UsersRequest $request [description]
      * @return [type]                [description]
      */
     public static function saveRecord(UsersRequest $request)
     {
 
-          $static_object = (new self);
+        $static_object = (new self);
 
-          $user = new \App\User();
-          $user->name = $request->name;
-          $user->email = $request->email;
-          
+        $user = new \App\User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+
         /**
          * If admin does not enter password, it will create the default password
          */
         $password = 'password';
-         if($request->has('password'))
-         {
-           if($request->password)
-              $password = $request->password;
-         }
+        if ($request->has('password')) {
+            if ($request->password)
+                $password = $request->password;
+        }
 
-         $user->password = bcrypt($password);
-         $response = $user->save();
+        $user->password = bcrypt($password);
+        $response = $user->save();
 
-          /**
-           * User created, Assign Roles
-           */
+        /**
+         * User created, Assign Roles
+         */
 
-          $user->role()->attach($request->role);
+        $user->role()->attach($request->role);
 
-          /**
-           * Roles Assigned successfully, upload images if any available
-           */
+        /**
+         * Roles Assigned successfully, upload images if any available
+         */
 
-          /**
-          * Assign campaign
-          */
-          $user->campaign()->attach($request->campaign);
+        /**
+         * Assign campaign
+         */
+        $user->campaign()->attach($request->campaign);
 
-          $static_object->processUpload($request, $user);
-          
+        $static_object->processUpload($request, $user);
 
-          if($response)
-              return $static_object->getMessage('success');
-          else
-              return $static_object->getMessage('error');
+
+        if ($response)
+            return $static_object->getMessage('success');
+        else
+            return $static_object->getMessage('error');
 
     }
 
@@ -180,26 +179,24 @@ class User extends Authenticatable
     {
 
         $static_object = (new self);
-        $user =  User::getRecord($slug);
+        $user = User::getRecord($slug);
 
-        if(!$user)
+        if (!$user)
             return false;
 
         $user->name = $request->name;
 
-        
 
-       if($request->has('password'))
-       {
-        if($request->password)
-            $user->password = bcrypt($request->password);
-       }
+        if ($request->has('password')) {
+            if ($request->password)
+                $user->password = bcrypt($request->password);
+        }
         $user->role()->sync($request->role);
         $user->campaign()->sync($request->campaign);
         $response = $user->save();
         $static_object->processUpload($request, $user);
 
-        if($response)
+        if ($response)
             return $static_object->getMessage('success');
         else
             return $static_object->getMessage('error');
@@ -207,23 +204,21 @@ class User extends Authenticatable
 
     public function getMessage($type)
     {
-        if($type=='success')
-        {
-          $this->success_message['message'] = $this->success_message['message'];
-          return $this->success_message;
+        if ($type == 'success') {
+            $this->success_message['message'] = $this->success_message['message'];
+            return $this->success_message;
         }
 
         $this->error_message['message'] = $this->error_message['message'];
-          return $this->error_message;
+        return $this->error_message;
     }
 
     public function processUpload($request, $user)
     {
-        if($request->hasFile('image'))
-        {
+        if ($request->hasFile('image')) {
             $path = $request->file('image')->store('users');
             $user->image = $path;
-            $response =    $user->save();
+            $response = $user->save();
             return $response;
         }
     }
@@ -232,10 +227,10 @@ class User extends Authenticatable
     public function getUserImage()
     {
         $url = Storage::url($this->image);
-        return BASE_PATH.$url;
+        return BASE_PATH . $url;
     }
 
-     public static function getRecord($slug)
+    public static function getRecord($slug)
     {
         return \App\User::where('slug', '=', $slug)->first();
     }
@@ -250,42 +245,39 @@ class User extends Authenticatable
         $static_object = (new static);
         try {
             $record = \App\User::getRecord($slug);
-            if($record)
-            {
+            if ($record) {
                 // $old_image = $record;
-                $status =   $record->delete();
+                $status = $record->delete();
 
-            // if($old_image)
-            // {
-            //     \File::delete($static_object->upload_path.$old_image);
-            //     \File::delete($static_object->upload_path_thumbnail.$old_image);
-            // }
-              return ['status' => $status, 'message' => 'record deleted successfully'];
+                // if($old_image)
+                // {
+                //     \File::delete($static_object->upload_path.$old_image);
+                //     \File::delete($static_object->upload_path_thumbnail.$old_image);
+                // }
+                return ['status' => $status, 'message' => 'record deleted successfully'];
             }
-        }
-        catch( \Exception $ex)
-        {
-             return ['status' => $status, 'message' => $ex->getMessage()];
+        } catch (\Exception $ex) {
+            return ['status' => $status, 'message' => $ex->getMessage()];
 
         }
     }
 
     public function challenges()
     {
-        return $this->hasMany('\App\Challenge','created_by','id');
+        return $this->hasMany('\App\Challenge', 'created_by', 'id');
     }
 
 
-    public function getFriendSuggestions($limit=5)
+    public function getFriendSuggestions($limit = 5)
     {
         $following_users = $this->followings()->select('followables.followable_id')
-                                ->get()
-                                ->pluck('followable_id')
-                                ->toArray();
-        
-        $list = \App\User::whereNotIn('id',$following_users)
-                            ->where('id','!=', $this->id)
-                            ->limit($limit)->get();
+            ->get()
+            ->pluck('followable_id')
+            ->toArray();
+
+        $list = \App\User::whereNotIn('id', $following_users)
+            ->where('id', '!=', $this->id)
+            ->limit($limit)->get();
         return \App\User::processFrendSuggestions($list);
     }
 
@@ -293,14 +285,13 @@ class User extends Authenticatable
     {
         $user = \Auth::user();
         $list = [];
-        foreach($friends as $friend)
-        {
+        foreach ($friends as $friend) {
             $item['id'] = $friend->id;
             $item['name'] = $friend->name;
             $item['slug'] = $friend->slug;
             $item['following'] = $friend->followings(User::class)->get()->count();
             $item['image'] = '';
-            $item['is_following'] = (int) $user->isFollowing($friend);
+            $item['is_following'] = (int)$user->isFollowing($friend);
             $list[] = $item;
         }
         return $list;

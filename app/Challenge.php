@@ -24,9 +24,9 @@ class Challenge extends Model implements Commentable
 
 	protected $table = 'challenges';
     protected static $recordEvents = ['created'];
-    
+
     protected $fillable = ['name', 'text'];
-    
+
     protected static $logAttributes = ['name', 'text'];
 
 	public $success_message = [	'status' => 1,
@@ -37,11 +37,11 @@ class Challenge extends Model implements Commentable
     							'message'=> 'please_try_again_later',
     							'type'   => 'error'
     						];
-	private $base_path = 'http://localhost/euraka-live/public/';    						
+	private $base_path = 'http://localhost/euraka-live/public/';
    	private $upload_path = 'uploads/challenges/';
-   	private $upload_path_thumbnail = 'uploads/challenges/thumbnails/';    		
-   	private $edit_path = 'challenges/edit/';				
-    
+   	private $upload_path_thumbnail = 'uploads/challenges/thumbnails/';
+   	private $edit_path = 'challenges/edit/';
+
 
 
     public function mustBeApproved(): bool
@@ -58,7 +58,7 @@ class Challenge extends Model implements Commentable
             ->saveSlugsTo('slug');
     }
 
-  
+
 
     /**
      * This method will handle the total saving job of the module
@@ -134,7 +134,7 @@ class Challenge extends Model implements Commentable
         	$response =    $record->save();
         	return $response;
     	}
-       
+
     }
 
     /**
@@ -165,7 +165,7 @@ class Challenge extends Model implements Commentable
      */
     public static function getRecord($slug)
     {
-        
+
     return \App\Challenge::leftJoin('eureka_categories','id','challenges.category_id')
        ->where('challenges.slug','=', $slug)->first();
     }
@@ -244,7 +244,7 @@ class Challenge extends Model implements Commentable
                                 ->first();
             $item['comment_id'] = $record->id;
             $item['comment'] = $record->comment;
-            $item['created_at'] = 
+            $item['created_at'] =
             \Carbon\Carbon::createFromTimeStamp(strtotime($record->created_at))->diffForHumans();
             $item['rate'] = $record->rate;
             $item['user'] = $user;

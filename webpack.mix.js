@@ -18,12 +18,10 @@ mix.version();
 
 if (!mix.inProduction()) {
     mix.browserSync({
-        proxy: 'usa.local',
+        proxy: 'euraka.local',
         files: [
-            'public/css/client.css',
-            'public/js/main.js',
-            'public/js/chat-message.js',
-            'public/js/chat-notify.js',
+            'public/css/app.css',
+            'public/js/app.js',
         ],
         open: false
     });
