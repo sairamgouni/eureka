@@ -112,7 +112,7 @@ class ChallengeController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return ChallengeResource
      */
 //    public function show(Request $request)
 //    {
