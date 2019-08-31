@@ -24,10 +24,15 @@ Vue.use(Loading);
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/index.css';
 import Datepicker from 'vuejs-datepicker';
-import Multiselect from 'vue-multiselect';
 Vue.use(VueToast);
 Vue.use(Datepicker);
-Vue.use(Multiselect);
+
+import Multiselect from 'vue-multiselect'
+import 'vue-multiselect/dist/vue-multiselect.min.css'
+
+  // register globally
+  Vue.component('multiselect', Multiselect)
+
 
 import InfiniteLoading from 'vue-infinite-loading';
 

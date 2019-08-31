@@ -9,7 +9,7 @@
 		<!-- Main Content -->
 
 		<main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
-		 <div role="tablist " v-if="userLogin">
+		<!--  <div role="tablist " v-if="userLogin">
 		    <b-card no-body class="mb-1">
 		      <b-card-header header-tag="header" class="p-1 " role="tab">
 		        <b-button block href="#" v-b-toggle.accordion-1 variant="info" class="btn btn-purple btn-lg full-width color-white" style="color:white;">Post Challange</b-button>
@@ -20,7 +20,7 @@
 		        </b-card-body>
 		      </b-collapse>
 		    </b-card>
-		  </div>
+		  </div> -->
 		
 		<ActivityItem />
 
@@ -74,6 +74,7 @@ import ActivityFeed from './sub-components/ActivityFeed';
 import PagesMayLike from './sub-components/PagesMayLike'; 
 import PostStatus from './sub-components/PostStatus'; 
 import ActivityItem from './sub-components/ActivityItem'; 
+import PostChallenge from './challenges/PostChallenge'; 
 
     export default {
         name: 'Newsfeed',
@@ -85,6 +86,7 @@ import ActivityItem from './sub-components/ActivityItem';
         	PostStatus,
         
         	ActivityItem,
+        	PostChallenge
         },
         data() {
         	return {

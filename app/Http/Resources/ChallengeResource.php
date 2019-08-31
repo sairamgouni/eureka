@@ -26,6 +26,8 @@ class ChallengeResource extends JsonResource
             'description' => $this->description,
             'likes' => $this->likers()->count(),
             'comments' => $this->comments()->count(),
+            'ideas_count' => $this->comments()->where('created_at', '>=', $this->start_date)
+                ->where('created_at', '<=', $this->end_date)->count(),
             'otherUsersLiked' => $this->likers()->count(),
             'user' => new ChallengeOwnerResource($this->user),
             'created_at' => $this->created_at->diffForHumans(),

@@ -17,144 +17,105 @@
 					
 					<!-- Personal Information Form  -->
 					
-					<form>
-						<div class="row">
+					 <b-form @submit="onSubmit">
+                
+                    	<div class="row">
+
+
+					  			
+					
 					
 							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
 								<div class="form-group label-floating">
-									<label class="control-label">First Name</label>
-									<input class="form-control" placeholder="" type="text" value="James">
+									<label class="control-label">Full Name</label>
+									
+
+                    		<b-form-input 
+					                    class="mt-2 form-control"
+					                    id="fullname" 
+					                    type="text" 
+					                    v-model="form.fullname" 
+					                    required 
+					                   />
+					                </b-form-group>
+								</div>
+
+								<div class="form-group label-floating">
+									<label class="control-label">Nick Name</label>
+
+                    		<b-form-input 
+					                    class="mt-2 form-control"
+					                    id="nickname" 
+					                    type="text" 
+					                    v-model="form.nickname" 
+					                    required 
+					                   />
+					                </b-form-group>
+
 								</div>
 					
 								<div class="form-group label-floating">
 									<label class="control-label">Your Email</label>
-									<input class="form-control" placeholder="" type="email" value="jspiegel@yourmail.com">
+								
+                    		<b-form-input 
+					                    class="mt-2 form-control"
+					                    id="email" 
+					                    type="text" 
+					                    v-model="form.email" 
+					                    required readonly
+					                   />
+					                </b-form-group>
 								</div>
 					
-								<div class="form-group date-time-picker label-floating">
-									<label class="control-label">Your Birthday</label>
-									<input name="datetimepicker" value="10/24/1984" />
-									<span class="input-group-addon">
-															<svg class="olymp-month-calendar-icon icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-month-calendar-icon"></use></svg>
-														</span>
-								</div>
+ 
 							</div>
 					
 							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
-								<div class="form-group label-floating">
-									<label class="control-label">Last Name</label>
-									<input class="form-control" placeholder="" type="text" value="Spiegel">
-								</div>
+			 
 					
-								<div class="form-group label-floating">
-									<label class="control-label">Your Website</label>
-									<input class="form-control" placeholder="" type="email" value="daydreamzagency.com">
-								</div>
-					
-					
-								<div class="form-group label-floating is-empty">
-									<label class="control-label">Your Phone Number</label>
-									<input class="form-control" placeholder="" type="text">
-								</div>
-							</div>
-					
-							<div class="col col-lg-4 col-md-4 col-sm-12 col-12">
-								<div class="form-group label-floating is-select">
-									<label class="control-label">Your Country</label>
-									<select class="selectpicker form-control">
-										<option value="US">United States</option>
-										<option value="AU">Australia</option>
-									</select>
-								</div>
-							</div>
-							<div class="col col-lg-4 col-md-4 col-sm-12 col-12">
-								<div class="form-group label-floating is-select">
-									<label class="control-label">Your State / Province</label>
-									<select class="selectpicker form-control">
-										<option value="CA">California</option>
-										<option value="TE">Texas</option>
-									</select>
-								</div>
-							</div>
-							<div class="col col-lg-4 col-md-4 col-sm-12 col-12">
-								<div class="form-group label-floating is-select">
-									<label class="control-label">Your City</label>
-									<select class="selectpicker form-control">
-										<option value="SF">San Francisco</option>
-										<option value="NY">New York</option>
-									</select>
-								</div>
-							</div>
-							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
+ 
 								<div class="form-group label-floating">
 									<label class="control-label">Write a little description about you</label>
-									<textarea class="form-control" placeholder="">Hi, I’m James, I’m 36 and I work as a Digital Designer for the  “Daydreams” Agency in Pier 56</textarea>
+									<b-form-textarea
+							    class="mt-2 form-control"
+							      id="description"
+							      v-model="form.about"
+							      
+							      rows="3"
+							      max-rows="6"
+						    ></b-form-textarea>
 								</div>
-					
-								<div class="form-group label-floating is-select">
-									<label class="control-label">Your Gender</label>
-									<select class="selectpicker form-control">
-										<option value="MA">Male</option>
-										<option value="FE">Female</option>
-									</select>
-								</div>
-					
-								<div class="form-group label-floating is-empty">
-									<label class="control-label">Religious Belifs</label>
-									<input class="form-control" placeholder="" type="text">
-								</div>
+
+							<div class="form-group label-floating">
+								<span class="control-label">Profile Image</span>
+							<b-form-file
+							class="mt-2"
+						      v-model="form.image"
+						      :state="Boolean(form.image)"
+						      placeholder="Upload an Image"
+						      drop-placeholder="Drop Image here..."
+						    ></b-form-file>
 							</div>
-							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
-								<div class="form-group label-floating is-empty">
-									<label class="control-label">Your Birthplace</label>
-									<input class="form-control" placeholder="" type="text">
-								</div>
-					
-								<div class="form-group label-floating">
-									<label class="control-label">Your Occupation</label>
-									<input class="form-control" placeholder="" type="text" value="UI/UX Designer">
-								</div>
-					
-								<div class="form-group label-floating is-select">
-									<label class="control-label">Status</label>
-									<select class="selectpicker form-control">
-										<option value="MA">Married</option>
-										<option value="FE">Not Married</option>
-									</select>
-								</div>
-					
-								<div class="form-group label-floating">
-									<label class="control-label">Political Incline</label>
-									<input class="form-control" placeholder="" type="text" value="Democrat">
-								</div>
+
+							<div class="form-group label-floating">
+								<span class="control-label">Background Image</span>
+							<b-form-file
+							class="mt-2"
+						      v-model="form.background_image"
+						      :state="Boolean(form.background_image)"
+						      placeholder="Upload an Image"
+						      drop-placeholder="Drop Image here..."
+						    ></b-form-file>
 							</div>
-							<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-								<div class="form-group with-icon label-floating">
-									<label class="control-label">Your Facebook Account</label>
-									<input class="form-control" type="text" value="www.facebook.com/james-spiegel95321">
-									<i class="fab fa-facebook-f c-facebook" aria-hidden="true"></i>
-								</div>
-								<div class="form-group with-icon label-floating">
-									<label class="control-label">Your Twitter Account</label>
-									<input class="form-control" type="text" value="www.twitter.com/james_spiegelOK">
-									<i class="fab fa-twitter c-twitter" aria-hidden="true"></i>
-								</div>
-								<div class="form-group with-icon label-floating is-empty">
-									<label class="control-label">Your RSS Feed Account</label>
-									<input class="form-control" type="text">
-									<i class="fa fa-rss c-rss" aria-hidden="true"></i>
-								</div>
-								<div class="form-group with-icon label-floating">
-									<label class="control-label">Your Dribbble Account</label>
-									<input class="form-control" type="text" value="www.dribbble.com/thecowboydesigner">
-									<i class="fab fa-dribbble c-dribbble" aria-hidden="true"></i>
-								</div>
-								<div class="form-group with-icon label-floating is-empty">
-									<label class="control-label">Your Spotify Account</label>
-									<input class="form-control" type="text">
-									<i class="fab fa-spotify c-spotify" aria-hidden="true"></i>
-								</div>
-							</div>
+ 
+ 							</div>
+		 
+<!-- 							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
+	
+ 
+							</div> -->
+ 
+						 
 							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
 								<button class="btn btn-secondary btn-lg full-width">Restore all Attributes</button>
 							</div>
@@ -163,7 +124,7 @@
 							</div>
 					
 						</div>
-					</form>
+					</b-form>
 					
 					<!-- ... end Personal Information Form  -->
 				</div>
@@ -187,6 +148,102 @@ export default {
 	components : {
 		ProfileNavigation,
 		EditProfileHead,
-	}
+	},
+		data() {
+            return {
+                baseUrl: '',
+                userLogin: false,
+                userId:'',
+                userSlug:'',
+                userImage:'',
+                userBackgroundImage:'',
+                userName:'',
+                form:{
+                	fullname:'',
+                	nickname:'',
+                	email:'',
+                	about:'',
+                	image:'',
+                	background_image:'',
+                },
+            }
+		},
+		methods: {
+			 onSubmit(evt) {
+                let loader = this.$loading.show({
+                    container: this.fullPage ? null : this.$refs.file,
+                });
+
+                // this.showDismissibleAlert = false
+                evt.preventDefault();
+
+                var bodyFormData = new FormData();
+                bodyFormData.set('fullname', this.form.fullname);
+                bodyFormData.set('nickname', this.form.nickname);
+                bodyFormData.set('email', this.form.email);
+                bodyFormData.set('about', this.form.about);
+                bodyFormData.set('image', this.form.image);
+                bodyFormData.set('background_image', this.form.background_image);
+                
+                this.axios({
+                        method: 'post',
+                        url: '/user/update-profile',
+                        data: bodyFormData
+                    })
+                    .then((response) => {
+
+                        loader.hide();
+ 
+                       
+                        if (response.status==200) {
+   
+                            this.$toast.open({
+                                message: 'Profile Updated',
+                                type: 'success'
+                            });
+
+                              this.$store.commit('setUserName', this.form.fullname );
+                              this.$store.commit('setUserNickname', this.form.nickname );
+                              this.$store.commit('setUserAbout', this.form.about );
+                              this.$store.commit('setUserAbout', this.form.about );
+                              this.$store.commit('setUserBackgroundImage', response.data.background_image );
+                              this.$store.commit('setUserImage', response.data.image );
+
+                                this.userImage = this.$store.getters.getUserImage;
+					            this.userBackgroundImage = this.$store.getters.getUserBackgroundImage;
+					            this.userName = this.$store.getters.getUserName;
+					  			this.userAbout = this.$store.getters.getUserAbout;
+					            this.userNickname = this.$store.getters.getUserNickname;
+
+                        } else {
+                        	loader.hide();
+                            console.log('inelse boy');
+                                this.$toast.open({
+                                message: 'Ooops...! Something went wrong',
+                                type: 'error'
+                            });
+                        }
+                    })
+                    .catch(function(response) {
+                        loader.hide();
+                    });
+            },
+		},
+		created(){
+            this.userLogin = this.$store.getters.getLogin;
+            this.userId = this.$store.getters.getUserId;
+            this.userSlug = this.$store.getters.getUserSlug;
+            this.userImage = this.$store.getters.getUserImage;
+            this.userBackgroundImage = this.$store.getters.getUserBackgroundImage;
+            this.userName = this.$store.getters.getUserName;
+            this.userEmail = this.$store.getters.getUserEmail;
+            this.userAbout = this.$store.getters.getUserAbout;
+            this.userNickname = this.$store.getters.getUserNickname;
+            this.form.fullname = this.userName;
+            this.form.email = this.userEmail;
+            this.form.about = this.userAbout;
+            this.form.nickname = this.userNickname;
+     
+        },
 }
 </script>

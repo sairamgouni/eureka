@@ -20,6 +20,11 @@
             </form>
 
             <a href="#" class="link-find-friend">Find Friends</a>
+            
+
+              <router-link   to="/post-challenge">
+                    <a href="javascript:void(0);" class="btn btn-primary btn-md-1 mt-1">Post Challenge</a>
+              </router-link>  
 
             <div class="control-block">
 
@@ -30,7 +35,7 @@
 
                 <div class="author-page author vcard inline-items more">
                     <div class="author-thumb">
-                        <img alt="author" src="assets/img/author-page.jpg" class="avatar">
+                        <img  :alt="userName" :src="userImage" class="avatar">
                         <span class="icon-status online"></span>
                         <div class="more-dropdown more-with-triangle">
                             <div class="mCustomScrollbar" data-mcs-theme="dark">
@@ -40,7 +45,9 @@
 
                                 <ul class="account-settings">
                                     <li>
-                                        <router-link  to="/profile" class="nav-link">
+                                        <router-link  
+                                        :to="{ name: 'ProfileEuraka', params: { id: userId, slug: userSlug } }"
+                                         class="nav-link">
                                         
 
                                             <svg class="olymp-menu-icon">
@@ -125,6 +132,11 @@
          data() {
             return {
                 baseUrl: '',
+                userLogin: false,
+                userId:'',
+                userSlug:'',
+                userImage:'',
+                userName:'',
             }
         },
         methods : {
@@ -141,20 +153,28 @@
                         data: bodyFormData
                     })
                     .then((response) => {
-
-                        // console.log(response);
                        this.$store.dispatch('destroyAccess');
                        if(response.data.success==1)
-                        this.$router.push('/login');
-                    // console.log('yep boy');
+                        this.$router.push('/');
+                        this.$router.go();
                     });
                     // console.log('logout ended');
             }
+        },
+        created(){
+            this.userLogin = this.$store.getters.getLogin;
+            this.userId = this.$store.getters.getUserId;
+            this.userSlug = this.$store.getters.getUserSlug;
+            this.userImage = this.$store.getters.getUserImage;
+            this.userName = this.$store.getters.getUserName;
         }
 
     }
 </script>
 
-<style scoped>
-
+<style>
+.avatar{
+    height: 36px;
+    width:36px;
+}
 </style>

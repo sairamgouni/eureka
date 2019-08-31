@@ -2,85 +2,23 @@
 	
 			<div class="ui-block">
 				<div class="ui-block-title">
-					<h6 class="title">Friends (86)</h6>
+					<h6 class="title">Following ({{totalFollowings}})</h6>
 				</div>
 				<div class="ui-block-content">
 
 					<!-- W-Faved-Page -->
 					
 					<ul class="widget w-faved-page js-zoom-gallery">
-						<li>
-							<a href="#">
-								<img src="assets/img/avatar38-sm.jpg" alt="author">
-							</a>
+						<li v-for="(item, index) in firendsList">
+							  <router-link  
+                                        :to="{ name: 'ProfileEuraka', params: { id: item.id, slug: item.slug } }"
+                                          class="h6 notification-friend">
+								<img :src="item.image" :alt="item.name" class="avatar" :title="item.name">
+							</router-link>
 						</li>
-						<li>
-							<a href="#">
-								<img src="assets/img/avatar24-sm.jpg" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="assets/img/avatar36-sm.jpg" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="assets/img/avatar35-sm.jpg" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="assets/img/avatar34-sm.jpg" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="assets/img/avatar33-sm.jpg" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="assets/img/avatar32-sm.jpg" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="assets/img/avatar31-sm.jpg" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="assets/img/avatar30-sm.jpg" alt="author">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="assets/img/avatar29-sm.jpg" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="assets/img/avatar28-sm.jpg" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="assets/img/avatar27-sm.jpg" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="assets/img/avatar26-sm.jpg" alt="user">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="assets/img/avatar25-sm.jpg" alt="user">
-							</a>
-						</li>
-						<li class="all-users">
-							<a href="#">+74</a>
+						 
+						<li class="all-users" v-if="remainingFriends>0">
+							<a href="#">+{{remainingFriends}}</a>
 						</li>
 					</ul>
 					
@@ -92,6 +30,55 @@
 
 <script>
 	export default {
-		name: 'UserFriends'
+		name: 'UserFriends',
+		  props: ['totalItems','CurrentUser', 'isUserLoggedIn', 'isSameUser'],
+			data() {
+            return {
+                baseUrl: '',
+                userLogin: false,
+                userId:'',
+                userSlug:'',
+                userImage:'',
+                userName:'',
+                firendsList: [],
+                totalFollowings:0,
+                remainingFriends:0,
+            }
+		},
+		methods: {
+			loadUserFriends() {
+				var bodyFormData = new FormData();
+                 // bodyFormData.set('email', this.form.username);
+                // bodyFormData.set('password', this.form.password);
+                this.axios({
+                        method: 'get',
+                        url: this.baseUrl + 'friends/getFriendsList/'+this.totalItems+'?userId='+this.CurrentUser.userId,
+                        data: bodyFormData
+                    })
+                    .then((response) => {
+                    	if(response.status==200)
+                    	{
+                    		this.firendsList = response.data.list;
+                    		this.totalFollowings = response.data.totalFollowings;
+                    		this.remainingFriends = parseInt(this.totalFollowings) -  parseInt(this.firendsList.length);
+                    		
+                    		// console.log('remaining: '+this.remainingFriends);
+                    	}
+                        // console.log(response);
+                       // this.$store.dispatch('destroyAccess');
+                       // if(response.data.success==1)
+                       //  this.$router.push('/login');
+                    // console.log('yep boy');
+                    });
+			},
+		},
+		created(){
+            this.userLogin = this.$store.getters.getLogin;
+            this.userId = this.$store.getters.getUserId;
+            this.userSlug = this.$store.getters.getUserSlug;
+            this.userImage = this.$store.getters.getUserImage;
+            this.userName = this.$store.getters.getUserName;
+            this.loadUserFriends();
+        }
 	}
 </script>

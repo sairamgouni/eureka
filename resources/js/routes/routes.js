@@ -12,7 +12,7 @@ import Badges from "../components/pages/badges/BadgesList";
 import Contributors from "../components/pages/contributors/ContributorsList";
 import Users from "../components/pages/contributors/UsersList";
 import LoginPage from "../components/pages/login";
-
+import PostChallenge from "../components/pages/challenges/PostChallenge";
 
 export default [
     {
@@ -41,7 +41,7 @@ export default [
     },
     {
         name: 'ProfileEuraka',
-        path: '/profile',
+        path: '/profile/:id/:slug',
         component: ProfileEuraka,
         meta : {
             requiresAuth:true,
@@ -125,6 +125,14 @@ export default [
         component: LoginPage,
          meta : {
             requiresVisitor:true,
+        }
+    },
+        {
+        name: 'PostChallenge',
+        path: '/post-challenge',
+        component: PostChallenge,
+        meta : {
+            requiresAuth:true,
         }
     },
 ];

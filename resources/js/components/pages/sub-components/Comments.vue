@@ -146,8 +146,7 @@
             },
 
             loadComments() {
-            	console.log('about to load comments');
-
+            	 
             	var bodyFormData = new FormData();
                 bodyFormData.set('challent_id', this.comment_type_id);
             	     this.axios({

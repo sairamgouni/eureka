@@ -10,7 +10,7 @@
 					<ul class="widget w-personal-info item-block">
 						<li>
 							<span class="title">About Me:</span>
-							<span class="text">Hi, I’m James, I’m 36 and I work as a Digital Designer for the  “Daydreams” Agency in Pier 56.</span>
+							<span class="text">{{CurrentUser.userAbout}}</span>
 						</li>
 
 					</ul>
@@ -18,7 +18,7 @@
 					<!-- .. end W-Personal-Info -->
 					<!-- W-Socials -->
 
-					<div class="widget w-socials">
+<!-- 					<div class="widget w-socials">
 						<h6 class="title">Other Social Networks:</h6>
 						<a href="#" class="social-item bg-facebook">
 							<i class="fab fa-facebook-f" aria-hidden="true"></i>
@@ -32,7 +32,7 @@
 							<i class="fab fa-dribbble" aria-hidden="true"></i>
 							Dribbble
 						</a>
-					</div>
+					</div> -->
 
 
 					<!-- ... end W-Socials -->
@@ -42,6 +42,18 @@
 
 <script>
 	export default {
-		name: 'ProfileIntro'
+		name: 'ProfileIntro',
+		props: ['CurrentUser', 'isUserLoggedIn', 'isSameUser'],
+	 	data() {
+            return {
+ 
+            }
+		},
+		methods: {
+		 
+		},
+		created(){
+  
+        }
 	}
 </script>

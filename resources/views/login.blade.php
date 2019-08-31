@@ -41,7 +41,7 @@
               <div class="content form op2">
                
               <div id="loginfrm">
-                          <form method="POST" name="login-form" id="login-"  action="/login">
+                          <form method="POST" name="login-form" id="login-"  action="/webportal/login">
                         @csrf
                           <span class="error-msg" style="display:none">Please enter your email | Please enter your password</span>
                         <p class="userlogin1">
@@ -135,12 +135,14 @@
         <!-- Bootstrap plugins -->
         <script src="{{asset('assets/login-assets/js/bootstrap/bootstrap.js')}}"></script>
         <!-- Form plugins -->
-        <script src="{{asset('assets/login-assets/plugins/jquery.validate.js')}}"></script>
+        {{-- <script src="{{asset('assets/login-assets/plugins/jquery.validate.js')}}"></script> --}}
 
         <!-- Top particles background -->
         <script src="{{asset('assets/login-assets/js/pages/particles.js')}}"></script>
         <script src="{{asset('assets/login-assets/js/pages/app.js')}}"></script>
-        <script src="{{asset('assets/login-assets/js/pages/login.js')}}"></script>
-
+        {{-- <script src="{{asset('assets/login-assets/js/pages/login.js')}}"></script> --}}
+      {{-- <script src="{{ asset(mix('js/manifest.js')) }}"></script>
+<script src="{{ asset(mix('js/vendor.js')) }}"></script>
+<script src="{{asset(mix('js/app.js'))}}"></script> --}}
         </body>
 </html>

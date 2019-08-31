@@ -95,10 +95,18 @@
                             this.$store.commit('setLogin', true );
                             this.$store.commit('setUserId', response.data.object.id );
                             this.$store.commit('setUserName', response.data.object.name );
-                            this.$store.commit('setUserImage', response.data.object.image);
+                            // this.$store.commit('setUserImage', response.data.object.image);
                             this.$store.commit('setUserEmail', response.data.object.email);
                             this.$store.commit('setUserSlug', response.data.object.slug);
-     
+                            this.$store.commit('setUserNickname', response.data.object.nickname);
+                            this.$store.commit('setUserAbout', response.data.object.about);
+
+                            this.$store.commit('setUserImage', response.data.object.image);
+                            this.$store.commit('setUserBackgroundImage', response.data.object.background_image);
+                               
+                            console.log('setting setters');
+                            console.log(response.data.object);
+                            console.log('end setting setters');
                             this.$router.push('/');
                              this.$toast.open({
                                 message: 'Login was success',

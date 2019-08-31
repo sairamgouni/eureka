@@ -76,8 +76,9 @@
         },
         created() {
             this.userLogin = this.$store.getters.getLogin;
-            console.log('created');
-            console.log(this.userLogin);
+           
+            // console.log('created');
+            // console.log(this.userLogin);
         },
          watch: {
         '$route' (to, from) {

@@ -69,9 +69,65 @@ class LoginController extends Controller
         return $result;
     }
 
+    public function postWebLogin(Request $request)
+    {
+           $login = 0;
+        $user = null;
+        // if(\Auth::user())
+        // {
+        //     $login = 1;
+        //     $user = \Auth::user();
+        //     $result = ['success' => $login, 'object' => $user, 'level' => 'user'];
+        //     return $result;
+        // }
+
+        
+     
+        // $credentials = $request->only('email', 'password');
+        $credentials = [ 'username' => $request->email,  'password'=>$request->password];
+
+        if (\Auth::attempt($credentials)) {
+            // Authentication passed...
+             $login = 1;
+        }
+
+        if(\Auth::user())
+        {
+            $login = 1;
+            $user = \Auth::user();
+        }
+        return back();
+        // $result = ['success' => $login, 'object' => $user, 'level' => 'user'];
+        // return $result;
+    }
+
+    public function isUserLoggedIn()
+    {
+        return response()->json(\Auth::user());
+    }
+
+    public function setLocalStorage()
+    {
+        // dd(\Auth::user());
+    }
+
     public function logout()
     {
         \Auth::logout();
         return ['success'=>1];
+    }
+
+    public function myTestCode()
+    {
+        $users = \App\User::get();
+        $count = 0;
+        foreach($users as $user)
+        {
+            $user->password = bcrypt($user->employee_id);
+            $user->slug = str_slug($user->username);
+            $user->save();
+            $count++;
+        }
+        dd($count.' users Updated');
     }
 }

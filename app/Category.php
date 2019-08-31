@@ -199,7 +199,8 @@ class Category extends Model
 
     public static function getList()
     {
-        $list = \App\Category::select(['id as value','title as text'])
+        // $list = \App\Category::select(['id as value','title as text'])
+          $list = \App\Category::select(['id as code','title as name'])
                                 ->get();
                                 // ->pluck('title', 'id');
         return $list;

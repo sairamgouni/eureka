@@ -7,7 +7,7 @@
 			<div class="ui-block">
 				<div class="top-header">
 					<div class="top-header-thumb">
-						<img src="assets/img/top-header1.jpg" alt="nature">
+						<img  class="bg-image" :src="CurrentUser.userBackgroundImage" :alt="CurrentUser.userName">
 					</div>
 					<div class="profile-section">
 						<div class="row">
@@ -46,7 +46,7 @@
 							</div>
 						</div>
 
-						<div class="control-block-button">
+						<div class="control-block-button" v-if="isSameUser">
 
 
 							<div class="btn btn-control bg-primary more">
@@ -69,12 +69,12 @@
 						</div>
 					</div>
 					<div class="top-header-author">
-						<a href="02-ProfilePage.html" class="author-thumb">
-							<img src="assets/img/author-main1.jpg" alt="author">
+						<a href="javascript:void(0);" class="author-thumb">
+							<img class="user-thumb" :src="CurrentUser.userImage" :alt="CurrentUser.userName">
 						</a>
 						<div class="author-content">
-							<a href="02-ProfilePage.html" class="h4 author-name">James Spiegel</a>
-							<div class="country">San Francisco, CA</div>
+							<a href="#" class="h4 author-name">{{CurrentUser.userName}}</a>
+							<div class="country">{{CurrentUser.userLocation}}</div>
 						</div>
 					</div>
 				</div>
@@ -87,6 +87,22 @@
 </template>
 <script>
 	export default {
-		name: 'ProfileHeader'
+		name: 'ProfileHeader',
+		props:['CurrentUser', 'isUserLoggedIn', 'isSameUser'],
+			data() {
+            return {
+ 
+            }
+		},
+		methods: {
+ 
+
+		},
+		created(){
+ 
+            
+        }
 	}
 </script>
+
+ 

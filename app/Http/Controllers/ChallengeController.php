@@ -2,51 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Challenge;
-use App\Http\Resources\ChallengeResource;
 use Illuminate\Http\Request;
 use \App\Http\Requests\ChallengeRequest;
+use Illuminate\Support\Facades\DB;
 
 class ChallengeController extends Controller
 {
     public function index()
     {
-        $challenges = \App\Challenge::paginate(5);
-        $data['title'] = 'Challenges';
-        $data['challenges'] = $challenges;
-        return view('admin.challenges.index', $data);
+    	$challenges = \App\Challenge::paginate(5);
+    	$data['title'] = 'Challenges';
+    	$data['challenges'] = $challenges;
+    	return view('admin.challenges.index',$data);
     }
 
     public function add()
     {
 
-
+      
         $category = \App\Category::get()->pluck('title', 'id');
-
+       
         $data['title'] = 'Add Challenge';
-
-        return view('admin.challenges.add-edit')->with('category', $category);
+  
+    	return view('admin.challenges.add-edit')->with('category',$category);
     }
 
-    /**
+     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
-        $result = (object)\App\Challenge::saveRecord($request);
-        \Session::flash('type', $result->type);
-        \Session::flash('message', $result->message);
+    	
+        $result = (object) \App\Challenge::saveRecord($request);
+        \Session::flash('type',$result->type);
+    	\Session::flash('message',$result->message);
         return redirect('admin/challenges');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($slug)
@@ -55,80 +54,85 @@ class ChallengeController extends Controller
         $data['record'] = \App\Challenge::getRecord($slug);
 
         dd($data);
-        return view('admin.challenges.add-edit', $data);
+        return view('admin.challenges.add-edit',$data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $slug)
     {
 
-        $result = (object)\App\Challenge::updateRecord($request, $slug);
-        \Session::flash('type', $result->type);
-        \Session::flash('message', $result->message);
+        $result = (object) \App\Challenge::updateRecord($request, $slug);
+        \Session::flash('type',$result->type);
+    	\Session::flash('message',$result->message);
         return redirect('admin/challenges');
     }
 
 
     public function saveRecord(Request $request)
     {
-        $result = (object)\App\Challenge::saveRecord($request);
-        return ['success' => 1, 'object' => $result];
+          $result = (object) \App\Challenge::saveRecord($request);
+          return ['success' => 1, 'object'=>$result];
     }
 
-    public function getList()
+    public function getList(Request $request)
     {
+         $user = null;
+        if($request->has('userId'))
+        {
+            $userId = $request->userId;
+            $user = \App\User::where('id','=',$userId)->first();
+        }
+        if(!$user)
+            $user = \Auth::user();
 
-        $user = \Auth::user();
-        // dd($user->challenges);
-        $challenges = \App\Challenge::orderBy('created_at', 'desc')->with(['user', 'categories'])->paginate(5);
+        $challenges = \App\Challenge::orderBy('created_at','desc')->with(['user','categories'])->paginate(5);
         $challenges = \App\Challenge::prepareAjaxData($challenges);
-        return response()->json($challenges);
+        return response()->json(['list'=>$challenges, 'user'=>\Auth::user()]);
         // return ['success'=>true, 'object'=>$challenges];
     }
 
     public function toggleLike(Request $request)
     {
         $user = \Auth::user();
-        if (!$user)
-            return ['success' => 0, 'message' => 'Please login to continue'];
-
+        if(!$user)
+        return ['success'=>0, 'message'=>'Please login to continue'];
+        
         $item_id = $request->item_id;
-        $challange = Challenge::where('id', '=', $item_id)->first();
-
-        if (!$challange)
-            return ['success' => 0, 'message' => 'Invalid Challenge'];
-
+        $challange = \App\Challenge::where('id','=',$item_id)->first();
+        
+        if(!$challange)
+            return ['success'=>0, 'message'=>'Invalid Challenge'];
+        
         $user->toggleLike($challange);
-        return (int)$user->hasLiked($challange);
-        // return $request->item_id;
+        $status = (int) $user->hasLiked($challange);
+        
+        $liked = 'liked';
+        if(!$status)
+            $liked = 'unliked';
+
+            $log_message = ' has '.$liked.' the challenge '.$challange->title;
+            activity()
+           ->performedOn($challange)
+           ->log($log_message);
+
+        return $status;
 
     }
 
-    /**
-     * @param Request $request
-     * @return ChallengeResource
-     */
-//    public function show(Request $request)
-//    {
-//        $id = $request->id;
-//        $challanges = Challenge::where('id', '=', $id)->with('user','categories')->get();
-//        $challanges = Challenge::prepareAjaxData($challanges);
-//        if(count($challanges))
-//            $challanges = $challanges[0];
-//        return response()->json($challanges);
-//    }
-
     public function show(Request $request)
     {
-        $challenge = Challenge::with('user', 'categories')->find($request->input('id'));
-
-        return $response = new ChallengeResource($challenge);
+        $id = $request->id;
+        $challanges = \App\Challenge::where('id', '=', $id)->with(['user','categories'])->get();
+        $challanges = \App\Challenge::prepareAjaxData($challanges);
+        if(count($challanges))
+            $challanges = $challanges[0];
+        return response()->json($challanges);
     }
 
     public function postComment(Request $request)
@@ -136,54 +140,93 @@ class ChallengeController extends Controller
         $challenge_id = $request->challenge_id;
         $challenge = \App\Challenge::where('id', '=', $challenge_id)->first();
 
-        if (!$challenge)
-            return response()->json(['success' => 0, 'message' => 'invalid challenge']);
+        if(!$challenge)
+            return response()->json(['success'=>0,'message'=>'invalid challenge']);
 
         $user = \Auth::user();
 
-        if (!$user)
-            return response()->json(['success' => 0, 'message' => 'Invalid User']);
+        if(!$user)
+        return response()->json(['success'=>0,'message'=>'Invalid User']);
 
-        $user->comment($challenge, $request->comment_text, 1);
+         $user->comment($challenge, $request->comment_text,1);
 
-        return response()->json(['success' => 1, 'message' => 'Comment Posted']);
+
+             $log_message = ' has commented on challenge '.$challenge->title;
+            
+            activity()
+           ->performedOn($challenge)
+           ->log($log_message);
+
+
+
+         return response()->json(['success'=>1,'message'=>'Comment Posted']);
 
 
     }
 
     public function getComments(Request $request)
     {
-        $challenge_id = $request->challenge_id;
+         $challenge_id = $request->challenge_id;
         $challenge = \App\Challenge::where('id', '=', $challenge_id)->first();
 
-        if (!$challenge)
-            return response()->json(['success' => 0, 'message' => 'invalid challenge']);
+        if(!$challenge)
+            return response()->json(['success'=>0,'message'=>'invalid challenge']);
 
-        $comments = \App\Challenge::prepareAjaxComments($challenge->comments()->orderBy('created_at', 'desc')->get());
+        $comments = \App\Challenge::prepareAjaxComments($challenge->comments()->orderBy('created_at','desc')->get());
         return response()->json($comments);
     }
 
-    public function getFriends(Request $request)
+    public function getFriendSuggestions(Request $request, $total=5)
     {
         $user = \Auth::user();
-        $list = $user->getFriendSuggestions();
-        return response()->json($list);
+        $list = $user->getFriendSuggestions($total);
+       return response()->json($list);
+
+    }
+
+
+    public function getFriends(Request $request, $total=5)
+    {
+        $user = null;
+        if($request->has('userId'))
+        {
+            $userId = $request->userId;
+            $user = \App\User::where('id','=',$userId)->first();
+        }
+        if(!$user)
+            $user = \Auth::user();
+
+        $list = $user->getFriendsList($total);
+       $total_following = $user->followings->count();
+       return response()->json(['list'=>$list, 'totalFollowings'=>$total_following]);
 
     }
 
     public function toggleFollow(Request $request)
     {
         $user = \Auth::user();
-        if (!$user)
-            return ['success' => 0, 'message' => 'Please login to continue'];
-
+        if(!$user)
+        return ['success'=>0, 'message'=>'Please login to continue'];
+        
         $item_id = $request->item_id;
-        $toFollow = \App\User::where('id', '=', $item_id)->first();
-
-        if (!$toFollow)
-            return ['success' => 0, 'message' => 'Invalid Challenge'];
-
+        $toFollow = \App\User::where('id','=',$item_id)->first();
+        
+        if(!$toFollow)
+            return ['success'=>0, 'message'=>'Invalid Challenge'];
+        
         $user->toggleFollow($toFollow);
-        return (int)$user->isFollowing($toFollow);
+
+        $status = (int) $user->isFollowing($toFollow);
+
+                $liked = 'following';
+        if(!$status)
+            $liked = 'unfollowing';
+
+            $log_message = ' is '.$liked.' '.$toFollow->name;
+            activity()
+           ->performedOn($toFollow)
+           ->log($log_message);
+
+        return $status;
     }
 }

@@ -15,13 +15,38 @@
 			</div>
 		</div>
 	</div>
-	<img class="img-bottom" src="assets/img/account-bottom.png" alt="friends">
+	<img class="img-bottom" :src="userImage" alt="friends">
 </div>
 
 <!-- ... end Main Header Account -->
 </template>
 <script>
 	export default {
-		name: 'EditProfileHead'
+		name: 'EditProfileHead',
+				data() {
+            return {
+                baseUrl: '',
+                userLogin: false,
+                userId:'',
+                userSlug:'',
+                userImage:'',
+                userBackgroundImage:'',
+                userName:'',
+            }
+		},
+		created(){
+            this.userLogin = this.$store.getters.getLogin;
+            this.userId = this.$store.getters.getUserId;
+            this.userSlug = this.$store.getters.getUserSlug;
+            this.userImage = this.$store.getters.getUserImage;
+            this.userBackgroundImage = this.$store.getters.getUserBackgroundImage;
+            this.userName = this.$store.getters.getUserName;
+            this.userEmail = this.$store.getters.getUserEmail;
+            this.userAbout = this.$store.getters.getUserAbout;
+            this.userNickname = this.$store.getters.getUserNickname;
+ 
+     
+        },
+
 	}
 </script>

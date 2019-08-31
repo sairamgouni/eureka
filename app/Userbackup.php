@@ -19,7 +19,6 @@ use Overtrue\LaravelFollow\Traits\CanSubscribe;
 use Overtrue\LaravelFollow\Traits\CanVote;
 use Overtrue\LaravelFollow\Traits\CanBookmark;
 use Actuallymab\LaravelComment\CanComment;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Authenticatable
 {
@@ -33,7 +32,6 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $table = 'users';
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -300,18 +298,13 @@ class User extends Authenticatable
             $item['id'] = $friend->id;
             $item['name'] = $friend->name;
             $item['slug'] = $friend->slug;
-            $item['about'] = $friend->about;
             $item['following'] = $friend->followings(User::class)->get()->count();
-            $item['image'] = $friend->getProfileImage();
-            $item['background_image'] = $friend->getBackgroundImage();
+            $item['image'] = '';
             $item['is_following'] = (int) $user->isFollowing($friend);
-            $item['location'] =  'San Francisco, CA';//'$user->country';
             $list[] = $item;
         }
         return $list;
     }
-
-
 
 
     public function getFriendsList($limit=5)
@@ -319,20 +312,6 @@ class User extends Authenticatable
         $following_users = $this->followings()->limit($limit)->get();
         return \App\User::processFrendSuggestions($following_users);
                                 
-    }
-
-    public function getProfileImage()
-    {
-        if($this->image)
-            return $this->image;
-        return '/users/thumbs/boy.png';
-    }
-
-    public function getBackgroundImage()
-    {
-        if($this->image)
-            return $this->background_image;
-        return '/users/backgrounds/default.jpg';
     }
 
 }

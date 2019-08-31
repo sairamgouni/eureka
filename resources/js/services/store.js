@@ -14,6 +14,9 @@ export default new Vuex.Store({
         userName : '',
         userEmail : '',
         userImage : '',
+        userBackgroundImage : '',
+        userAbout : '',
+        userNickname : '',
     	baseUrl : 'http://localhost:8000/',
     },
     getters: {
@@ -39,11 +42,26 @@ export default new Vuex.Store({
             return state.userEmail;
         },
         getUserImage: state => {
+            if(state.userImage)
             return state.userImage;
+            return '/users/thumbs/boy.png';
+        },
+        getUserBackgroundImage: state => {
+            
+            if(state.userBackgroundImage)
+                return state.userBackgroundImage;
+
+            return '/users/backgrounds/default.jpg'
         },
 	    getUserSlug: state => {
 	        return state.userSlug;
 	    },
+        getUserAbout: state => {
+            return state.userAbout;
+        },
+        getUserNickname: state => {
+            return state.userNickname;
+        },
     },
     mutations: {
     	setLogin(state, token) {
@@ -68,7 +86,18 @@ export default new Vuex.Store({
             state.userName = token;
         },
         setUserImage(state, token) {
+            
             state.userImage = token;
+        },
+        setUserBackgroundImage(state, token) {
+            
+                state.userBackgroundImage = token;
+        },
+        setUserAbout(state, token) {
+            state.userAbout = token;
+        },
+        setUserNickname(state, token) {
+            state.userNickname = token;
         },
     	removeAccess(state) {
     		state.userLogin = false;
@@ -78,6 +107,10 @@ export default new Vuex.Store({
 	    	state.userSlug = '';
             state.userName = '';
             state.userEmail = '';
+            state.userAbout = '';
+            state.userNickname = '';
+            state.userImage = '';
+            state.userBackgroundImage = '';
     	}
 	    
     },

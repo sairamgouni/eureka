@@ -10,93 +10,24 @@
 				<!-- W-Activity-Feed -->
 				
 				<ul class="widget w-activity-feed notification-list">
-					<li>
+					<li v-for="(item, index) in activities" :key="item.id">
 						<div class="author-thumb">
-							<img src="assets/img/avatar49-sm.jpg" alt="author">
+							<img :src="item.image" :alt="item.username">
 						</div>
 						<div class="notification-event">
-							<a href="#" class="h6 notification-friend">Marina Polson</a> commented on Jason Mark’s <a href="#" class="notification-link">photo.</a>.
-							<span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">2 mins ago</time></span>
+							  <router-link  
+                                        :to="{ name: 'ProfileEuraka', params: { id: item.user_id, slug: item.user_slug } }"
+                                          class="h6 notification-friend">
+						 							{{item.username}}
+							</router-link>
+							 {{item.message}}
+							 
+							<span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{item.created_at}}</time></span>
+
 						</div>
 					</li>
 				
-					<li>
-						<div class="author-thumb">
-							<img src="assets/img/avatar9-sm.jpg" alt="author">
-						</div>
-						<div class="notification-event">
-							<a href="#" class="h6 notification-friend">Jake Parker </a> liked Nicholas Grissom’s <a href="#" class="notification-link">status update.</a>.
-							<span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">5 mins ago</time></span>
-						</div>
-					</li>
-				
-					<li>
-						<div class="author-thumb">
-							<img src="assets/img/avatar50-sm.jpg" alt="author">
-						</div>
-						<div class="notification-event">
-							<a href="#" class="h6 notification-friend">Mary Jane Stark </a> added 20 new photos to her <a href="#" class="notification-link">gallery album.</a>.
-							<span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">12 mins ago</time></span>
-						</div>
-					</li>
-				
-					<li>
-						<div class="author-thumb">
-							<img src="assets/img/avatar51-sm.jpg" alt="author">
-						</div>
-						<div class="notification-event">
-							<a href="#" class="h6 notification-friend">Nicholas Grissom </a> updated his profile <a href="#" class="notification-link">photo</a>.
-							<span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">1 hour ago</time></span>
-						</div>
-					</li>
-					<li>
-						<div class="author-thumb">
-							<img src="assets/img/avatar48-sm.jpg" alt="author">
-						</div>
-						<div class="notification-event">
-							<a href="#" class="h6 notification-friend">Marina Valentine </a> commented on Chris Greyson’s <a href="#" class="notification-link">status update</a>.
-							<span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">1 hour ago</time></span>
-						</div>
-					</li>
-				
-					<li>
-						<div class="author-thumb">
-							<img src="assets/img/avatar52-sm.jpg" alt="author">
-						</div>
-						<div class="notification-event">
-							<a href="#" class="h6 notification-friend">Green Goo Rock </a> posted a <a href="#" class="notification-link">status update</a>.
-							<span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">1 hour ago</time></span>
-						</div>
-					</li>
-					<li>
-						<div class="author-thumb">
-							<img src="assets/img/avatar10-sm.jpg" alt="author">
-						</div>
-						<div class="notification-event">
-							<a href="#" class="h6 notification-friend">Elaine Dreyfuss  </a> liked your <a href="#" class="notification-link">blog post</a>.
-							<span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">2 hours ago</time></span>
-						</div>
-					</li>
-				
-					<li>
-						<div class="author-thumb">
-							<img src="assets/img/avatar10-sm.jpg" alt="author">
-						</div>
-						<div class="notification-event">
-							<a href="#" class="h6 notification-friend">Elaine Dreyfuss  </a> commented on your <a href="#" class="notification-link">blog post</a>.
-							<span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">2 hours ago</time></span>
-						</div>
-					</li>
-				
-					<li>
-						<div class="author-thumb">
-							<img src="assets/img/avatar53-sm.jpg" alt="author">
-						</div>
-						<div class="notification-event">
-							<a href="#" class="h6 notification-friend">Bruce Peterson </a> changed his <a href="#" class="notification-link">profile picture</a>.
-							<span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">15 hours ago</time></span>
-						</div>
-					</li>
+				 
 				
 				</ul>
 				
@@ -106,6 +37,44 @@
 
 <script>
 	export default {
-		name: 'ActivityFeed'
+		name: 'ActivityFeed',
+		data(){
+			return {
+				activities:[],
+			}
+		},
+		methods: {
+			loadActivities() { 
+				var bodyFormData = new FormData();
+                // bodyFormData.set('challent_id', this.comment_type_id);
+            	     this.axios({
+                        method: 'get',
+                        url: '/activities/get-list',
+                        data: bodyFormData
+                    })
+                    .then((response) => {
+
+                        console.log(response.data.success);
+                        console.log(response);
+
+                        if (response.status==200) {
+
+                            this.activities = response.data;
+                            console.log('comments..');
+                            console.log(this.activities);
+
+                        } else {
+
+                        }
+                    })
+                    .catch(function(response) {
+
+                    });
+			}
+		},
+		 created() {
+		  
+		 	this.loadActivities();
+		 }
 	}
 </script>

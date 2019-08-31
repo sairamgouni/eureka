@@ -12,10 +12,14 @@
 				<ul class="widget w-friend-pages-added notification-list friend-requests">
 					<li class="inline-items" v-for="(item,index) in list" :key="index">
 						<div class="author-thumb">
-							<img src="assets/img/avatar38-sm.jpg" alt="author">
+							<img :src="item.image" :alt="item.name" class="avatar" :title="item.name">
 						</div>
 						<div class="notification-event">
-							<a href="#" class="h6 notification-friend">{{item.name}}</a>
+						  <router-link  
+                                        :to="{ name: 'ProfileEuraka', params: { id: item.id, slug: item.slug } }"
+                                          class="h6 notification-friend">
+                                          {{item.name}}
+                                </router-link>
 							<span class="chat-message-item">8 Friends in Common</span>
 						</div>
 						<span class="notification-icon"  @click="toggleFollow(item.id)" >
@@ -114,7 +118,7 @@
 
                 this.axios({
                         method: 'get',
-                        url: 'friends/getlist',
+                        url: 'friends/getSuggestions/5',
                         data: bodyFormData
                     })
                     .then((response) => {
