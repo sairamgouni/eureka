@@ -2647,6 +2647,143 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "LeftSideBar"
 });
@@ -3276,6 +3413,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ChallengeDetails",
@@ -3302,13 +3453,13 @@ __webpack_require__.r(__webpack_exports__);
     });
     var bodyFormData = new FormData();
     bodyFormData.set('id', this.selectedChallengeId);
-    this.axios({
-      method: 'get',
-      url: 'challenges/getDetails?id=' + this.selectedChallengeId,
-      data: bodyFormData
-    }).then(function (response) {
+    this.axios.get("".concat(APP.baseUrl, "/challenges/getDetails?id=").concat(this.selectedChallengeId)) // this.axios({
+    //     method: 'get',
+    //     url:,
+    //     data: bodyFormData
+    // })
+    .then(function (response) {
       loader.hide();
-      console.log(response);
 
       if (response.status == 200) {
         _this.challenge = response.data;
@@ -3319,9 +3470,7 @@ __webpack_require__.r(__webpack_exports__);
         //     type: 'success'
         // });
         //   this.$router.push('/login');
-      } else {
-        console.log('inelse boy');
-      }
+      } else {}
     })["catch"](function (response) {
       loader.hide();
     });
@@ -10210,6 +10359,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ActivityFeed',
   data: function data() {
@@ -10225,7 +10377,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.axios({
         method: 'get',
-        url: '/activities/get-list',
+        url: APP.baseUrl + '/activities/get-list',
         data: bodyFormData
       }).then(function (response) {
         console.log(response.data.success);
@@ -10657,6 +10809,123 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Comments',
   props: ['comment_type', 'comment_type_id'],
@@ -10665,6 +10934,11 @@ __webpack_require__.r(__webpack_exports__);
       comment_text: '',
       comments: []
     };
+  },
+  watch: {
+    'comments': function comments(value) {
+      console.log(value);
+    }
   },
   methods: {
     onSubmit: function onSubmit(evt) {
@@ -10675,24 +10949,14 @@ __webpack_require__.r(__webpack_exports__);
       }); // this.showDismissibleAlert = false
 
       evt.preventDefault();
-      var bodyFormData = new FormData();
-      bodyFormData.set('comment_text', this.comment_text);
+      var bodyFormData = new FormData(evt.target);
+      if (!bodyFormData.get('comment_text')) bodyFormData.set('comment_text', this.comment_text);
       bodyFormData.set('challenge_id', this.comment_type_id);
-      this.axios({
-        method: 'post',
-        url: '/challenges/store-comment',
-        data: bodyFormData
-      }).then(function (response) {
+      if (bodyFormData.get('comment_text')) this.axios.post(APP.baseUrl + '/challenges/store-comment', bodyFormData).then(function (response) {
         loader.hide();
-        console.log(response.data.success);
-        console.log(response);
 
         if (response.status == 200) {
-          console.log('yep');
-          console.log(response.data.object);
-          _this.comment_text = {
-            comment_text: ''
-          };
+          _this.comment_text = '';
 
           _this.$toast.open({
             message: 'Comment posted..! ',
@@ -10700,9 +10964,9 @@ __webpack_require__.r(__webpack_exports__);
           });
 
           _this.loadComments();
-        } else {
-          console.log('inelse boy');
 
+          $(evt.target)[0].reset();
+        } else {
           _this.$toast.open({
             message: 'Comment not posted',
             type: 'error'
@@ -10719,24 +10983,31 @@ __webpack_require__.r(__webpack_exports__);
 
       var bodyFormData = new FormData();
       bodyFormData.set('challent_id', this.comment_type_id);
-      this.axios({
-        method: 'get',
-        url: '/challenges/comments?challenge_id=' + this.comment_type_id,
-        data: bodyFormData
-      }).then(function (response) {
-        console.log(response.data.success);
-        console.log(response);
-
+      this.axios.get("".concat(APP.baseUrl, "/challenges/comments?challenge_id=").concat(this.comment_type_id)).then(function (response) {
         if (response.status == 200) {
           _this2.comments = response.data;
-          console.log('comments..');
-          console.log(_this2.comments);
         } else {}
       })["catch"](function (response) {});
+    },
+    ownerLike: function ownerLike(comment) {
+      var _this3 = this;
+
+      if (comment && comment.id) this.axios.post("".concat(APP.baseUrl, "/challenges/comment/").concat(comment.id, "/owner-like")).then(function (response) {
+        if (response.status === 200) {
+          if (response.data) $("#owner_like_".concat(comment.id)).addClass('text-danger');else $("#owner_like_".concat(comment.id)).removeClass('text-danger');
+
+          _this3.$toast.open({
+            message: response.data ? 'Liked' : 'Un liked',
+            type: 'success'
+          });
+        } else _this3.$toast.open({
+          message: 'Something went wrong!',
+          type: 'error'
+        });
+      })["catch"](function (error) {});
     }
   },
   created: function created() {
-    console.log('its loaded');
     this.loadComments();
   }
 });
@@ -39611,6 +39882,25 @@ var warnNoMutationObserverSupport = function warnNoMutationObserverSupport(sourc
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/sub-components/Comments.vue?vue&type=style&index=0&lang=scss&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/lib/loader.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/sub-components/Comments.vue?vue&type=style&index=0&lang=scss& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".comments-list .comment-item {\n  padding: 0px 15px;\n}\n.comments-list .comment-item .comment {\n  margin-bottom: 5px;\n}\n.comments-list .comment-item .likes-count {\n  margin-top: 2px;\n}\n.comments-list.style-3 .comment-item {\n  background-color: transparent;\n  border-bottom: 1px solid #ccc6;\n  margin-bottom: 15px;\n}\n.comments-list.style-3 .post__author-thumb img {\n  width: 35px;\n  height: 35px;\n}\n.replay-form-group {\n  /*height: 50px;*/\n  margin: 0;\n}\n.replay-form-group textarea {\n  min-height: 70px !important;\n}\n.comment-reply-item {\n  /*.author-date {*/\n  /*    display: flex;*/\n  /*    justify-content: space-between;*/\n  /*}*/\n}\n.comment-reply-item .post__author {\n  margin-bottom: 10px;\n}\n@media only screen and (max-width: 460px) {\n.comment-reply-item .author-date {\n    /*display: block;*/\n    margin-bottom: 10px;\n}\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loading-overlay/dist/vue-loading.css":
 /*!***********************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loading-overlay/dist/vue-loading.css ***!
@@ -39680,7 +39970,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.avatar{\r\n    height: 36px;\r\n    width:36px;\n}\r\n", ""]);
+exports.push([module.i, "\n.avatar{\n    height: 36px;\n    width:36px;\n}\n", ""]);
 
 // exports
 
@@ -39718,7 +40008,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.active[data-v-7139aab0]{\r\n\tfill: #e91d24;\r\n    color: #e91d24;\n}\r\n", ""]);
+exports.push([module.i, "\n.active[data-v-7139aab0]{\n\tfill: #e91d24;\n    color: #e91d24;\n}\n", ""]);
 
 // exports
 
@@ -39737,7 +40027,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.unfollow[data-v-6d6251fb]{ background-color: #9ca0a3;\n}\n.follow[data-v-6d6251fb]{ background-color: #38a9ff;\n}\r\n", ""]);
+exports.push([module.i, "\n.unfollow[data-v-6d6251fb]{ background-color: #9ca0a3;\n}\n.follow[data-v-6d6251fb]{ background-color: #38a9ff;\n}\n", ""]);
 
 // exports
 
@@ -43611,6 +43901,33 @@ function t(t,n,r){return void 0===(t=(n.split?n.split("."):n).reduce(function(t,
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/sub-components/Comments.vue?vue&type=style&index=0&lang=scss&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/lib/loader.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/sub-components/Comments.vue?vue&type=style&index=0&lang=scss& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../node_modules/sass-loader/lib/loader.js??ref--7-3!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Comments.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/sub-components/Comments.vue?vue&type=style&index=0&lang=scss&");
+
+if (typeof content === 'string') {
+  content = [[module.i, content, '']];
+}
+
+var options = {}
+
+options.insert = "head";
+options.singleton = false;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js")(content, options);
+
+if (content.locals) {
+  module.exports = content.locals;
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/layouts/HeaderNav.vue?vue&type=style&index=0&lang=css&":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/layouts/HeaderNav.vue?vue&type=style&index=0&lang=css& ***!
@@ -45972,41 +46289,6 @@ var render = function() {
                           attrs: {
                             "data-toggle": "tooltip",
                             "data-placement": "right",
-                            "data-original-title": "LIST"
-                          }
-                        },
-                        [
-                          _c("use", {
-                            attrs: {
-                              "xlink:href":
-                                "assets/svg-icons/sprites/icons.svg#olymp-star-icon"
-                            }
-                          })
-                        ]
-                      )
-                    ]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { to: "/challenge-details" }
-                    },
-                    [
-                      _c(
-                        "svg",
-                        {
-                          staticClass: "olymp-newsfeed-icon left-menu-icon",
-                          attrs: {
-                            "data-toggle": "tooltip",
-                            "data-placement": "right",
                             "data-original-title": "DETAILS"
                           }
                         },
@@ -46030,89 +46312,42 @@ var render = function() {
                 [
                   _c(
                     "router-link",
-                    { staticClass: "nav-link", attrs: { to: "/profile" } },
-                    [
-                      _c(
-                        "svg",
-                        {
-                          staticClass: "olymp-newsfeed-icon left-menu-icon",
-                          attrs: {
-                            "data-toggle": "tooltip",
-                            "data-placement": "right",
-                            "data-original-title": "PROFILE"
-                          }
-                        },
-                        [
-                          _c("use", {
-                            attrs: {
-                              "xlink:href":
-                                "assets/svg-icons/sprites/icons.svg#olymp-calendar-icon"
-                            }
-                          })
-                        ]
-                      )
-                    ]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                [
-                  _c(
-                    "router-link",
-                    { staticClass: "nav-link", attrs: { to: "/badges" } },
-                    [
-                      _c(
-                        "svg",
-                        {
-                          staticClass: "olymp-newsfeed-icon left-menu-icon",
-                          attrs: {
-                            "data-toggle": "tooltip",
-                            "data-placement": "right",
-                            "data-original-title": "BADGES"
-                          }
-                        },
-                        [
-                          _c("use", {
-                            attrs: {
-                              "xlink:href":
-                                "assets/svg-icons/sprites/icons.svg#olymp-badge-icon"
-                            }
-                          })
-                        ]
-                      )
-                    ]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                [
-                  _c(
-                    "router-link",
                     { staticClass: "nav-link", attrs: { to: "/contributors" } },
                     [
                       _c(
                         "svg",
                         {
-                          staticClass: "olymp-newsfeed-icon left-menu-icon",
+                          staticClass: "left-menu-icon",
+                          staticStyle: { "enable-background": "new 0 0 32 32" },
                           attrs: {
+                            version: "1.1",
+                            xmlns: "http://www.w3.org/2000/svg",
+                            "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                            x: "0px",
+                            y: "0px",
+                            viewBox: "0 0 32 32",
+                            "xml:space": "preserve",
                             "data-toggle": "tooltip",
                             "data-placement": "right",
-                            "data-original-title": "BADGES"
+                            "data-original-title": "Contributors"
                           }
                         },
                         [
-                          _c("use", {
-                            attrs: {
-                              "xlink:href":
-                                "assets/svg-icons/sprites/icons.svg#olymp-badge-icon"
-                            }
-                          })
+                          _c("g", [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M22.25,20.47c-0.54-0.39-1.83-0.85-4.67-1.79l-0.45-0.15c-0.48-0.16-0.9-0.3-1.04-0.36c-0.04-0.02-0.1-0.04-0.11-0.05\n\t\t\t\t\t\t\t\tc0,0-0.02-0.04-0.01-0.14c0.06-0.14,0.36-0.6,0.56-0.89c0.79-1.19,1.99-2.98,1.99-4.98c0-3.99-2.8-7.24-6.24-7.24\n\t\t\t\t\t\t\t\tc-3.44,0-6.24,3.25-6.24,7.24c0,1.98,1.18,3.76,2,4.99c0.19,0.28,0.5,0.74,0.54,0.83c0.02,0.15,0.01,0.19,0.01,0.19\n\t\t\t\t\t\t\t\tc-0.01,0.01-0.07,0.04-0.12,0.06C8.33,18.23,8,18.34,7.6,18.47l-0.63,0.21c-2.85,0.94-4.13,1.4-4.67,1.79\n\t\t\t\t\t\t\t\tc-1.77,1.28-2.17,5.75-2.25,7.61c-0.01,0.35,0.11,0.68,0.35,0.94c0.24,0.26,0.56,0.41,0.95,0.42c0.7,0,1.27-0.55,1.31-1.25\n\t\t\t\t\t\t\t\tc0.09-2.16,0.65-5.23,1.15-5.59c0.13-0.08,0.78-0.4,3.98-1.43l0.34-0.12c0.68-0.23,1.09-0.36,1.31-0.45\n\t\t\t\t\t\t\t\tc1.31-0.54,1.93-1.67,1.7-3.11c-0.09-0.6-0.49-1.18-0.94-1.85c-0.62-0.92-1.56-2.3-1.56-3.53c0-2.5,1.66-4.62,3.63-4.62\n\t\t\t\t\t\t\t\ts3.63,2.11,3.63,4.62c0,1.21-0.9,2.55-1.56,3.54c-0.49,0.74-0.85,1.27-0.94,1.84c-0.22,1.43,0.4,2.57,1.71,3.11\n\t\t\t\t\t\t\t\tc0.28,0.11,0.83,0.3,1.65,0.56c0.88,0.29,3.57,1.17,3.96,1.43c0.56,0.4,1.09,3.63,1.17,5.61c0.02,0.7,0.6,1.25,1.36,1.25\n\t\t\t\t\t\t\t\tc0.35-0.01,0.67-0.16,0.91-0.42c0.24-0.26,0.36-0.59,0.34-0.93c0-0.02-0.05-2.2-0.3-3.58C23.82,22.47,23.18,21.14,22.25,20.47z"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M31.65,22.2L31.65,22.2c-0.39-2.06-1.02-3.38-1.94-4.05c-0.54-0.39-1.77-0.82-4.67-1.79l-0.44-0.14\n\t\t\t\t\t\t\t\tc-0.47-0.16-0.91-0.3-1.06-0.36c-0.04-0.02-0.1-0.04-0.11-0.04c0,0-0.02-0.04-0.01-0.15c0.06-0.14,0.37-0.6,0.56-0.89\n\t\t\t\t\t\t\t\tc0.79-1.19,1.99-2.98,1.99-4.98c0-3.99-2.8-7.24-6.24-7.24c-1.06,0-2.1,0.32-3.04,0.92c-0.61,0.42-0.78,1.22-0.39,1.83\n\t\t\t\t\t\t\t\tc0.38,0.57,1.12,0.78,1.81,0.39c0.52-0.33,1.06-0.5,1.61-0.5c1.97,0,3.63,2.11,3.63,4.62c0,1.2-0.9,2.54-1.56,3.54\n\t\t\t\t\t\t\t\tc-0.5,0.74-0.85,1.27-0.94,1.84c-0.22,1.43,0.4,2.57,1.71,3.11c0.28,0.11,0.83,0.3,1.65,0.56c0.88,0.29,3.57,1.17,3.96,1.43\n\t\t\t\t\t\t\t\tc0.56,0.4,1.09,3.63,1.17,5.61c0.02,0.7,0.6,1.25,1.36,1.25c0.35-0.01,0.67-0.16,0.91-0.42c0.24-0.26,0.36-0.59,0.34-0.93\n\t\t\t\t\t\t\t\tC31.95,25.76,31.9,23.58,31.65,22.2z"
+                              }
+                            })
+                          ])
                         ]
                       )
                     ]
@@ -46126,25 +46361,115 @@ var render = function() {
                 [
                   _c(
                     "router-link",
-                    { staticClass: "nav-link", attrs: { to: "/users" } },
+                    { staticClass: "nav-link", attrs: { to: "/approach" } },
                     [
                       _c(
                         "svg",
                         {
-                          staticClass: "olymp-newsfeed-icon left-menu-icon",
+                          staticClass: "left-menu-icon",
+                          staticStyle: { "enable-background": "new 0 0 32 32" },
                           attrs: {
+                            version: "1.1",
+                            xmlns: "http://www.w3.org/2000/svg",
+                            "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                            x: "0px",
+                            y: "0px",
+                            viewBox: "0 0 32 32",
+                            "xml:space": "preserve",
                             "data-toggle": "tooltip",
                             "data-placement": "right",
-                            "data-original-title": "BADGES"
+                            "data-original-title": "EUREKA Approach"
                           }
                         },
                         [
-                          _c("use", {
-                            attrs: {
-                              "xlink:href":
-                                "assets/svg-icons/sprites/icons.svg#olymp-badge-icon"
-                            }
-                          })
+                          _c("g", [
+                            _c("path", {
+                              staticClass: "st0",
+                              attrs: {
+                                d:
+                                  "M14.23,10.56c0.06,0.11,0.11,0.23,0.17,0.31c0.06,0.09,0.14,0.17,0.2,0.26c0.09,0.09,0.17,0.17,0.29,0.26\n\t\t\t\t\t\t\t\tc0.09,0.06,0.2,0.14,0.34,0.17c0.11,0.06,0.23,0.09,0.37,0.11c0.14,0.03,0.26,0.03,0.37,0.03c0.11,0,0.26,0,0.37-0.03\n\t\t\t\t\t\t\t\tc0.11-0.03,0.23-0.06,0.31-0.11h0.03c0.11-0.06,0.23-0.11,0.34-0.2c0.09-0.06,0.17-0.14,0.26-0.23l0.03-0.03\n\t\t\t\t\t\t\t\tc0.09-0.09,0.14-0.17,0.2-0.26c0.06-0.09,0.11-0.17,0.14-0.29c0-0.03,0-0.03,0.03-0.06c0.06-0.11,0.09-0.26,0.11-0.37\n\t\t\t\t\t\t\t\tc0.03-0.11,0.03-0.26,0.03-0.37s0-0.26-0.03-0.37c-0.03-0.11-0.06-0.23-0.11-0.37c-0.09-0.2-0.2-0.37-0.34-0.51\n\t\t\t\t\t\t\t\tc-0.03-0.03-0.03-0.03-0.06-0.06C17.2,8.36,17.12,8.3,17,8.22c-0.11-0.06-0.2-0.11-0.31-0.17s-0.23-0.09-0.34-0.11\n\t\t\t\t\t\t\t\tC16.2,7.9,16.09,7.9,15.97,7.9c-0.11,0-0.26,0-0.37,0.03c-0.11,0.03-0.23,0.06-0.34,0.11h-0.03C15.11,8.1,15,8.16,14.91,8.22\n\t\t\t\t\t\t\t\tc-0.11,0.09-0.2,0.14-0.29,0.23c-0.09,0.09-0.17,0.17-0.23,0.26c-0.06,0.09-0.11,0.2-0.17,0.31c-0.06,0.11-0.09,0.23-0.11,0.34\n\t\t\t\t\t\t\t\tc-0.03,0.14-0.03,0.26-0.03,0.37c0,0.11,0,0.26,0.03,0.37C14.14,10.34,14.2,10.45,14.23,10.56z"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              staticClass: "st0",
+                              attrs: {
+                                d:
+                                  "M18.2,21.04h-0.66v-7.01c0-0.4-0.31-0.74-0.74-0.74h-3c-0.4,0-0.74,0.31-0.74,0.74v1.54\n\t\t\t\t\t\t\t\tc0,0.4,0.31,0.74,0.74,0.74h0.6v4.75h-0.6c-0.4,0-0.74,0.31-0.74,0.74v1.54c0,0.4,0.31,0.74,0.74,0.74h4.41\n\t\t\t\t\t\t\t\tc0.4,0,0.74-0.31,0.74-0.74V21.8C18.95,21.38,18.6,21.04,18.2,21.04z"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              staticClass: "st0",
+                              attrs: {
+                                d:
+                                  "M16,0.1C7.23,0.1,0.1,7.23,0.1,16c0,8.77,7.13,15.9,15.9,15.9c8.77,0,15.9-7.13,15.9-15.9\n\t\t\t\t\t\t\t\tC31.9,7.23,24.77,0.1,16,0.1z M16,29.34C8.64,29.34,2.66,23.36,2.66,16S8.64,2.66,16,2.66S29.34,8.64,29.34,16\n\t\t\t\t\t\t\t\tS23.36,29.34,16,29.34z"
+                              }
+                            })
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "nav-link", attrs: { to: "/home" } },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "left-menu-icon",
+                          staticStyle: { "enable-background": "new 0 0 32 32" },
+                          attrs: {
+                            version: "1.1",
+                            xmlns: "http://www.w3.org/2000/svg",
+                            "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                            x: "0px",
+                            y: "0px",
+                            viewBox: "0 0 32 32",
+                            "xml:space": "preserve",
+                            "data-toggle": "tooltip",
+                            "data-placement": "right",
+                            "data-original-title": "Settings"
+                          }
+                        },
+                        [
+                          _c("g", [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M30.64,14.01l-0.7-0.29c0.09-0.8,0.09-1.61,0-2.41l0.7-0.29c0.49-0.2,0.88-0.59,1.08-1.08c0.2-0.49,0.2-1.03,0-1.53\n\t\t\t\t\t\t\t\tl-0.64-1.55c-0.2-0.49-0.59-0.88-1.08-1.08c-0.49-0.2-1.04-0.2-1.53,0l-0.7,0.29c-0.5-0.63-1.07-1.2-1.7-1.7l0.29-0.7\n\t\t\t\t\t\t\t\tc0.2-0.49,0.2-1.03,0-1.53c-0.2-0.49-0.59-0.88-1.08-1.08l-1.55-0.65c-0.5-0.2-1.04-0.2-1.53,0c-0.49,0.2-0.88,0.59-1.08,1.08\n\t\t\t\t\t\t\t\tl-0.29,0.7c-0.8-0.09-1.61-0.09-2.41,0l-0.29-0.7c-0.2-0.49-0.59-0.88-1.08-1.08c-0.49-0.2-1.03-0.2-1.53,0l-1.55,0.64\n\t\t\t\t\t\t\t\tc-0.49,0.2-0.88,0.59-1.08,1.08c-0.21,0.49-0.21,1.04,0,1.53l0.29,0.7c-0.62,0.49-1.2,1.06-1.7,1.7l-0.7-0.29\n\t\t\t\t\t\t\t\tc-0.49-0.2-1.03-0.2-1.53,0c-0.49,0.2-0.88,0.59-1.08,1.08L7.54,8.41c-0.2,0.49-0.2,1.04,0,1.53c0.2,0.49,0.59,0.88,1.08,1.08\n\t\t\t\t\t\t\t\tl1.42,0.59c0.25,0.1,0.52,0.1,0.77,0c0.24-0.1,0.44-0.3,0.54-0.54c0.1-0.25,0.1-0.52,0-0.77c-0.1-0.25-0.3-0.44-0.54-0.54\n\t\t\t\t\t\t\t\tL9.38,9.17l0.64-1.55l1.42,0.59c0.44,0.18,0.95,0.03,1.21-0.37c0.61-0.92,1.39-1.69,2.31-2.31c0.4-0.27,0.56-0.78,0.37-1.21\n\t\t\t\t\t\t\t\tL14.75,2.9l1.55-0.64l0.59,1.42c0.18,0.45,0.66,0.7,1.12,0.6c1.06-0.22,2.16-0.22,3.26,0c0.46,0.09,0.94-0.16,1.12-0.6l0.58-1.42\n\t\t\t\t\t\t\t\tl1.55,0.64l-0.59,1.42c-0.18,0.44-0.03,0.95,0.37,1.21c0.92,0.61,1.7,1.39,2.31,2.31c0.27,0.4,0.78,0.55,1.21,0.37l1.42-0.59\n\t\t\t\t\t\t\t\tl0.64,1.55l-1.42,0.59c-0.45,0.18-0.69,0.64-0.6,1.12c0.21,1.06,0.21,2.16,0,3.26c-0.09,0.47,0.16,0.94,0.6,1.12l1.42,0.58\n\t\t\t\t\t\t\t\tl-0.64,1.55l-1.43-0.59c-0.44-0.18-0.95-0.02-1.21,0.37c-0.61,0.92-1.39,1.69-2.31,2.31c-0.4,0.27-0.55,0.78-0.37,1.21l0.59,1.42\n\t\t\t\t\t\t\t\tl-1.55,0.64l-0.59-1.42c-0.1-0.25-0.3-0.44-0.54-0.55c-0.25-0.1-0.52-0.1-0.76,0c-0.25,0.1-0.44,0.3-0.55,0.55\n\t\t\t\t\t\t\t\tc-0.1,0.25-0.1,0.52,0,0.76l0.59,1.42c0.21,0.5,0.59,0.88,1.09,1.08c0.25,0.1,0.51,0.15,0.76,0.15c0.26,0,0.52-0.05,0.76-0.16\n\t\t\t\t\t\t\t\tl1.55-0.64c0.49-0.21,0.88-0.59,1.08-1.08c0.2-0.49,0.2-1.04,0-1.53l-0.29-0.7c0.62-0.49,1.19-1.06,1.7-1.7l0.7,0.29\n\t\t\t\t\t\t\t\tc1.02,0.42,2.19-0.06,2.61-1.08l0.65-1.55c0.2-0.49,0.2-1.04,0-1.53C31.52,14.59,31.13,14.21,30.64,14.01z"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M25.1,12.47c-0.02-2.99-2.47-5.43-5.51-5.43c-1.46,0.01-2.83,0.59-3.86,1.63c-1.02,1.04-1.58,2.41-1.58,3.88\n\t\t\t\t\t\t\t\tc0,0.55,0.45,1,1.01,1c0.27,0,0.52-0.11,0.71-0.3c0.19-0.19,0.29-0.45,0.29-0.71c-0.01-0.93,0.35-1.8,1-2.46\n\t\t\t\t\t\t\t\tc0.65-0.66,1.52-1.03,2.47-1.03c1.9,0,3.45,1.54,3.47,3.44c0.01,1.91-1.53,3.48-3.44,3.49c-0.27,0-0.52,0.11-0.71,0.3\n\t\t\t\t\t\t\t\tc-0.19,0.19-0.29,0.45-0.29,0.71c0,0.55,0.45,1,1.01,1c1.46-0.01,2.83-0.59,3.86-1.63C24.55,15.31,25.11,13.93,25.1,12.47z"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M17.49,19.85h-0.34c-0.14-0.45-0.32-0.88-0.54-1.29l0.24-0.24c0.33-0.33,0.51-0.76,0.51-1.22c0-0.47-0.18-0.9-0.51-1.22\n\t\t\t\t\t\t\t\tl-0.86-0.86c-0.66-0.66-1.81-0.65-2.44,0l-0.24,0.24c-0.41-0.22-0.84-0.4-1.29-0.54v-0.35c0-0.95-0.78-1.73-1.73-1.73H9.06\n\t\t\t\t\t\t\t\tc-0.95,0-1.73,0.78-1.73,1.73v0.35c-0.45,0.14-0.88,0.32-1.29,0.54l-0.24-0.24c-0.66-0.66-1.81-0.65-2.44,0l-0.86,0.86\n\t\t\t\t\t\t\t\tc-0.32,0.32-0.5,0.76-0.5,1.22c0,0.46,0.18,0.9,0.5,1.22l0.24,0.24c-0.22,0.41-0.4,0.84-0.54,1.29H1.85\n\t\t\t\t\t\t\t\tc-0.95,0-1.73,0.78-1.73,1.73v1.22c0,0.95,0.78,1.73,1.73,1.73H2.2c0.14,0.45,0.32,0.88,0.54,1.29l-0.24,0.24\n\t\t\t\t\t\t\t\tc-0.32,0.32-0.5,0.76-0.5,1.22s0.18,0.9,0.5,1.22l0.86,0.86c0.66,0.66,1.81,0.65,2.44,0l0.24-0.24c0.41,0.22,0.84,0.4,1.29,0.54\n\t\t\t\t\t\t\t\tv0.35c0.01,0.95,0.78,1.73,1.73,1.73h1.22c0.95,0,1.73-0.78,1.73-1.73v-0.35c0.45-0.14,0.88-0.32,1.29-0.54l0.24,0.24\n\t\t\t\t\t\t\t\tc0.66,0.66,1.81,0.65,2.44,0l0.86-0.86c0.33-0.33,0.51-0.76,0.51-1.22c0-0.47-0.18-0.9-0.51-1.22l-0.24-0.24\n\t\t\t\t\t\t\t\tc0.22-0.41,0.4-0.84,0.54-1.29h0.34c0.95,0,1.73-0.78,1.73-1.73v-1.22C19.22,20.63,18.44,19.85,17.49,19.85z M15.39,23.35\n\t\t\t\t\t\t\t\tc-0.15,0.76-0.44,1.46-0.87,2.09c-0.26,0.4-0.21,0.93,0.12,1.26l0.6,0.59l-0.47,0.47l-0.6-0.6c-0.34-0.34-0.87-0.39-1.27-0.12\n\t\t\t\t\t\t\t\tc-0.63,0.43-1.34,0.72-2.09,0.87c-0.47,0.09-0.81,0.5-0.81,0.98v0.85H9.34V28.9c0-0.48-0.34-0.89-0.8-0.98\n\t\t\t\t\t\t\t\tc-0.77-0.17-1.47-0.46-2.1-0.88c-0.4-0.26-0.94-0.2-1.26,0.12l-0.6,0.59l-0.47-0.47l0.6-0.6c0.34-0.34,0.39-0.88,0.12-1.26\n\t\t\t\t\t\t\t\tc-0.43-0.63-0.72-1.34-0.87-2.09c-0.09-0.47-0.5-0.81-0.98-0.81H2.13v-0.67h0.85c0.48,0,0.89-0.34,0.98-0.81\n\t\t\t\t\t\t\t\tc0.15-0.75,0.44-1.46,0.87-2.09c0.27-0.4,0.21-0.93-0.12-1.26l-0.6-0.59l0.47-0.47l0.6,0.61c0.34,0.34,0.88,0.39,1.27,0.12\n\t\t\t\t\t\t\t\tc0.63-0.43,1.34-0.72,2.09-0.87c0.47-0.09,0.81-0.5,0.81-0.98v-0.85h0.67v0.85c0,0.48,0.34,0.89,0.81,0.98\n\t\t\t\t\t\t\t\tc0.75,0.15,1.46,0.44,2.09,0.87c0.4,0.26,0.93,0.21,1.26-0.12l0.6-0.6l0.47,0.47l-0.6,0.6c-0.34,0.34-0.39,0.88-0.12,1.26\n\t\t\t\t\t\t\t\tc0.43,0.63,0.72,1.34,0.87,2.09c0.09,0.47,0.5,0.81,0.98,0.81h0.85v0.67h-0.85C15.9,22.54,15.48,22.88,15.39,23.35z"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M9.67,18.1c-2.25,0-4.09,1.84-4.09,4.1c0,2.26,1.84,4.09,4.1,4.09c2.25,0,4.09-1.84,4.09-4.09\n\t\t\t\t\t\t\t\tC13.76,19.94,11.93,18.1,9.67,18.1z M11.77,22.2c0,1.15-0.94,2.09-2.09,2.09s-2.09-0.94-2.09-2.09s0.94-2.09,2.09-2.09\n\t\t\t\t\t\t\t\tS11.77,21.05,11.77,22.2z"
+                              }
+                            })
+                          ])
                         ]
                       )
                     ]
@@ -46209,64 +46534,260 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
+              _c(
+                "li",
+                [
                   _c(
-                    "svg",
+                    "router-link",
                     {
-                      staticClass: "olymp-newsfeed-icon left-menu-icon",
-                      attrs: {
-                        "data-toggle": "tooltip",
-                        "data-placement": "right",
-                        "data-original-title": "NEWSFEED"
-                      }
+                      staticClass: "nav-link",
+                      attrs: { to: "/challenge-details" }
                     },
                     [
-                      _c("use", {
-                        attrs: {
-                          "xlink:href":
-                            "assets/svg-icons/sprites/icons.svg#olymp-newsfeed-icon"
-                        }
-                      })
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "olymp-newsfeed-icon left-menu-icon",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-placement": "right",
+                            "data-original-title": "NEWSFEED"
+                          }
+                        },
+                        [
+                          _c("use", {
+                            attrs: {
+                              "xlink:href":
+                                "assets/svg-icons/sprites/icons.svg#olymp-newsfeed-icon"
+                            }
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "left-menu-title" }, [
+                        _vm._v("Newsfeed")
+                      ])
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "left-menu-title" }, [
-                    _vm._v("Newsfeed")
-                  ])
-                ])
-              ]),
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
+              _c(
+                "li",
+                [
                   _c(
-                    "svg",
-                    {
-                      staticClass: "olymp-star-icon left-menu-icon",
-                      attrs: {
-                        "data-toggle": "tooltip",
-                        "data-placement": "right",
-                        "data-original-title": "FAV PAGE"
-                      }
-                    },
+                    "router-link",
+                    { staticClass: "nav-link", attrs: { to: "/home" } },
                     [
-                      _c("use", {
-                        attrs: {
-                          "xlink:href":
-                            "assets/svg-icons/sprites/icons.svg#olymp-star-icon"
-                        }
-                      })
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "olymp-newsfeed-icon left-menu-icon",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-placement": "right",
+                            "data-original-title": "DETAILS"
+                          }
+                        },
+                        [
+                          _c("use", {
+                            attrs: {
+                              "xlink:href":
+                                "assets/svg-icons/sprites/icons.svg#olymp-calendar-icon"
+                            }
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "left-menu-title" }, [
+                        _vm._v("Challenges Details")
+                      ])
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "left-menu-title" }, [
-                    _vm._v("Fav Pages Feed")
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._m(1)
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "nav-link", attrs: { to: "/contributors" } },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "left-menu-icon",
+                          staticStyle: { "enable-background": "new 0 0 32 32" },
+                          attrs: {
+                            version: "1.1",
+                            xmlns: "http://www.w3.org/2000/svg",
+                            "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                            x: "0px",
+                            y: "0px",
+                            viewBox: "0 0 32 32",
+                            "xml:space": "preserve",
+                            "data-toggle": "tooltip",
+                            "data-placement": "right",
+                            "data-original-title": "Contributors"
+                          }
+                        },
+                        [
+                          _c("g", [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M22.25,20.47c-0.54-0.39-1.83-0.85-4.67-1.79l-0.45-0.15c-0.48-0.16-0.9-0.3-1.04-0.36c-0.04-0.02-0.1-0.04-0.11-0.05\n\t\t\t\t\t\t\t\tc0,0-0.02-0.04-0.01-0.14c0.06-0.14,0.36-0.6,0.56-0.89c0.79-1.19,1.99-2.98,1.99-4.98c0-3.99-2.8-7.24-6.24-7.24\n\t\t\t\t\t\t\t\tc-3.44,0-6.24,3.25-6.24,7.24c0,1.98,1.18,3.76,2,4.99c0.19,0.28,0.5,0.74,0.54,0.83c0.02,0.15,0.01,0.19,0.01,0.19\n\t\t\t\t\t\t\t\tc-0.01,0.01-0.07,0.04-0.12,0.06C8.33,18.23,8,18.34,7.6,18.47l-0.63,0.21c-2.85,0.94-4.13,1.4-4.67,1.79\n\t\t\t\t\t\t\t\tc-1.77,1.28-2.17,5.75-2.25,7.61c-0.01,0.35,0.11,0.68,0.35,0.94c0.24,0.26,0.56,0.41,0.95,0.42c0.7,0,1.27-0.55,1.31-1.25\n\t\t\t\t\t\t\t\tc0.09-2.16,0.65-5.23,1.15-5.59c0.13-0.08,0.78-0.4,3.98-1.43l0.34-0.12c0.68-0.23,1.09-0.36,1.31-0.45\n\t\t\t\t\t\t\t\tc1.31-0.54,1.93-1.67,1.7-3.11c-0.09-0.6-0.49-1.18-0.94-1.85c-0.62-0.92-1.56-2.3-1.56-3.53c0-2.5,1.66-4.62,3.63-4.62\n\t\t\t\t\t\t\t\ts3.63,2.11,3.63,4.62c0,1.21-0.9,2.55-1.56,3.54c-0.49,0.74-0.85,1.27-0.94,1.84c-0.22,1.43,0.4,2.57,1.71,3.11\n\t\t\t\t\t\t\t\tc0.28,0.11,0.83,0.3,1.65,0.56c0.88,0.29,3.57,1.17,3.96,1.43c0.56,0.4,1.09,3.63,1.17,5.61c0.02,0.7,0.6,1.25,1.36,1.25\n\t\t\t\t\t\t\t\tc0.35-0.01,0.67-0.16,0.91-0.42c0.24-0.26,0.36-0.59,0.34-0.93c0-0.02-0.05-2.2-0.3-3.58C23.82,22.47,23.18,21.14,22.25,20.47z"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M31.65,22.2L31.65,22.2c-0.39-2.06-1.02-3.38-1.94-4.05c-0.54-0.39-1.77-0.82-4.67-1.79l-0.44-0.14\n\t\t\t\t\t\t\t\tc-0.47-0.16-0.91-0.3-1.06-0.36c-0.04-0.02-0.1-0.04-0.11-0.04c0,0-0.02-0.04-0.01-0.15c0.06-0.14,0.37-0.6,0.56-0.89\n\t\t\t\t\t\t\t\tc0.79-1.19,1.99-2.98,1.99-4.98c0-3.99-2.8-7.24-6.24-7.24c-1.06,0-2.1,0.32-3.04,0.92c-0.61,0.42-0.78,1.22-0.39,1.83\n\t\t\t\t\t\t\t\tc0.38,0.57,1.12,0.78,1.81,0.39c0.52-0.33,1.06-0.5,1.61-0.5c1.97,0,3.63,2.11,3.63,4.62c0,1.2-0.9,2.54-1.56,3.54\n\t\t\t\t\t\t\t\tc-0.5,0.74-0.85,1.27-0.94,1.84c-0.22,1.43,0.4,2.57,1.71,3.11c0.28,0.11,0.83,0.3,1.65,0.56c0.88,0.29,3.57,1.17,3.96,1.43\n\t\t\t\t\t\t\t\tc0.56,0.4,1.09,3.63,1.17,5.61c0.02,0.7,0.6,1.25,1.36,1.25c0.35-0.01,0.67-0.16,0.91-0.42c0.24-0.26,0.36-0.59,0.34-0.93\n\t\t\t\t\t\t\t\tC31.95,25.76,31.9,23.58,31.65,22.2z"
+                              }
+                            })
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "left-menu-title" }, [
+                        _vm._v("Contributors")
+                      ])
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "nav-link", attrs: { to: "/approach" } },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "left-menu-icon",
+                          staticStyle: { "enable-background": "new 0 0 32 32" },
+                          attrs: {
+                            version: "1.1",
+                            xmlns: "http://www.w3.org/2000/svg",
+                            "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                            x: "0px",
+                            y: "0px",
+                            viewBox: "0 0 32 32",
+                            "xml:space": "preserve",
+                            "data-toggle": "tooltip",
+                            "data-placement": "right",
+                            "data-original-title": "EUREKA Approach"
+                          }
+                        },
+                        [
+                          _c("g", [
+                            _c("path", {
+                              staticClass: "st0",
+                              attrs: {
+                                d:
+                                  "M14.23,10.56c0.06,0.11,0.11,0.23,0.17,0.31c0.06,0.09,0.14,0.17,0.2,0.26c0.09,0.09,0.17,0.17,0.29,0.26\n\t\t\t\t\t\t\t\tc0.09,0.06,0.2,0.14,0.34,0.17c0.11,0.06,0.23,0.09,0.37,0.11c0.14,0.03,0.26,0.03,0.37,0.03c0.11,0,0.26,0,0.37-0.03\n\t\t\t\t\t\t\t\tc0.11-0.03,0.23-0.06,0.31-0.11h0.03c0.11-0.06,0.23-0.11,0.34-0.2c0.09-0.06,0.17-0.14,0.26-0.23l0.03-0.03\n\t\t\t\t\t\t\t\tc0.09-0.09,0.14-0.17,0.2-0.26c0.06-0.09,0.11-0.17,0.14-0.29c0-0.03,0-0.03,0.03-0.06c0.06-0.11,0.09-0.26,0.11-0.37\n\t\t\t\t\t\t\t\tc0.03-0.11,0.03-0.26,0.03-0.37s0-0.26-0.03-0.37c-0.03-0.11-0.06-0.23-0.11-0.37c-0.09-0.2-0.2-0.37-0.34-0.51\n\t\t\t\t\t\t\t\tc-0.03-0.03-0.03-0.03-0.06-0.06C17.2,8.36,17.12,8.3,17,8.22c-0.11-0.06-0.2-0.11-0.31-0.17s-0.23-0.09-0.34-0.11\n\t\t\t\t\t\t\t\tC16.2,7.9,16.09,7.9,15.97,7.9c-0.11,0-0.26,0-0.37,0.03c-0.11,0.03-0.23,0.06-0.34,0.11h-0.03C15.11,8.1,15,8.16,14.91,8.22\n\t\t\t\t\t\t\t\tc-0.11,0.09-0.2,0.14-0.29,0.23c-0.09,0.09-0.17,0.17-0.23,0.26c-0.06,0.09-0.11,0.2-0.17,0.31c-0.06,0.11-0.09,0.23-0.11,0.34\n\t\t\t\t\t\t\t\tc-0.03,0.14-0.03,0.26-0.03,0.37c0,0.11,0,0.26,0.03,0.37C14.14,10.34,14.2,10.45,14.23,10.56z"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              staticClass: "st0",
+                              attrs: {
+                                d:
+                                  "M18.2,21.04h-0.66v-7.01c0-0.4-0.31-0.74-0.74-0.74h-3c-0.4,0-0.74,0.31-0.74,0.74v1.54\n\t\t\t\t\t\t\t\tc0,0.4,0.31,0.74,0.74,0.74h0.6v4.75h-0.6c-0.4,0-0.74,0.31-0.74,0.74v1.54c0,0.4,0.31,0.74,0.74,0.74h4.41\n\t\t\t\t\t\t\t\tc0.4,0,0.74-0.31,0.74-0.74V21.8C18.95,21.38,18.6,21.04,18.2,21.04z"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              staticClass: "st0",
+                              attrs: {
+                                d:
+                                  "M16,0.1C7.23,0.1,0.1,7.23,0.1,16c0,8.77,7.13,15.9,15.9,15.9c8.77,0,15.9-7.13,15.9-15.9\n\t\t\t\t\t\t\t\tC31.9,7.23,24.77,0.1,16,0.1z M16,29.34C8.64,29.34,2.66,23.36,2.66,16S8.64,2.66,16,2.66S29.34,8.64,29.34,16\n\t\t\t\t\t\t\t\tS23.36,29.34,16,29.34z"
+                              }
+                            })
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "left-menu-title" }, [
+                        _vm._v("Eureka Approach")
+                      ])
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "nav-link", attrs: { to: "/home" } },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "left-menu-icon",
+                          staticStyle: { "enable-background": "new 0 0 32 32" },
+                          attrs: {
+                            version: "1.1",
+                            xmlns: "http://www.w3.org/2000/svg",
+                            "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                            x: "0px",
+                            y: "0px",
+                            viewBox: "0 0 32 32",
+                            "xml:space": "preserve",
+                            "data-toggle": "tooltip",
+                            "data-placement": "right",
+                            "data-original-title": "Settings"
+                          }
+                        },
+                        [
+                          _c("g", [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M30.64,14.01l-0.7-0.29c0.09-0.8,0.09-1.61,0-2.41l0.7-0.29c0.49-0.2,0.88-0.59,1.08-1.08c0.2-0.49,0.2-1.03,0-1.53\n\t\t\t\t\t\t\t\tl-0.64-1.55c-0.2-0.49-0.59-0.88-1.08-1.08c-0.49-0.2-1.04-0.2-1.53,0l-0.7,0.29c-0.5-0.63-1.07-1.2-1.7-1.7l0.29-0.7\n\t\t\t\t\t\t\t\tc0.2-0.49,0.2-1.03,0-1.53c-0.2-0.49-0.59-0.88-1.08-1.08l-1.55-0.65c-0.5-0.2-1.04-0.2-1.53,0c-0.49,0.2-0.88,0.59-1.08,1.08\n\t\t\t\t\t\t\t\tl-0.29,0.7c-0.8-0.09-1.61-0.09-2.41,0l-0.29-0.7c-0.2-0.49-0.59-0.88-1.08-1.08c-0.49-0.2-1.03-0.2-1.53,0l-1.55,0.64\n\t\t\t\t\t\t\t\tc-0.49,0.2-0.88,0.59-1.08,1.08c-0.21,0.49-0.21,1.04,0,1.53l0.29,0.7c-0.62,0.49-1.2,1.06-1.7,1.7l-0.7-0.29\n\t\t\t\t\t\t\t\tc-0.49-0.2-1.03-0.2-1.53,0c-0.49,0.2-0.88,0.59-1.08,1.08L7.54,8.41c-0.2,0.49-0.2,1.04,0,1.53c0.2,0.49,0.59,0.88,1.08,1.08\n\t\t\t\t\t\t\t\tl1.42,0.59c0.25,0.1,0.52,0.1,0.77,0c0.24-0.1,0.44-0.3,0.54-0.54c0.1-0.25,0.1-0.52,0-0.77c-0.1-0.25-0.3-0.44-0.54-0.54\n\t\t\t\t\t\t\t\tL9.38,9.17l0.64-1.55l1.42,0.59c0.44,0.18,0.95,0.03,1.21-0.37c0.61-0.92,1.39-1.69,2.31-2.31c0.4-0.27,0.56-0.78,0.37-1.21\n\t\t\t\t\t\t\t\tL14.75,2.9l1.55-0.64l0.59,1.42c0.18,0.45,0.66,0.7,1.12,0.6c1.06-0.22,2.16-0.22,3.26,0c0.46,0.09,0.94-0.16,1.12-0.6l0.58-1.42\n\t\t\t\t\t\t\t\tl1.55,0.64l-0.59,1.42c-0.18,0.44-0.03,0.95,0.37,1.21c0.92,0.61,1.7,1.39,2.31,2.31c0.27,0.4,0.78,0.55,1.21,0.37l1.42-0.59\n\t\t\t\t\t\t\t\tl0.64,1.55l-1.42,0.59c-0.45,0.18-0.69,0.64-0.6,1.12c0.21,1.06,0.21,2.16,0,3.26c-0.09,0.47,0.16,0.94,0.6,1.12l1.42,0.58\n\t\t\t\t\t\t\t\tl-0.64,1.55l-1.43-0.59c-0.44-0.18-0.95-0.02-1.21,0.37c-0.61,0.92-1.39,1.69-2.31,2.31c-0.4,0.27-0.55,0.78-0.37,1.21l0.59,1.42\n\t\t\t\t\t\t\t\tl-1.55,0.64l-0.59-1.42c-0.1-0.25-0.3-0.44-0.54-0.55c-0.25-0.1-0.52-0.1-0.76,0c-0.25,0.1-0.44,0.3-0.55,0.55\n\t\t\t\t\t\t\t\tc-0.1,0.25-0.1,0.52,0,0.76l0.59,1.42c0.21,0.5,0.59,0.88,1.09,1.08c0.25,0.1,0.51,0.15,0.76,0.15c0.26,0,0.52-0.05,0.76-0.16\n\t\t\t\t\t\t\t\tl1.55-0.64c0.49-0.21,0.88-0.59,1.08-1.08c0.2-0.49,0.2-1.04,0-1.53l-0.29-0.7c0.62-0.49,1.19-1.06,1.7-1.7l0.7,0.29\n\t\t\t\t\t\t\t\tc1.02,0.42,2.19-0.06,2.61-1.08l0.65-1.55c0.2-0.49,0.2-1.04,0-1.53C31.52,14.59,31.13,14.21,30.64,14.01z"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M25.1,12.47c-0.02-2.99-2.47-5.43-5.51-5.43c-1.46,0.01-2.83,0.59-3.86,1.63c-1.02,1.04-1.58,2.41-1.58,3.88\n\t\t\t\t\t\t\t\tc0,0.55,0.45,1,1.01,1c0.27,0,0.52-0.11,0.71-0.3c0.19-0.19,0.29-0.45,0.29-0.71c-0.01-0.93,0.35-1.8,1-2.46\n\t\t\t\t\t\t\t\tc0.65-0.66,1.52-1.03,2.47-1.03c1.9,0,3.45,1.54,3.47,3.44c0.01,1.91-1.53,3.48-3.44,3.49c-0.27,0-0.52,0.11-0.71,0.3\n\t\t\t\t\t\t\t\tc-0.19,0.19-0.29,0.45-0.29,0.71c0,0.55,0.45,1,1.01,1c1.46-0.01,2.83-0.59,3.86-1.63C24.55,15.31,25.11,13.93,25.1,12.47z"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M17.49,19.85h-0.34c-0.14-0.45-0.32-0.88-0.54-1.29l0.24-0.24c0.33-0.33,0.51-0.76,0.51-1.22c0-0.47-0.18-0.9-0.51-1.22\n\t\t\t\t\t\t\t\tl-0.86-0.86c-0.66-0.66-1.81-0.65-2.44,0l-0.24,0.24c-0.41-0.22-0.84-0.4-1.29-0.54v-0.35c0-0.95-0.78-1.73-1.73-1.73H9.06\n\t\t\t\t\t\t\t\tc-0.95,0-1.73,0.78-1.73,1.73v0.35c-0.45,0.14-0.88,0.32-1.29,0.54l-0.24-0.24c-0.66-0.66-1.81-0.65-2.44,0l-0.86,0.86\n\t\t\t\t\t\t\t\tc-0.32,0.32-0.5,0.76-0.5,1.22c0,0.46,0.18,0.9,0.5,1.22l0.24,0.24c-0.22,0.41-0.4,0.84-0.54,1.29H1.85\n\t\t\t\t\t\t\t\tc-0.95,0-1.73,0.78-1.73,1.73v1.22c0,0.95,0.78,1.73,1.73,1.73H2.2c0.14,0.45,0.32,0.88,0.54,1.29l-0.24,0.24\n\t\t\t\t\t\t\t\tc-0.32,0.32-0.5,0.76-0.5,1.22s0.18,0.9,0.5,1.22l0.86,0.86c0.66,0.66,1.81,0.65,2.44,0l0.24-0.24c0.41,0.22,0.84,0.4,1.29,0.54\n\t\t\t\t\t\t\t\tv0.35c0.01,0.95,0.78,1.73,1.73,1.73h1.22c0.95,0,1.73-0.78,1.73-1.73v-0.35c0.45-0.14,0.88-0.32,1.29-0.54l0.24,0.24\n\t\t\t\t\t\t\t\tc0.66,0.66,1.81,0.65,2.44,0l0.86-0.86c0.33-0.33,0.51-0.76,0.51-1.22c0-0.47-0.18-0.9-0.51-1.22l-0.24-0.24\n\t\t\t\t\t\t\t\tc0.22-0.41,0.4-0.84,0.54-1.29h0.34c0.95,0,1.73-0.78,1.73-1.73v-1.22C19.22,20.63,18.44,19.85,17.49,19.85z M15.39,23.35\n\t\t\t\t\t\t\t\tc-0.15,0.76-0.44,1.46-0.87,2.09c-0.26,0.4-0.21,0.93,0.12,1.26l0.6,0.59l-0.47,0.47l-0.6-0.6c-0.34-0.34-0.87-0.39-1.27-0.12\n\t\t\t\t\t\t\t\tc-0.63,0.43-1.34,0.72-2.09,0.87c-0.47,0.09-0.81,0.5-0.81,0.98v0.85H9.34V28.9c0-0.48-0.34-0.89-0.8-0.98\n\t\t\t\t\t\t\t\tc-0.77-0.17-1.47-0.46-2.1-0.88c-0.4-0.26-0.94-0.2-1.26,0.12l-0.6,0.59l-0.47-0.47l0.6-0.6c0.34-0.34,0.39-0.88,0.12-1.26\n\t\t\t\t\t\t\t\tc-0.43-0.63-0.72-1.34-0.87-2.09c-0.09-0.47-0.5-0.81-0.98-0.81H2.13v-0.67h0.85c0.48,0,0.89-0.34,0.98-0.81\n\t\t\t\t\t\t\t\tc0.15-0.75,0.44-1.46,0.87-2.09c0.27-0.4,0.21-0.93-0.12-1.26l-0.6-0.59l0.47-0.47l0.6,0.61c0.34,0.34,0.88,0.39,1.27,0.12\n\t\t\t\t\t\t\t\tc0.63-0.43,1.34-0.72,2.09-0.87c0.47-0.09,0.81-0.5,0.81-0.98v-0.85h0.67v0.85c0,0.48,0.34,0.89,0.81,0.98\n\t\t\t\t\t\t\t\tc0.75,0.15,1.46,0.44,2.09,0.87c0.4,0.26,0.93,0.21,1.26-0.12l0.6-0.6l0.47,0.47l-0.6,0.6c-0.34,0.34-0.39,0.88-0.12,1.26\n\t\t\t\t\t\t\t\tc0.43,0.63,0.72,1.34,0.87,2.09c0.09,0.47,0.5,0.81,0.98,0.81h0.85v0.67h-0.85C15.9,22.54,15.48,22.88,15.39,23.35z"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M9.67,18.1c-2.25,0-4.09,1.84-4.09,4.1c0,2.26,1.84,4.09,4.1,4.09c2.25,0,4.09-1.84,4.09-4.09\n\t\t\t\t\t\t\t\tC13.76,19.94,11.93,18.1,9.67,18.1z M11.77,22.2c0,1.15-0.94,2.09-2.09,2.09s-2.09-0.94-2.09-2.09s0.94-2.09,2.09-2.09\n\t\t\t\t\t\t\t\tS11.77,21.05,11.77,22.2z"
+                              }
+                            })
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            ])
           ]
         )
       ]
@@ -46280,46 +46801,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "title-block" }, [
       _c("h6", { staticClass: "logo-title" }, [_vm._v("eureka")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profile-completion" }, [
-      _c("div", { staticClass: "skills-item" }, [
-        _c("div", { staticClass: "skills-item-info" }, [
-          _c("span", { staticClass: "skills-item-title" }, [
-            _vm._v("Profile Completion")
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "skills-item-count" }, [
-            _c("span", {
-              staticClass: "count-animate",
-              attrs: {
-                "data-speed": "1000",
-                "data-refresh-interval": "50",
-                "data-to": "76",
-                "data-from": "0"
-              }
-            }),
-            _c("span", { staticClass: "units" }, [_vm._v("76%")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "skills-item-meter" }, [
-          _c("span", {
-            staticClass: "skills-item-meter-active bg-primary",
-            staticStyle: { width: "76%" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("span", [
-        _vm._v("Complete "),
-        _c("a", { attrs: { href: "#" } }, [_vm._v("your profile")]),
-        _vm._v(" so people can know more about you!")
-      ])
     ])
   }
 ]
@@ -46790,7 +47271,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "post-content" }, [
                     _vm._v(
-                      "\n                           " +
+                      "\n                            " +
                         _vm._s(_vm.challenge.description) +
                         "\n                        "
                     )
@@ -47143,7 +47624,7 @@ var staticRenderFns = [
           { staticClass: "published", attrs: { datetime: "2017-03-24T18:18" } },
           [
             _vm._v(
-              "\n                                -  12 hours ago\n                            "
+              "\n                                - 12 hours ago\n                            "
             )
           ]
         )
@@ -48075,7 +48556,7 @@ var staticRenderFns = [
                   _vm._v(" "),
                   _c("p", [
                     _vm._v(
-                      "Welcome to your badge collection! Here you’ll find all the badges you can unlock to show on your profile.\r\n\t Learn how to achive the goal to adquire them and collect them all. Some have leveled tiers and other don’t.\r\n\t You can challenge your friends to see who gets more and let the fun begin!"
+                      "Welcome to your badge collection! Here you’ll find all the badges you can unlock to show on your profile.\n\t Learn how to achive the goal to adquire them and collect them all. Some have leveled tiers and other don’t.\n\t You can challenge your friends to see who gets more and let the fun begin!"
                     )
                   ])
                 ])
@@ -53434,7 +53915,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("span", { staticClass: "text" }, [
             _vm._v(
-              "Hi, I’m James, I’m 36 and I work as a Digital Designer for the\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t“Daydreams” Agency in Pier 56\r\n\t\t\t\t\t\t\t\t\t\t\t\t"
+              "Hi, I’m James, I’m 36 and I work as a Digital Designer for the\n\t\t\t\t\t\t\t\t\t\t\t\t\t“Daydreams” Agency in Pier 56\n\t\t\t\t\t\t\t\t\t\t\t\t"
             )
           ])
         ]),
@@ -53531,7 +54012,7 @@ var staticRenderFns = [
               staticClass: "fab fa-facebook-f",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v("\r\n\t\t\t\t\t\t\tFacebook\r\n\t\t\t\t\t\t")
+            _vm._v("\n\t\t\t\t\t\t\tFacebook\n\t\t\t\t\t\t")
           ]
         ),
         _vm._v(" "),
@@ -53543,7 +54024,7 @@ var staticRenderFns = [
               staticClass: "fab fa-twitter",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v("\r\n\t\t\t\t\t\t\tTwitter\r\n\t\t\t\t\t\t")
+            _vm._v("\n\t\t\t\t\t\t\tTwitter\n\t\t\t\t\t\t")
           ]
         ),
         _vm._v(" "),
@@ -53555,7 +54036,7 @@ var staticRenderFns = [
               staticClass: "fab fa-dribbble",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v("\r\n\t\t\t\t\t\t\tDribbble\r\n\t\t\t\t\t\t")
+            _vm._v("\n\t\t\t\t\t\t\tDribbble\n\t\t\t\t\t\t")
           ]
         )
       ])
@@ -54514,7 +54995,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\r\n\t\t\t\t\t\t\t\t\t\tHi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.\r\n\t\t\t\t\t\t\t\t\t"
+            "\n\t\t\t\t\t\t\t\t\t\tHi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.\n\t\t\t\t\t\t\t\t\t"
           )
         ]
       ),
@@ -54617,7 +55098,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\r\n\t\t\t\t\t\t\t\t\t\tHi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.\r\n\t\t\t\t\t\t\t\t\t"
+            "\n\t\t\t\t\t\t\t\t\t\tHi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.\n\t\t\t\t\t\t\t\t\t"
           )
         ]
       ),
@@ -54720,7 +55201,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\r\n\t\t\t\t\t\t\t\t\t\tHi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.\r\n\t\t\t\t\t\t\t\t\t"
+            "\n\t\t\t\t\t\t\t\t\t\tHi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.\n\t\t\t\t\t\t\t\t\t"
           )
         ]
       ),
@@ -54823,7 +55304,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\r\n\t\t\t\t\t\t\t\t\t\tHi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.\r\n\t\t\t\t\t\t\t\t\t"
+            "\n\t\t\t\t\t\t\t\t\t\tHi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.\n\t\t\t\t\t\t\t\t\t"
           )
         ]
       ),
@@ -54926,7 +55407,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\r\n\t\t\t\t\t\t\t\t\t\tHi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.\r\n\t\t\t\t\t\t\t\t\t"
+            "\n\t\t\t\t\t\t\t\t\t\tHi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.\n\t\t\t\t\t\t\t\t\t"
           )
         ]
       ),
@@ -55029,7 +55510,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\r\n\t\t\t\t\t\t\t\t\t\tHi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.\r\n\t\t\t\t\t\t\t\t\t"
+            "\n\t\t\t\t\t\t\t\t\t\tHi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.\n\t\t\t\t\t\t\t\t\t"
           )
         ]
       ),
@@ -55132,7 +55613,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\r\n\t\t\t\t\t\t\t\t\t\tHi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.\r\n\t\t\t\t\t\t\t\t\t"
+            "\n\t\t\t\t\t\t\t\t\t\tHi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.\n\t\t\t\t\t\t\t\t\t"
           )
         ]
       ),
@@ -55235,7 +55716,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\r\n\t\t\t\t\t\t\t\t\t\tHi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.\r\n\t\t\t\t\t\t\t\t\t"
+            "\n\t\t\t\t\t\t\t\t\t\tHi!, I’m Marina and I’m a Community Manager for “Gametube”. Gamer and full-time mother.\n\t\t\t\t\t\t\t\t\t"
           )
         ]
       ),
@@ -60722,7 +61203,7 @@ var staticRenderFns = [
         _c(
           "time",
           { staticClass: "published", attrs: { datetime: "2017-03-24T18:18" } },
-          [_vm._v("\r\n\t\t\t\t\t\t\t\t\t\t2 hours ago\r\n\t\t\t\t\t\t\t\t\t")]
+          [_vm._v("\n\t\t\t\t\t\t\t\t\t\t2 hours ago\n\t\t\t\t\t\t\t\t\t")]
         )
       ])
     ])
@@ -60810,9 +61291,9 @@ var staticRenderFns = [
       _c("a", { attrs: { href: "#" } }, [_vm._v("Diana")]),
       _vm._v(", "),
       _c("a", { attrs: { href: "#" } }, [_vm._v("Nicholas")]),
-      _vm._v(" and\r\n\t\t\t\t\t\t\t\t"),
+      _vm._v(" and\n\t\t\t\t\t\t\t\t"),
       _c("br"),
-      _vm._v("13 more liked this\r\n\t\t\t\t\t\t\t")
+      _vm._v("13 more liked this\n\t\t\t\t\t\t\t")
     ])
   },
   function() {
@@ -60832,7 +61313,7 @@ var staticRenderFns = [
           { staticClass: "published", attrs: { datetime: "2017-03-24T18:18" } },
           [
             _vm._v(
-              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t46 mins ago\r\n\t\t\t\t\t\t\t\t\t\t\t"
+              "\n\t\t\t\t\t\t\t\t\t\t\t\t46 mins ago\n\t\t\t\t\t\t\t\t\t\t\t"
             )
           ]
         )
@@ -60856,7 +61337,7 @@ var staticRenderFns = [
           { staticClass: "published", attrs: { datetime: "2017-03-24T18:18" } },
           [
             _vm._v(
-              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t1 hour ago\r\n\t\t\t\t\t\t\t\t\t\t\t"
+              "\n\t\t\t\t\t\t\t\t\t\t\t\t1 hour ago\n\t\t\t\t\t\t\t\t\t\t\t"
             )
           ]
         )
@@ -61115,7 +61596,7 @@ var staticRenderFns = [
         _c(
           "time",
           { staticClass: "published", attrs: { datetime: "2017-03-24T18:18" } },
-          [_vm._v("\r\n\t\t\t\t\t\t\t\t2 hours ago\r\n\t\t\t\t\t\t\t")]
+          [_vm._v("\n\t\t\t\t\t\t\t\t2 hours ago\n\t\t\t\t\t\t\t")]
         )
       ])
     ])
@@ -61164,7 +61645,7 @@ var staticRenderFns = [
         _c(
           "time",
           { staticClass: "published", attrs: { datetime: "2017-03-24T18:18" } },
-          [_vm._v("\r\n\t\t\t\t\t\t\t\t\t\t46 mins ago\r\n\t\t\t\t\t\t\t\t\t")]
+          [_vm._v("\n\t\t\t\t\t\t\t\t\t\t46 mins ago\n\t\t\t\t\t\t\t\t\t")]
         )
       ])
     ])
@@ -61184,7 +61665,7 @@ var staticRenderFns = [
         _c(
           "time",
           { staticClass: "published", attrs: { datetime: "2017-03-24T18:18" } },
-          [_vm._v("\r\n\t\t\t\t\t\t\t\t\t\t1 hour ago\r\n\t\t\t\t\t\t\t\t\t")]
+          [_vm._v("\n\t\t\t\t\t\t\t\t\t\t1 hour ago\n\t\t\t\t\t\t\t\t\t")]
         )
       ])
     ])
@@ -61250,10 +61731,10 @@ var staticRenderFns = [
             attrs: {
               title: "Green Goo Rock",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\r\n\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\n\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Green Goo Rock\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Green Goo Rock\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61262,10 +61743,10 @@ var staticRenderFns = [
             attrs: {
               title: "Mathilda Brinker",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Mathilda Brinker\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Mathilda Brinker\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61274,10 +61755,10 @@ var staticRenderFns = [
             attrs: {
               title: "Marina Valentine",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Marina Valentine\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Marina Valentine\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61286,10 +61767,10 @@ var staticRenderFns = [
             attrs: {
               title: "Dave Marinara",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Dave Marinara\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Dave Marinara\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61298,10 +61779,10 @@ var staticRenderFns = [
             attrs: {
               title: "Rachel Howlett",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Rachel Howlett\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Rachel Howlett\n\t\t\t\t\t\t\t\t")]
         )
       ]
     )
@@ -61342,10 +61823,10 @@ var staticRenderFns = [
             attrs: {
               title: "Green Goo Rock",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\r\n\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\n\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Green Goo Rock\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Green Goo Rock\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61354,10 +61835,10 @@ var staticRenderFns = [
             attrs: {
               title: "Mathilda Brinker",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Mathilda Brinker\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Mathilda Brinker\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61366,10 +61847,10 @@ var staticRenderFns = [
             attrs: {
               title: "Marina Valentine",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Marina Valentine\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Marina Valentine\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61378,10 +61859,10 @@ var staticRenderFns = [
             attrs: {
               title: "Dave Marinara",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Dave Marinara\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Dave Marinara\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61390,10 +61871,10 @@ var staticRenderFns = [
             attrs: {
               title: "Rachel Howlett",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Rachel Howlett\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Rachel Howlett\n\t\t\t\t\t\t\t\t")]
         )
       ]
     )
@@ -61434,10 +61915,10 @@ var staticRenderFns = [
             attrs: {
               title: "Green Goo Rock",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\r\n\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\n\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Green Goo Rock\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Green Goo Rock\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61446,10 +61927,10 @@ var staticRenderFns = [
             attrs: {
               title: "Mathilda Brinker",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Mathilda Brinker\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Mathilda Brinker\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61458,10 +61939,10 @@ var staticRenderFns = [
             attrs: {
               title: "Marina Valentine",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Marina Valentine\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Marina Valentine\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61470,10 +61951,10 @@ var staticRenderFns = [
             attrs: {
               title: "Dave Marinara",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Dave Marinara\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Dave Marinara\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61482,10 +61963,10 @@ var staticRenderFns = [
             attrs: {
               title: "Rachel Howlett",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Rachel Howlett\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Rachel Howlett\n\t\t\t\t\t\t\t\t")]
         )
       ]
     )
@@ -61526,10 +62007,10 @@ var staticRenderFns = [
             attrs: {
               title: "Green Goo Rock",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Green Goo Rock\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Green Goo Rock\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61538,10 +62019,10 @@ var staticRenderFns = [
             attrs: {
               title: "Mathilda Brinker",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Mathilda Brinker\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Mathilda Brinker\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61550,10 +62031,10 @@ var staticRenderFns = [
             attrs: {
               title: "Marina Valentine",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Marina Valentine\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Marina Valentine\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61562,10 +62043,10 @@ var staticRenderFns = [
             attrs: {
               title: "Dave Marinara",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Dave Marinara\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Dave Marinara\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61574,10 +62055,10 @@ var staticRenderFns = [
             attrs: {
               title: "Rachel Howlett",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Rachel Howlett\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Rachel Howlett\n\t\t\t\t\t\t\t\t")]
         )
       ]
     )
@@ -61618,10 +62099,10 @@ var staticRenderFns = [
             attrs: {
               title: "Green Goo Rock",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\r\n\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\n\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Green Goo Rock\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Green Goo Rock\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61630,10 +62111,10 @@ var staticRenderFns = [
             attrs: {
               title: "Mathilda Brinker",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Mathilda Brinker\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Mathilda Brinker\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61642,10 +62123,10 @@ var staticRenderFns = [
             attrs: {
               title: "Marina Valentine",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Marina Valentine\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Marina Valentine\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61654,10 +62135,10 @@ var staticRenderFns = [
             attrs: {
               title: "Dave Marinara",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Dave Marinara\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Dave Marinara\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -61666,10 +62147,10 @@ var staticRenderFns = [
             attrs: {
               title: "Rachel Howlett",
               "data-content":
-                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Rachel Howlett\r\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Rachel Howlett\n\t\t\t\t\t\t\t\t")]
         )
       ]
     )
@@ -63502,16 +63983,16 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n\t\t\t\t\t\t \t\t\t\t\t\t\t" +
+                    "\n                    " +
                       _vm._s(item.username) +
-                      "\n\t\t\t\t\t\t\t"
+                      "\n                "
                   )
                 ]
               ),
               _vm._v(
-                "\n\t\t\t\t\t\t\t " +
+                "\n                " +
                   _vm._s(item.message) +
-                  "\n\t\t\t\t\t\t\t \n\t\t\t\t\t\t\t"
+                  "\n\n                "
               ),
               _c("span", { staticClass: "notification-date" }, [
                 _c(
@@ -63881,7 +64362,7 @@ var render = function() {
       "ul",
       { staticClass: "comments-list style-3" },
       _vm._l(_vm.comments, function(comment, index) {
-        return _c("li", { staticClass: "comment-item" }, [
+        return _c("li", { key: comment.id, staticClass: "comment-item" }, [
           _vm._m(0, true),
           _vm._v(" "),
           _c("div", { staticClass: "comments-content" }, [
@@ -63915,7 +64396,129 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(comment.comment))])
+            _c("p", { staticClass: "comment" }, [
+              _vm._v(_vm._s(comment.comment))
+            ]),
+            _vm._v(" "),
+            _vm.$parent.challenge.isAuthor
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "post-add-icon inline-items",
+                    attrs: { href: "javascript:void(0)" },
+                    on: {
+                      click: function($event) {
+                        return _vm.ownerLike(comment)
+                      }
+                    }
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fas fa-thumbs-up",
+                      class: { "text-danger": comment.like_count },
+                      attrs: { id: "owner_like_" + comment.id }
+                    })
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._m(1, true),
+            _vm._v(" "),
+            _c(
+              "ul",
+              { staticClass: "comments-list style-3 mt-3" },
+              _vm._l(comment.child_comments, function(
+                childComments,
+                childIndex
+              ) {
+                return _c(
+                  "li",
+                  {
+                    key: childComments.id,
+                    staticClass: "comment-item comment-reply-item"
+                  },
+                  [
+                    _vm._m(2, true),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "comments-content" }, [
+                      _c("div", { staticClass: "post__author author vcard" }, [
+                        _c("div", { staticClass: "author-date" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "h6 post__author-name fn",
+                              attrs: { href: "#" }
+                            },
+                            [_vm._v(_vm._s(childComments.user.name))]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "post__date" }, [
+                            _c(
+                              "time",
+                              {
+                                staticClass: "published",
+                                attrs: { datetime: "2004-07-24T18:18" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(childComments.created_at) +
+                                    "\n                                        "
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(_vm._s(childComments.comment))])
+                    ])
+                  ]
+                )
+              }),
+              0
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "post__author author vcard inline-items" },
+              [
+                _c(
+                  "form",
+                  {
+                    class: comment.child_comments.length
+                      ? "col-md-11 offset-md-1"
+                      : "col-12 pl-0",
+                    on: { submit: _vm.onSubmit }
+                  },
+                  [
+                    _c("div", { staticClass: "row" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                        },
+                        [
+                          _vm._m(3, true),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: {
+                              type: "hidden",
+                              name: "replay",
+                              required: ""
+                            },
+                            domProps: { value: comment.id }
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(4, true)
+                    ])
+                  ]
+                )
+              ]
+            )
           ])
         ])
       }),
@@ -63927,7 +64530,7 @@ var render = function() {
       { staticClass: "col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" },
       [
         _c("form", { on: { submit: _vm.onSubmit } }, [
-          _vm._m(1),
+          _vm._m(5),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
             _c(
@@ -63955,7 +64558,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { placeholder: "" },
+                      attrs: { name: "comment_text", placeholder: "" },
                       domProps: { value: _vm.comment_text },
                       on: {
                         input: function($event) {
@@ -63972,7 +64575,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-primary btn-lg full-width",
+                    staticClass: "btn btn-primary w-100",
                     attrs: { type: "submit" }
                   },
                   [
@@ -63996,6 +64599,59 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "post__author-thumb" }, [
       _c("img", { attrs: { src: "assets/img/avatar1.jpg", alt: "author" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "reply", attrs: { href: "#" } }, [
+      _c("i", { staticClass: "fas fa-reply" }),
+      _vm._v(
+        "\n                                Reply\n                            "
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "post__author-thumb" }, [
+      _c("img", { attrs: { src: "assets/img/avatar1.jpg", alt: "author" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "form-group label-floating is-empty replay-form-group" },
+      [
+        _c("label", { staticClass: "control-label" }, [_vm._v("Write Reply")]),
+        _vm._v(" "),
+        _c("textarea", {
+          staticClass: "form-control",
+          attrs: {
+            name: "comment_text",
+            required: "",
+            rows: "1",
+            placeholder: ""
+          }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 text-right" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary btn-sm", attrs: { type: "submit" } },
+        [_vm._v("Reply\n                                 ")]
+      )
     ])
   },
   function() {
@@ -69334,11 +69990,11 @@ __vue_render__._withStripped = true;
   /* functional template */
   const __vue_is_functional_template__ = false;
   /* style inject */
-  
-  /* style inject SSR */
-  
 
-  
+  /* style inject SSR */
+
+
+
   var DateInput = normalizeComponent_1(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
@@ -69846,11 +70502,11 @@ __vue_render__$1._withStripped = true;
   /* functional template */
   const __vue_is_functional_template__$1 = false;
   /* style inject */
-  
-  /* style inject SSR */
-  
 
-  
+  /* style inject SSR */
+
+
+
   var PickerDay = normalizeComponent_1(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$1,
@@ -70146,11 +70802,11 @@ __vue_render__$2._withStripped = true;
   /* functional template */
   const __vue_is_functional_template__$2 = false;
   /* style inject */
-  
-  /* style inject SSR */
-  
 
-  
+  /* style inject SSR */
+
+
+
   var PickerMonth = normalizeComponent_1(
     { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
     __vue_inject_styles__$2,
@@ -70414,11 +71070,11 @@ __vue_render__$3._withStripped = true;
   /* functional template */
   const __vue_is_functional_template__$3 = false;
   /* style inject */
-  
-  /* style inject SSR */
-  
 
-  
+  /* style inject SSR */
+
+
+
   var PickerYear = normalizeComponent_1(
     { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
     __vue_inject_styles__$3,
@@ -71050,9 +71706,9 @@ __vue_render__$4._withStripped = true;
   /* functional template */
   const __vue_is_functional_template__$4 = false;
   /* style inject SSR */
-  
 
-  
+
+
   var Datepicker = normalizeComponent_1(
     { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
     __vue_inject_styles__$4,
@@ -74414,7 +75070,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Comments_vue_vue_type_template_id_f97e984c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Comments.vue?vue&type=template&id=f97e984c& */ "./resources/js/components/pages/sub-components/Comments.vue?vue&type=template&id=f97e984c&");
 /* harmony import */ var _Comments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Comments.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/sub-components/Comments.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _Comments_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Comments.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/components/pages/sub-components/Comments.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -74422,7 +75080,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _Comments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Comments_vue_vue_type_template_id_f97e984c___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Comments_vue_vue_type_template_id_f97e984c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -74451,6 +75109,22 @@ component.options.__file = "resources/js/components/pages/sub-components/Comment
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Comments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Comments.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/sub-components/Comments.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Comments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/sub-components/Comments.vue?vue&type=style&index=0&lang=scss&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/pages/sub-components/Comments.vue?vue&type=style&index=0&lang=scss& ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_lib_loader_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Comments_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist!../../../../../node_modules/css-loader!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../node_modules/sass-loader/lib/loader.js??ref--7-3!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Comments.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/sub-components/Comments.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_lib_loader_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Comments_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_lib_loader_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Comments_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_lib_loader_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Comments_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_lib_loader_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Comments_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_lib_loader_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Comments_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -75131,8 +75805,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\eurakav\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laragon\www\eurakav\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Projects\freelance\sairam\eureka\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Projects\freelance\sairam\eureka\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

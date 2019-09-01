@@ -12,10 +12,10 @@
 */
 
 Route::get('/', function () {
-	if(\Auth::user())
-    	return view('landing');
+    if (\Auth::user())
+        return view('landing');
     else
-    	return view('login');
+        return view('login');
 });
 
 // Auth::routes();
@@ -35,7 +35,6 @@ Route::get('portal/mytest', 'Auth\LoginController@myTestCode');
 // })->name('login');
 
 
-
 //Route::view('landing', '/');
 
 // Auth::routes();
@@ -47,6 +46,7 @@ Route::post('challenges/create', 'ChallengeController@saveRecord');
 Route::get('challenges/getlist', 'ChallengeController@getList');
 Route::get('challenges/getDetails', 'ChallengeController@show');
 Route::post('challenges/toggle-like', 'ChallengeController@toggleLike');
+Route::post('challenges/comment/{comment_id}/owner-like', 'ChallengeController@toggleCommentOwnerLike');
 
 Route::post('challenges/store-comment', 'ChallengeController@postComment');
 Route::get('challenges/comments', 'ChallengeController@getComments');
