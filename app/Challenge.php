@@ -99,6 +99,7 @@ class Challenge extends Model
         $record->status = $request->status;
         $record->category_id = 0;
         $record->active_from = $request->active_from;
+        $record->active_to = $request->active_to;
         $record->description = $request->description;
         $record->created_by = \Auth::user()->id;
         $response = $record->save();
