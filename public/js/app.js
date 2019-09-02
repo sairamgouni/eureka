@@ -4674,6 +4674,7 @@ __webpack_require__.r(__webpack_exports__);
       bodyFormData.set('categories', this.form.selectedList);
       bodyFormData.set('status', this.form.selectedStatus);
       bodyFormData.set('active_from', this.form.activeFrom);
+      bodyFormData.set('active_to', this.form.activeTo);
       this.axios({
         method: 'post',
         url: '/challenges/create',
@@ -4691,7 +4692,8 @@ __webpack_require__.r(__webpack_exports__);
             image: '',
             selectedList: [],
             selectedStatus: 'Active',
-            activeFrom: ''
+            activeFrom: '',
+            activeTo: ''
           };
 
           _this.$toast.open({
@@ -50474,11 +50476,11 @@ var render = function() {
                         staticClass: "mt-3",
                         attrs: { name: "active_to", placeholder: "Active To" },
                         model: {
-                          value: _vm.form.active_to,
+                          value: _vm.form.active_To,
                           callback: function($$v) {
-                            _vm.$set(_vm.form, "active_to", $$v)
+                            _vm.$set(_vm.form, "active_To", $$v)
                           },
-                          expression: "form.active_to"
+                          expression: "form.active_To"
                         }
                       })
                     ],
