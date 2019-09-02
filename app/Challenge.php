@@ -223,8 +223,13 @@ class Challenge extends Model
             $item['likes'] = $record->like()->count();
             $item['comments'] = $record->comments()->count();
 
+            $startDate = Date::parse($record->active_from);
+            $endDate = Date::parse($record->active_to);
             // TODO: Check the can_comment variable
-            $item['can_comment'] = now()->isBetween(Date::parse($record->active_from), Date::parse($record->active_to), true);
+            $item['can_comment'] = now()->isBetween($startDate, $endDate, true);
+            // To check the challenge is valid or not
+            // Is the end date in future then it will be a valid challenge
+            $item['is_valid_challenge'] = $endDate->isFuture();
             // TODO: Challenge data
             $item['ideas'] = $record->comments()
                 ->whereBetween('created_at', [Date::parse($record->active_from), Date::parse($record->active_to)])

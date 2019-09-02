@@ -38,7 +38,8 @@
                         <div class="post-milestone-progress">
                             <div class="post-milestone-progress">
                                 <ul class="progress-stage-wrapper clearfix">
-                                    <li class="progress-stage-item in-progress">
+                                    <li class="progress-stage-item"
+                                        :class="challenge.is_valid_challenge?'in-progress':'completed'">
                                         <div class="icon icon-lightbulb">
                                             <div class="style-empty">
                                                 <svg viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
@@ -144,7 +145,7 @@
                                         </div>
                                     </li>
                                     <li class="progress-stage-item"
-                                        :class="challenge.ideas?'in-progress':'not-started'">
+                                        :class="challenge.is_valid_challenge?challenge.ideas?'in-progress':'not-started':'completed'">
                                         <div class="icon icon-puzzle">
                                             <div class="style-empty">
                                                 <svg viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"

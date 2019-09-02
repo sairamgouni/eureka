@@ -3794,6 +3794,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ChallengeDetails",
@@ -47605,7 +47606,12 @@ var render = function() {
                       [
                         _c(
                           "li",
-                          { staticClass: "progress-stage-item in-progress" },
+                          {
+                            staticClass: "progress-stage-item",
+                            class: _vm.challenge.is_valid_challenge
+                              ? "in-progress"
+                              : "completed"
+                          },
                           [
                             _c("div", { staticClass: "icon icon-lightbulb" }, [
                               _c("div", { staticClass: "style-empty" }, [
@@ -47830,9 +47836,11 @@ var render = function() {
                           "li",
                           {
                             staticClass: "progress-stage-item",
-                            class: _vm.challenge.ideas
-                              ? "in-progress"
-                              : "not-started"
+                            class: _vm.challenge.is_valid_challenge
+                              ? _vm.challenge.ideas
+                                ? "in-progress"
+                                : "not-started"
+                              : "completed"
                           },
                           [
                             _c("div", { staticClass: "icon icon-puzzle" }, [
