@@ -37,7 +37,7 @@
                                    :class="{'text-danger':comment.like_count}"></i>
 
 							</a>
-                            <a href="#" class="reply">
+                            <a href="#" class="reply" v-if="$parent.challenge.can_comment">
                                 <i class="fas fa-reply"></i>
                                 Reply
                             </a>
@@ -71,7 +71,7 @@
                     </li>
                              </ul>
 
-                            <div class="post__author author vcard inline-items">
+                            <div class="post__author author vcard inline-items" v-if="$parent.challenge.can_comment">
                                 <form @submit="onSubmit"
                                       :class="comment.child_comments.length?'col-md-11 offset-md-1':'col-12 pl-0'">
 
@@ -104,7 +104,7 @@
               <a href="#" class="btn btn-grey btn-md mb60 mt60">Load More Comments...</a>
           </div> -->
 
-                <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" v-if="$parent.challenge.can_comment">
 
 
                     <!-- Comment Form -->

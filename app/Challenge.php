@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -220,6 +221,19 @@ class Challenge extends Model
             $item['description'] = $record->description;
             $item['likes'] = $record->like()->count();
             $item['comments'] = $record->comments()->count();
+
+            // TODO: Check the can_comment variable
+            $item['can_comment'] = now()->isBetween(Date::parse($record->active_from), Date::parse($record->active_to), true);
+            // TODO: Challenge data
+            $item['ideas'] = $record->comments()
+                ->whereBetween('created_at', [Date::parse($record->active_from), Date::parse($record->active_to)])
+                ->count();
+
+            $item['game_time'] = Like::whereIn('like_id', $record->comments()->pluck('id'))->whereUserId($record->created_by)->count();
+            $item['finalized'] = $record->comments()->whereFinalized(1)->count();
+            //TODO: winner data
+//            $item['winner'] = $record->winnerComment;
+
 
             if ($user) {
                 $item['isUserLiked'] = (int)$record->hasLiked($record);
