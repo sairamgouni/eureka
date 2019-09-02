@@ -66,7 +66,7 @@
     	<datepicker 
 
     	name="active_to" 
-    	v-model="form.active_to" 
+    	v-model="form.active_To" 
     	placeholder="Active To"
     	class="mt-3"></datepicker>
     </b-col>
@@ -133,6 +133,7 @@
                 bodyFormData.set('categories', this.form.selectedList);
                 bodyFormData.set('status', this.form.selectedStatus);
                 bodyFormData.set('active_from', this.form.activeFrom);
+                bodyFormData.set('active_to', this.form.activeTo);
                 this.axios({
                         method: 'post',
                         url: '/challenges/create',
@@ -152,6 +153,7 @@
 						                    selectedList:[],
 						                    selectedStatus:'Active',
 						                    activeFrom:'' ,
+                                            activeTo:'' ,
 						                };
                             this.$toast.open({
                                 message: 'Challenge Created ',
