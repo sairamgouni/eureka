@@ -3,8 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e3930a32-b739-4209-a5d7-7a4470415a04" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Challenge.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Challenge.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/ChallengeDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/ChallengeDetails.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/landing.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/landing.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -147,7 +151,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Office/protracked/sibrov3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Controllers/Auth" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -205,7 +209,12 @@
       <workItem from="1567263741112" duration="268000" />
       <workItem from="1567334590700" duration="29333000" />
       <workItem from="1567452604644" duration="18000" />
-      <workItem from="1567452634227" duration="8112000" />
+      <workItem from="1567452634227" duration="8265000" />
+      <workItem from="1567492899859" duration="624000" />
+      <workItem from="1567538740460" duration="635000" />
+      <workItem from="1567699636126" duration="8000" />
+      <workItem from="1567712590933" duration="2962000" />
+      <workItem from="1567716917143" duration="256000" />
     </task>
     <servers />
   </component>

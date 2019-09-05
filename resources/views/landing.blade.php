@@ -350,10 +350,12 @@
         },
     });
 
-    let APP={
-        baseUrl:"{{url('/')}}",
-        assetUrl:"{{asset('/')}}"
-    }
+    let APP = {
+        baseUrl: "{{url('/')}}",
+        assetUrl: "{{asset('/')}}"
+    };
+    let USER = JSON.parse(`@Json(auth()->user())`);
+
 </script>
 <script src="{{ asset(mix('js/manifest.js')) }}"></script>
 <script src="{{ asset(mix('js/vendor.js')) }}"></script>
