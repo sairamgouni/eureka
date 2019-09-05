@@ -23,7 +23,6 @@ class PasswordResetController extends Controller
     */
 
 
-
     /**
      * Where to redirect users after resetting their password.
      *
@@ -42,20 +41,19 @@ class PasswordResetController extends Controller
 
         $user = auth()->user();
 
-        if(Hash::check($request->current_password, $user->password)){
+        if (Hash::check($request->current_password, $user->password)) {
             $user->update([
                 'password' => Hash::make($request->password_confirmation)
             ]);
 
             return response()->json([
-                'message' => 'Password updated'
+                'message' => 'Password updated',
+                'user' => $user
             ]);
 
-        }
+        } else {
 
-        else {
-
-            return response()->json(['errors' => ['current_password'=> ['Current password does not match']]], 422);
+            return response()->json(['errors' => ['current_password' => ['Current password does not match']]], 422);
 
         }
     }
@@ -66,8 +64,7 @@ class PasswordResetController extends Controller
         $users = User::get();
         $count = 0;
 
-        foreach($users as $user)
-        {
+        foreach ($users as $user) {
             $user->password = bcrypt($user->employee_id);
             $user->slug = str_slug($user->username);
             $user->save();
@@ -76,7 +73,7 @@ class PasswordResetController extends Controller
 //            ]);
             $count++;
         }
-        dd($count.' users Updated');
+        dd($count . ' users Updated');
 
     }
 }
