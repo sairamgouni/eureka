@@ -2,7 +2,7 @@
     <header class="header" id="site-header">
 
         <div class="page-title">
-            <h6>Post Formats</h6>
+            <h6>{{$route.meta.title || 'Eureka'}}</h6>
         </div>
 
         <div class="header-content-wrapper">
@@ -20,22 +20,22 @@
             </form>
 
             <a href="#" class="link-find-friend">Find Friends</a>
-            
 
-              <router-link   to="/post-challenge">
-                    <a href="javascript:void(0);" class="btn btn-primary btn-md-1 mt-1">Post Challenge</a>
-              </router-link>  
+
+            <router-link to="/post-challenge">
+                <a href="javascript:void(0);" class="btn btn-primary btn-md-1 mt-1">Post Challenge</a>
+            </router-link>
 
             <div class="control-block">
 
-              <Events />
+                <Events/>
 
-                
-                <Notifications />
+
+                <Notifications/>
 
                 <div class="author-page author vcard inline-items more">
                     <div class="author-thumb">
-                        <img  :alt="userName" :src="userImage" class="avatar">
+                        <img :alt="userName" :src="userImage" class="avatar">
                         <span class="icon-status online"></span>
                         <div class="more-dropdown more-with-triangle">
                             <div class="mCustomScrollbar" data-mcs-theme="dark">
@@ -45,10 +45,10 @@
 
                                 <ul class="account-settings">
                                     <li>
-                                        <router-link  
-                                        :to="{ name: 'ProfileEuraka', params: { id: userId, slug: userSlug } }"
-                                         class="nav-link">
-                                        
+                                        <router-link
+                                            :to="{ name: 'ProfileEuraka', params: { id: userId, slug: userSlug } }"
+                                            class="nav-link">
+
 
                                             <svg class="olymp-menu-icon">
                                                 <use
@@ -59,7 +59,7 @@
                                         </router-link>
                                     </li>
                                     <li>
-                                       <router-link  to="/create-challenge" class="nav-link">
+                                        <router-link to="/create-challenge" class="nav-link">
                                             <svg class="olymp-star-icon left-menu-icon" data-toggle="tooltip"
                                                  data-placement="right" data-original-title="FAV PAGE">
                                                 <use
@@ -70,16 +70,19 @@
                                         </router-link>
                                     </li>
                                     <li @click="logout()">
-                                       <a href="javascript:void(0);" >
-                                        <svg class="olymp-logout-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-logout-icon"></use></svg>
+                                        <a href="javascript:void(0);">
+                                            <svg class="olymp-logout-icon">
+                                                <use
+                                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-logout-icon"></use>
+                                            </svg>
 
-                                        Log Out
+                                            Log Out
 
-                                    </a>
+                                        </a>
                                     </li>
                                 </ul>
 
-                               
+
                                 <div class="ui-block-title ui-block-title-small">
                                     <h6 class="title">About Olympus</h6>
                                 </div>
@@ -110,7 +113,7 @@
 
                         </div>
                     </div>
- 
+
                 </div>
 
             </div>
@@ -122,46 +125,46 @@
 <script>
     import Notifications from '../pages/sub-components/Notifications';
     import Events from '../pages/sub-components/Events';
-    
+
     export default {
         name: "HeaderNav",
         components: {
             Notifications,
             Events,
         },
-         data() {
+        data() {
             return {
                 baseUrl: '',
                 userLogin: false,
-                userId:'',
-                userSlug:'',
-                userImage:'',
-                userName:'',
+                userId: '',
+                userSlug: '',
+                userImage: '',
+                userName: '',
             }
         },
-        methods : {
+        methods: {
             logout() {
 
-                    // evt.preventDefault();
+                // evt.preventDefault();
 
                 var bodyFormData = new FormData();
                 // bodyFormData.set('email', this.form.username);
                 // bodyFormData.set('password', this.form.password);
                 this.axios({
-                        method: 'post',
-                        url: this.baseUrl + 'portal/logout',
-                        data: bodyFormData
-                    })
+                    method: 'post',
+                    url: this.baseUrl + 'portal/logout',
+                    data: bodyFormData
+                })
                     .then((response) => {
-                       this.$store.dispatch('destroyAccess');
-                       if(response.data.success==1)
-                        this.$router.push('/');
+                        this.$store.dispatch('destroyAccess');
+                        if (response.data.success == 1)
+                            this.$router.push('/');
                         this.$router.go();
                     });
-                    // console.log('logout ended');
+                // console.log('logout ended');
             }
         },
-        created(){
+        created() {
             this.userLogin = this.$store.getters.getLogin;
             this.userId = this.$store.getters.getUserId;
             this.userSlug = this.$store.getters.getUserSlug;
@@ -173,8 +176,8 @@
 </script>
 
 <style>
-.avatar{
-    height: 36px;
-    width:36px;
-}
+    .avatar {
+        height: 36px;
+        width: 36px;
+    }
 </style>

@@ -22,7 +22,7 @@
                         </a>
                     </li>
                     <li>
-                        <router-link  to="/challenge-details" class="nav-link">
+                        <router-link to="/challenge-details" class="nav-link">
 
 
                             <svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip"
@@ -35,7 +35,7 @@
                     </li>
 
                     <li>
-                        <router-link  to="/home" class="nav-link">
+                        <router-link to="/home" class="nav-link">
 
 
                             <svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip"
@@ -48,10 +48,13 @@
                     </li>
 
                     <li>
-                        <router-link  to="/contributors" class="nav-link">
+                        <router-link to="/contributors" class="nav-link">
 
 
-                            <svg version="1.1" class="left-menu-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve" data-toggle="tooltip" data-placement="right"   data-original-title="Contributors">
+                            <svg version="1.1" class="left-menu-icon" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32"
+                                 style="enable-background:new 0 0 32 32;" xml:space="preserve" data-toggle="tooltip"
+                                 data-placement="right" data-original-title="Contributors">
 						<g>
 							<path d="M22.25,20.47c-0.54-0.39-1.83-0.85-4.67-1.79l-0.45-0.15c-0.48-0.16-0.9-0.3-1.04-0.36c-0.04-0.02-0.1-0.04-0.11-0.05
 								c0,0-0.02-0.04-0.01-0.14c0.06-0.14,0.36-0.6,0.56-0.89c0.79-1.19,1.99-2.98,1.99-4.98c0-3.99-2.8-7.24-6.24-7.24
@@ -75,10 +78,13 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link  to="/approach" class="nav-link">
+                        <router-link to="/approach" class="nav-link">
 
 
-                            <svg version="1.1" class="left-menu-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve" data-toggle="tooltip" data-placement="right"   data-original-title="EUREKA Approach">
+                            <svg version="1.1" class="left-menu-icon" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32"
+                                 style="enable-background:new 0 0 32 32;" xml:space="preserve" data-toggle="tooltip"
+                                 data-placement="right" data-original-title="EUREKA Approach">
 						<g>
 							<path class="st0" d="M14.23,10.56c0.06,0.11,0.11,0.23,0.17,0.31c0.06,0.09,0.14,0.17,0.2,0.26c0.09,0.09,0.17,0.17,0.29,0.26
 								c0.09,0.06,0.2,0.14,0.34,0.17c0.11,0.06,0.23,0.09,0.37,0.11c0.14,0.03,0.26,0.03,0.37,0.03c0.11,0,0.26,0,0.37-0.03
@@ -101,10 +107,13 @@
                     </li>
 
                     <li>
-                        <router-link  to="/home" class="nav-link">
+                        <router-link to="/home" class="nav-link">
 
 
-                            <svg version="1.1" class="left-menu-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve" data-toggle="tooltip" data-placement="right"   data-original-title="Settings">
+                            <svg version="1.1" class="left-menu-icon" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32"
+                                 style="enable-background:new 0 0 32 32;" xml:space="preserve" data-toggle="tooltip"
+                                 data-placement="right" data-original-title="Settings">
 						<g>
 							<path d="M30.64,14.01l-0.7-0.29c0.09-0.8,0.09-1.61,0-2.41l0.7-0.29c0.49-0.2,0.88-0.59,1.08-1.08c0.2-0.49,0.2-1.03,0-1.53
 								l-0.64-1.55c-0.2-0.49-0.59-0.88-1.08-1.08c-0.49-0.2-1.04-0.2-1.53,0l-0.7,0.29c-0.5-0.63-1.07-1.2-1.7-1.7l0.29-0.7
@@ -177,7 +186,7 @@
                         </a>
                     </li>
                     <li>
-                        <router-link  to="/challenge-details" class="nav-link">
+                        <router-link to="/challenge-details" class="nav-link">
                             <svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip"
                                  data-placement="right"
                                  data-original-title="NEWSFEED">
@@ -188,7 +197,7 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link  to="/home" class="nav-link">
+                        <router-link to="/home" class="nav-link">
 
 
                             <svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip"
@@ -202,10 +211,13 @@
 
                     </li>
                     <li>
-                        <router-link  to="/contributors" class="nav-link">
+                        <router-link to="/contributors" class="nav-link">
 
 
-                            <svg version="1.1" class="left-menu-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve" data-toggle="tooltip" data-placement="right"   data-original-title="Contributors">
+                            <svg version="1.1" class="left-menu-icon" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32"
+                                 style="enable-background:new 0 0 32 32;" xml:space="preserve" data-toggle="tooltip"
+                                 data-placement="right" data-original-title="Contributors">
 						<g>
 							<path d="M22.25,20.47c-0.54-0.39-1.83-0.85-4.67-1.79l-0.45-0.15c-0.48-0.16-0.9-0.3-1.04-0.36c-0.04-0.02-0.1-0.04-0.11-0.05
 								c0,0-0.02-0.04-0.01-0.14c0.06-0.14,0.36-0.6,0.56-0.89c0.79-1.19,1.99-2.98,1.99-4.98c0-3.99-2.8-7.24-6.24-7.24
@@ -230,10 +242,13 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link  to="/approach" class="nav-link">
+                        <router-link to="/approach" class="nav-link">
 
 
-                            <svg version="1.1" class="left-menu-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve" data-toggle="tooltip" data-placement="right"   data-original-title="EUREKA Approach">
+                            <svg version="1.1" class="left-menu-icon" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32"
+                                 style="enable-background:new 0 0 32 32;" xml:space="preserve" data-toggle="tooltip"
+                                 data-placement="right" data-original-title="EUREKA Approach">
 						<g>
 							<path class="st0" d="M14.23,10.56c0.06,0.11,0.11,0.23,0.17,0.31c0.06,0.09,0.14,0.17,0.2,0.26c0.09,0.09,0.17,0.17,0.29,0.26
 								c0.09,0.06,0.2,0.14,0.34,0.17c0.11,0.06,0.23,0.09,0.37,0.11c0.14,0.03,0.26,0.03,0.37,0.03c0.11,0,0.26,0,0.37-0.03
@@ -256,10 +271,13 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link  to="/home" class="nav-link">
+                        <router-link to="/home" class="nav-link">
 
 
-                            <svg version="1.1" class="left-menu-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve" data-toggle="tooltip" data-placement="right"   data-original-title="Settings">
+                            <svg version="1.1" class="left-menu-icon" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32"
+                                 style="enable-background:new 0 0 32 32;" xml:space="preserve" data-toggle="tooltip"
+                                 data-placement="right" data-original-title="Settings">
 						<g>
 							<path d="M30.64,14.01l-0.7-0.29c0.09-0.8,0.09-1.61,0-2.41l0.7-0.29c0.49-0.2,0.88-0.59,1.08-1.08c0.2-0.49,0.2-1.03,0-1.53
 								l-0.64-1.55c-0.2-0.49-0.59-0.88-1.08-1.08c-0.49-0.2-1.04-0.2-1.53,0l-0.7,0.29c-0.5-0.63-1.07-1.2-1.7-1.7l0.29-0.7
@@ -316,7 +334,10 @@
 
 <script>
     export default {
-        name: "LeftSideBar"
+        name: "LeftSideBar",
+        mounted() {
+
+        }
     }
 </script>
 
