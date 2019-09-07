@@ -2,59 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a16b8e3-7d01-4680-a874-559b0abcb3e5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/$CACHE_FILE$" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/$CACHE_FILE$" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.phpstorm.meta.php" beforeDir="false" afterPath="$PROJECT_DIR$/.phpstorm.meta.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_ide_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/_ide_helper.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Challenge.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Challenge.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Comment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/PasswordResetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/PasswordResetController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ChallengeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ChallengeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LikeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/LikeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Like.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Like.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/session.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/session.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_08_18_171307_create_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_08_18_171307_create_comments_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/assets/js/base-init.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/assets/js/base-init.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/layouts/HeaderNav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/layouts/HeaderNav.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/layouts/LeftSideBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/layouts/LeftSideBar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/ChallengeDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/ChallengeDetails.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/pages/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/Newsfeed.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/Newsfeed.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/challenges/PostChallenge.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/challenges/PostChallenge.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/contributors/ContributorsList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/contributors/ContributorsList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/profile/Friends.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/profile/Friends.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/profile/ProfileEuraka.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/profile/ProfileEuraka.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/profile/ProfileHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/profile/ProfileHeader.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/profile/edit/ChangePassword.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/profile/edit/ChangePassword.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/sub-components/ActivityFeed.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/sub-components/ActivityFeed.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/sub-components/ActivityItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/sub-components/ActivityItem.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/sub-components/Comments.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/sub-components/Comments.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/sub-components/FriendSuggestions.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/sub-components/FriendSuggestions.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/sub-components/Notifications.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/sub-components/Notifications.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/routes/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/routes/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/services/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/services/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/landing.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/landing.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -233,7 +186,7 @@
       <option name="presentableId" value="Default" />
       <updated>1567475681122</updated>
       <workItem from="1567475682328" duration="101675000" />
-      <workItem from="1567849112962" duration="1521000" />
+      <workItem from="1567849112962" duration="13418000" />
     </task>
     <servers />
   </component>

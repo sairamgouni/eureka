@@ -3911,8 +3911,27 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4059,56 +4078,114 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Home",
   data: function data() {
-    var _ref;
-
-    return _ref = {
+    return {
       userLogin: false,
       userId: '',
       userSlug: '',
+      userName: '',
       userImage: '',
-      userName: ''
-    }, _defineProperty(_ref, "userImage", ''), _defineProperty(_ref, "userBackgroundImage", ''), _defineProperty(_ref, "challenges", []), _defineProperty(_ref, "page", 1), _defineProperty(_ref, "type", 'all'), _defineProperty(_ref, "recordsUserId", ''), _ref;
+      userBackgroundImage: '',
+      challenges: [],
+      page: 1,
+      type: 'all',
+      recordsUserId: '',
+      categories: [],
+      sort_by: 'desc',
+      hasMore: false,
+      infinite: false
+    };
   },
   created: function created() {
     this.userLogin = this.$store.getters.getLogin;
     this.userId = this.$store.getters.getUserId;
     this.loadPosts();
+    this.loadCategories();
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    $('.selectpicker').selectpicker();
+
+    window.onscroll = function (ev) {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        if (_this.hasMore && _this.infinite) {
+          console.log(_this.hasMore); // $state.loaded();
+
+          _this.loadPosts(_this.page);
+        } else {// $state.complete();
+        }
+      }
+    };
   },
   methods: {
-    loadPosts: function loadPosts() {
-      var _this = this;
+    loadCategories: function loadCategories() {
+      var _this2 = this;
 
+      this.axios.get("".concat(APP.baseUrl, "/categories/getlist")).then(function (response) {
+        _this2.categories = response.data.object;
+
+        _this2.$nextTick(function () {
+          $('.selectpicker').selectpicker('refresh');
+        });
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadPosts: function loadPosts() {
+      var _this3 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '1';
+      if (!this.infinite && page != '1') return false;
+      this.infinite = false;
       var loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.file
       });
-      var bodyFormData = new FormData();
-      this.recordsUserId = this.userId;
-      this.type = 'all';
+      var bodyFormData = new FormData(); // bodyFormData.append('page', page);
+      // this.recordsUserId = this.userId;
 
-      if (this.isSameUser != undefined) {
-        this.recordsUserId = this.profileIdToLoad;
-      }
-
-      if (this.specificUserRecords != undefined) {
-        if (this.specificUserRecords) this.type = 'specific';
-      }
+      this.type = $(this.$refs.category).val() || 'all';
+      this.sort_by = $(this.$refs.sortBy).val() || 'desc'; //
+      // if (this.isSameUser != undefined) {
+      //     this.recordsUserId = this.profileIdToLoad;
+      // }
+      //
+      // if (this.specificUserRecords != undefined) {
+      //     if (this.specificUserRecords)
+      //         this.type = 'specific';
+      // }
 
       this.axios({
         method: 'get',
-        url: 'challenges/getlist?userId=' + this.recordsUserId + '&recordsType=' + this.type,
+        url: APP.baseUrl + '/challenges/getlist?&type=' + this.type + '&sort_by=' + this.sort_by + '&page=' + page,
         data: bodyFormData
       }).then(function (response) {
         loader.hide();
 
         if (response.status == 200) {
-          _this.challenges = response.data.list;
+          if (response.data.current_page == 1) {
+            _this3.challenges = response.data.data;
+          } else {
+            _this3.challenges = [].concat(_toConsumableArray(_this3.challenges), _toConsumableArray(response.data.data)); // this.challenges.push(...new Set([...this.challenges, ...response.data.data]));
+          }
+
+          _this3.hasMore = response.data.has_more;
+          _this3.infinite = _this3.hasMore;
+          _this3.page = response.data.next_page;
         }
       })["catch"](function (response) {
         loader.hide();
       });
     },
     infiniteHandler: function infiniteHandler($state) {
-      var _this2 = this;
+      var _this4 = this;
+
+      // if (this.hasMore) {
+      //     $state.loaded();
+      //     this.loadPosts(this.page);
+      // } else {
+      //     $state.complete();
+      // }
+      return;
 
       if (this.challenges.length == 0) {
         // $state.loaded();
@@ -4122,11 +4199,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       }).then(function (response) {
         if (response.status == 200) {
-          var _this2$challenges;
+          var _this4$challenges;
 
-          _this2.page += 1;
+          _this4.page += 1;
 
-          (_this2$challenges = _this2.challenges).push.apply(_this2$challenges, _toConsumableArray(new Set([].concat(_toConsumableArray(_this2.challenges), _toConsumableArray(response.data.list)))));
+          (_this4$challenges = _this4.challenges).push.apply(_this4$challenges, _toConsumableArray(new Set([].concat(_toConsumableArray(_this4.challenges), _toConsumableArray(response.data.list)))));
 
           $state.loaded();
         } else {
@@ -4135,7 +4212,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     updateLike: function updateLike(itemId) {
-      var _this3 = this;
+      var _this5 = this;
 
       // console.log('index '+index);
       if (!this.userLogin) {
@@ -4157,19 +4234,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         // loader.hide();
         var like_value = response.data; // console.log('liked: '+itemId);
 
-        for (var index = 0; index < _this3.challenges.length; index++) {
+        for (var index = 0; index < _this5.challenges.length; index++) {
           // console.log('in loop with index: '+this.challenges[index].id);
-          if (_this3.challenges[index].id == itemId) {
+          if (_this5.challenges[index].id == itemId) {
             console.log('like_value: ' + like_value);
 
             if (like_value == 1) {
-              _this3.challenges[index].likes += 1;
-              _this3.challenges[index].isUserLiked = 1;
+              _this5.challenges[index].likes += 1;
+              _this5.challenges[index].isUserLiked = 1;
               break;
             } else {
-              if (_this3.challenges[index].likes > 0) {
-                _this3.challenges[index].likes -= 1;
-                _this3.challenges[index].isUserLiked = 0;
+              if (_this5.challenges[index].likes > 0) {
+                _this5.challenges[index].likes -= 1;
+                _this5.challenges[index].isUserLiked = 0;
               }
             }
           }
@@ -38972,7 +39049,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.active[data-v-a9aac016]{\n    fill: #e91d24;\n    color: #e91d24;\n}\n.active_bg[data-v-a9aac016]{\n    background: #e91d24;\n}\n.challenge-image[data-v-a9aac016]{\n    width:197px;\n    height:194px;\n}\n", ""]);
+exports.push([module.i, "\n.active[data-v-a9aac016] {\n    fill: #e91d24;\n    color: #e91d24;\n}\n.active_bg[data-v-a9aac016] {\n    background: #e91d24;\n}\n.challenge-image[data-v-a9aac016] {\n    width: 197px;\n    height: 194px;\n}\n", ""]);
 
 // exports
 
@@ -47905,42 +47982,88 @@ var render = function() {
         [
           _c("div", { staticClass: "ui-block responsive-flex1200" }, [
             _c("div", { staticClass: "ui-block-title" }, [
-              _vm._m(0),
+              _c("div", { staticClass: "w-select" }, [
+                _c("div", { staticClass: "title" }, [_vm._v("Filter By:")]),
+                _vm._v(" "),
+                _c("fieldset", { staticClass: "form-group" }, [
+                  _c(
+                    "select",
+                    {
+                      ref: "category",
+                      staticClass: "selectpicker form-control"
+                    },
+                    [
+                      _c("option", { attrs: { value: "all" } }, [
+                        _vm._v("All Categories")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.categories, function(category) {
+                        return _c(
+                          "option",
+                          {
+                            key: category.code,
+                            domProps: { value: category.code }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(category.name) +
+                                "\n                                "
+                            )
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ]),
               _vm._v(" "),
-              _vm._m(1),
+              _c("div", { staticClass: "w-select" }, [
+                _c("fieldset", { staticClass: "form-group" }, [
+                  _c(
+                    "select",
+                    { ref: "sortBy", staticClass: "selectpicker form-control" },
+                    [
+                      _c("option", { attrs: { value: "desc" } }, [
+                        _vm._v("Date (Descending)")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "asc" } }, [
+                        _vm._v("Date (Ascending)")
+                      ])
+                    ]
+                  )
+                ])
+              ]),
               _vm._v(" "),
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-primary btn-md-2",
-                  attrs: {
-                    href: "#",
-                    "data-toggle": "modal",
-                    "data-target": "#create-photo-album"
-                  }
+                  staticClass: "btn btn-primary btn-md-2 mt-1",
+                  attrs: { href: "javascript:void(0)" },
+                  on: { click: _vm.loadPosts }
                 },
                 [_vm._v("Filter")]
               ),
               _vm._v(" "),
-              _c("form", { staticClass: "w-search" }, [
-                _c("div", { staticClass: "form-group with-button" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      placeholder: "Search Blog Posts......"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("button", [
-                    _c("svg", { staticClass: "olymp-magnifying-glass-icon" }, [
-                      _c("use", {
-                        attrs: {
-                          "xlink:href":
-                            "assets/svg-icons/sprites/icons.svg#olymp-magnifying-glass-icon"
-                        }
-                      })
-                    ])
+              _c("div", { staticClass: "form-group with-button" }, [
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: "Search Blog Posts......"
+                  }
+                }),
+                _vm._v(" "),
+                _c("button", [
+                  _c("svg", { staticClass: "olymp-magnifying-glass-icon" }, [
+                    _c("use", {
+                      attrs: {
+                        "xlink:href":
+                          "assets/svg-icons/sprites/icons.svg#olymp-magnifying-glass-icon"
+                      }
+                    })
                   ])
                 ])
               ])
@@ -47952,163 +48075,180 @@ var render = function() {
     _vm._v(" "),
     _c("section", { staticClass: "blog-post-wrap" }, [
       _c("div", { staticClass: "container" }, [
-        _c(
-          "div",
-          { staticClass: "row" },
-          [
-            _vm._l(_vm.challenges, function(item, index) {
-              return _c(
-                "div",
-                {
-                  key: index,
-                  staticClass: "col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12"
-                },
-                [
-                  _c("div", { staticClass: "ui-block" }, [
-                    _c("article", { staticClass: "hentry blog-post" }, [
-                      _c("div", { staticClass: "post-thumb" }, [
-                        _c("img", {
-                          staticStyle: { width: "391px", height: "276px" },
-                          attrs: { src: item.image, alt: item.title }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "post-content" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "h4 post-title",
-                              attrs: {
-                                to: {
-                                  name: "ChallengeDetails",
-                                  params: { id: item.id, slug: item.slug }
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n\n                                    " +
-                                  _vm._s(item.title) +
-                                  "\n                                "
-                              )
-                            ]
-                          ),
+        _vm.challenges && _vm.challenges.length
+          ? _c(
+              "div",
+              { staticClass: "row" },
+              [
+                _vm._l(_vm.challenges, function(item, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: index,
+                      staticClass:
+                        "col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12"
+                    },
+                    [
+                      _c("div", { staticClass: "ui-block" }, [
+                        _c("article", { staticClass: "hentry blog-post" }, [
+                          _c("div", { staticClass: "post-thumb" }, [
+                            _c("img", {
+                              staticStyle: { width: "391px", height: "276px" },
+                              attrs: { src: item.image, alt: item.title }
+                            })
+                          ]),
                           _vm._v(" "),
                           _c(
                             "div",
-                            {
-                              staticClass: "post-additional-info inline-items"
-                            },
+                            { staticClass: "post-content" },
                             [
                               _c(
+                                "router-link",
+                                {
+                                  staticClass: "h4 post-title",
+                                  attrs: {
+                                    to: {
+                                      name: "ChallengeDetails",
+                                      params: { id: item.id, slug: item.slug }
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n\n                                    " +
+                                      _vm._s(item.title) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
                                 "div",
-                                { staticClass: "friends-harmonic-wrap" },
+                                {
+                                  staticClass:
+                                    "post-additional-info inline-items"
+                                },
                                 [
                                   _c(
-                                    "ul",
-                                    { staticClass: "friends-harmonic" },
+                                    "div",
+                                    { staticClass: "friends-harmonic-wrap" },
                                     [
-                                      _c("li", [
-                                        _c(
-                                          "a",
-                                          {
-                                            staticClass:
-                                              "post-add-icon inline-items",
-                                            class: {
-                                              active:
-                                                item.isUserLiked == 1
-                                                  ? true
-                                                  : false
-                                            },
-                                            attrs: {
-                                              href: "javascript:void(0);"
-                                            },
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.updateLike(item.id)
-                                              }
-                                            }
-                                          },
-                                          [
+                                      _c(
+                                        "ul",
+                                        { staticClass: "friends-harmonic" },
+                                        [
+                                          _c("li", [
                                             _c(
-                                              "svg",
+                                              "a",
                                               {
-                                                staticClass: "olymp-heart-icon"
+                                                staticClass:
+                                                  "post-add-icon inline-items",
+                                                class: {
+                                                  active:
+                                                    item.isUserLiked == 1
+                                                      ? true
+                                                      : false
+                                                },
+                                                attrs: {
+                                                  href: "javascript:void(0);"
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.updateLike(
+                                                      item.id
+                                                    )
+                                                  }
+                                                }
                                               },
                                               [
-                                                _c("use", {
-                                                  attrs: {
-                                                    "xlink:href":
-                                                      "assets/svg-icons/sprites/icons.svg#olymp-heart-icon"
-                                                  }
-                                                })
+                                                _c(
+                                                  "svg",
+                                                  {
+                                                    staticClass:
+                                                      "olymp-heart-icon"
+                                                  },
+                                                  [
+                                                    _c("use", {
+                                                      attrs: {
+                                                        "xlink:href":
+                                                          "assets/svg-icons/sprites/icons.svg#olymp-heart-icon"
+                                                      }
+                                                    })
+                                                  ]
+                                                )
                                               ]
                                             )
-                                          ]
-                                        )
-                                      ])
+                                          ])
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "names-people-likes" },
+                                        [
+                                          _vm._v(
+                                            "\n                                            " +
+                                              _vm._s(item.likes) +
+                                              "\n                                        "
+                                          )
+                                        ]
+                                      )
                                     ]
                                   ),
                                   _vm._v(" "),
                                   _c(
                                     "div",
-                                    { staticClass: "names-people-likes" },
+                                    { staticClass: "comments-shared" },
                                     [
-                                      _vm._v(
-                                        "\n                                               " +
-                                          _vm._s(item.likes) +
-                                          "\n                                            "
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass:
+                                            "post-add-icon inline-items",
+                                          attrs: { href: "#" }
+                                        },
+                                        [
+                                          _c(
+                                            "svg",
+                                            {
+                                              staticClass:
+                                                "olymp-speech-balloon-icon"
+                                            },
+                                            [
+                                              _c("use", {
+                                                attrs: {
+                                                  "xlink:href":
+                                                    "assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"
+                                                }
+                                              })
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("span", [
+                                            _vm._v(_vm._s(item.comments))
+                                          ])
+                                        ]
                                       )
                                     ]
                                   )
                                 ]
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "comments-shared" }, [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "post-add-icon inline-items",
-                                    attrs: { href: "#" }
-                                  },
-                                  [
-                                    _c(
-                                      "svg",
-                                      {
-                                        staticClass: "olymp-speech-balloon-icon"
-                                      },
-                                      [
-                                        _c("use", {
-                                          attrs: {
-                                            "xlink:href":
-                                              "assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"
-                                          }
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("span", [_vm._v(_vm._s(item.comments))])
-                                  ]
-                                )
-                              ])
-                            ]
+                              )
+                            ],
+                            1
                           )
-                        ],
-                        1
-                      )
-                    ])
-                  ])
-                ]
-              )
-            }),
-            _vm._v(" "),
-            _c("infinite-loading", { on: { infinite: _vm.infiniteHandler } })
-          ],
-          2
-        )
+                        ])
+                      ])
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                _c("infinite-loading", {
+                  on: { infinite: _vm.infiniteHandler }
+                })
+              ],
+              2
+            )
+          : _c("div", { staticClass: "row" }, [_vm._m(0)])
       ])
     ])
   ])
@@ -48118,32 +48258,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-select" }, [
-      _c("div", { staticClass: "title" }, [_vm._v("Filter By:")]),
-      _vm._v(" "),
-      _c("fieldset", { staticClass: "form-group" }, [
-        _c("select", { staticClass: "selectpicker form-control" }, [
-          _c("option", { attrs: { value: "NU" } }, [_vm._v("All Categories")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "NU" } }, [_vm._v("Favourite")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "NU" } }, [_vm._v("Likes")])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-select" }, [
-      _c("fieldset", { staticClass: "form-group" }, [
-        _c("select", { staticClass: "selectpicker form-control" }, [
-          _c("option", { attrs: { value: "NU" } }, [
-            _vm._v("Date (Descending)")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "NU" } }, [_vm._v("Date (Ascending)")])
+    return _c("div", { staticClass: "col-12" }, [
+      _c("article", { staticClass: "hentry post empty-post" }, [
+        _c("div", { staticClass: "empty-post-content" }, [
+          _c("div", { staticClass: "title" }, [_vm._v("Nothing to show")])
         ])
       ])
     ])
