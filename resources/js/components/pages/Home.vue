@@ -116,7 +116,7 @@
                         </div>
                     </div>
 
-                    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+<!--                    <infinite-loading @infinite="infiniteHandler"></infinite-loading>-->
 
                 </div>
 

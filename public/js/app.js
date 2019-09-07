@@ -48006,9 +48006,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    " +
+                              "\n                                        " +
                                 _vm._s(category.name) +
-                                "\n                                "
+                                "\n                                    "
                             )
                           ]
                         )
@@ -48079,174 +48079,160 @@ var render = function() {
           ? _c(
               "div",
               { staticClass: "row" },
-              [
-                _vm._l(_vm.challenges, function(item, index) {
-                  return _c(
-                    "div",
-                    {
-                      key: index,
-                      staticClass:
-                        "col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12"
-                    },
-                    [
-                      _c("div", { staticClass: "ui-block" }, [
-                        _c("article", { staticClass: "hentry blog-post" }, [
-                          _c("div", { staticClass: "post-thumb" }, [
-                            _c("img", {
-                              staticStyle: { width: "391px", height: "276px" },
-                              attrs: { src: item.image, alt: item.title }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "post-content" },
-                            [
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass: "h4 post-title",
-                                  attrs: {
-                                    to: {
-                                      name: "ChallengeDetails",
-                                      params: { id: item.id, slug: item.slug }
-                                    }
+              _vm._l(_vm.challenges, function(item, index) {
+                return _c(
+                  "div",
+                  {
+                    key: index,
+                    staticClass:
+                      "col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12"
+                  },
+                  [
+                    _c("div", { staticClass: "ui-block" }, [
+                      _c("article", { staticClass: "hentry blog-post" }, [
+                        _c("div", { staticClass: "post-thumb" }, [
+                          _c("img", {
+                            staticStyle: { width: "391px", height: "276px" },
+                            attrs: { src: item.image, alt: item.title }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "post-content" },
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "h4 post-title",
+                                attrs: {
+                                  to: {
+                                    name: "ChallengeDetails",
+                                    params: { id: item.id, slug: item.slug }
                                   }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n\n                                    " +
-                                      _vm._s(item.title) +
-                                      "\n                                "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "post-additional-info inline-items"
-                                },
-                                [
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n\n                                        " +
+                                    _vm._s(item.title) +
+                                    "\n                                    "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "post-additional-info inline-items"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "friends-harmonic-wrap" },
+                                  [
+                                    _c(
+                                      "ul",
+                                      { staticClass: "friends-harmonic" },
+                                      [
+                                        _c("li", [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "post-add-icon inline-items",
+                                              class: {
+                                                active:
+                                                  item.isUserLiked == 1
+                                                    ? true
+                                                    : false
+                                              },
+                                              attrs: {
+                                                href: "javascript:void(0);"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.updateLike(item.id)
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "svg",
+                                                {
+                                                  staticClass:
+                                                    "olymp-heart-icon"
+                                                },
+                                                [
+                                                  _c("use", {
+                                                    attrs: {
+                                                      "xlink:href":
+                                                        "assets/svg-icons/sprites/icons.svg#olymp-heart-icon"
+                                                    }
+                                                  })
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ])
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "names-people-likes" },
+                                      [
+                                        _vm._v(
+                                          "\n                                                " +
+                                            _vm._s(item.likes) +
+                                            "\n                                            "
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "comments-shared" }, [
                                   _c(
-                                    "div",
-                                    { staticClass: "friends-harmonic-wrap" },
+                                    "a",
+                                    {
+                                      staticClass: "post-add-icon inline-items",
+                                      attrs: { href: "#" }
+                                    },
                                     [
                                       _c(
-                                        "ul",
-                                        { staticClass: "friends-harmonic" },
+                                        "svg",
+                                        {
+                                          staticClass:
+                                            "olymp-speech-balloon-icon"
+                                        },
                                         [
-                                          _c("li", [
-                                            _c(
-                                              "a",
-                                              {
-                                                staticClass:
-                                                  "post-add-icon inline-items",
-                                                class: {
-                                                  active:
-                                                    item.isUserLiked == 1
-                                                      ? true
-                                                      : false
-                                                },
-                                                attrs: {
-                                                  href: "javascript:void(0);"
-                                                },
-                                                on: {
-                                                  click: function($event) {
-                                                    return _vm.updateLike(
-                                                      item.id
-                                                    )
-                                                  }
-                                                }
-                                              },
-                                              [
-                                                _c(
-                                                  "svg",
-                                                  {
-                                                    staticClass:
-                                                      "olymp-heart-icon"
-                                                  },
-                                                  [
-                                                    _c("use", {
-                                                      attrs: {
-                                                        "xlink:href":
-                                                          "assets/svg-icons/sprites/icons.svg#olymp-heart-icon"
-                                                      }
-                                                    })
-                                                  ]
-                                                )
-                                              ]
-                                            )
-                                          ])
+                                          _c("use", {
+                                            attrs: {
+                                              "xlink:href":
+                                                "assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"
+                                            }
+                                          })
                                         ]
                                       ),
                                       _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "names-people-likes" },
-                                        [
-                                          _vm._v(
-                                            "\n                                            " +
-                                              _vm._s(item.likes) +
-                                              "\n                                        "
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "comments-shared" },
-                                    [
-                                      _c(
-                                        "a",
-                                        {
-                                          staticClass:
-                                            "post-add-icon inline-items",
-                                          attrs: { href: "#" }
-                                        },
-                                        [
-                                          _c(
-                                            "svg",
-                                            {
-                                              staticClass:
-                                                "olymp-speech-balloon-icon"
-                                            },
-                                            [
-                                              _c("use", {
-                                                attrs: {
-                                                  "xlink:href":
-                                                    "assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"
-                                                }
-                                              })
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c("span", [
-                                            _vm._v(_vm._s(item.comments))
-                                          ])
-                                        ]
-                                      )
+                                      _c("span", [
+                                        _vm._v(_vm._s(item.comments))
+                                      ])
                                     ]
                                   )
-                                ]
-                              )
-                            ],
-                            1
-                          )
-                        ])
+                                ])
+                              ]
+                            )
+                          ],
+                          1
+                        )
                       ])
-                    ]
-                  )
-                }),
-                _vm._v(" "),
-                _c("infinite-loading", {
-                  on: { infinite: _vm.infiniteHandler }
-                })
-              ],
-              2
+                    ])
+                  ]
+                )
+              }),
+              0
             )
           : _c("div", { staticClass: "row" }, [_vm._m(0)])
       ])
