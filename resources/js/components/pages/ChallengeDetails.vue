@@ -14,26 +14,6 @@
 
                         <a href="#" class="post-category bg-primary">Digital</a>
 
-                        <ul class="filter-icons">
-                            <li>
-                                <a href="#" class="post-add-icon inline-items">
-                                    <img src="assets/img/icon-chat1.png" alt="icon">
-                                    <span>58</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="post-add-icon inline-items">
-                                    <img src="assets/img/icon-chat26.png" alt="icon">
-                                    <span>21</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="post-add-icon inline-items">
-                                    <img src="assets/img/icon-chat15.png" alt="icon">
-                                    <span>3</span>
-                                </a>
-                            </li>
-                        </ul>
 
                         <div class="post-milestone-progress">
                             <div class="post-milestone-progress">
@@ -393,7 +373,7 @@
                                             <span>{{challenge.finalized}}</span> ideas
                                         </div>
                                     </li>
-                                    <li class="progress-stage-item not-started">
+                                    <li class="progress-stage-item not-started"  :class="challenge.finalized?'in-progress':'not-started'">
                                         <div class="icon icon-winner">
                                             <label>Week</label>
                                             <span>4</span>
@@ -409,20 +389,20 @@
 
                         <div class="author-date">
                             <div class="author-thumb">
-                                <img alt="author" src="assets/img/friend-harmonic7.jpg" class="avatar">
+                                <img :src="challenge.user.image" :alt="challenge.user.name" class="avatar">
                             </div>
                             by
-                            <a class="h6 post__author-name fn" href="#">JACK SCORPIO</a>
+                            <a class="h6 post__author-name fn" href="#">{{challenge.user.name}}</a>
                             <div class="post__date">
                                 <time class="published" datetime="2017-03-24T18:18">
-                                    - 12 hours ago
+                                    {{challenge.created_at}}
                                 </time>
                             </div>
                             <div class="post__location">Malaysia</div>
                         </div>
 
                         <div class="post-thumb">
-                            <img src="assets/img/post-thumb1.jpg" alt="author">
+                            <img :src="challenge.image" :alt="challenge.user.name" class="post-thumb">
                         </div>
 
                         <div class="post-content-wrap">
@@ -434,16 +414,10 @@
                                         <use
                                             xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
                                     </svg>
-                                    <span>105</span>
+                                    <span>{{challenge.comments}}</span>
                                 </a>
 
-                                <a href="#" class="btn btn-control has-i bg-facebook">
-                                    <i class="fab fa-facebook-f" aria-hidden="true"></i>
-                                </a>
 
-                                <a href="#" class="btn btn-control has-i bg-twitter">
-                                    <i class="fab fa-twitter" aria-hidden="true"></i>
-                                </a>
                             </div>
 
                             <div class="post-content">
@@ -452,55 +426,7 @@
                         </div>
 
 
-                        <div class="choose-reaction reaction-colored">
-                            <div class="title">Choose your <span>Reaction!</span></div>
 
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <img src="assets/img/icon-chat13.png" alt="icon" data-toggle="tooltip"
-                                             data-placement="top" data-original-title="LOL">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="assets/img/icon-chat15.png" alt="icon" data-toggle="tooltip"
-                                             data-placement="top" data-original-title="Amazed">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="assets/img/icon-chat9.png" alt="icon" data-toggle="tooltip"
-                                             data-placement="top" data-original-title="ANGER">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="assets/img/icon-chat4.png" alt="icon" data-toggle="tooltip"
-                                             data-placement="top" data-original-title="joy">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="assets/img/icon-chat6.png" alt="icon" data-toggle="tooltip"
-                                             data-placement="top" data-original-title="BAD">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="assets/img/icon-chat26.png" alt="icon" data-toggle="tooltip"
-                                             data-placement="top" data-original-title="LIKE">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="assets/img/icon-chat27.png" alt="icon" data-toggle="tooltip"
-                                             data-placement="top" data-original-title="COOL">
-                                    </a>
-                                </li>
-                            </ul>
-
-                        </div>
                     </article>
 
                     <!-- ... end Single Post -->
@@ -516,72 +442,139 @@
                 <!-- ... end Pagination -->
 
             </div>
+<!--            <div v-for="list in lists">-->
+<!--                   <h1>{{lists.title}}</h1>-->
+<!--            </div>-->
+<!--            <div class="col col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12" v-for="(task, index) in list">-->
+<!--                <aside class="blog-post-wrap">-->
 
-            <div class="col col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
-                <aside class="blog-post-wrap">
+<!--                    <div class="ui-block">-->
+
+<!--                        &lt;!&ndash; Post &ndash;&gt;-->
+
+<!--                        <article class="hentry blog-post blog-post-v3 featured-post-item">-->
+
+<!--                            <div class="post-thumb">-->
+
+<!--                                <a href="#" class="post-category bg-primary"></a>-->
+<!--                            </div>-->
+
+<!--                            <div class="post-content">-->
+
+<!--                                <div class="author-date">-->
+<!--                                    by-->
+<!--                                    <a class="h6 post__author-name fn" href="#">{{task.name}}</a>-->
+<!--                                    <div class="post__date">-->
+<!--                                        <time class="published" datetime="2017-03-24T18:18">-->
+<!--                                            -->
+<!--                                        </time>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                                <a href="#" class="h4 post-title">{{task.title}}</a>-->
+
+<!--                                <div class="post-additional-info inline-items">-->
+
+<!--                                    <div class="friends-harmonic-wrap">-->
+<!--                                        <ul class="friends-harmonic">-->
+<!--                                            <li>-->
+<!--                                                <a href="#">-->
+<!--                                                    <img src="img/icon-chat26.png" alt="icon">-->
+<!--                                                </a>-->
+<!--                                            </li>-->
+<!--                                            <li>-->
+<!--                                                <a href="#">-->
+<!--                                                    <img src="img/icon-chat27.png" alt="icon">-->
+<!--                                                </a>-->
+<!--                                            </li>-->
+<!--                                            <li>-->
+<!--                                                <a href="#">-->
+<!--                                                    <img src="img/icon-chat2.png" alt="icon">-->
+<!--                                                </a>-->
+<!--                                            </li>-->
+<!--                                        </ul>-->
+<!--                                        <div class="names-people-likes">-->
+<!--                                            206-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
+<!--                                    <div class="comments-shared">-->
+<!--                                        <a href="#" class="post-add-icon inline-items">-->
+<!--                                            <svg class="olymp-speech-balloon-icon">-->
+<!--                                                <use xlink:href="svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>-->
+<!--                                            </svg>-->
+<!--                                            <span>97</span>-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                        </article>-->
+
+<!--                        &lt;!&ndash; ... end Post &ndash;&gt;-->
+
+<!--                    </div>-->
+
+
+
+<!--                </aside>-->
+<!--            </div>-->
+<!--    {{this.posts | json}}-->
+            <div class="col col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12" >
+                <aside class="blog-post-wrap"  v-for="(item, index) in posts" :key="index">
 
                     <div class="ui-block">
 
-                        <!-- Post -->
+                        <!-- Pos    t -->
 
                         <article class="hentry blog-post blog-post-v3 featured-post-item">
 
                             <div class="post-thumb">
-                                <img src="assets/img/post13.jpg" alt="photo">
-                                <a href="#" class="post-category bg-primary">DIGITAL</a>
+
+                                <img :src="item.image" :alt="item.title">
+
+                                <a href="#" class="post-category bg-primary">{{item.title}}</a>
+
                             </div>
 
                             <div class="post-content">
 
                                 <div class="author-date">
                                     by
-                                    <a class="h6 post__author-name fn" href="#">JACK SCORPIO</a>
+                                    <router-link
+                                        :to="{ name: 'ProfileEuraka', params: { id: item.user.id, slug: item.user.slug } }"
+                                        class="h6 post__author-name fn">
+
+
+                                        {{item.user.name}}
+                                    </router-link>
                                     <div class="post__date">
                                         <time class="published" datetime="2017-03-24T18:18">
-                                            - 5 MONTHS ago
+                                            {{item.created_at}}
                                         </time>
                                     </div>
                                 </div>
 
-                                <a href="#" class="h4 post-title">We went lookhunting in all the California bay area</a>
+
+                                <router-link :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }" class="h4 title">
+                                    {{item.title}}
+                                </router-link>
 
                                 <div class="post-additional-info inline-items">
 
-                                    <div class="friends-harmonic-wrap">
-                                        <ul class="friends-harmonic">
-                                            <li>
-                                                <a href="#">
-                                                    <img src="assets/img/icon-chat26.png" alt="icon">
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img src="assets/img/icon-chat27.png" alt="icon">
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img src="assets/img/icon-chat2.png" alt="icon">
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <div class="names-people-likes">
-                                            206
-                                        </div>
-                                    </div>
+                                    <a href="#" class="post-add-icon inline-items">
+                                        <svg class="olymp-speech-balloon-icon">
+                                            <use
+                                                xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
+                                        </svg>
+                                        <span>{{item.comments}}</span>
+                                    </a>
 
-                                    <div class="comments-shared">
-                                        <a href="#" class="post-add-icon inline-items">
-                                            <svg class="olymp-speech-balloon-icon">
-                                                <use
-                                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
-                                            </svg>
-                                            <span>97</span>
-                                        </a>
                                     </div>
 
                                 </div>
-                            </div>
+
 
                         </article>
 
@@ -589,206 +582,7 @@
 
                     </div>
 
-                    <div class="ui-block">
 
-                        <!-- Post -->
-
-                        <article class="hentry blog-post blog-post-v3 featured-post-item">
-
-                            <div class="post-thumb">
-                                <img src="assets/img/post14.jpg" alt="photo">
-                                <a href="#" class="post-category bg-primary">DIGITAL</a>
-                            </div>
-
-                            <div class="post-content">
-
-                                <div class="author-date">
-                                    by
-                                    <a class="h6 post__author-name fn" href="#">JACK SCORPIO</a>
-                                    <div class="post__date">
-                                        <time class="published" datetime="2017-03-24T18:18">
-                                            - 2 MONTHS ago
-                                        </time>
-                                    </div>
-                                </div>
-
-                                <a href="#" class="h4 post-title">We went lookhunting in all the California bay area</a>
-
-                                <div class="post-additional-info inline-items">
-
-                                    <div class="friends-harmonic-wrap">
-                                        <ul class="friends-harmonic">
-                                            <li>
-                                                <a href="#">
-                                                    <img src="assets/img/icon-chat6.png" alt="icon">
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img src="assets/img/icon-chat7.png" alt="icon">
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <div class="names-people-likes">
-                                            37
-                                        </div>
-                                    </div>
-
-                                    <div class="comments-shared">
-                                        <a href="#" class="post-add-icon inline-items">
-                                            <svg class="olymp-speech-balloon-icon">
-                                                <use
-                                                    xlink:href="svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
-                                            </svg>
-                                            <span>62</span>
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </article>
-
-                        <!-- ... end Post -->
-
-                    </div>
-
-                    <div class="ui-block">
-
-                        <!-- Post -->
-
-                        <article class="hentry blog-post blog-post-v3 featured-post-item">
-
-                            <div class="post-thumb">
-                                <img src="assets/img/post15.jpg" alt="photo">
-                                <a href="#" class="post-category bg-primary">DIGITAL</a>
-                            </div>
-
-                            <div class="post-content">
-
-                                <div class="author-date">
-                                    by
-                                    <a class="h6 post__author-name fn" href="#">MADDY SIMMONS </a>
-                                    <div class="post__date">
-                                        <time class="published" datetime="2017-03-24T18:18">
-                                            - 3 MONTHS ago
-                                        </time>
-                                    </div>
-                                </div>
-
-                                <a href="#" class="h4 post-title">Check out this 10 yummy breakfast recipes</a>
-
-                                <div class="post-additional-info inline-items">
-
-                                    <div class="friends-harmonic-wrap">
-                                        <ul class="friends-harmonic">
-                                            <li>
-                                                <a href="#">
-                                                    <img src="assets/img/icon-chat20.png" alt="icon">
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img src="assets/img/icon-chat11.png" alt="icon">
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img src="assets/img/icon-chat9.png" alt="icon">
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <div class="names-people-likes">
-                                            88
-                                        </div>
-                                    </div>
-
-                                    <div class="comments-shared">
-                                        <a href="#" class="post-add-icon inline-items">
-                                            <svg class="olymp-speech-balloon-icon">
-                                                <use
-                                                    xlink:href="svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
-                                            </svg>
-                                            <span>39</span>
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </article>
-
-                        <!-- ... end Post -->
-                    </div>
-
-                    <div class="ui-block">
-
-                        <!-- Post -->
-
-                        <article class="hentry blog-post blog-post-v3 featured-post-item">
-
-                            <div class="post-thumb">
-                                <img src="assets/img/post16.jpg" alt="photo">
-                                <a href="#" class="post-category bg-primary">DIGITAL</a>
-                            </div>
-
-                            <div class="post-content">
-
-                                <div class="author-date">
-                                    by
-                                    <a class="h6 post__author-name fn" href="#">JACK SCORPIO</a>
-                                    <div class="post__date">
-                                        <time class="published" datetime="2017-03-24T18:18">
-                                            - 6 MONTHS ago
-                                        </time>
-                                    </div>
-                                </div>
-
-                                <a href="#" class="h4 post-title">We optimized the Olympus App for better navigation</a>
-
-                                <div class="post-additional-info inline-items">
-
-                                    <div class="friends-harmonic-wrap">
-                                        <ul class="friends-harmonic">
-                                            <li>
-                                                <a href="#">
-                                                    <img src="assets/img/icon-chat1.png" alt="icon">
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img src="assets/img/icon-chat26.png" alt="icon">
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img src="assets/img/icon-chat27.png" alt="icon">
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <div class="names-people-likes">
-                                            93
-                                        </div>
-                                    </div>
-
-                                    <div class="comments-shared">
-                                        <a href="#" class="post-add-icon inline-items">
-                                            <svg class="olymp-speech-balloon-icon">
-                                                <use
-                                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
-                                            </svg>
-                                            <span>105</span>
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </article>
-
-                        <!-- ... end Post -->
-
-                    </div>
 
                 </aside>
             </div>
@@ -798,7 +592,6 @@
 
 <script>
     import Comments from './sub-components/Comments';
-
     export default {
         name: "ChallengeDetails",
         components: {Comments},
@@ -808,14 +601,63 @@
                 selectedChallengeSlug: '',
                 selectedChallengeId: '',
                 challenge: '',
+                posts:[],
 
             }
+        },
+        methods:{
+            getChallenges() {
+
+                let loader = this.$loading.show({
+                    container: this.fullPage ? null : this.$refs.file,
+                });
+                var bodyFormData = new FormData();
+
+                this.axios({
+                    method: 'get',
+                    url: 'challenges/getlist?userId='+this.recordsUserId+'&recordsType='+this.type,
+                    data: bodyFormData
+                })
+                    .then((response) => {
+                         loader.hide();
+
+                        if (response.status==200) {
+                            // console.log(response);
+                            // alert(response);
+                            this.posts = response.data.list;
+
+                             console.log("sairam",this.posts);
+
+                        }
+                        else if(response.status==401)
+                        {
+                            console.log('in 401 response');
+                            this.$store.dispatch('destroyAccess');
+                            this.$toast.open({
+                                message: 'Please login to continue',
+                                type: 'success'
+                            });
+                            this.$router.push('/login');
+                        }
+                        else {
+                            console.log('inelse boy');
+                        }
+                    })
+                    .catch(function(response) {
+                        loader.hide();
+                    });
+            },
+        },
+        mounted(){
+            this.getChallenges();
+
         },
         created() {
             this.selectedChallengeId = this.$route.params.id;
             this.selectedChallengeSlug = this.$route.params.slug;
             this.userLogin = this.$store.getters.getLogin;
             this.userId = this.$store.getters.getUserId;
+            this.getChallenges();
 
             let loader = this.$loading.show({
                 container: this.fullPage ? null : this.$refs.file,

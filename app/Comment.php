@@ -53,4 +53,13 @@ class Comment extends Model
     {
         return $this->morphOne(Like::class, 'like')->whereUserId(\Auth::id());
     }
+    public function ownerCommenttick()
+    {
+        return $this->morphOne(Like::class, 'like')->whereUserId(\Auth::id());
+    }
+
+    public function tick()
+    {
+        return $this->morphOne(Tick::class, 'tick')->whereUserId(\Auth::id());
+    }
 }

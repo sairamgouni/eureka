@@ -22,20 +22,20 @@
             <a href="#" class="link-find-friend">Find Friends</a>
 
 
-            <router-link to="/post-challenge">
-                <a href="javascript:void(0);" class="btn btn-primary btn-md-1 mt-1">Post Challenge</a>
-            </router-link>
+<!--              <router-link   to="/post-challenge">-->
+<!--                    <a href="javascript:void(0);" class="btn btn-primary btn-md-1 mt-1">Post Challenge</a>-->
+<!--              </router-link>  -->
 
             <div class="control-block">
 
-                <Events/>
+           <!--    <Events /> -->
 
 
-                <Notifications/>
+                <Notifications :notifications="notifications" />
 
                 <div class="author-page author vcard inline-items more">
                     <div class="author-thumb">
-                        <img :alt="userName" :src="userImage" class="avatar">
+                        <img  :alt="userName" :src="userImage" class="avatar">
                         <span class="icon-status online"></span>
                         <div class="more-dropdown more-with-triangle">
                             <div class="mCustomScrollbar" data-mcs-theme="dark">
@@ -46,8 +46,8 @@
                                 <ul class="account-settings">
                                     <li>
                                         <router-link
-                                            :to="{ name: 'ProfileEuraka', params: { id: userId, slug: userSlug } }"
-                                            class="nav-link">
+                                        :to="{ name: 'ProfileEuraka', params: { id: userId, slug: userSlug } }"
+                                         class="nav-link">
 
 
                                             <svg class="olymp-menu-icon">
@@ -59,7 +59,7 @@
                                         </router-link>
                                     </li>
                                     <li>
-                                        <router-link to="/create-challenge" class="nav-link">
+                                       <router-link  to="/create-challenge" class="nav-link">
                                             <svg class="olymp-star-icon left-menu-icon" data-toggle="tooltip"
                                                  data-placement="right" data-original-title="FAV PAGE">
                                                 <use
@@ -70,15 +70,12 @@
                                         </router-link>
                                     </li>
                                     <li @click="logout()">
-                                        <a href="javascript:void(0);">
-                                            <svg class="olymp-logout-icon">
-                                                <use
-                                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-logout-icon"></use>
-                                            </svg>
+                                       <a href="javascript:void(0);" >
+                                        <svg class="olymp-logout-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-logout-icon"></use></svg>
 
-                                            Log Out
+                                        Log Out
 
-                                        </a>
+                                    </a>
                                     </li>
                                 </ul>
 
@@ -132,52 +129,69 @@
             Notifications,
             Events,
         },
-        data() {
+         data() {
             return {
                 baseUrl: '',
                 userLogin: false,
-                userId: '',
-                userSlug: '',
-                userImage: '',
-                userName: '',
+                userId:'',
+                userSlug:'',
+                userImage:'',
+                userName:'',
+                userLevel:'',
+                notifications:[],
             }
         },
-        methods: {
+        methods : {
             logout() {
 
-                // evt.preventDefault();
+                    // evt.preventDefault();
 
                 var bodyFormData = new FormData();
                 // bodyFormData.set('email', this.form.username);
                 // bodyFormData.set('password', this.form.password);
                 this.axios({
-                    method: 'post',
-                    url: this.baseUrl + 'portal/logout',
-                    data: bodyFormData
-                })
+                        method: 'post',
+                        url: 'portal/logout',
+                        data: bodyFormData
+                    })
                     .then((response) => {
-                        this.$store.dispatch('destroyAccess');
-                        if (response.data.success == 1)
-                            this.$router.push('/');
+                       this.$store.dispatch('destroyAccess');
+                       if(response.data.success==1)
+                        this.$router.push('/');
                         this.$router.go();
                     });
-                // console.log('logout ended');
-            }
+                    // console.log('logout ended');
+            },
+            getNotifications() {
+                let data = {'userId':this.userId};
+                this.axios({
+                    method:'post',
+                    url:'user/top-notifications',
+                    data: data
+                })
+                .then((response) => {
+                    // console.log('got notifications');
+                    this.notifications = response.data.notifications;
+                    // console.log(response);
+                });
+            },
         },
-        created() {
+        created(){
             this.userLogin = this.$store.getters.getLogin;
             this.userId = this.$store.getters.getUserId;
             this.userSlug = this.$store.getters.getUserSlug;
             this.userImage = this.$store.getters.getUserImage;
             this.userName = this.$store.getters.getUserName;
+            this.userLevel = this.$store.getters.getUserLevel;
+            this.getNotifications();
         }
 
     }
 </script>
 
 <style>
-    .avatar {
-        height: 36px;
-        width: 36px;
-    }
+.avatar{
+    height: 36px;
+    width:36px;
+}
 </style>

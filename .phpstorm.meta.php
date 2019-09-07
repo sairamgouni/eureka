@@ -3,13 +3,13 @@
 
 namespace PHPSTORM_META {
 
-   /**
-    * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2019-09-01 22:09:28.
-    *
-    * @author Barry vd. Heuvel <barryvdh@gmail.com>
-    * @see https://github.com/barryvdh/laravel-ide-helper
-    */
+    /**
+     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
+     * Generated on 2019-09-01 22:09:28.
+     *
+     * @author Barry vd. Heuvel <barryvdh@gmail.com>
+     * @see https://github.com/barryvdh/laravel-ide-helper
+     */
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,

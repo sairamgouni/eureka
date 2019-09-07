@@ -40,38 +40,57 @@ class LoginController extends Controller
 
     public function postLogin(Request $request)
     {
-        $login = 0;
+           $login = 0;
         $user = null;
-        if (\Auth::user()) {
+        if(\Auth::user())
+        {
             $login = 1;
             $user = \Auth::user();
-            $result = ['success' => $login, 'object' => $user, 'level' => 'user'];
+                    $role = $user->role->role_id;
+            if($role==1) {
+                $isAdmin = 1;
+                $level = 'admin';
+            }
+            else {
+                $level='user';
+            }
+            $result = ['success' => $login, 'object' => $user, 'level' => $level];
             return $result;
         }
+
 
 
         $credentials = $request->only('email', 'password');
 
         if (\Auth::attempt($credentials)) {
             // Authentication passed...
-            $login = 1;
+             $login = 1;
         }
-
-        if (\Auth::check()) {
+        $isAdmin = 0;
+        $level = '';
+        if(\Auth::user())
+        {
             $login = 1;
             $user = \Auth::user();
-
-            $user->update(['last_login', now()]);
+                $role = $user->role()->first();
+            if($role) {
+                if($role->id==1) {
+                    $isAdmin = 1;
+                    $level = 'admin';
+                }
+                else {
+                    $level='user';
+                }
+            }
         }
 
-
-        $result = ['success' => $login, 'object' => $user, 'level' => 'user'];
+        $result = ['success' => $login, 'object' => $user, 'level' => $level];
         return $result;
     }
 
     public function postWebLogin(Request $request)
     {
-        $login = 0;
+           $login = 0;
         $user = null;
         // if(\Auth::user())
         // {
@@ -82,27 +101,45 @@ class LoginController extends Controller
         // }
 
 
+
         // $credentials = $request->only('email', 'password');
-        $credentials = ['username' => $request->email, 'password' => $request->password];
+        $credentials = [ 'username' => $request->email,  'password'=>$request->password];
 
         if (\Auth::attempt($credentials)) {
             // Authentication passed...
-            $login = 1;
-        }
+             $login = 1;
 
+        }
+        $role_id=0;
+        $role = null;
+        $isAdmin = 0;
         $firstTimeLogin = false;
-        if (\Auth::user()) {
+        if(\Auth::user())
+        {
             $login = 1;
             $user = \Auth::user();
-
             $firstTimeLogin = $user->last_login ?? false;
-
+            $role = $user->role()->first();
+            // dd($role);
+            $level = '';
             if ($firstTimeLogin)
                 $user->update(['last_login', now()]);
-        }
 
+            if($role)
+            {
+                if($role->id==1)
+                {
+                    $isAdmin = 1;
+                    $level='admin';
+                }
+                else {
+                    $level='user';
+                }
+            }
+
+        }
         return back();
-        // $result = ['success' => $login, 'object' => $user, 'level' => 'user'];
+        // $result = ['success' => $login, 'object' => $user, 'level' => $level];
         // return $result;
     }
 
@@ -119,19 +156,20 @@ class LoginController extends Controller
     public function logout()
     {
         \Auth::logout();
-        return ['success' => 1];
+        return ['success'=>1];
     }
 
     public function myTestCode()
     {
         $users = \App\User::get();
         $count = 0;
-        foreach ($users as $user) {
+        foreach($users as $user)
+        {
             $user->password = bcrypt($user->employee_id);
             $user->slug = str_slug($user->username);
             $user->save();
             $count++;
         }
-        dd($count . ' users Updated');
+        dd($count.' users Updated');
     }
 }

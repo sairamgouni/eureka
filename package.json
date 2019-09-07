@@ -32,6 +32,7 @@
     },
     "dependencies": {
         "bootstrap-vue": "^2.0.0-rc.27",
+        "selectize": "^0.12.6",
         "vue-infinite-loading": "^2.4.4",
         "vue-loading-overlay": "^3.2.0",
         "vue-multiselect": "^2.1.6",

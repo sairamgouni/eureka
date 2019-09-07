@@ -43,7 +43,8 @@ class PasswordResetController extends Controller
 
         if (Hash::check($request->current_password, $user->password)) {
             $user->update([
-                'password' => Hash::make($request->password_confirmation)
+                'password' => Hash::make($request->password_confirmation),
+                'last_login' => now()
             ]);
 
             return response()->json([

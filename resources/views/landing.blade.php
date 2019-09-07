@@ -356,6 +356,8 @@
     };
     let USER = JSON.parse(`@Json(auth()->user())`);
 
+    // console.log(USER);
+
 </script>
 <script src="{{ asset(mix('js/manifest.js')) }}"></script>
 <script src="{{ asset(mix('js/vendor.js')) }}"></script>

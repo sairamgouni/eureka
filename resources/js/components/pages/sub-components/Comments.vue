@@ -37,10 +37,26 @@
                                    :class="{'text-danger':comment.like_count}"></i>
 
 							</a>
-                            <a href="#" class="reply" v-if="$parent.challenge.can_comment">
+                            <a href="#" class="reply">
                                 <i class="fas fa-reply"></i>
                                 Reply
                             </a>
+
+                             <a href="javascript:void(0)" class="post-add-icon inline-items"
+                                v-if="$parent.challenge.isAuthor"
+                                @click="ownertick(comment)">
+                                <i class="fas fa-check " :id="`owner_tick_${comment.id}`"
+                                   :class="{'text-danger':comment.tick_count}"></i>
+
+							</a>
+
+                             <a href="javascript:void(0)" class="post-add-icon inline-items"
+                                v-if="$parent.challenge.isAuthor"
+                                @click="ownerwin(comment)">
+                                <i class="fas fa-trophy " :id="`owner_win_${comment.id}`"
+                                   :class="{'text-danger':comment.win_count}"></i>
+
+							</a>
 
                              <ul class="comments-list style-3 mt-3">
 
@@ -71,7 +87,7 @@
                     </li>
                              </ul>
 
-                            <div class="post__author author vcard inline-items" v-if="$parent.challenge.can_comment">
+                            <div class="post__author author vcard inline-items">
                                 <form @submit="onSubmit"
                                       :class="comment.child_comments.length?'col-md-11 offset-md-1':'col-12 pl-0'">
 
@@ -80,10 +96,11 @@
                                 <div class="form-group label-floating is-empty replay-form-group">
                                     <label class="control-label">Write Reply</label>
                                     <textarea class="form-control" name="comment_text" required rows="1"
-                                              placeholder=""></textarea>
+                                              placeholder="" style=" border:1px solid red;"></textarea>
                                 </div>
                                 <input type="hidden" name="replay" :value="comment.id" required>
                             </div>
+
                             <div class="col-12 text-right">
                                     <button type="submit" class="btn btn-primary btn-sm">Reply
                                  </button>
@@ -104,7 +121,7 @@
               <a href="#" class="btn btn-grey btn-md mb60 mt60">Load More Comments...</a>
           </div> -->
 
-                <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" v-if="$parent.challenge.can_comment">
+                <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
 
                     <!-- Comment Form -->
@@ -128,10 +145,10 @@
                             </div> -->
 
                             <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group label-floating is-empty">
+                                <div class="form-group label-floating">
                                     <label class="control-label">Your Comment</label>
                                     <textarea v-model="comment_text" name="comment_text" class="form-control"
-                                              placeholder=""></textarea>
+                                              placeholder="" style=" border:1px solid red;"></textarea>
                                 </div>
                                     <button type="submit" class="btn btn-primary w-100">Post your Comment
                                  </button>
@@ -159,6 +176,12 @@
         }
 
         .likes-count {
+            margin-top: 2px;
+        }
+        .tick_count{
+            margin-top: 2px;
+        }
+        .win_count{
             margin-top: 2px;
         }
     }
@@ -300,7 +323,52 @@
                     }).catch((error) => {
 
                     })
+            },
+            ownertick(comment) {
+                if (comment && comment.id)
+                    this.axios.post(`${APP.baseUrl}/challenges/comment/${comment.id}/owner-tick`).then((response) => {
+                        if (response.status === 200) {
+                            if (response.data)
+                                $(`#owner_tick_${comment.id}`).addClass('text-danger');
+                            else
+                                $(`#owner_tick_${comment.id}`).removeClass('text-danger');
+
+                            this.$toast.open({
+                                message: response.data ? 'checked' : 'un checked',
+                                type: 'success'
+                            });
+                        } else
+                            this.$toast.open({
+                                message: 'Something went wrong!',
+                                type: 'error'
+                            });
+                    }).catch((error) => {
+
+                    })
+            },
+            ownerwin(comment) {
+                if (comment && comment.id)
+                    this.axios.post(`${APP.baseUrl}/challenges/comment/${comment.id}/owner-win`).then((response) => {
+                        if (response.status === 200) {
+                            if (response.data)
+                                $(`#owner_win_${comment.id}`).addClass('text-danger');
+                            else
+                                $(`#owner_win_${comment.id}`).removeClass('text-danger');
+
+                            this.$toast.open({
+                                message: response.data ? 'checked' : 'un checked',
+                                type: 'success'
+                            });
+                        } else
+                            this.$toast.open({
+                                message: 'Something went wrong!',
+                                type: 'error'
+                            });
+                    }).catch((error) => {
+
+                    })
             }
+
         },
         created() {
             this.loadComments();

@@ -17,6 +17,7 @@ export default new Vuex.Store({
         userBackgroundImage : '',
         userAbout : '',
         userNickname : '',
+        userLevel : '',
     	baseUrl : 'http://localhost:8000/',
     },
     getters: {
@@ -40,6 +41,9 @@ export default new Vuex.Store({
         },
         getUserEmail: state => {
             return state.userEmail;
+        },
+        getUserLevel: state => {
+            return state.userLevel;
         },
         getUserImage: state => {
             if(state.userImage)
@@ -84,6 +88,9 @@ export default new Vuex.Store({
         },
         setUserName(state, token) {
             state.userName = token;
+        },
+        setUserLevel(state, token) {
+            state.userLevel = token;
         },
         setUserImage(state, token) {
             

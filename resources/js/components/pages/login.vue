@@ -85,13 +85,10 @@
                     })
                     .then((response) => {
                         loader.hide();
-                        console.log(response.data.success);
+                   
                         if (response.data.success==1) {
-                            console.log('yep');
-                            // data = response.data.object;
-                            console.log(response.data.object);
-                             // console.log(data);
-                            // this.showDismissibleAlert = false;
+                           
+  
                             this.$store.commit('setLogin', true );
                             this.$store.commit('setUserId', response.data.object.id );
                             this.$store.commit('setUserName', response.data.object.name );
@@ -100,13 +97,12 @@
                             this.$store.commit('setUserSlug', response.data.object.slug);
                             this.$store.commit('setUserNickname', response.data.object.nickname);
                             this.$store.commit('setUserAbout', response.data.object.about);
+                            this.$store.commit('setUserLevel', response.data.level);
 
                             this.$store.commit('setUserImage', response.data.object.image);
                             this.$store.commit('setUserBackgroundImage', response.data.object.background_image);
                                
-                            console.log('setting setters');
-                            console.log(response.data.object);
-                            console.log('end setting setters');
+                       
                             this.$router.push('/');
                              this.$toast.open({
                                 message: 'Login was success',
@@ -114,7 +110,7 @@
                             });
 
                         } else {
-                            console.log('inelse boy');
+                          
                                 this.$toast.open({
                                 message: 'Invalid Credentials',
                                 type: 'error'

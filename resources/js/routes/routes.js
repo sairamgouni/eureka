@@ -13,128 +13,146 @@ import Contributors from "../components/pages/contributors/ContributorsList";
 import Users from "../components/pages/contributors/UsersList";
 import LoginPage from "../components/pages/login";
 import PostChallenge from "../components/pages/challenges/PostChallenge";
+import Approach from "../components/pages/Approach";
 
 export default [
     {
         name: 'Home',
         path: '/home',
         component: Home,
-        meta: {
+        meta : {
             requiresAuth: true,
-            title: "New Title"
+            title: "News Feed"
         }
     },
     {
         name: 'ChallengeDetails',
         path: '/challenge-details/:id/:slug',
         component: ChallengeDetails,
-        meta: {
-            requiresAuth: true,
-            title: "Challenge Details"
+         meta : {
+            requiresAuth:true,
+             title: "Challenge Details"
         }
     },
     {
         name: 'Newsfeed',
         path: '/',
         component: Newsfeed,
-        meta: {
-            requiresAuth: true,
+        meta : {
+            requiresAuth:true,
+            title: "News Feed"
         }
     },
     {
         name: 'ProfileEuraka',
         path: '/profile/:id/:slug',
         component: ProfileEuraka,
-        meta: {
-            requiresAuth: true,
+        meta : {
+            requiresAuth:true,
+            title: "Profile"
         }
     },
     {
         name: 'About',
         path: '/about',
         component: About,
-        meta: {
-            requiresAuth: true,
+        meta : {
+            requiresAuth:true,
+            title: "About"
         }
     },
     {
         name: 'Friends',
-        path: '/friends',
+        path: '/friends/:id/:slug',
         component: Friends,
-        meta: {
-            requiresAuth: true,
+        meta : {
+            requiresAuth:true,
+            title: "Friends"
         }
     },
     {
         name: 'Photos',
         path: '/photos',
         component: Photos,
-        meta: {
-            requiresAuth: true,
+        meta : {
+            requiresAuth:true,
         }
     },
     {
         name: 'Badges',
         path: '/badges',
         component: Badges,
-        meta: {
-            requiresAuth: true,
+        meta : {
+            requiresAuth:true,
         }
     },
     {
         name: 'Contributors',
         path: '/contributors',
         component: Contributors,
-        meta: {
-            requiresAuth: true,
+        meta : {
+            requiresAuth:true,
+            title: "Contributors"
         }
     },
     {
         name: 'Users',
         path: '/users',
         component: Users,
-        meta: {
-            requiresAuth: true,
+        meta : {
+            requiresAuth:true,
         }
     },
     {
         name: 'EditPersonalInformation',
         path: '/edit-profile',
         component: EditPersonalInformation,
-        meta: {
-            requiresAuth: true,
+        meta : {
+            requiresAuth:true,
+            title: "Edit Profile"
         }
     },
     {
         name: 'ChangePassword',
         path: '/change-password',
         component: ChangePassword,
-        meta: {
-            requiresAuth: true,
+        meta : {
+            requiresAuth:true,
+            title: "Change Password"
         }
     },
     {
         name: 'Notifications',
         path: '/notifications',
         component: Notifications,
-        meta: {
-            requiresAuth: true,
+        meta : {
+            requiresAuth:true,
         }
     },
     {
         name: 'LoginPage',
         path: '/login',
         component: LoginPage,
-        meta: {
-            requiresVisitor: true,
+         meta : {
+            requiresVisitor:true,
         }
     },
-    {
+        {
         name: 'PostChallenge',
         path: '/post-challenge',
         component: PostChallenge,
-        meta: {
-            requiresAuth: true,
+        meta : {
+            requiresAuth:true,
+            title: "Post Challenge"
+        }
+    },
+    {
+        name: 'Approach',
+        path: '/approach',
+        component: Approach,
+        meta : {
+            requiresAuth:true,
+            title: "Approach"
         }
     },
 ];

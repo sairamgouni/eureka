@@ -26,17 +26,7 @@
 <body class="body_css">
 <div class="main">
     <div id="particles-js" style="position: relative">
-        <img src="{{asset('assets/login-assets/img/logo-white.svg')}}" alt="" class="logo" style="top: -51px;">
-        <div style="text-align: center;
-                          color: #fff;
-                          position: absolute;
-                          top: 44%;
-                          margin-top: 50px;
-                          width: 100%;
-                          font-size: 16px;
-                          font-weight: bold; ">
-            Expense Claim System
-        </div>
+        <img src="{{asset('assets/login-assets/img/eureka-logo-horizontal.svg')}}" alt="" class="logo" style="top: 51px;height: 200px;width: 200px">
     </div>
 
     <div class="row login-cont">
@@ -85,10 +75,10 @@
                                 </span>
                     </p>
                     <p>
-                        @if (Route::has('password.request'))
-                            <a href="{{ route('password.request') }}" title="Password Lost and Found"
+
+                            <a href="password/reset" title="Password Lost and Found"
                                class="frgt-password" style="cursor:pointer">Forgot password?</a>
-                        @endif
+
                     </p>
                 </form>
             </div>

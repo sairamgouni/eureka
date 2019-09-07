@@ -1,8 +1,8 @@
 
 <template>
-	 
+
  <span>
- 
+
 <div class="container">
 	<div class="row">
 
@@ -21,7 +21,9 @@
 		      </b-collapse>
 		    </b-card>
 		  </div> -->
-		
+    <router-link   to="/post-challenge" >
+                    <a href="javascript:void(0);" class="btn btn-primary btn-md-1 mt-1"  style="height:50px;width:500px">Post Challenge</a>
+              </router-link>
 		<ActivityItem />
 
 			<a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="items-to-load.html" data-container="newsfeed-items-grid"><svg class="olymp-three-dots-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
@@ -34,10 +36,10 @@
 		<!-- Left Sidebar -->
 
 		<aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
-			
-	 
 
-			<PagesMayLike />
+	 	<FriendSuggestions ></FriendSuggestions>
+
+			<!-- <PagesMayLike /> -->
 		</aside>
 
 		<!-- ... end Left Sidebar -->
@@ -49,10 +51,10 @@
 
 		<!-- <Birthday /> -->
 
-		<FriendSuggestions ></FriendSuggestions>
+
 		<ActivityFeed ></ActivityFeed>
-		
- 
+
+
 
 		</aside>
 
@@ -69,12 +71,12 @@
 
 <script>
 
-import FriendSuggestions from './sub-components/FriendSuggestions'; 
-import ActivityFeed from './sub-components/ActivityFeed'; 
-import PagesMayLike from './sub-components/PagesMayLike'; 
-import PostStatus from './sub-components/PostStatus'; 
-import ActivityItem from './sub-components/ActivityItem'; 
-import PostChallenge from './challenges/PostChallenge'; 
+import FriendSuggestions from './sub-components/FriendSuggestions';
+import ActivityFeed from './sub-components/ActivityFeed';
+import PagesMayLike from './sub-components/PagesMayLike';
+import PostStatus from './sub-components/PostStatus';
+import ActivityItem from './sub-components/ActivityItem';
+import PostChallenge from './challenges/PostChallenge';
 
     export default {
         name: 'Newsfeed',
@@ -82,9 +84,9 @@ import PostChallenge from './challenges/PostChallenge';
         	ActivityFeed,
         	FriendSuggestions,
         	PagesMayLike,
-        
+
         	PostStatus,
-        
+
         	ActivityItem,
         	PostChallenge
         },

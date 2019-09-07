@@ -68,12 +68,7 @@ new Vue(Vue.util.extend({router, store}, App)).$mount('#app');
 
 //validating router for
 router.beforeEach((to, from, next) => {
-    if (!USER.last_login)
-        next({
-            name: 'ChangePassword'
-        });
-
-    else if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
         console.log(store.getters.getLogin);
         if (store.getters.getLogin != false) {
             if (to.matched.some(record => record.meta.requiresUserLevel)) {

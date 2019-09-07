@@ -1,22 +1,22 @@
 <template>
  <div class="card_data align-items-center">
-       
+
         <b-card style="max-width: 60rem;" class="mb-2 shadow p-3 mb-5 bg-white rounded">
-            
+
             <h4 style="text-align: center">Post Challenge</h4>
-                         
+
             <b-form @submit="onSubmit">
-                
-                    <b-form-input 
+
+                    <b-form-input
                     class="mt-2"
-                    id="title" 
-                    type="text" 
-                    v-model="form.title" 
-                    required 
-                    placeholder="Challenge Title" />
+                    id="title"
+                    type="text"
+                    v-model="form.title"
+                    required
+                    placeholder="Title" />
                 </b-form-group>
 
-  			
+
 		    <b-form-textarea
 		    class="mt-2"
 		      id="description"
@@ -26,8 +26,8 @@
 		      max-rows="6"
 		    ></b-form-textarea>
 
- 
-  
+
+
 	<b-form-file
 	class="mt-2"
       v-model="form.image"
@@ -35,15 +35,15 @@
       placeholder="Upload an Image"
       drop-placeholder="Drop Image here..."
     ></b-form-file>
-    
 
-         <multiselect 
+
+         <multiselect
          class="mt-3"
          v-model="form.selectedList" tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="code" :options="optionsList" :multiple="true" :taggable="true" @tag="addTag"></multiselect>
-         
+
  <!--    <b-form-group label="Categories"  class="mt-2 checkbox">
       <b-form-checkbox-group
-     
+
         id="checkbox-group-1"
         v-model="form.selectedList"
         :options="optionsList"
@@ -51,31 +51,28 @@
       ></b-form-checkbox-group>
     </b-form-group> -->
 
-  
+
 
    		<b-row	>
    			<b-col class="col-6">
-    	<datepicker 
+    	<datepicker
 
-    	name="active_from" 
-    	v-model="form.activeFrom" 
+    	name="active_from"
+    	v-model="form.activeFrom"
+      
     	placeholder="Active from"
     	class="mt-3"></datepicker>
     </b-col>
     <b-col class="col-6">
-    	<datepicker 
+    	<datepicker
 
-    	name="active_to" 
-    	v-model="form.active_To" 
+    	name="active_to"
+    	v-model="form.activeTo"
+      
     	placeholder="Active To"
     	class="mt-3"></datepicker>
     </b-col>
 </b-row>
- 
-  <b-form-select v-model="form.selectedStatus" :options="statusOptions" class="mt-3">
-    	
-    </b-form-select>
-  
 
         <b-row class="mt-4">
             <b-col class="text-right">
@@ -101,16 +98,12 @@
                     description: '',
                     image: '',
                     selectedList:[],
-                    selectedStatus:'Active',
                     activeFrom:'' ,
                     activeTo:'' ,
                 },
                 show: true,
+                categoriesList:[],
                 optionsList:[],
-                statusOptions:[ 
-                				{ value: 'Active', text: 'Active' },
-                				{ value: 'Inactive', text: 'InActive' },
-                			  ],
          		state : { date: new Date(2016, 9,  16)}
             }
         },
@@ -119,18 +112,25 @@
 				  },
 		methods: {
 			 onSubmit(evt) {
+                  evt.preventDefault();
+                for(let i=0; i<this.form.selectedList.length; i++)
+                {
+                    this.categoriesList[i] = this.form.selectedList[i].code;
+                }
+                // console.log(this.categoriesList);
+                // return ;
                 let loader = this.$loading.show({
                     container: this.fullPage ? null : this.$refs.file,
                 });
 
                 // this.showDismissibleAlert = false
-                evt.preventDefault();
+              
 
                 var bodyFormData = new FormData();
                 bodyFormData.set('title', this.form.title);
                 bodyFormData.set('description', this.form.description);
                 bodyFormData.set('image', this.form.image);
-                bodyFormData.set('categories', this.form.selectedList);
+                bodyFormData.set('categories', this.categoriesList);
                 bodyFormData.set('status', this.form.selectedStatus);
                 bodyFormData.set('active_from', this.form.activeFrom);
                 bodyFormData.set('active_to', this.form.activeTo);
@@ -144,8 +144,8 @@
                         console.log(response.data.success);
                         if (response.data.success==1) {
                             // console.log('yep');
-                          
-                            // console.log(response.data.object);
+
+                           console.log(response.data.object);
                				this.form = {
 						                    title: '',
 						                    description: '',
@@ -153,7 +153,6 @@
 						                    selectedList:[],
 						                    selectedStatus:'Active',
 						                    activeFrom:'' ,
-                                            activeTo:'' ,
 						                };
                             this.$toast.open({
                                 message: 'Challenge Created ',
@@ -183,9 +182,9 @@
 			    }
 		},
 		created() {
-            
+
 			this.userLogin = this.$store.getters.getLogin;
-			 
+
 			 if(!this.userLogin)
 			 	return;
 			   let loader = this.$loading.show({
@@ -200,7 +199,7 @@
                         data: bodyFormData
                     })
                     .then((response) => {
-                       
+
                         loader.hide();
                         // console.log(response);
                         this.optionsList = response.data.object;
@@ -218,10 +217,10 @@
                               self.$router.push('/login');
                     });
 		},
-			
+
 	}
 </script>
 
 <style scoped>
-	
+
 </style>

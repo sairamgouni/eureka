@@ -7,7 +7,7 @@
 			<div class="ui-block">
 				<div class="top-header">
 					<div class="top-header-thumb">
-						<img  class="bg-image" :src="CurrentUser.userBackgroundImage" :alt="CurrentUser.userName">
+						<img  class="top-header-thumb" :src="user.background_image" :alt="user.name">
 					</div>
 					<div class="profile-section">
 						<div class="row">
@@ -20,8 +20,12 @@
 									</li>
 
 									<li>
-										<router-link  to="/friends" class="nav-link">
-										My Challenges
+										<router-link
+
+										 :to="{ name: 'Friends',
+										 params: { id: user.id, slug: user.slug } }" >
+
+										Friends
 										</router-link>
 									</li>
 								</ul>
@@ -70,11 +74,11 @@
 					</div>
 					<div class="top-header-author">
 						<a href="javascript:void(0);" class="author-thumb">
-							<img class="user-thumb" :src="CurrentUser.userImage" :alt="CurrentUser.userName">
+							<img class="user-thumb" :src="user.image" :alt="user.name">
 						</a>
 						<div class="author-content">
-							<a href="#" class="h4 author-name">{{CurrentUser.userName}}</a>
-							<div class="country">{{CurrentUser.userLocation}}</div>
+							<a href="#" class="h4 author-name">{{user.name}}</a>
+							<div class="country">{{user.location}}</div>
 						</div>
 					</div>
 				</div>
@@ -91,18 +95,36 @@
 		props:['CurrentUser', 'isUserLoggedIn', 'isSameUser'],
 			data() {
             return {
- 
+ 				currentProfileId:'',
+ 				user:{},
             }
 		},
 		methods: {
- 
+ 				getUserDetails(userId) {
+				 var bodyFormData = new FormData();
+            	 bodyFormData.set('userId', userId);
+            	 this.axios({
+                        method: 'get',
+                        url: 'user/get-profile/'+userId,
+                        data: bodyFormData
+                    })
+                    .then((response) => {
+                    	this.user = response.data;
+
+                    })
+                    .catch(function(response) {
+                    	console.log('in profile header exception');
+                    	// console.log(response);
+                        // loader.hide();
+                    });
+			}
 
 		},
 		created(){
- 
-            
+ 			this.currentProfileId = this.$route.params.id;
+ 			this.getUserDetails(this.currentProfileId);
         }
 	}
 </script>
 
- 
+

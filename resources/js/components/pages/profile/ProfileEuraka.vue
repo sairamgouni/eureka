@@ -1,7 +1,7 @@
 <template>
 <span>
 
-<ProfileHeader :CurrentUser="user" :isUserLoggedIn="userLogin" :isSameUser="isSameUser" />
+<ProfileHeader :CurrentUser="user" :isUserLoggedIn="userLogin" :isSameUser="isSameUser"  />
 
 <div class="container">
 	<div class="row">
@@ -14,6 +14,8 @@
 				:isUserLoggedIn="userLogin" 
 				:isSameUser="isSameUser" 
 				:loadCurrentUserActivity="true" 
+				:profileIdToLoad="currentProfileId"
+				:specificUserRecords="true"
 			/>
 
 			<a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="items-to-load.html" data-container="newsfeed-items-grid">

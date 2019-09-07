@@ -1,13 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e3930a32-b739-4209-a5d7-7a4470415a04" name="Default Changelist" comment="">
+    <list default="true" id="0a16b8e3-7d01-4680-a874-559b0abcb3e5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/$CACHE_FILE$" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/$CACHE_FILE$" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.phpstorm.meta.php" beforeDir="false" afterPath="$PROJECT_DIR$/.phpstorm.meta.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_ide_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/_ide_helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Challenge.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Challenge.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/PasswordResetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/PasswordResetController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ChallengeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ChallengeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LikeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/LikeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Like.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Like.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/session.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/session.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_08_18_171307_create_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_08_18_171307_create_comments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/assets/js/base-init.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/assets/js/base-init.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/layouts/HeaderNav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/layouts/HeaderNav.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/layouts/LeftSideBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/layouts/LeftSideBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/ChallengeDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/ChallengeDetails.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/Newsfeed.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/Newsfeed.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/challenges/PostChallenge.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/challenges/PostChallenge.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/contributors/ContributorsList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/contributors/ContributorsList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/profile/Friends.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/profile/Friends.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/profile/ProfileEuraka.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/profile/ProfileEuraka.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/profile/ProfileHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/profile/ProfileHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/profile/edit/ChangePassword.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/profile/edit/ChangePassword.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/sub-components/ActivityFeed.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/sub-components/ActivityFeed.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/sub-components/ActivityItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/sub-components/ActivityItem.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/sub-components/Comments.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/sub-components/Comments.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/sub-components/FriendSuggestions.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/sub-components/FriendSuggestions.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/sub-components/Notifications.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/sub-components/Notifications.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/routes/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/routes/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/services/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/services/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/landing.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/landing.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,25 +62,11 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
     </execution>
-  </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand />
-    <select />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -134,32 +167,36 @@
       <path value="$PROJECT_DIR$/vendor/anahkiasen/underscore-php" />
       <path value="$PROJECT_DIR$/vendor/actuallymab/laravel-comment" />
       <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/intervention/image" />
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
       <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
-      <path value="$PROJECT_DIR$/vendor/intervention/image" />
-      <path value="$PROJECT_DIR$/vendor/seld/jsonlint" />
       <path value="$PROJECT_DIR$/vendor/seld/phar-utils" />
+      <path value="$PROJECT_DIR$/vendor/seld/jsonlint" />
       <path value="$PROJECT_DIR$/vendor/justinrainbow/json-schema" />
-      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
-      <path value="$PROJECT_DIR$/vendor/barryvdh/reflection-docblock" />
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-ide-helper" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
     </include_path>
   </component>
-  <component name="ProjectId" id="1PkPxiF7UqIkJepShtxexwWmF0J" />
-  <component name="PropertiesComponent">
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Controllers/Auth" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.gutterIcons" />
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/../euraka-live-master/.idea/euraka-live-master.iml" />
+      </list>
+    </option>
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Projects\freelance\sairam\eureka\app\Http\Controllers\Auth" />
-    </key>
+  <component name="ProjectId" id="1QJ56I1dSwuQmqu8Li6RgQAg3KD" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -173,11 +210,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.watch-poll">
-    <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
-      <TestRunner scope="XML" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="watch-poll" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -188,38 +221,19 @@
       <envs />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="npm.watch-poll" />
-      <item itemvalue="PHPUnit.phpunit.xml" />
-    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e3930a32-b739-4209-a5d7-7a4470415a04" name="Default Changelist" comment="" />
-      <created>1566415369369</created>
+      <changelist id="0a16b8e3-7d01-4680-a874-559b0abcb3e5" name="Default Changelist" comment="" />
+      <created>1567475681122</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1566415369369</updated>
-      <workItem from="1566415370491" duration="6746000" />
-      <workItem from="1566451276776" duration="1350000" />
-      <workItem from="1566927959130" duration="113000" />
-      <workItem from="1566928118439" duration="327000" />
-      <workItem from="1567104025295" duration="3672000" />
-      <workItem from="1567187226819" duration="1804000" />
-      <workItem from="1567249251316" duration="1208000" />
-      <workItem from="1567263741112" duration="268000" />
-      <workItem from="1567334590700" duration="29333000" />
-      <workItem from="1567452604644" duration="18000" />
-      <workItem from="1567452634227" duration="8265000" />
-      <workItem from="1567492899859" duration="624000" />
-      <workItem from="1567538740460" duration="635000" />
-      <workItem from="1567699636126" duration="8000" />
-      <workItem from="1567712590933" duration="2962000" />
-      <workItem from="1567716917143" duration="1421000" />
-      <workItem from="1567718379425" duration="422000" />
+      <updated>1567475681122</updated>
+      <workItem from="1567475682328" duration="101675000" />
+      <workItem from="1567849112962" duration="1521000" />
     </task>
     <servers />
   </component>
