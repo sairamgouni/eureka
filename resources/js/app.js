@@ -67,35 +67,35 @@ router.beforeEach((to, from, next) => {
 new Vue(Vue.util.extend({router, store}, App)).$mount('#app');
 
 //validating router for
-router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        console.log(store.getters.getLogin);
-        if (store.getters.getLogin != false) {
-            if (to.matched.some(record => record.meta.requiresUserLevel)) {
-                if (store.getters.getUserLevel == 'admin') {
-                    next()
-
-                } else {
-                    next({
-                        path: '/'
-                    })
-                }
-            } else {
-                next()
-            }
-
-        } else {
-            next({
-                path: '/'
-            })
-        }
-    } else {
-        if (store.getters.getLogin != false) {
-            next({
-                path: '/'
-            })
-        } else {
-            next()
-        }
-    }
-});
+// router.beforeEach((to, from, next) => {
+//     if (to.matched.some(record => record.meta.requiresAuth)) {
+//         console.log(store.getters.getLogin);
+//         if (store.getters.getLogin != false) {
+//             if (to.matched.some(record => record.meta.requiresUserLevel)) {
+//                 if (store.getters.getUserLevel == 'admin') {
+//                     next()
+//
+//                 } else {
+//                     next({
+//                         path: '/'
+//                     })
+//                 }
+//             } else {
+//                 next()
+//             }
+//
+//         } else {
+//             next({
+//                 path: '/'
+//             })
+//         }
+//     } else {
+//         if (store.getters.getLogin != false) {
+//             next({
+//                 path: '/'
+//             })
+//         } else {
+//             next()
+//         }
+//     }
+// });

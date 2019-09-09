@@ -19,7 +19,7 @@
 
 					<!-- Change Password Form -->
 
-					<form @submit="changePassword">
+					<form @submit.prevent="changePassword">
 						<div class="row">
 
 							<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -95,7 +95,7 @@
         methods: {
             changePassword() {
                 this.$validator
-                this.submiting = true
+                this.submiting = true;
                 axios.post('/api/changePassword', this.password)
                     .then((response) => {
                         // loader.hide();

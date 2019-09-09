@@ -51,6 +51,7 @@ Route::post('challenges/create', 'ChallengeController@saveRecord');
 
 
 Route::get('challenges/getlist', 'ChallengeController@getList');
+Route::get('challenges/getlist', 'ChallengeController@getList');
 Route::get('challenges/getDetails', 'ChallengeController@show');
 Route::post('challenges/toggle-like', 'ChallengeController@toggleLike');
 Route::post('challenges/comment/{comment_id}/owner-like', 'ChallengeController@toggleCommentOwnerLike');

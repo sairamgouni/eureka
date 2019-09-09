@@ -1,39 +1,39 @@
 <template>
     <div>
-        <div v-if = "userLogin==true">
-        <!-- <div v-if = "userLogin"> -->
-        <!-- Fixed Sidebar Left -->
-        <left-side-bar></left-side-bar>
-        <!-- ... end Fixed Sidebar Left -->
+        <div v-if="userLogin==true">
+            <!-- <div v-if = "userLogin"> -->
+            <!-- Fixed Sidebar Left -->
+            <left-side-bar></left-side-bar>
+            <!-- ... end Fixed Sidebar Left -->
 
-        <!-- Fixed Sidebar Left -->
-        <left-side-bar-fixed></left-side-bar-fixed>
-        <!-- ... end Fixed Sidebar Left -->
+            <!-- Fixed Sidebar Left -->
+            <left-side-bar-fixed></left-side-bar-fixed>
+            <!-- ... end Fixed Sidebar Left -->
 
-        <!-- Fixed Sidebar Right-Responsive -->
-        <right-side-bar></right-side-bar>
-        <!-- ... end Fixed Sidebar Right-Responsive -->
+            <!-- Fixed Sidebar Right-Responsive -->
+            <right-side-bar></right-side-bar>
+            <!-- ... end Fixed Sidebar Right-Responsive -->
 
-        <!-- Header-BP -->
-        <header-nav></header-nav>
-        <!-- ... end Header-BP -->
+            <!-- Header-BP -->
+            <header-nav></header-nav>
+            <!-- ... end Header-BP -->
 
-        <!-- Responsive Header-BP -->
-        <header-nav-responsive></header-nav-responsive>
-        <!-- ... end Responsive Header-BP -->
-        <!-- </div> -->
-        <div class="header-spacer header-spacer-small"></div>
-        <div class="mt-5">
-            <!--Vue Router View Instance-->
-            <router-view :key="$route.fullPath"></router-view>
-        </div>
+            <!-- Responsive Header-BP -->
+            <header-nav-responsive></header-nav-responsive>
+            <!-- ... end Responsive Header-BP -->
+            <!-- </div> -->
+            <div class="header-spacer header-spacer-small"></div>
+            <div class="mt-5">
+                <!--Vue Router View Instance-->
+                <router-view :key="$route.fullPath"></router-view>
+            </div>
         </div>
         <div v-if="userLogin==0">
             <br>
             <div class="header-spacer"></div>
-               <!-- Header-BP -->
-        <HeaderBeforeLogin />
-        <!-- ... end Header-BP -->
+            <!-- Header-BP -->
+            <HeaderBeforeLogin/>
+            <!-- ... end Header-BP -->
             <router-view :key="$route.fullPath"></router-view>
         </div>
     </div>
@@ -49,7 +49,7 @@
 
     export default {
         name: "App",
-        userLevel : '',
+        userLevel: '',
         userLogin: false,
         components: {HeaderNavResponsive, HeaderNav, LeftSideBarFixed, LeftSideBar, RightSideBar, HeaderBeforeLogin},
         data() {
@@ -72,22 +72,21 @@
                     return false;
                 });
             });
-            
+
         },
         created() {
-            this.userLogin = this.$store.getters.getLogin;
-           
+            this.userLogin = USER ? true : false;
+
             // console.log('created');
             // console.log(this.userLogin);
         },
-         watch: {
-        '$route' (to, from) {
-            if (to.name !='ll') {
-                this.userLogin = this.$store.getters.getLogin;
-               
+        watch: {
+            '$route'(to, from) {
+                if (to.name != 'll') {
+                    this.userLogin = USER ? true : false;
+                }
             }
-        }
-    },
+        },
     }
 </script>
 

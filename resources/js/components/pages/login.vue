@@ -1,7 +1,7 @@
 <template>
 
     <div class="card_data align-items-center">
-       
+
         <b-card style="max-width: 25rem;" class="mb-2 shadow p-3 mb-5 bg-white rounded">
             <b-alert variant="danger" dismissible v-model="showDismissibleAlert">
                 {{ alertMessage }}
@@ -10,11 +10,13 @@
             <hr>
             <b-form @submit="onSubmit">
                 <b-form-group id="username" label="Username:" label-for="username" class="font-weight-bold">
-                    <b-form-input id="username" type="text" v-model="form.username" required placeholder="Enter email or merchant id" />
+                    <b-form-input id="username" type="text" v-model="form.username" required
+                                  placeholder="Enter email or merchant id"/>
                 </b-form-group>
 
                 <b-form-group id="password" label="Password:" label-for="password" class="font-weight-bold">
-                    <b-form-input id="password" type="password" v-model="form.password" required placeholder="Enter password" />
+                    <b-form-input id="password" type="password" v-model="form.password" required
+                                  placeholder="Enter password"/>
                 </b-form-group>
                 <b-row class="mt-4">
                     <b-col class="text-center">
@@ -79,19 +81,19 @@
                 bodyFormData.set('email', this.form.username);
                 bodyFormData.set('password', this.form.password);
                 this.axios({
-                        method: 'post',
-                        url: this.baseUrl + 'portal/login',
-                        data: bodyFormData
-                    })
+                    method: 'post',
+                    url: this.baseUrl + 'portal/login',
+                    data: bodyFormData
+                })
                     .then((response) => {
                         loader.hide();
-                   
-                        if (response.data.success==1) {
-                           
-  
-                            this.$store.commit('setLogin', true );
-                            this.$store.commit('setUserId', response.data.object.id );
-                            this.$store.commit('setUserName', response.data.object.name );
+
+                        if (response.data.success == 1) {
+
+                            USER = response.data.object;
+                            this.$store.commit('setLogin', true);
+                            this.$store.commit('setUserId', response.data.object.id);
+                            this.$store.commit('setUserName', response.data.object.name);
                             // this.$store.commit('setUserImage', response.data.object.image);
                             this.$store.commit('setUserEmail', response.data.object.email);
                             this.$store.commit('setUserSlug', response.data.object.slug);
@@ -101,23 +103,23 @@
 
                             this.$store.commit('setUserImage', response.data.object.image);
                             this.$store.commit('setUserBackgroundImage', response.data.object.background_image);
-                               
-                       
+
+
                             this.$router.push('/');
-                             this.$toast.open({
+                            this.$toast.open({
                                 message: 'Login was success',
                                 type: 'success'
                             });
 
                         } else {
-                          
-                                this.$toast.open({
+
+                            this.$toast.open({
                                 message: 'Invalid Credentials',
                                 type: 'error'
                             });
                         }
                     })
-                    .catch(function(response) {
+                    .catch(function (response) {
                         loader.hide();
                     });
             },

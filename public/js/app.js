@@ -1699,13 +1699,13 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   created: function created() {
-    this.userLogin = this.$store.getters.getLogin; // console.log('created');
+    this.userLogin = USER ? true : false; // console.log('created');
     // console.log(this.userLogin);
   },
   watch: {
     '$route': function $route(to, from) {
       if (to.name != 'll') {
-        this.userLogin = this.$store.getters.getLogin;
+        this.userLogin = USER ? true : false;
       }
     }
   }
@@ -5741,6 +5741,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'LoginPage',
   data: function data() {
@@ -5775,6 +5777,8 @@ __webpack_require__.r(__webpack_exports__);
         loader.hide();
 
         if (response.data.success == 1) {
+          USER = response.data.object;
+
           _this.$store.commit('setLogin', true);
 
           _this.$store.commit('setUserId', response.data.object.id);
@@ -58636,198 +58640,215 @@ var render = function() {
                 _vm._m(0),
                 _vm._v(" "),
                 _c("div", { staticClass: "ui-block-content" }, [
-                  _c("form", { on: { submit: _vm.changePassword } }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
-                        },
-                        [
-                          _c(
-                            "div",
-                            { staticClass: "form-group label-floating" },
-                            [
-                              _c("label", { staticClass: "control-label" }, [
-                                _vm._v("Confirm Current Password")
-                              ]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.password.current_password,
-                                    expression: "password.current_password"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                class: {
-                                  "is-invalid": _vm.errors.current_password
-                                },
-                                attrs: { placeholder: "", type: "password" },
-                                domProps: {
-                                  value: _vm.password.current_password
-                                },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.changePassword($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "form-group label-floating" },
+                              [
+                                _c("label", { staticClass: "control-label" }, [
+                                  _vm._v("Confirm Current Password")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.password.current_password,
+                                      expression: "password.current_password"
                                     }
-                                    _vm.$set(
-                                      _vm.password,
-                                      "current_password",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _vm.errors.current_password
-                                ? _c(
-                                    "div",
-                                    { staticClass: "invalid-feedback" },
-                                    [
-                                      _vm._v(
-                                        _vm._s(_vm.errors.current_password[0])
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.errors.current_password
+                                  },
+                                  attrs: { placeholder: "", type: "password" },
+                                  domProps: {
+                                    value: _vm.password.current_password
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.password,
+                                        "current_password",
+                                        $event.target.value
                                       )
-                                    ]
-                                  )
-                                : _vm._e()
-                            ]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "col col-lg-6 col-md-6 col-sm-12 col-12"
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "form-group label-floating is-empty"
-                            },
-                            [
-                              _c("label", { staticClass: "control-label" }, [
-                                _vm._v("Your New Password")
-                              ]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.password.password,
-                                    expression: "password.password"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                class: { "is-invalid": _vm.errors.password },
-                                attrs: {
-                                  placeholder: "",
-                                  type: "password",
-                                  required: ""
-                                },
-                                domProps: { value: _vm.password.password },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
                                     }
-                                    _vm.$set(
-                                      _vm.password,
-                                      "password",
-                                      $event.target.value
-                                    )
                                   }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _vm.errors.password
-                                ? _c(
-                                    "div",
-                                    { staticClass: "invalid-feedback" },
-                                    [_vm._v(_vm._s(_vm.errors.password[0]))]
-                                  )
-                                : _vm._e()
-                            ]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "col col-lg-6 col-md-6 col-sm-12 col-12"
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "form-group label-floating is-empty"
-                            },
-                            [
-                              _c("label", { staticClass: "control-label" }, [
-                                _vm._v("Confirm New Password")
-                              ]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.password.password_confirmation,
-                                    expression: "password.password_confirmation"
-                                  }
-                                ],
-                                ref: "password",
-                                staticClass: "form-control",
-                                class: {
-                                  "is-invalid": _vm.errors.password_confirmation
-                                },
-                                attrs: { placeholder: "", type: "password" },
-                                domProps: {
-                                  value: _vm.password.password_confirmation
-                                },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.password,
-                                      "password_confirmation",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _vm.errors.password_confirmation
-                                ? _c(
-                                    "div",
-                                    { staticClass: "invalid-feedback" },
-                                    [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.errors.password_confirmation[0]
+                                }),
+                                _vm._v(" "),
+                                _vm.errors.current_password
+                                  ? _c(
+                                      "div",
+                                      { staticClass: "invalid-feedback" },
+                                      [
+                                        _vm._v(
+                                          _vm._s(_vm.errors.current_password[0])
                                         )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "col col-lg-6 col-md-6 col-sm-12 col-12"
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "form-group label-floating is-empty"
+                              },
+                              [
+                                _c("label", { staticClass: "control-label" }, [
+                                  _vm._v("Your New Password")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.password.password,
+                                      expression: "password.password"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: { "is-invalid": _vm.errors.password },
+                                  attrs: {
+                                    placeholder: "",
+                                    type: "password",
+                                    required: ""
+                                  },
+                                  domProps: { value: _vm.password.password },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.password,
+                                        "password",
+                                        $event.target.value
                                       )
-                                    ]
-                                  )
-                                : _vm._e()
-                            ]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm._m(1)
-                    ])
-                  ])
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _vm.errors.password
+                                  ? _c(
+                                      "div",
+                                      { staticClass: "invalid-feedback" },
+                                      [_vm._v(_vm._s(_vm.errors.password[0]))]
+                                    )
+                                  : _vm._e()
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "col col-lg-6 col-md-6 col-sm-12 col-12"
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "form-group label-floating is-empty"
+                              },
+                              [
+                                _c("label", { staticClass: "control-label" }, [
+                                  _vm._v("Confirm New Password")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.password.password_confirmation,
+                                      expression:
+                                        "password.password_confirmation"
+                                    }
+                                  ],
+                                  ref: "password",
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid":
+                                      _vm.errors.password_confirmation
+                                  },
+                                  attrs: { placeholder: "", type: "password" },
+                                  domProps: {
+                                    value: _vm.password.password_confirmation
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.password,
+                                        "password_confirmation",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _vm.errors.password_confirmation
+                                  ? _c(
+                                      "div",
+                                      { staticClass: "invalid-feedback" },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.password_confirmation[0]
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(1)
+                      ])
+                    ]
+                  )
                 ])
               ])
             ]
@@ -68018,42 +68039,38 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a(vue__WEBPACK_IMPORTED_MODULE_0___
   router: router,
   store: _services_store__WEBPACK_IMPORTED_MODULE_6__["default"]
 }, _components_App__WEBPACK_IMPORTED_MODULE_4__["default"])).$mount('#app'); //validating router for
-
-router.beforeEach(function (to, from, next) {
-  if (to.matched.some(function (record) {
-    return record.meta.requiresAuth;
-  })) {
-    console.log(_services_store__WEBPACK_IMPORTED_MODULE_6__["default"].getters.getLogin);
-
-    if (_services_store__WEBPACK_IMPORTED_MODULE_6__["default"].getters.getLogin != false) {
-      if (to.matched.some(function (record) {
-        return record.meta.requiresUserLevel;
-      })) {
-        if (_services_store__WEBPACK_IMPORTED_MODULE_6__["default"].getters.getUserLevel == 'admin') {
-          next();
-        } else {
-          next({
-            path: '/'
-          });
-        }
-      } else {
-        next();
-      }
-    } else {
-      next({
-        path: '/'
-      });
-    }
-  } else {
-    if (_services_store__WEBPACK_IMPORTED_MODULE_6__["default"].getters.getLogin != false) {
-      next({
-        path: '/'
-      });
-    } else {
-      next();
-    }
-  }
-});
+// router.beforeEach((to, from, next) => {
+//     if (to.matched.some(record => record.meta.requiresAuth)) {
+//         console.log(store.getters.getLogin);
+//         if (store.getters.getLogin != false) {
+//             if (to.matched.some(record => record.meta.requiresUserLevel)) {
+//                 if (store.getters.getUserLevel == 'admin') {
+//                     next()
+//
+//                 } else {
+//                     next({
+//                         path: '/'
+//                     })
+//                 }
+//             } else {
+//                 next()
+//             }
+//
+//         } else {
+//             next({
+//                 path: '/'
+//             })
+//         }
+//     } else {
+//         if (store.getters.getLogin != false) {
+//             next({
+//                 path: '/'
+//             })
+//         } else {
+//             next()
+//         }
+//     }
+// });
 
 /***/ }),
 
