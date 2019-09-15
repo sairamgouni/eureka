@@ -63,7 +63,7 @@ router.beforeEach((to, from, next) => {
         return next('/change-password');
     else next();
 });
-
+console.log(store);
 new Vue(Vue.util.extend({router, store}, App)).$mount('#app');
 
 //validating router for

@@ -6,36 +6,36 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-    	userLogin : false,
-    	userAccess : '',
-    	userState : '',
-    	userId : '',
-    	userSlug : '',
-        userName : '',
-        userEmail : '',
-        userImage : '',
-        userBackgroundImage : '',
-        userAbout : '',
-        userNickname : '',
-        userLevel : '',
-    	baseUrl : 'http://localhost:8000/',
+        userLogin: USER ? true : false,
+        userAccess: '',
+        userState: '',
+        userId: USER ? USER.id : '',
+        userSlug: USER ? USER.slug : '',
+        userName: USER ? USER.username : '',
+        userEmail: USER ? USER.email : '',
+        userImage: USER ? USER.image : '',
+        userBackgroundImage: USER ? USER.background_image : '',
+        userAbout: USER ? USER.about : '',
+        userNickname: USER ? USER.nickname : '',
+        userLevel: USER ? USER.level : '',
+        baseUrl: 'http://localhost:8000/',
     },
     getters: {
-	    getLogin: state => {
-	        return state.userLogin;
-	    },
-	    getUrl: state => {
-	        return state.baseUrl;
-	    },
-	    getAccess: state => {
-	        return state.userAccess;
-	    },
-	    getUserState: state => {
-	        return state.userState;
-	    },
-	    getUserId: state => {
-	        return state.userId;
-	    },
+        getLogin: state => {
+            return state.userLogin;
+        },
+        getUrl: state => {
+            return state.baseUrl;
+        },
+        getAccess: state => {
+            return state.userAccess;
+        },
+        getUserState: state => {
+            return state.userState;
+        },
+        getUserId: state => {
+            return state.userId;
+        },
         getUserName: state => {
             return state.userName;
         },
@@ -46,20 +46,20 @@ export default new Vuex.Store({
             return state.userLevel;
         },
         getUserImage: state => {
-            if(state.userImage)
-            return state.userImage;
+            if (state.userImage)
+                return state.userImage;
             return '/users/thumbs/boy.png';
         },
         getUserBackgroundImage: state => {
-            
-            if(state.userBackgroundImage)
+
+            if (state.userBackgroundImage)
                 return state.userBackgroundImage;
 
             return '/users/backgrounds/default.jpg'
         },
-	    getUserSlug: state => {
-	        return state.userSlug;
-	    },
+        getUserSlug: state => {
+            return state.userSlug;
+        },
         getUserAbout: state => {
             return state.userAbout;
         },
@@ -68,21 +68,21 @@ export default new Vuex.Store({
         },
     },
     mutations: {
-    	setLogin(state, token) {
-        state.userLogin = token;
-    	},
-    	setAccess(state, token) {
-    		state.userAccess = token;
-    	},
-    	setUserState(state, token) {
-    		state.userState = token;
-    	},
-    	setUserId(state, token) {
-    		state.userId = token;
-    	},
-    	setUserSlug(state, token) {
-    		state.userSlug = token;
-    	},
+        setLogin(state, token) {
+            state.userLogin = token;
+        },
+        setAccess(state, token) {
+            state.userAccess = token;
+        },
+        setUserState(state, token) {
+            state.userState = token;
+        },
+        setUserId(state, token) {
+            state.userId = token;
+        },
+        setUserSlug(state, token) {
+            state.userSlug = token;
+        },
         setUserEmail(state, token) {
             state.userEmail = token;
         },
@@ -93,12 +93,12 @@ export default new Vuex.Store({
             state.userLevel = token;
         },
         setUserImage(state, token) {
-            
+
             state.userImage = token;
         },
         setUserBackgroundImage(state, token) {
-            
-                state.userBackgroundImage = token;
+
+            state.userBackgroundImage = token;
         },
         setUserAbout(state, token) {
             state.userAbout = token;
@@ -106,26 +106,26 @@ export default new Vuex.Store({
         setUserNickname(state, token) {
             state.userNickname = token;
         },
-    	removeAccess(state) {
-    		state.userLogin = false;
-	    	state.userAccess = '';
-	    	state.userState = '';
-	    	state.userId = '';
-	    	state.userSlug = '';
+        removeAccess(state) {
+            state.userLogin = false;
+            state.userAccess = '';
+            state.userState = '';
+            state.userId = '';
+            state.userSlug = '';
             state.userName = '';
             state.userEmail = '';
             state.userAbout = '';
             state.userNickname = '';
             state.userImage = '';
             state.userBackgroundImage = '';
-    	}
-	    
+        }
+
     },
-        actions : {
-        	destroyAccess(context) {
+    actions: {
+        destroyAccess(context) {
             context.commit('removeAccess');
         },
-        
+
         // showMessage(message, type='success') {
         //      this.$toast.open({
         //             message: 'Please login to like',
@@ -133,9 +133,7 @@ export default new Vuex.Store({
         //             });
         // },
 
-    
-    },
-    plugins: [createPersistedState({
 
-      })],
+    },
+    plugins: [createPersistedState({})],
 });

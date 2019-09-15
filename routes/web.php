@@ -50,7 +50,7 @@ Route::get('categories/getlist', 'CategoriesController@getList');
 Route::post('challenges/create', 'ChallengeController@saveRecord');
 
 
-Route::get('challenges/getlist', 'ChallengeController@getList');
+//Route::get('challenges/getlist', 'ChallengeController@getList');
 Route::get('challenges/getlist', 'ChallengeController@getList');
 Route::get('challenges/getDetails', 'ChallengeController@show');
 Route::post('challenges/toggle-like', 'ChallengeController@toggleLike');

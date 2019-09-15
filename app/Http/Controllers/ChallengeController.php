@@ -113,7 +113,7 @@ class ChallengeController extends Controller
 
         // $challenges = \App\Challenge::with(['user','categories']);
 
-        $challenges = Challenge::when($request->input('type') !== 'all', function ($query) use ($request) {
+        $challenges = Challenge::when($request->input('type') && $request->input('type') !== 'all', function ($query) use ($request) {
             $query->whereHas('challengeCategories', function ($q) use ($request) {
                 $q->whereCategoryId($request->input('type'));
             });
@@ -124,6 +124,9 @@ class ChallengeController extends Controller
 //            ->when($type != 'specific', function ($query) use ($request) {
 //            $query->orderBy('created_at', $request->input('sort_by'));
 //        })
+            ->when($request->input('userId') && $request->input('recordsType') == 'specific', function ($query, $userId) use ($request) {
+                $query->where('created_by', $request->input('userId'));
+            })
             ->orderBy('created_at', $request->input('sort_by') ?? 'desc')
             ->with(['user', 'categories']);
 //        $challenges = null;

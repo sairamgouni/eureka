@@ -9550,27 +9550,6 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -9669,29 +9648,58 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: 'ActivityItem',
   props: ['CurrentUser', 'isUserLoggedIn', 'isSameUser', 'loadCurrentUserActivity', 'profileIdToLoad', 'specificUserRecords'],
   data: function data() {
-    var _ref;
-
-    return _ref = {
-      userLogin: false,
-      userId: '',
-      userSlug: '',
-      userImage: '',
-      userName: ''
-    }, _defineProperty(_ref, "userImage", ''), _defineProperty(_ref, "userBackgroundImage", ''), _defineProperty(_ref, "challenges", []), _defineProperty(_ref, "page", 1), _defineProperty(_ref, "type", 'all'), _defineProperty(_ref, "recordsUserId", ''), _ref;
+    return {
+      userLogin: USER ? true : false,
+      userId: USER ? USER.id : '',
+      userSlug: USER ? USER.slug : '',
+      userName: USER ? USER.username : '',
+      userImage: USER ? USER.image : '',
+      userBackgroundImage: USER ? USER.background_image : '',
+      challenges: [],
+      page: 1,
+      type: 'all',
+      recordsUserId: '',
+      sort_by: 'desc',
+      hasMore: false,
+      infinite: false
+    };
   },
   created: function created() {
-    this.userLogin = this.$store.getters.getLogin;
-    this.userId = this.$store.getters.getUserId;
+    // this.userLogin = this.$store.getters.getLogin;
+    // this.userId = this.$store.getters.getUserId;
+    this.$store.commit('setLogin', true);
+    this.$store.commit('setUserId', this.userId);
+    this.$store.commit('setUserName', this.username); // this.$store.commit('setUserImage', response.data.user.image);
+
+    this.$store.commit('setUserEmail', USER ? USER.email : '');
+    this.$store.commit('setUserSlug', this.userSlug);
+    this.$store.commit('setUserNickname', USER ? USER.nickname : '');
+    this.$store.commit('setUserAbout', USER ? USER.about : '');
+    this.$store.commit('setUserLevel', USER ? USER.level : '');
+    this.$store.commit('setUserImage', this.UserImage);
+    this.$store.commit('setUserBackgroundImage', this.userBackgroundImage); //
+
     this.loadPosts();
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    window.onscroll = function (ev) {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        if (_this.hasMore && _this.infinite) {
+          _this.loadPosts(_this.page);
+        }
+      }
+    };
   },
   methods: {
     loadPosts: function loadPosts() {
-      var _this = this;
+      var _this2 = this;
 
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '1';
       var loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.file
       });
-      var bodyFormData = new FormData();
       this.recordsUserId = this.userId;
       this.type = 'all';
 
@@ -9703,58 +9711,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         if (this.specificUserRecords) this.type = 'specific';
       }
 
-      this.axios({
-        method: 'get',
-        url: 'challenges/getlist?userId=' + this.recordsUserId + '&recordsType=' + this.type,
-        data: bodyFormData
-      }).then(function (response) {
+      if (!this.infinite && page != '1') return false;
+      this.infinite = false;
+      this.axios.get("".concat(APP.baseUrl, "/challenges/getlist?userId=").concat(this.recordsUserId, "&recordsType=").concat(this.type, "&sort_by=").concat(this.sort_by, "&page=").concat(page)).then(function (response) {
         loader.hide();
 
         if (response.status == 200) {
-          _this.challenges = response.data.list;
-
-          if (response.data.user && !_this.userLogin) {
-            _this.$store.commit('setLogin', true);
-
-            _this.$store.commit('setUserId', response.data.user.id);
-
-            _this.$store.commit('setUserName', response.data.user.name); // this.$store.commit('setUserImage', response.data.user.image);
-
-
-            _this.$store.commit('setUserEmail', response.data.user.email);
-
-            _this.$store.commit('setUserSlug', response.data.user.slug);
-
-            _this.$store.commit('setUserNickname', response.data.user.nickname);
-
-            _this.$store.commit('setUserAbout', response.data.user.about);
-
-            _this.$store.commit('setUserLevel', response.data.level);
-
-            _this.$store.commit('setUserImage', response.data.user.image);
-
-            _this.$store.commit('setUserBackgroundImage', response.data.user.background_image);
-
-            _this.userLogin = _this.$store.getters.getLogin;
-            _this.userId = _this.$store.getters.getUserId;
-            _this.userSlug = _this.$store.getters.getUserSlug;
-            _this.userImage = _this.$store.getters.getUserImage;
-            _this.userName = _this.$store.getters.getUserName;
-            _this.userImage = _this.$store.getters.getUserImage;
-            _this.userBackgroundImage = _this.$store.getters.getUserBackgroundImage;
-
-            _this.$router.go();
+          if (response.data.current_page == 1) {
+            _this2.challenges = response.data.data;
+          } else {
+            _this2.challenges = [].concat(_toConsumableArray(_this2.challenges), _toConsumableArray(response.data.data));
           }
+
+          _this2.hasMore = response.data.has_more;
+          _this2.infinite = _this2.hasMore;
+          _this2.page = response.data.next_page;
         } else if (response.status == 401) {
           // console.log('in 401 response');
-          _this.$store.dispatch('destroyAccess');
-
-          _this.$toast.open({
+          // this.$store.dispatch('destroyAccess');
+          _this2.$toast.open({
             message: 'Please login to continue',
             type: 'success'
           });
 
-          _this.$router.push('/login');
+          _this2.$router.push('/login');
         } else {// console.log('inelse boy');
         }
       })["catch"](function (response) {
@@ -9762,7 +9742,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     infiniteHandler: function infiniteHandler($state) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.challenges.length == 0) {
         // $state.loaded();
@@ -9776,11 +9756,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       }).then(function (response) {
         if (response.status == 200) {
-          var _this2$challenges;
+          var _this3$challenges;
 
-          _this2.page += 1;
+          _this3.page += 1;
 
-          (_this2$challenges = _this2.challenges).push.apply(_this2$challenges, _toConsumableArray(new Set([].concat(_toConsumableArray(_this2.challenges), _toConsumableArray(response.data.list)))));
+          (_this3$challenges = _this3.challenges).push.apply(_this3$challenges, _toConsumableArray(new Set([].concat(_toConsumableArray(_this3.challenges), _toConsumableArray(response.data.list)))));
 
           $state.loaded();
         } else {
@@ -9789,7 +9769,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     updateLike: function updateLike(itemId) {
-      var _this3 = this;
+      var _this4 = this;
 
       // console.log('index '+index);
       if (!this.userLogin) {
@@ -9811,19 +9791,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         // loader.hide();
         var like_value = response.data; // console.log('liked: '+itemId);
 
-        for (var index = 0; index < _this3.challenges.length; index++) {
+        for (var index = 0; index < _this4.challenges.length; index++) {
           // console.log('in loop with index: '+this.challenges[index].id);
-          if (_this3.challenges[index].id == itemId) {
+          if (_this4.challenges[index].id == itemId) {
             console.log('like_value: ' + like_value);
 
             if (like_value == 1) {
-              _this3.challenges[index].likes += 1;
-              _this3.challenges[index].isUserLiked = 1;
+              _this4.challenges[index].likes += 1;
+              _this4.challenges[index].isUserLiked = 1;
               break;
             } else {
-              if (_this3.challenges[index].likes > 0) {
-                _this3.challenges[index].likes -= 1;
-                _this3.challenges[index].isUserLiked = 0;
+              if (_this4.challenges[index].likes > 0) {
+                _this4.challenges[index].likes -= 1;
+                _this4.challenges[index].isUserLiked = 0;
               }
             }
           }
@@ -39129,7 +39109,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.active[data-v-7139aab0]{\n\tfill: #e91d24;\n    color: #e91d24;\n}\n.active_bg[data-v-7139aab0]{\n\tbackground: #e91d24;\n}\n.challenge-image[data-v-7139aab0]{\n\twidth:197px;\n\theight:194px;\n}\n", ""]);
+exports.push([module.i, "\n.active[data-v-7139aab0] {\n    fill: #e91d24;\n    color: #e91d24;\n}\n.active_bg[data-v-7139aab0] {\n    background: #e91d24;\n}\n.challenge-image[data-v-7139aab0] {\n    width: 197px;\n    height: 194px;\n}\n", ""]);
 
 // exports
 
@@ -59541,191 +59521,82 @@ var render = function() {
   return _c(
     "div",
     { attrs: { id: "newsfeed-items-grid" } },
-    [
-      _vm._l(_vm.challenges, function(item, index) {
-        return _c("div", { key: index, staticClass: "ui-block" }, [
-          _c("span", [
-            _c("article", { staticClass: "hentry post video" }, [
-              _c(
-                "div",
-                { staticClass: "post__author author vcard inline-items" },
-                [
-                  _c("img", {
-                    attrs: { src: item.user.image, alt: item.user.name }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "author-date" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "h6 post__author-name fn",
-                          attrs: {
-                            to: {
-                              name: "ProfileEuraka",
-                              params: { id: item.user.id, slug: item.user.slug }
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n\n\n\t\t\t\t\t\t\t\t\t" +
-                              _vm._s(item.user.name) +
-                              "\n\t\t\t\t\t\t\t\t"
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "post__date" }, [
-                        _c(
-                          "time",
-                          {
-                            staticClass: "published",
-                            attrs: { datetime: "2004-07-24T18:18" }
-                          },
-                          [
-                            _vm._v(
-                              "\n\t\t\t\t\t\t\t\t\t\t" +
-                                _vm._s(item.created_at) +
-                                "\n\t\t\t\t\t\t\t\t\t"
-                            )
-                          ]
-                        )
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("br")
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "post-video" }, [
-                _c("div", { staticClass: "video-thumb" }, [
-                  _c("img", {
-                    staticClass: "challenge-image",
-                    attrs: { src: item.image, alt: item.title }
-                  })
-                ]),
+    _vm._l(_vm.challenges, function(item, index) {
+      return _c("div", { key: index, staticClass: "ui-block" }, [
+        _c("span", [
+          _c("article", { staticClass: "hentry post video" }, [
+            _c(
+              "div",
+              { staticClass: "post__author author vcard inline-items" },
+              [
+                _c("img", {
+                  attrs: { src: item.user.image, alt: item.user.name }
+                }),
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "video-content" },
+                  { staticClass: "author-date" },
                   [
                     _c(
                       "router-link",
                       {
-                        staticClass: "h4 title",
+                        staticClass: "h6 post__author-name fn",
                         attrs: {
                           to: {
-                            name: "ChallengeDetails",
-                            params: { id: item.id, slug: item.slug }
+                            name: "ProfileEuraka",
+                            params: { id: item.user.id, slug: item.user.slug }
                           }
                         }
                       },
                       [
                         _vm._v(
-                          "\n\t\t\t\t\t\t\t\t" +
-                            _vm._s(item.title) +
-                            "\n\t\t\t\t\t\t\t"
+                          "\n\n\n\t\t\t\t\t\t\t\t\t" +
+                            _vm._s(item.user.name) +
+                            "\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     ),
                     _vm._v(" "),
-                    _c("p", [
-                      _vm._v(_vm._s(item.description) + "\n\t\t\t\t\t\t\t\t")
+                    _c("div", { staticClass: "post__date" }, [
+                      _c(
+                        "time",
+                        {
+                          staticClass: "published",
+                          attrs: { datetime: "2004-07-24T18:18" }
+                        },
+                        [
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t\t\t\t" +
+                              _vm._s(item.created_at) +
+                              "\n\t\t\t\t\t\t\t\t\t"
+                          )
+                        ]
+                      )
                     ])
                   ],
                   1
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "post-additional-info inline-items" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "post-add-icon inline-items",
-                    class: { active: item.isUserLiked == 1 ? true : false },
-                    attrs: { href: "javascript:void(0);" },
-                    on: {
-                      click: function($event) {
-                        return _vm.updateLike(item.id)
-                      }
-                    }
-                  },
-                  [
-                    _c("svg", { staticClass: "olymp-heart-icon" }, [
-                      _c("use", {
-                        attrs: {
-                          "xlink:href":
-                            "assets/svg-icons/sprites/icons.svg#olymp-heart-icon"
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(item.likes))])
-                  ]
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "comments-shared" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "post-add-icon inline-items",
-                      attrs: { href: "javascript:void(0);" }
-                    },
-                    [
-                      _c("svg", { staticClass: "olymp-speech-balloon-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [_vm._v(_vm._s(item.comments))])
-                    ]
-                  )
-                ])
+                _c("br")
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "post-video" }, [
+              _c("div", { staticClass: "video-thumb" }, [
+                _c("img", {
+                  staticClass: "challenge-image",
+                  attrs: { src: item.image, alt: item.title }
+                })
               ]),
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "control-block-button post-control-button" },
+                { staticClass: "video-content" },
                 [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-control",
-                      class: {
-                        active_bg: item.isUserLiked == 1 ? true : false
-                      },
-                      attrs: { href: "javascript:void(0);" },
-                      on: {
-                        click: function($event) {
-                          return _vm.updateLike(item.id)
-                        }
-                      }
-                    },
-                    [
-                      _c("svg", { staticClass: "olymp-like-post-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-like-post-icon"
-                          }
-                        })
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
                   _c(
                     "router-link",
                     {
-                      staticClass: "btn btn-control",
+                      staticClass: "h4 title",
                       attrs: {
                         to: {
                           name: "ChallengeDetails",
@@ -59734,27 +59605,130 @@ var render = function() {
                       }
                     },
                     [
-                      _c("svg", { staticClass: "olymp-comments-post-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"
-                          }
-                        })
-                      ])
+                      _vm._v(
+                        "\n\t\t\t\t\t\t\t\t" +
+                          _vm._s(item.title) +
+                          "\n\t\t\t\t\t\t\t"
+                      )
                     ]
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(_vm._s(item.description) + "\n\t\t\t\t\t\t\t\t")
+                  ])
                 ],
                 1
               )
-            ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "post-additional-info inline-items" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "post-add-icon inline-items",
+                  class: { active: item.isUserLiked == 1 ? true : false },
+                  attrs: { href: "javascript:void(0);" },
+                  on: {
+                    click: function($event) {
+                      return _vm.updateLike(item.id)
+                    }
+                  }
+                },
+                [
+                  _c("svg", { staticClass: "olymp-heart-icon" }, [
+                    _c("use", {
+                      attrs: {
+                        "xlink:href":
+                          "assets/svg-icons/sprites/icons.svg#olymp-heart-icon"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(item.likes))])
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "comments-shared" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "post-add-icon inline-items",
+                    attrs: { href: "javascript:void(0);" }
+                  },
+                  [
+                    _c("svg", { staticClass: "olymp-speech-balloon-icon" }, [
+                      _c("use", {
+                        attrs: {
+                          "xlink:href":
+                            "assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(item.comments))])
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "control-block-button post-control-button" },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-control",
+                    class: { active_bg: item.isUserLiked == 1 ? true : false },
+                    attrs: { href: "javascript:void(0);" },
+                    on: {
+                      click: function($event) {
+                        return _vm.updateLike(item.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("svg", { staticClass: "olymp-like-post-icon" }, [
+                      _c("use", {
+                        attrs: {
+                          "xlink:href":
+                            "assets/svg-icons/sprites/icons.svg#olymp-like-post-icon"
+                        }
+                      })
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-control",
+                    attrs: {
+                      to: {
+                        name: "ChallengeDetails",
+                        params: { id: item.id, slug: item.slug }
+                      }
+                    }
+                  },
+                  [
+                    _c("svg", { staticClass: "olymp-comments-post-icon" }, [
+                      _c("use", {
+                        attrs: {
+                          "xlink:href":
+                            "assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"
+                        }
+                      })
+                    ])
+                  ]
+                )
+              ],
+              1
+            )
           ])
         ])
-      }),
-      _vm._v(" "),
-      _c("infinite-loading", { on: { infinite: _vm.infiniteHandler } })
-    ],
-    2
+      ])
+    }),
+    0
   )
 }
 var staticRenderFns = []
@@ -68035,6 +68009,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 router.beforeEach(function (to, from, next) {
   if (!USER.last_login && to.name !== 'ChangePassword') return next('/change-password');else next();
 });
+console.log(_services_store__WEBPACK_IMPORTED_MODULE_6__["default"]);
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a(vue__WEBPACK_IMPORTED_MODULE_0___default.a.util.extend({
   router: router,
   store: _services_store__WEBPACK_IMPORTED_MODULE_6__["default"]
@@ -70958,18 +70933,18 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    userLogin: false,
+    userLogin: USER ? true : false,
     userAccess: '',
     userState: '',
-    userId: '',
-    userSlug: '',
-    userName: '',
-    userEmail: '',
-    userImage: '',
-    userBackgroundImage: '',
-    userAbout: '',
-    userNickname: '',
-    userLevel: '',
+    userId: USER ? USER.id : '',
+    userSlug: USER ? USER.slug : '',
+    userName: USER ? USER.username : '',
+    userEmail: USER ? USER.email : '',
+    userImage: USER ? USER.image : '',
+    userBackgroundImage: USER ? USER.background_image : '',
+    userAbout: USER ? USER.about : '',
+    userNickname: USER ? USER.nickname : '',
+    userLevel: USER ? USER.level : '',
     baseUrl: 'http://localhost:8000/'
   },
   getters: {

@@ -1,15 +1,7 @@
 <template>
-				<div id="newsfeed-items-grid">
-
-
-
-				<div class="ui-block" v-for="(item, index) in challenges" :key="index"
-				>
-
-
-
-			<span >
-
+    <div id="newsfeed-items-grid">
+        <div class="ui-block" v-for="(item, index) in challenges" :key="index">
+			<span>
 					<article class="hentry post video">
 
 						<div class="post__author author vcard inline-items">
@@ -18,8 +10,8 @@
 							<div class="author-date">
 
 								 <router-link
-                                        :to="{ name: 'ProfileEuraka', params: { id: item.user.id, slug: item.user.slug } }"
-                                          class="h6 post__author-name fn">
+                                     :to="{ name: 'ProfileEuraka', params: { id: item.user.id, slug: item.user.slug } }"
+                                     class="h6 post__author-name fn">
 
 
 									{{item.user.name}}
@@ -32,10 +24,7 @@
 								</div>
 							</div>
 							<br>
-
-
 						</div>
-
 
 						<div class="post-video">
 							<div class="video-thumb">
@@ -44,274 +33,261 @@
 							</div>
 
 							<div class="video-content">
-								<router-link :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }" class="h4 title">
+								<router-link
+                                    :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
+                                    class="h4 title">
 								{{item.title}}
 							</router-link>
 								<p>{{item.description}}
 								</p>
-								<!-- <a href="#" class="link-site">YOUTUBE.COM</a> -->
+                                <!-- <a href="#" class="link-site">YOUTUBE.COM</a> -->
 							</div>
 						</div>
 
 						<div class="post-additional-info inline-items">
 
 							<a href="javascript:void(0);" @click="updateLike(item.id);"
-							class="post-add-icon inline-items"
-							v-bind:class="{ active: (item.isUserLiked==1)? true : false }"
-							>
-								<svg class="olymp-heart-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
+                               class="post-add-icon inline-items"
+                               v-bind:class="{ active: (item.isUserLiked==1)? true : false }"
+                            >
+								<svg class="olymp-heart-icon"><use
+                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
 								<span>{{item.likes}}</span>
 							</a>
 
-
-
 							<div class="comments-shared">
-								<a href="javascript:void(0);"
-
-								class="post-add-icon inline-items"
-
-								>
-									<svg class="olymp-speech-balloon-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>
-
+								<a href="javascript:void(0);" class="post-add-icon inline-items">
+									<svg class="olymp-speech-balloon-icon"><use
+                                        xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>
 									<span>{{item.comments}}</span>
 								</a>
-
-
 							</div>
-
-
 						</div>
 
-						<div class="control-block-button post-control-button" >
+						<div class="control-block-button post-control-button">
 
 							<a href="javascript:void(0);" class="btn btn-control"
-							 @click="updateLike(item.id);"
-							v-bind:class="{ active_bg: (item.isUserLiked==1)? true : false }"
-							>
-								<svg class="olymp-like-post-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>
+                               @click="updateLike(item.id);"
+                               v-bind:class="{ active_bg: (item.isUserLiked==1)? true : false }">
+								<svg class="olymp-like-post-icon"><use
+                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>
 							</a>
 
-                            	<router-link :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }" class="btn btn-control">
-															<svg class="olymp-comments-post-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>
+                            	<router-link
+                                    :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
+                                    class="btn btn-control">
+                                    <svg class="olymp-comments-post-icon">
+                                        <use
+                                            xlink:href="assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>
 
 							</router-link>
-
-
-
-
 						</div>
 
 					</article>
 					</span>
+        </div>
 
-				</div>
+        <!--        <infinite-loading @infinite="infiniteHandler"></infinite-loading>-->
 
-				   <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-
-			</div>
+    </div>
 </template>
 
 <script>
-	export default {
-		name: 'ActivityItem',
-		 props: ['CurrentUser', 'isUserLoggedIn',
-		 		'isSameUser', 'loadCurrentUserActivity',
-		 		'profileIdToLoad', 'specificUserRecords'],
-		data(){
-			return {
-				userLogin:false,
-				userId:'',
-				userSlug:'',
-				userImage:'',
-				userName:'',
-				userImage:'',
-				userBackgroundImage:'',
-				challenges:[],
-				 page: 1,
-				 type:'all',
-				 recordsUserId:'',
+    export default {
+        name: 'ActivityItem',
+        props: ['CurrentUser', 'isUserLoggedIn',
+            'isSameUser', 'loadCurrentUserActivity',
+            'profileIdToLoad', 'specificUserRecords'],
+        data() {
+            return {
+                userLogin: USER ? true : false,
+                userId: USER ? USER.id : '',
+                userSlug: USER ? USER.slug : '',
+                userName: USER ? USER.username : '',
+                userImage: USER ? USER.image : '',
+                userBackgroundImage: USER ? USER.background_image : '',
+                challenges: [],
+                page: 1,
+                type: 'all',
+                recordsUserId: '',
+                sort_by: 'desc',
+                hasMore: false,
+                infinite: false
 
-			}
-		},
-		created(){
-			this.userLogin = this.$store.getters.getLogin;
-			this.userId = this.$store.getters.getUserId;
+            }
+        },
+        created() {
+            // this.userLogin = this.$store.getters.getLogin;
+            // this.userId = this.$store.getters.getUserId;
 
+            this.$store.commit('setLogin', true);
+            this.$store.commit('setUserId', this.userId);
+            this.$store.commit('setUserName', this.username);
+            // this.$store.commit('setUserImage', response.data.user.image);
+            this.$store.commit('setUserEmail', USER ? USER.email : '');
+            this.$store.commit('setUserSlug', this.userSlug);
+            this.$store.commit('setUserNickname', USER ? USER.nickname : '');
+            this.$store.commit('setUserAbout', USER ? USER.about : '');
+            this.$store.commit('setUserLevel', USER ? USER.level : '');
 
-			this.loadPosts();
-		},
-		methods : {
-			loadPosts() {
-					   let loader = this.$loading.show({
+            this.$store.commit('setUserImage', this.UserImage);
+            this.$store.commit('setUserBackgroundImage', this.userBackgroundImage);
+            //
+            this.loadPosts();
+        },
+        mounted() {
+            window.onscroll = (ev) => {
+
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                    if (this.hasMore && this.infinite) {
+                        this.loadPosts(this.page);
+                    }
+                }
+            };
+        },
+        methods: {
+            loadPosts(page = '1') {
+                let loader = this.$loading.show({
                     container: this.fullPage ? null : this.$refs.file,
                 });
 
-                var bodyFormData = new FormData();
                 this.recordsUserId = this.userId;
                 this.type = 'all';
 
-                if(this.isSameUser!=undefined)
-                {
-                	this.recordsUserId = this.profileIdToLoad;
+                if (this.isSameUser != undefined) {
+                    this.recordsUserId = this.profileIdToLoad;
                 }
 
-				if(this.specificUserRecords!=undefined)
-                {
-                	if(this.specificUserRecords)
-                		this.type = 'specific';
+                if (this.specificUserRecords != undefined) {
+                    if (this.specificUserRecords)
+                        this.type = 'specific';
                 }
 
-            	 this.axios({
-                        method: 'get',
-                        url: 'challenges/getlist?userId='+this.recordsUserId+'&recordsType='+this.type,
-                        data: bodyFormData
-                    })
+                if (!this.infinite && page != '1')
+                    return false;
+
+                this.infinite = false;
+
+
+                this.axios.get(`${APP.baseUrl}/challenges/getlist?userId=${this.recordsUserId}&recordsType=${this.type}&sort_by=${this.sort_by}&page=${page}`)
                     .then((response) => {
                         loader.hide();
-                         if (response.status==200) {
-                         	this.challenges = response.data.list;
 
-                         	    if(response.data.user && !this.userLogin)
-                  				{
+                        if (response.status == 200) {
+                            if (response.data.current_page == 1) {
+                                this.challenges = response.data.data;
+                            } else {
+                                this.challenges = [...this.challenges, ...response.data.data];
+                            }
+                            this.hasMore = response.data.has_more;
+                            this.infinite = this.hasMore;
+                            this.page = response.data.next_page;
 
-			                  	this.$store.commit('setLogin', true );
-			                    this.$store.commit('setUserId', response.data.user.id );
-			                    this.$store.commit('setUserName', response.data.user.name );
-			                            // this.$store.commit('setUserImage', response.data.user.image);
-			                    this.$store.commit('setUserEmail', response.data.user.email);
-			                    this.$store.commit('setUserSlug', response.data.user.slug);
-			                    this.$store.commit('setUserNickname', response.data.user.nickname);
-			                    this.$store.commit('setUserAbout', response.data.user.about);
-			                    this.$store.commit('setUserLevel', response.data.level);
-
-			                    this.$store.commit('setUserImage', response.data.user.image);
-			                    this.$store.commit('setUserBackgroundImage', response.data.user.background_image);
-
-			                    this.userLogin = this.$store.getters.getLogin;
-					            this.userId = this.$store.getters.getUserId;
-					            this.userSlug = this.$store.getters.getUserSlug;
-					            this.userImage = this.$store.getters.getUserImage;
-					            this.userName = this.$store.getters.getUserName;
-					            this.userImage = this.$store.getters.getUserImage;
-					            this.userBackgroundImage = this.$store.getters.getUserBackgroundImage;
-					            this.$router.go();
-			                  }
-
-
-                        }
-                        else if(response.status==401)
-                        {
-                        	// console.log('in 401 response');
-                        	  this.$store.dispatch('destroyAccess');
-                        	    this.$toast.open({
+                        } else if (response.status == 401) {
+                            // console.log('in 401 response');
+                            // this.$store.dispatch('destroyAccess');
+                            this.$toast.open({
                                 message: 'Please login to continue',
                                 type: 'success'
                             });
-		                      this.$router.push('/login');
-                        }
-                        else {
-                           // console.log('inelse boy');
+                            this.$router.push('/login');
+                        } else {
+                            // console.log('inelse boy');
                         }
                     })
-                    .catch(function(response) {
+                    .catch(function (response) {
                         loader.hide();
                     });
-			},
-			infiniteHandler($state) {
+            },
+            infiniteHandler($state) {
 
- 			     if(this.challenges.length==0 )
-                {
-                	 // $state.loaded();
-                	 $state.complete();
-                	return;
+                if (this.challenges.length == 0) {
+                    // $state.loaded();
+                    $state.complete();
+                    return;
                 }
-              this.axios.get('challenges/getlist?userId='+this.recordsUserId+'&type='+this.type, {
-                params: {
-                  page: this.page
-                },
-              }).then((response) => {
+                this.axios.get('challenges/getlist?userId=' + this.recordsUserId + '&type=' + this.type, {
+                    params: {
+                        page: this.page
+                    },
+                }).then((response) => {
 
-                if (response.status==200) {
-                  this.page += 1;
-                  this.challenges.push(...new Set([...this.challenges,...response.data.list]));
+                    if (response.status == 200) {
+                        this.page += 1;
+                        this.challenges.push(...new Set([...this.challenges, ...response.data.list]));
 
-                  $state.loaded();
-                } else {
-                  $state.complete();
-                }
-              });
+                        $state.loaded();
+                    } else {
+                        $state.complete();
+                    }
+                });
             },
 
             updateLike(itemId) {
-            	// console.log('index '+index);
-            	if(!this.userLogin)
-            	{
-            		 this.$toast.open({
+                // console.log('index '+index);
+                if (!this.userLogin) {
+                    this.$toast.open({
                         message: 'Please login to like',
                         type: 'info'
-                        });
-            		 return;
-            	}
-            	 var bodyFormData = new FormData();
-            	 bodyFormData.set('item_id', itemId);
-            	 bodyFormData.set('userId', this.userId);
-            	 this.axios({
-                        method: 'post',
-                        url: 'challenges/toggle-like',
-                        data: bodyFormData
-                    })
+                    });
+                    return;
+                }
+                var bodyFormData = new FormData();
+                bodyFormData.set('item_id', itemId);
+                bodyFormData.set('userId', this.userId);
+                this.axios({
+                    method: 'post',
+                    url: 'challenges/toggle-like',
+                    data: bodyFormData
+                })
                     .then((response) => {
                         // loader.hide();
                         let like_value = response.data;
 
                         // console.log('liked: '+itemId);
-                        for(let index = 0; index<this.challenges.length; index++)
-                        {
+                        for (let index = 0; index < this.challenges.length; index++) {
 
-                        	// console.log('in loop with index: '+this.challenges[index].id);
-                        	if(this.challenges[index].id==itemId)
-                        	{
-                        		console.log('like_value: '+like_value);
-                        		if(like_value==1)
-                        		{
-                        			this.challenges[index].likes += 1;
-                        			this.challenges[index].isUserLiked = 1;
-                        			break;
-                        		}
-                        		else
-                        		{
-                        			if(this.challenges[index].likes>0)
-                        			{
-                        				this.challenges[index].likes -= 1;
-                        				this.challenges[index].isUserLiked = 0;
+                            // console.log('in loop with index: '+this.challenges[index].id);
+                            if (this.challenges[index].id == itemId) {
+                                console.log('like_value: ' + like_value);
+                                if (like_value == 1) {
+                                    this.challenges[index].likes += 1;
+                                    this.challenges[index].isUserLiked = 1;
+                                    break;
+                                } else {
+                                    if (this.challenges[index].likes > 0) {
+                                        this.challenges[index].likes -= 1;
+                                        this.challenges[index].isUserLiked = 0;
 
-                        			}
-                        		}
-                        	}
+                                    }
+                                }
+                            }
                         }
 
                     })
-                    .catch(function(response) {
-                    	console.log('in ativityItemView Exception');
-                    	// console.log(response);
+                    .catch(function (response) {
+                        console.log('in ativityItemView Exception');
+                        // console.log(response);
                         // loader.hide();
                     });
             },
-		}
+        }
 
-	}
+    }
 </script>
 
 <style scoped>
-.active{
-	fill: #e91d24;
-    color: #e91d24;
-}
-.active_bg{
-	background: #e91d24;
-}
-.challenge-image{
-	width:197px;
-	height:194px;
-}
+    .active {
+        fill: #e91d24;
+        color: #e91d24;
+    }
+
+    .active_bg {
+        background: #e91d24;
+    }
+
+    .challenge-image {
+        width: 197px;
+        height: 194px;
+    }
 </style>
