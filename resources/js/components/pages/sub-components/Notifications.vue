@@ -63,7 +63,8 @@
         props: ['notifications'],
         data() {
             return {
-                unreadNotifications: this.notifications
+                unreadNotifications: this.notifications,
+                lastReadCall: null
             }
         },
         watch: {
@@ -73,13 +74,15 @@
         },
         mounted() {
             $('.control-icon.more.has-items').hover((e) => {
-                if (this.unreadNotifications.length)
-                    this.axios.post(`${APP.baseUrl}/user/read-top-notifications`).then((response) => {
+                if (this.unreadNotifications.length && !this.lastReadCall)
+                    this.lastReadCall = this.axios.post(`${APP.baseUrl}/user/read-top-notifications`).then((response) => {
                         this.unreadNotifications = response.data.notifications;
-                        $('.control-icon.more.has-items').off('hover');
+                        $('body').off('hover', '.control-icon.more.has-items', true);
                         e.preventDefault();
                         e.stopPropagation();
                         e.stop();
+
+                        this.lastReadCall = this.unreadNotifications.length || null;
                     });
             })
         }

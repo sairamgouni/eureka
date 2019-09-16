@@ -10578,7 +10578,8 @@ __webpack_require__.r(__webpack_exports__);
   props: ['notifications'],
   data: function data() {
     return {
-      unreadNotifications: this.notifications
+      unreadNotifications: this.notifications,
+      lastReadCall: null
     };
   },
   watch: {
@@ -10590,12 +10591,13 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     $('.control-icon.more.has-items').hover(function (e) {
-      if (_this.unreadNotifications.length) _this.axios.post("".concat(APP.baseUrl, "/user/read-top-notifications")).then(function (response) {
+      if (_this.unreadNotifications.length && !_this.lastReadCall) _this.lastReadCall = _this.axios.post("".concat(APP.baseUrl, "/user/read-top-notifications")).then(function (response) {
         _this.unreadNotifications = response.data.notifications;
-        $('.control-icon.more.has-items').off('hover');
+        $('body').off('hover', '.control-icon.more.has-items', true);
         e.preventDefault();
         e.stopPropagation();
         e.stop();
+        _this.lastReadCall = _this.unreadNotifications.length || null;
       });
     });
   }

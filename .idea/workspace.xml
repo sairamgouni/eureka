@@ -3,11 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0a16b8e3-7d01-4680-a874-559b0abcb3e5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/pages/sub-components/Notifications.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/sub-components/Notifications.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -205,7 +203,7 @@
       <workItem from="1568529350872" duration="24000" />
       <workItem from="1568529450290" duration="9046000" />
       <workItem from="1568650059843" duration="608000" />
-      <workItem from="1568655398027" duration="4527000" />
+      <workItem from="1568655398027" duration="4907000" />
     </task>
     <servers />
   </component>
