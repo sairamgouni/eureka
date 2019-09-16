@@ -145,6 +145,10 @@
                 }
             };
         },
+        beforeDestroy() {
+            this.hasMore = false;
+            $(window).off('scroll');
+        },
         methods: {
             loadPosts(page = '1') {
                 let loader = this.$loading.show({

@@ -116,7 +116,7 @@
                         </div>
                     </div>
 
-<!--                    <infinite-loading @infinite="infiniteHandler"></infinite-loading>-->
+                    <!--                    <infinite-loading @infinite="infiniteHandler"></infinite-loading>-->
 
                 </div>
 
@@ -196,14 +196,16 @@
 
                 if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
                     if (this.hasMore && this.infinite) {
-                        console.log(this.hasMore);
-                        // $state.loaded();
                         this.loadPosts(this.page);
                     } else {
                         // $state.complete();
                     }
                 }
             };
+        },
+        beforeDestroy() {
+            this.hasMore = false;
+            $(window).off('scroll');
         },
         methods: {
             loadCategories() {
@@ -222,7 +224,7 @@
                 if (!this.infinite && page != '1')
                     return false;
 
-                this.infinite = false
+                this.infinite = false;
 
                 let loader = this.$loading.show({
                     container: this.fullPage ? null : this.$refs.file,

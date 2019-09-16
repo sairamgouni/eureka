@@ -4109,13 +4109,15 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     window.onscroll = function (ev) {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
         if (_this.hasMore && _this.infinite) {
-          console.log(_this.hasMore); // $state.loaded();
-
           _this.loadPosts(_this.page);
         } else {// $state.complete();
         }
       }
     };
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.hasMore = false;
+    $(window).off('scroll');
   },
   methods: {
     loadCategories: function loadCategories() {
@@ -9692,6 +9694,10 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         }
       }
     };
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.hasMore = false;
+    $(window).off('scroll');
   },
   methods: {
     loadPosts: function loadPosts() {
@@ -48037,9 +48043,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                        " +
+                              "\n                                    " +
                                 _vm._s(category.name) +
-                                "\n                                    "
+                                "\n                                "
                             )
                           ]
                         )
@@ -48145,9 +48151,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n\n                                        " +
+                                  "\n\n                                    " +
                                     _vm._s(item.title) +
-                                    "\n                                    "
+                                    "\n                                "
                                 )
                               ]
                             ),
@@ -48214,9 +48220,9 @@ var render = function() {
                                       { staticClass: "names-people-likes" },
                                       [
                                         _vm._v(
-                                          "\n                                                " +
+                                          "\n                                            " +
                                             _vm._s(item.likes) +
-                                            "\n                                            "
+                                            "\n                                        "
                                         )
                                       ]
                                     )
