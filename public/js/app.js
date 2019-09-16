@@ -10571,9 +10571,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Notifications',
-  props: ['notifications']
+  props: ['notifications'],
+  data: function data() {
+    return {
+      unreadNotifications: this.notifications
+    };
+  },
+  watch: {
+    notifications: function notifications(value) {
+      this.unreadNotifications = value;
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    $('.control-icon.more.has-items').hover(function (e) {
+      if (_this.unreadNotifications.length) _this.axios.post("".concat(APP.baseUrl, "/user/read-top-notifications")).then(function (response) {
+        _this.unreadNotifications = response.data.notifications;
+        $('.control-icon.more.has-items').off('hover');
+        e.preventDefault();
+        e.stopPropagation();
+        e.stop();
+      });
+    });
+  }
 });
 
 /***/ }),
@@ -60685,9 +60710,9 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
-    _vm.notifications.length > 0
+    _vm.unreadNotifications.length
       ? _c("div", { staticClass: "label-avatar bg-primary" }, [
-          _vm._v(_vm._s(_vm.notifications.length))
+          _vm._v(_vm._s(_vm.unreadNotifications.length))
         ])
       : _vm._e(),
     _vm._v(" "),
@@ -60734,16 +60759,16 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n\n                                            \n                                            " +
+                              "\n\n\n                                " +
                                 _vm._s(item.notifier_name) +
-                                "\n                                            "
+                                "\n                            "
                             )
                           ]
                         ),
                         _vm._v(
-                          "\n                                            \n                                            " +
+                          "\n\n                            " +
                             _vm._s(item.message) +
-                            "\n                                             \n                                             "
+                            "\n\n                            "
                         ),
                         _c(
                           "router-link",
@@ -60761,9 +60786,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n\n                                             \n                                                " +
+                              "\n\n\n                                " +
                                 _vm._s(item.item_title) +
-                                "\n                                             "
+                                "\n                            "
                             )
                           ]
                         )
@@ -60795,11 +60820,7 @@ var render = function() {
             staticClass: "view-all bg-primary",
             attrs: { to: "/notifications" }
           },
-          [
-            _vm._v(
-              "\n                        View All Notifications\n                    \t"
-            )
-          ]
+          [_vm._v("\n            View All Notifications\n        ")]
         )
       ],
       1

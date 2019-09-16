@@ -80,6 +80,7 @@ Route::get('user/get-profile/{id}', 'UsersController@getProfile');
 Route::get('user/top-contributors', 'UsersController@topContributors');
 
 Route::post('user/top-notifications', 'UsersController@topNotifications');
+Route::post('user/read-top-notifications', 'UsersController@readTopNotifications');
 
 Route::get('/activities/get-list/{id?}', 'UsersController@getActivities');
 

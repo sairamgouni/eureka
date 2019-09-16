@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Http\Requests\UsersRequest;
+use Illuminate\Notifications\DatabaseNotificationCollection;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\Models\Activity;
 
@@ -235,6 +236,15 @@ class UsersController extends Controller
             'unreadCount' => $unreadCount,
             'notifications' => $user->processNotifications($notifications)
         ]);
+    }
+
+    public function readTopNotifications(Request $request)
+    {
+        $user = \Auth::user();
+
+        $user->unreadNotifications->markAsRead();
+
+        return $this->topNotifications($request);
     }
 
     public function getusers()
