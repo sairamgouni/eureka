@@ -6196,6 +6196,72 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit_ProfileNavigation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit/ProfileNavigation */ "./resources/js/components/pages/profile/edit/ProfileNavigation.vue");
 /* harmony import */ var _edit_EditProfileHead__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit/EditProfileHead */ "./resources/js/components/pages/profile/edit/EditProfileHead.vue");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6390,6 +6456,52 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     ProfileNavigation: _edit_ProfileNavigation__WEBPACK_IMPORTED_MODULE_0__["default"],
     EditProfileHead: _edit_EditProfileHead__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      notifications: [],
+      loader: true,
+      hasMore: false,
+      page: 1
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    window.onscroll = function (ev) {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        if (_this.hasMore) {
+          _this.loadNotifications(_this.page + 1);
+        }
+      }
+    };
+  },
+  destroyed: function destroyed() {
+    this.hasMore = false;
+    $(window).off('scroll', window, true);
+  },
+  created: function created() {
+    this.loadNotifications();
+  },
+  methods: {
+    loadNotifications: function loadNotifications() {
+      var _this2 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      var loader = this.$loading.show();
+      this.hasMore = false;
+      this.axios.get("".concat(APP.baseUrl, "/user/all-notifications?page=").concat(page)).then(function (response) {
+        var _this2$notifications;
+
+        response.data.current_page === 1 ? _this2.notifications = response.data.data : (_this2$notifications = _this2.notifications).push.apply(_this2$notifications, _toConsumableArray(response.data.data));
+        _this2.hasMore = response.data.has_more;
+        _this2.page = response.data.current_page;
+        _this2.loader = false;
+        loader.hide();
+      })["catch"](function (e) {
+        return loader.hide();
+      });
+    }
   }
 });
 
@@ -51225,287 +51337,132 @@ var render = function() {
                 "col col-xl-9 order-xl-2 col-lg-9 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12"
             },
             [
-              _c("div", { staticClass: "ui-block" }, [
-                _c("div", { staticClass: "ui-block-title" }, [
-                  _c("h6", { staticClass: "title" }, [_vm._v("Notifications")]),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "more", attrs: { href: "#" } }, [
-                    _c("svg", { staticClass: "olymp-three-dots-icon" }, [
-                      _c("use", {
-                        attrs: {
-                          "xlink:href":
-                            "assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"
-                        }
-                      })
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("ul", { staticClass: "notification-list" }, [
-                  _c("li", [
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "notification-icon" }, [
-                      _c("svg", { staticClass: "olymp-comments-post-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"
-                          }
-                        })
-                      ])
+              _c(
+                "div",
+                { staticClass: "ui-block" },
+                [
+                  _c("div", { staticClass: "ui-block-title" }, [
+                    _c("h6", { staticClass: "title" }, [
+                      _vm._v("Notifications")
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "more" }, [
+                    _c("a", { staticClass: "more", attrs: { href: "#" } }, [
                       _c("svg", { staticClass: "olymp-three-dots-icon" }, [
                         _c("use", {
                           attrs: {
                             "xlink:href":
                               "assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("svg", { staticClass: "olymp-little-delete" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-little-delete"
                           }
                         })
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("li", { staticClass: "un-read" }, [
-                    _vm._m(2),
-                    _vm._v(" "),
-                    _vm._m(3),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "notification-icon" }, [
-                      _c("svg", { staticClass: "olymp-happy-face-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-happy-face-icon"
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "more" }, [
-                      _c("svg", { staticClass: "olymp-three-dots-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("svg", { staticClass: "olymp-little-delete" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-little-delete"
-                          }
-                        })
-                      ])
-                    ])
-                  ]),
+                  _vm._l(_vm.notifications, function(notification) {
+                    return _c(
+                      "ul",
+                      {
+                        key: notification.ref_id,
+                        staticClass: "notification-list"
+                      },
+                      [
+                        _c(
+                          "li",
+                          { class: { "un-read": notification.notifier_seen } },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "author-thumb" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    attrs: {
+                                      to: {
+                                        name: "ProfileEuraka",
+                                        params: {
+                                          id: notification.id,
+                                          slug: notification.notifier_slug
+                                        }
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      staticStyle: { height: "40px" },
+                                      attrs: {
+                                        src: notification.notifier_image,
+                                        alt: "author"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "notification-event" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "h6 notification-friend",
+                                  attrs: { href: "#" }
+                                },
+                                [_vm._v(_vm._s(notification.notifier_name))]
+                              ),
+                              _vm._v(" " + _vm._s(notification.message) + " "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "notification-link",
+                                  attrs: { href: "#" }
+                                },
+                                [_vm._v(_vm._s(notification.item_title))]
+                              ),
+                              _vm._v(".\n\t\t\t\t\t\t\t"),
+                              _c("span", { staticClass: "notification-date" }, [
+                                _c(
+                                  "time",
+                                  {
+                                    staticClass: "entry-date updated",
+                                    attrs: { datetime: "2004-07-24T18:18" }
+                                  },
+                                  [_vm._v(_vm._s(notification.created_at))]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "notification-icon" })
+                          ]
+                        )
+                      ]
+                    )
+                  }),
                   _vm._v(" "),
-                  _c("li", { staticClass: "with-comment-photo" }, [
-                    _vm._m(4),
-                    _vm._v(" "),
-                    _vm._m(5),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "notification-icon" }, [
-                      _c("svg", { staticClass: "olymp-comments-post-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"
-                          }
-                        })
+                  !_vm.notifications.length && !_vm.loader
+                    ? _c("ul", { staticClass: "notification-list" }, [
+                        _c("li", [
+                          _vm._v(
+                            "\n                        Nothing to show\n                    "
+                          )
+                        ])
                       ])
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(6),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "more" }, [
-                      _c("svg", { staticClass: "olymp-three-dots-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("svg", { staticClass: "olymp-little-delete" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-little-delete"
-                          }
-                        })
-                      ])
-                    ])
-                  ]),
+                    : _vm._e(),
                   _vm._v(" "),
-                  _c("li", [
-                    _vm._m(7),
-                    _vm._v(" "),
-                    _vm._m(8),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "notification-icon" }, [
-                      _c("svg", { staticClass: "olymp-heart-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-heart-icon"
-                          }
-                        })
+                  _vm.loader
+                    ? _c("ul", { staticClass: "notification-list" }, [
+                        _c("li", [
+                          _vm._v(
+                            "\n                        Loading...\n                    "
+                          )
+                        ])
                       ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "more" }, [
-                      _c("svg", { staticClass: "olymp-three-dots-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("svg", { staticClass: "olymp-little-delete" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-little-delete"
-                          }
-                        })
-                      ])
-                    ])
-                  ]),
+                    : _vm._e(),
                   _vm._v(" "),
-                  _c("li", [
-                    _vm._m(9),
-                    _vm._v(" "),
-                    _vm._m(10),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "notification-icon" }, [
-                      _c("svg", { staticClass: "olymp-calendar-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-calendar-icon"
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "more" }, [
-                      _c("svg", { staticClass: "olymp-three-dots-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("svg", { staticClass: "olymp-little-delete" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-little-delete"
-                          }
-                        })
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _vm._m(11),
-                    _vm._v(" "),
-                    _vm._m(12),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "notification-icon" }, [
-                      _c("svg", { staticClass: "olymp-comments-post-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "more" }, [
-                      _c("svg", { staticClass: "olymp-three-dots-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("svg", { staticClass: "olymp-little-delete" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-little-delete"
-                          }
-                        })
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _vm._m(13),
-                    _vm._v(" "),
-                    _vm._m(14),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "notification-icon" }, [
-                      _c("svg", { staticClass: "olymp-comments-post-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "more" }, [
-                      _c("svg", { staticClass: "olymp-three-dots-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("svg", { staticClass: "olymp-little-delete" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-little-delete"
-                          }
-                        })
-                      ])
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(15)
+                  _c("ul", { ref: "loader", staticClass: "notification-list" })
+                ],
+                2
+              )
             ]
           ),
           _vm._v(" "),
@@ -51524,317 +51481,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "author-thumb" }, [
-      _c("img", { attrs: { src: "assets/img/avatar1-sm.jpg", alt: "author" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "notification-event" }, [
-      _c("a", { staticClass: "h6 notification-friend", attrs: { href: "#" } }, [
-        _vm._v("Mathilda Brinker")
-      ]),
-      _vm._v(" commented on your new "),
-      _c("a", { staticClass: "notification-link", attrs: { href: "#" } }, [
-        _vm._v("profile status")
-      ]),
-      _vm._v(".\n\t\t\t\t\t\t\t"),
-      _c("span", { staticClass: "notification-date" }, [
-        _c(
-          "time",
-          {
-            staticClass: "entry-date updated",
-            attrs: { datetime: "2004-07-24T18:18" }
-          },
-          [_vm._v("4 hours ago")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "author-thumb" }, [
-      _c("img", { attrs: { src: "assets/img/avatar2-sm.jpg", alt: "author" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "notification-event" }, [
-      _vm._v("\n\t\t\t\t\t\t\tYou and "),
-      _c("a", { staticClass: "h6 notification-friend", attrs: { href: "#" } }, [
-        _vm._v("Nicholas Grissom")
-      ]),
-      _vm._v(" just became friends. Write on "),
-      _c("a", { staticClass: "notification-link", attrs: { href: "#" } }, [
-        _vm._v("his wall")
-      ]),
-      _vm._v(".\n\t\t\t\t\t\t\t"),
-      _c("span", { staticClass: "notification-date" }, [
-        _c(
-          "time",
-          {
-            staticClass: "entry-date updated",
-            attrs: { datetime: "2004-07-24T18:18" }
-          },
-          [_vm._v("9 hours ago")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "author-thumb" }, [
-      _c("img", { attrs: { src: "assets/img/avatar3-sm.jpg", alt: "author" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "notification-event" }, [
-      _c("a", { staticClass: "h6 notification-friend", attrs: { href: "#" } }, [
-        _vm._v("Sarah Hetfield")
-      ]),
-      _vm._v(" commented on your "),
-      _c("a", { staticClass: "notification-link", attrs: { href: "#" } }, [
-        _vm._v("photo")
-      ]),
-      _vm._v(".\n\t\t\t\t\t\t\t"),
-      _c("span", { staticClass: "notification-date" }, [
-        _c(
-          "time",
-          {
-            staticClass: "entry-date updated",
-            attrs: { datetime: "2004-07-24T18:18" }
-          },
-          [_vm._v("Yesterday at 5:32am")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "comment-photo" }, [
-      _c("img", {
-        attrs: { src: "assets/img/comment-photo.jpg", alt: "photo" }
-      }),
-      _vm._v(" "),
-      _c("span", [
-        _vm._v("“She looks incredible in that outfit! We should see each...”")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "author-thumb" }, [
-      _c("img", { attrs: { src: "assets/img/avatar4-sm.jpg", alt: "author" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "notification-event" }, [
-      _c("a", { staticClass: "h6 notification-friend", attrs: { href: "#" } }, [
-        _vm._v("Chris Greyson")
-      ]),
-      _vm._v(" liked your "),
-      _c("a", { staticClass: "notification-link", attrs: { href: "#" } }, [
-        _vm._v("profile status")
-      ]),
-      _vm._v(".\n\t\t\t\t\t\t\t"),
-      _c("span", { staticClass: "notification-date" }, [
-        _c(
-          "time",
-          {
-            staticClass: "entry-date updated",
-            attrs: { datetime: "2004-07-24T18:18" }
-          },
-          [_vm._v("March 18th at 8:22pm")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "author-thumb" }, [
-      _c("img", { attrs: { src: "assets/img/avatar5-sm.jpg", alt: "author" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "notification-event" }, [
-      _c("a", { staticClass: "h6 notification-friend", attrs: { href: "#" } }, [
-        _vm._v("Green Goo Rock")
-      ]),
-      _vm._v(" invited you to attend to his event Goo in "),
-      _c("a", { staticClass: "notification-link", attrs: { href: "#" } }, [
-        _vm._v("Gotham Bar")
-      ]),
-      _vm._v(".\n\t\t\t\t\t\t\t"),
-      _c("span", { staticClass: "notification-date" }, [
-        _c(
-          "time",
-          {
-            staticClass: "entry-date updated",
-            attrs: { datetime: "2004-07-24T18:18" }
-          },
-          [_vm._v("March 5th at 6:43pm")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "author-thumb" }, [
-      _c("img", { attrs: { src: "assets/img/avatar6-sm.jpg", alt: "author" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "notification-event" }, [
-      _c("a", { staticClass: "h6 notification-friend", attrs: { href: "#" } }, [
-        _vm._v("James Summers")
-      ]),
-      _vm._v(" commented on your new "),
-      _c("a", { staticClass: "notification-link", attrs: { href: "#" } }, [
-        _vm._v("profile status")
-      ]),
-      _vm._v(".\n\t\t\t\t\t\t\t"),
-      _c("span", { staticClass: "notification-date" }, [
-        _c(
-          "time",
-          {
-            staticClass: "entry-date updated",
-            attrs: { datetime: "2004-07-24T18:18" }
-          },
-          [_vm._v("March 2nd at 8:29pm")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "author-thumb" }, [
-      _c("img", { attrs: { src: "assets/img/avatar7-sm.jpg", alt: "author" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "notification-event" }, [
-      _c("a", { staticClass: "h6 notification-friend", attrs: { href: "#" } }, [
-        _vm._v("Marina Valentine")
-      ]),
-      _vm._v(" commented on your new "),
-      _c("a", { staticClass: "notification-link", attrs: { href: "#" } }, [
-        _vm._v("profile status")
-      ]),
-      _vm._v(".\n\t\t\t\t\t\t\t"),
-      _c("span", { staticClass: "notification-date" }, [
-        _c(
-          "time",
-          {
-            staticClass: "entry-date updated",
-            attrs: { datetime: "2004-07-24T18:18" }
-          },
-          [_vm._v("March 2nd at 10:07am")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("nav", { attrs: { "aria-label": "Page navigation" } }, [
-      _c("ul", { staticClass: "pagination justify-content-center" }, [
-        _c("li", { staticClass: "page-item disabled" }, [
-          _c(
-            "a",
-            { staticClass: "page-link", attrs: { href: "#", tabindex: "-1" } },
-            [_vm._v("Previous")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("1"),
-            _c("div", { staticClass: "ripple-container" }, [
-              _c("div", {
-                staticClass: "ripple ripple-on ripple-out",
-                staticStyle: {
-                  left: "-10.3833px",
-                  top: "-16.8333px",
-                  "background-color": "rgb(255, 255, 255)",
-                  transform: "scale(16.7857)"
-                }
-              })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("2")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("3")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("...")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("12")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("Next")
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

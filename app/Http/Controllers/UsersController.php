@@ -224,6 +224,22 @@ class UsersController extends Controller
 
     }
 
+    public function allNotifications(Request $request)
+    {
+        $user = \Auth::user();
+
+        $notifications = $user->notifications()->simplePaginate();
+
+        $response = [
+            'has_more' => $notifications->hasMorePages(),
+            'current_page' => $notifications->currentPage(),
+            'data' => $user->processNotifications($notifications),
+        ];
+
+        $notifications->markAsRead();
+
+        return response()->json($response);
+    }
 
     public function topNotifications(Request $request)
     {
