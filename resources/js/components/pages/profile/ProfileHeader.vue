@@ -30,27 +30,16 @@
 									</li>
 								</ul>
 							</div>
-							<div class="col col-lg-5 ml-auto col-md-5 col-sm-12 col-12">
-								<ul class="profile-menu">
-
-									<li>
-										<div class="more">
-											<svg class="olymp-three-dots-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
-											<ul class="more-dropdown more-with-triangle">
-												<li>
-													<a href="#">Report Profile</a>
-												</li>
-												<li>
-													<a href="#">Block Profile</a>
-												</li>
-											</ul>
-										</div>
-									</li>
-								</ul>
-							</div>
 						</div>
 
 						<div class="control-block-button" v-if="isSameUser">
+<!--                            		<span class="notification-icon"  @click="toggleFollow(item.id)" >-->
+<!--							<a href="javascript:void(0);" class="accept-request" :class="{ follow: (item.is_following==0) ? true : false, unfollow: (item.is_following==1) ? true : false,  }">-->
+<!--								<span class="icon-add without-text" >-->
+<!--									<svg class="olymp-happy-face-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>-->
+<!--								</span>-->
+<!--							</a>-->
+<!--						</span>-->
 
 
 							<div class="btn btn-control bg-primary more">

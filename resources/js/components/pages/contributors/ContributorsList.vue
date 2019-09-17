@@ -37,14 +37,14 @@
                                                 </div>
 
                                                 <div class="contributor-points">{{item.reputation}} points</div>
-                                                <a href="javascript:void(0);"
+                                                <a href="javascript:void(0);" v-if=" $store.state.userId !== item.id"
                                                 @click="toggleFollow(item.id)"
                                                 :class="{ follow: (item.is_following==0) ? true : false, unfollow: (item.is_following==1) ? true : false,  }"
                                                 class="btn btn-primary btn-sm">
-                                                    <template v-if="item.is_following==1">
+                                                    <template v-if="item.is_following==1 && $store.state.userId !== item.id">
                                                         UnFollow
                                                     </template>
-                                                    <template v-if="item.is_following==0">
+                                                    <template v-if="item.is_following==0  && $store.state.userId !== item.id">
                                                         Follow
                                                     </template>
                                                 </a>

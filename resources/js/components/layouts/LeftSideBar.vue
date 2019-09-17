@@ -22,7 +22,7 @@
                         </a>
                     </li>
                     <li>
-                        <router-link  to="/challenge-details" class="nav-link">
+                        <router-link  to="/" class="nav-link">
 
 
                             <svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip"
@@ -336,7 +336,7 @@
             this.userImage = this.$store.getters.getUserImage;
             this.userName = this.$store.getters.getUserName;
             this.userLevel = this.$store.getters.getUserLevel;
-         
+
         }
     }
 </script>

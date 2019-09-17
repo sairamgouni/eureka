@@ -8644,17 +8644,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ProfileHeader',
   props: ['CurrentUser', 'isUserLoggedIn', 'isSameUser'],
@@ -9551,6 +9540,110 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -39015,7 +39108,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.avatar{\n    height: 36px;\n    width:36px;\n}\n", ""]);
+exports.push([module.i, "\n.avatar{\r\n    height: 36px;\r\n    width:36px;\n}\r\n", ""]);
 
 // exports
 
@@ -39110,7 +39203,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.active_title[data-v-4eeaef89]{\n\tcolor:#e91d24;\n}\n", ""]);
+exports.push([module.i, "\n.active_title[data-v-4eeaef89]{\r\n\tcolor:#e91d24;\n}\r\n", ""]);
 
 // exports
 
@@ -39148,7 +39241,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.unfollow[data-v-6d6251fb]{ background-color: #9ca0a3;\n}\n.follow[data-v-6d6251fb]{ background-color: #38a9ff;\n}\n", ""]);
+exports.push([module.i, "\n.unfollow[data-v-6d6251fb]{ background-color: #9ca0a3;\n}\n.follow[data-v-6d6251fb]{ background-color: #38a9ff;\n}\r\n", ""]);
 
 // exports
 
@@ -45442,10 +45535,7 @@ var render = function() {
                 [
                   _c(
                     "router-link",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { to: "/challenge-details" }
-                    },
+                    { staticClass: "nav-link", attrs: { to: "/" } },
                     [
                       _c(
                         "svg",
@@ -48421,7 +48511,7 @@ var staticRenderFns = [
                   _vm._v(" "),
                   _c("p", [
                     _vm._v(
-                      "Welcome to your badge collection! Here you’ll find all the badges you can unlock to show on your profile.\n\t Learn how to achive the goal to adquire them and collect them all. Some have leveled tiers and other don’t.\n\t You can challenge your friends to see who gets more and let the fun begin!"
+                      "Welcome to your badge collection! Here you’ll find all the badges you can unlock to show on your profile.\r\n\t Learn how to achive the goal to adquire them and collect them all. Some have leveled tiers and other don’t.\r\n\t You can challenge your friends to see who gets more and let the fun begin!"
                     )
                   ])
                 ])
@@ -49291,40 +49381,46 @@ var render = function() {
                             _vm._v(_vm._s(item.reputation) + " points")
                           ]),
                           _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-primary btn-sm",
-                              class: {
-                                follow: item.is_following == 0 ? true : false,
-                                unfollow: item.is_following == 1 ? true : false
-                              },
-                              attrs: { href: "javascript:void(0);" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.toggleFollow(item.id)
-                                }
-                              }
-                            },
-                            [
-                              item.is_following == 1
-                                ? [
-                                    _vm._v(
-                                      "\n                                                    UnFollow\n                                                "
-                                    )
-                                  ]
-                                : _vm._e(),
-                              _vm._v(" "),
-                              item.is_following == 0
-                                ? [
-                                    _vm._v(
-                                      "\n                                                    Follow\n                                                "
-                                    )
-                                  ]
-                                : _vm._e()
-                            ],
-                            2
-                          )
+                          _vm.$store.state.userId !== item.id
+                            ? _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-primary btn-sm",
+                                  class: {
+                                    follow:
+                                      item.is_following == 0 ? true : false,
+                                    unfollow:
+                                      item.is_following == 1 ? true : false
+                                  },
+                                  attrs: { href: "javascript:void(0);" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.toggleFollow(item.id)
+                                    }
+                                  }
+                                },
+                                [
+                                  item.is_following == 1 &&
+                                  _vm.$store.state.userId !== item.id
+                                    ? [
+                                        _vm._v(
+                                          "\n                                                    UnFollow\n                                                "
+                                        )
+                                      ]
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  item.is_following == 0 &&
+                                  _vm.$store.state.userId !== item.id
+                                    ? [
+                                        _vm._v(
+                                          "\n                                                    Follow\n                                                "
+                                        )
+                                      ]
+                                    : _vm._e()
+                                ],
+                                2
+                              )
+                            : _vm._e()
                         ])
                       }),
                       0
@@ -50747,7 +50843,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("span", { staticClass: "text" }, [
             _vm._v(
-              "Hi, I’m James, I’m 36 and I work as a Digital Designer for the\n\t\t\t\t\t\t\t\t\t\t\t\t\t“Daydreams” Agency in Pier 56\n\t\t\t\t\t\t\t\t\t\t\t\t"
+              "Hi, I’m James, I’m 36 and I work as a Digital Designer for the\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t“Daydreams” Agency in Pier 56\r\n\t\t\t\t\t\t\t\t\t\t\t\t"
             )
           ])
         ]),
@@ -50844,7 +50940,7 @@ var staticRenderFns = [
               staticClass: "fab fa-facebook-f",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v("\n\t\t\t\t\t\t\tFacebook\n\t\t\t\t\t\t")
+            _vm._v("\r\n\t\t\t\t\t\t\tFacebook\r\n\t\t\t\t\t\t")
           ]
         ),
         _vm._v(" "),
@@ -50856,7 +50952,7 @@ var staticRenderFns = [
               staticClass: "fab fa-twitter",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v("\n\t\t\t\t\t\t\tTwitter\n\t\t\t\t\t\t")
+            _vm._v("\r\n\t\t\t\t\t\t\tTwitter\r\n\t\t\t\t\t\t")
           ]
         ),
         _vm._v(" "),
@@ -50868,7 +50964,7 @@ var staticRenderFns = [
               staticClass: "fab fa-dribbble",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v("\n\t\t\t\t\t\t\tDribbble\n\t\t\t\t\t\t")
+            _vm._v("\r\n\t\t\t\t\t\t\tDribbble\r\n\t\t\t\t\t\t")
           ]
         )
       ])
@@ -51022,9 +51118,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n\t\t\t\t\t\t\t\t" +
+                                  "\r\n\t\t\t\t\t\t\t\t" +
                                     _vm._s(item.name) +
-                                    "\n\t\t\t\t\t\t\t\t"
+                                    "\r\n\t\t\t\t\t\t\t\t"
                                 )
                               ]
                             ),
@@ -51116,9 +51212,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n\t\t\t\t\t\t\t\t\t\t" +
+                                    "\r\n\t\t\t\t\t\t\t\t\t\t" +
                                       _vm._s(item.about) +
-                                      "\n\t\t\t\t\t\t\t\t\t"
+                                      "\r\n\t\t\t\t\t\t\t\t\t"
                                   )
                                 ]
                               ),
@@ -56624,7 +56720,7 @@ var staticRenderFns = [
         _c(
           "time",
           { staticClass: "published", attrs: { datetime: "2017-03-24T18:18" } },
-          [_vm._v("\n\t\t\t\t\t\t\t\t\t\t2 hours ago\n\t\t\t\t\t\t\t\t\t")]
+          [_vm._v("\r\n\t\t\t\t\t\t\t\t\t\t2 hours ago\r\n\t\t\t\t\t\t\t\t\t")]
         )
       ])
     ])
@@ -56712,9 +56808,9 @@ var staticRenderFns = [
       _c("a", { attrs: { href: "#" } }, [_vm._v("Diana")]),
       _vm._v(", "),
       _c("a", { attrs: { href: "#" } }, [_vm._v("Nicholas")]),
-      _vm._v(" and\n\t\t\t\t\t\t\t\t"),
+      _vm._v(" and\r\n\t\t\t\t\t\t\t\t"),
       _c("br"),
-      _vm._v("13 more liked this\n\t\t\t\t\t\t\t")
+      _vm._v("13 more liked this\r\n\t\t\t\t\t\t\t")
     ])
   },
   function() {
@@ -56734,7 +56830,7 @@ var staticRenderFns = [
           { staticClass: "published", attrs: { datetime: "2017-03-24T18:18" } },
           [
             _vm._v(
-              "\n\t\t\t\t\t\t\t\t\t\t\t\t46 mins ago\n\t\t\t\t\t\t\t\t\t\t\t"
+              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t46 mins ago\r\n\t\t\t\t\t\t\t\t\t\t\t"
             )
           ]
         )
@@ -56758,7 +56854,7 @@ var staticRenderFns = [
           { staticClass: "published", attrs: { datetime: "2017-03-24T18:18" } },
           [
             _vm._v(
-              "\n\t\t\t\t\t\t\t\t\t\t\t\t1 hour ago\n\t\t\t\t\t\t\t\t\t\t\t"
+              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t1 hour ago\r\n\t\t\t\t\t\t\t\t\t\t\t"
             )
           ]
         )
@@ -57017,7 +57113,7 @@ var staticRenderFns = [
         _c(
           "time",
           { staticClass: "published", attrs: { datetime: "2017-03-24T18:18" } },
-          [_vm._v("\n\t\t\t\t\t\t\t\t2 hours ago\n\t\t\t\t\t\t\t")]
+          [_vm._v("\r\n\t\t\t\t\t\t\t\t2 hours ago\r\n\t\t\t\t\t\t\t")]
         )
       ])
     ])
@@ -57066,7 +57162,7 @@ var staticRenderFns = [
         _c(
           "time",
           { staticClass: "published", attrs: { datetime: "2017-03-24T18:18" } },
-          [_vm._v("\n\t\t\t\t\t\t\t\t\t\t46 mins ago\n\t\t\t\t\t\t\t\t\t")]
+          [_vm._v("\r\n\t\t\t\t\t\t\t\t\t\t46 mins ago\r\n\t\t\t\t\t\t\t\t\t")]
         )
       ])
     ])
@@ -57086,7 +57182,7 @@ var staticRenderFns = [
         _c(
           "time",
           { staticClass: "published", attrs: { datetime: "2017-03-24T18:18" } },
-          [_vm._v("\n\t\t\t\t\t\t\t\t\t\t1 hour ago\n\t\t\t\t\t\t\t\t\t")]
+          [_vm._v("\r\n\t\t\t\t\t\t\t\t\t\t1 hour ago\r\n\t\t\t\t\t\t\t\t\t")]
         )
       ])
     ])
@@ -57152,10 +57248,10 @@ var staticRenderFns = [
             attrs: {
               title: "Green Goo Rock",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\n\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\r\n\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Green Goo Rock\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Green Goo Rock\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57164,10 +57260,10 @@ var staticRenderFns = [
             attrs: {
               title: "Mathilda Brinker",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Mathilda Brinker\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Mathilda Brinker\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57176,10 +57272,10 @@ var staticRenderFns = [
             attrs: {
               title: "Marina Valentine",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Marina Valentine\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Marina Valentine\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57188,10 +57284,10 @@ var staticRenderFns = [
             attrs: {
               title: "Dave Marinara",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Dave Marinara\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Dave Marinara\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57200,10 +57296,10 @@ var staticRenderFns = [
             attrs: {
               title: "Rachel Howlett",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Rachel Howlett\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Rachel Howlett\r\n\t\t\t\t\t\t\t\t")]
         )
       ]
     )
@@ -57244,10 +57340,10 @@ var staticRenderFns = [
             attrs: {
               title: "Green Goo Rock",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\n\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\r\n\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Green Goo Rock\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Green Goo Rock\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57256,10 +57352,10 @@ var staticRenderFns = [
             attrs: {
               title: "Mathilda Brinker",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Mathilda Brinker\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Mathilda Brinker\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57268,10 +57364,10 @@ var staticRenderFns = [
             attrs: {
               title: "Marina Valentine",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Marina Valentine\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Marina Valentine\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57280,10 +57376,10 @@ var staticRenderFns = [
             attrs: {
               title: "Dave Marinara",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Dave Marinara\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Dave Marinara\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57292,10 +57388,10 @@ var staticRenderFns = [
             attrs: {
               title: "Rachel Howlett",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Rachel Howlett\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Rachel Howlett\r\n\t\t\t\t\t\t\t\t")]
         )
       ]
     )
@@ -57336,10 +57432,10 @@ var staticRenderFns = [
             attrs: {
               title: "Green Goo Rock",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\n\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\r\n\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Green Goo Rock\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Green Goo Rock\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57348,10 +57444,10 @@ var staticRenderFns = [
             attrs: {
               title: "Mathilda Brinker",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Mathilda Brinker\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Mathilda Brinker\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57360,10 +57456,10 @@ var staticRenderFns = [
             attrs: {
               title: "Marina Valentine",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Marina Valentine\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Marina Valentine\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57372,10 +57468,10 @@ var staticRenderFns = [
             attrs: {
               title: "Dave Marinara",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Dave Marinara\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Dave Marinara\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57384,10 +57480,10 @@ var staticRenderFns = [
             attrs: {
               title: "Rachel Howlett",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Rachel Howlett\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Rachel Howlett\r\n\t\t\t\t\t\t\t\t")]
         )
       ]
     )
@@ -57428,10 +57524,10 @@ var staticRenderFns = [
             attrs: {
               title: "Green Goo Rock",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Green Goo Rock\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Green Goo Rock\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57440,10 +57536,10 @@ var staticRenderFns = [
             attrs: {
               title: "Mathilda Brinker",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Mathilda Brinker\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Mathilda Brinker\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57452,10 +57548,10 @@ var staticRenderFns = [
             attrs: {
               title: "Marina Valentine",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Marina Valentine\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Marina Valentine\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57464,10 +57560,10 @@ var staticRenderFns = [
             attrs: {
               title: "Dave Marinara",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Dave Marinara\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Dave Marinara\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57476,10 +57572,10 @@ var staticRenderFns = [
             attrs: {
               title: "Rachel Howlett",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Rachel Howlett\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Rachel Howlett\r\n\t\t\t\t\t\t\t\t")]
         )
       ]
     )
@@ -57520,10 +57616,10 @@ var staticRenderFns = [
             attrs: {
               title: "Green Goo Rock",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\n\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar52-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Green Goo Rock</div>\r\n\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Green Goo Rock\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Green Goo Rock\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57532,10 +57628,10 @@ var staticRenderFns = [
             attrs: {
               title: "Mathilda Brinker",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar74-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Mathilda Brinker</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Mathilda Brinker\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Mathilda Brinker\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57544,10 +57640,10 @@ var staticRenderFns = [
             attrs: {
               title: "Marina Valentine",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar48-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Marina Valentine</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Marina Valentine\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Marina Valentine\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57556,10 +57652,10 @@ var staticRenderFns = [
             attrs: {
               title: "Dave Marinara",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar75-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Dave Marinara</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Dave Marinara\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Dave Marinara\r\n\t\t\t\t\t\t\t\t")]
         ),
         _vm._v(" "),
         _c(
@@ -57568,10 +57664,10 @@ var staticRenderFns = [
             attrs: {
               title: "Rachel Howlett",
               "data-content":
-                '<div class="inline-items">\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\n\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\n\t\t\t\t\t\t\t\t\t\t</div>'
+                '<div class="inline-items">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="author-thumb">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="assets/img/avatar76-sm.jpg" alt="author">\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class="h6 author-title">Rachel Howlett</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>'
             }
           },
-          [_vm._v("Rachel Howlett\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Rachel Howlett\r\n\t\t\t\t\t\t\t\t")]
         )
       ]
     )
@@ -58229,36 +58325,6 @@ var render = function() {
                         )
                       ])
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "col col-lg-5 ml-auto col-md-5 col-sm-12 col-12"
-                    },
-                    [
-                      _c("ul", { staticClass: "profile-menu" }, [
-                        _c("li", [
-                          _c("div", { staticClass: "more" }, [
-                            _c(
-                              "svg",
-                              { staticClass: "olymp-three-dots-icon" },
-                              [
-                                _c("use", {
-                                  attrs: {
-                                    "xlink:href":
-                                      "assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"
-                                  }
-                                })
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _vm._m(0)
-                          ])
-                        ])
-                      ])
-                    ]
                   )
                 ]),
                 _vm._v(" "),
@@ -58363,18 +58429,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", { staticClass: "more-dropdown more-with-triangle" }, [
-      _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Report Profile")])]),
-      _vm._v(" "),
-      _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Block Profile")])])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -59569,110 +59624,133 @@ var render = function() {
     { attrs: { id: "newsfeed-items-grid" } },
     _vm._l(_vm.challenges, function(item, index) {
       return _c("div", { key: index, staticClass: "ui-block" }, [
-        _c("span", [
-          _c("article", { staticClass: "hentry post video" }, [
+        _c("article", { staticClass: "hentry post has-post-thumbnail" }, [
+          _c("div", { staticClass: "post__author author vcard inline-items" }, [
+            _c("img", { attrs: { src: item.user.image, alt: item.user.name } }),
+            _vm._v(" "),
             _c(
               "div",
-              { staticClass: "post__author author vcard inline-items" },
+              { staticClass: "author-date" },
               [
-                _c("img", {
-                  attrs: { src: item.user.image, alt: item.user.name }
-                }),
-                _vm._v(" "),
                 _c(
-                  "div",
-                  { staticClass: "author-date" },
+                  "router-link",
+                  {
+                    staticClass: "h6 post__author-name fn",
+                    attrs: {
+                      to: {
+                        name: "ProfileEuraka",
+                        params: { id: item.user.id, slug: item.user.slug }
+                      }
+                    }
+                  },
                   [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "h6 post__author-name fn",
-                        attrs: {
-                          to: {
-                            name: "ProfileEuraka",
-                            params: { id: item.user.id, slug: item.user.slug }
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n\n\n\t\t\t\t\t\t\t\t\t" +
-                            _vm._s(item.user.name) +
-                            "\n\t\t\t\t\t\t\t\t"
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "post__date" }, [
-                      _c(
-                        "time",
-                        {
-                          staticClass: "published",
-                          attrs: { datetime: "2004-07-24T18:18" }
-                        },
-                        [
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\t\t\t\t" +
-                              _vm._s(item.created_at) +
-                              "\n\t\t\t\t\t\t\t\t\t"
-                          )
-                        ]
-                      )
-                    ])
-                  ],
-                  1
+                    _vm._v(
+                      "\n\n\n                            " +
+                        _vm._s(item.user.name) +
+                        "\n                        "
+                    )
+                  ]
                 ),
                 _vm._v(" "),
-                _c("br")
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "post-video" }, [
-              _c("div", { staticClass: "video-thumb" }, [
-                _c("img", {
-                  staticClass: "challenge-image",
-                  attrs: { src: item.image, alt: item.title }
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "video-content" },
-                [
+                _c("div", { staticClass: "post__date" }, [
                   _c(
-                    "router-link",
+                    "time",
                     {
-                      staticClass: "h4 title",
-                      attrs: {
-                        to: {
-                          name: "ChallengeDetails",
-                          params: { id: item.id, slug: item.slug }
-                        }
-                      }
+                      staticClass: "published",
+                      attrs: { datetime: "2004-07-24T18:18" }
                     },
                     [
                       _vm._v(
-                        "\n\t\t\t\t\t\t\t\t" +
-                          _vm._s(item.title) +
-                          "\n\t\t\t\t\t\t\t"
+                        "\n                                " +
+                          _vm._s(item.created_at) +
+                          "\n                            "
                       )
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(_vm._s(item.description) + "\n\t\t\t\t\t\t\t\t")
-                  ])
-                ],
-                1
-              )
-            ]),
+                  )
+                ])
+              ],
+              1
+            ),
             _vm._v(" "),
-            _c("div", { staticClass: "post-additional-info inline-items" }, [
+            _c("div", { staticClass: "more" }, [
+              _c("svg", { staticClass: "olymp-three-dots-icon" }, [
+                _c("use", {
+                  attrs: {
+                    "xlink:href":
+                      "svg-icons/sprites/icons.svg#olymp-three-dots-icon"
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _vm._m(0, true)
+            ])
+          ]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(item.description) + "\n                ")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "post-thumb" }, [
+            _c("img", { attrs: { src: item.image, alt: item.title } })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "post-additional-info inline-items" }, [
+            _c(
+              "a",
+              {
+                staticClass: "post-add-icon inline-items",
+                class: { active: item.isUserLiked == 1 ? true : false },
+                attrs: { href: "javascript:void(0);" },
+                on: {
+                  click: function($event) {
+                    return _vm.updateLike(item.id)
+                  }
+                }
+              },
+              [
+                _c("svg", { staticClass: "olymp-heart-icon" }, [
+                  _c("use", {
+                    attrs: {
+                      "xlink:href":
+                        "assets/svg-icons/sprites/icons.svg#olymp-heart-icon"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(item.likes))])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "comments-shared" }, [
               _c(
                 "a",
                 {
                   staticClass: "post-add-icon inline-items",
-                  class: { active: item.isUserLiked == 1 ? true : false },
+                  attrs: { href: "javascript:void(0);" }
+                },
+                [
+                  _c("svg", { staticClass: "olymp-speech-balloon-icon" }, [
+                    _c("use", {
+                      attrs: {
+                        "xlink:href":
+                          "assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(item.comments))])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "control-block-button post-control-button" },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-control",
+                  class: { active_bg: item.isUserLiked == 1 ? true : false },
                   attrs: { href: "javascript:void(0);" },
                   on: {
                     click: function($event) {
@@ -59681,103 +59759,68 @@ var render = function() {
                   }
                 },
                 [
-                  _c("svg", { staticClass: "olymp-heart-icon" }, [
+                  _c("svg", { staticClass: "olymp-like-post-icon" }, [
                     _c("use", {
                       attrs: {
                         "xlink:href":
-                          "assets/svg-icons/sprites/icons.svg#olymp-heart-icon"
+                          "assets/svg-icons/sprites/icons.svg#olymp-like-post-icon"
                       }
                     })
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(item.likes))])
+                  ])
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "comments-shared" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "post-add-icon inline-items",
-                    attrs: { href: "javascript:void(0);" }
-                  },
-                  [
-                    _c("svg", { staticClass: "olymp-speech-balloon-icon" }, [
-                      _c("use", {
-                        attrs: {
-                          "xlink:href":
-                            "assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(item.comments))])
-                  ]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "control-block-button post-control-button" },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-control",
-                    class: { active_bg: item.isUserLiked == 1 ? true : false },
-                    attrs: { href: "javascript:void(0);" },
-                    on: {
-                      click: function($event) {
-                        return _vm.updateLike(item.id)
-                      }
+              _c(
+                "router-link",
+                {
+                  staticClass: "btn btn-control",
+                  attrs: {
+                    to: {
+                      name: "ChallengeDetails",
+                      params: { id: item.id, slug: item.slug }
                     }
-                  },
-                  [
-                    _c("svg", { staticClass: "olymp-like-post-icon" }, [
-                      _c("use", {
-                        attrs: {
-                          "xlink:href":
-                            "assets/svg-icons/sprites/icons.svg#olymp-like-post-icon"
-                        }
-                      })
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "btn btn-control",
-                    attrs: {
-                      to: {
-                        name: "ChallengeDetails",
-                        params: { id: item.id, slug: item.slug }
+                  }
+                },
+                [
+                  _c("svg", { staticClass: "olymp-comments-post-icon" }, [
+                    _c("use", {
+                      attrs: {
+                        "xlink:href":
+                          "assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"
                       }
-                    }
-                  },
-                  [
-                    _c("svg", { staticClass: "olymp-comments-post-icon" }, [
-                      _c("use", {
-                        attrs: {
-                          "xlink:href":
-                            "assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"
-                        }
-                      })
-                    ])
-                  ]
-                )
-              ],
-              1
-            )
-          ])
+                    })
+                  ])
+                ]
+              )
+            ],
+            1
+          )
         ])
       ])
     }),
     0
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "more-dropdown" }, [
+      _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Edit Post")])]),
+      _vm._v(" "),
+      _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Delete Post")])]),
+      _vm._v(" "),
+      _c("li", [
+        _c("a", { attrs: { href: "#" } }, [_vm._v("Turn Off Notifications")])
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _c("a", { attrs: { href: "#" } }, [_vm._v("Select as Featured")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -71133,8 +71176,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Projects\freelance\sairam\eureka\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Projects\freelance\sairam\eureka\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\eureka\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\eureka\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
