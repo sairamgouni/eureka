@@ -32,17 +32,17 @@
 							</div>
 						</div>
 
-						<div class="control-block-button" v-if="isSameUser">
-<!--                            		<span class="notification-icon"  @click="toggleFollow(item.id)" >-->
-<!--							<a href="javascript:void(0);" class="accept-request" :class="{ follow: (item.is_following==0) ? true : false, unfollow: (item.is_following==1) ? true : false,  }">-->
-<!--								<span class="icon-add without-text" >-->
-<!--									<svg class="olymp-happy-face-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>-->
-<!--								</span>-->
-<!--							</a>-->
-<!--						</span>-->
+						<div class="control-block-button">
+                            		<span class="notification-icon"  @click="toggleFollow(user.id)" v-if=" $store.state.userId !== user.id">
+							<a href="javascript:void(0);" class="accept-request" :class="{ follow: (user.is_following==0) ? true : false, unfollow: (user.is_following==1) ? true : false,  }">
+								<span class="icon-add without-text" >
+									<svg class="olymp-happy-face-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
+								</span>
+							</a>
+						</span>
 
 
-							<div class="btn btn-control bg-primary more">
+							<div class="btn btn-control bg-primary more"  v-if="isSameUser">
 								<svg class="olymp-settings-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-settings-icon"></use></svg>
 
 								<ul class="more-dropdown more-with-triangle triangle-bottom-right">
@@ -89,6 +89,55 @@
             }
 		},
 		methods: {
+            toggleFollow(userId) {
+
+                let loader = this.$loading.show({
+                    container: this.fullPage ? null : this.$refs.file,
+                });
+                // console.log('index '+index);
+                var bodyFormData = new FormData();
+                bodyFormData.set('item_id', userId);
+                this.axios({
+                    method: 'post',
+                    url: 'friends/toggle-follow',
+                    data: bodyFormData
+                })
+                    .then((response) => {
+                        loader.hide();
+                        let like_value = response.data;
+
+                        if(this.user.id==userId)
+                        {
+
+                            if(like_value==1)
+                            {
+                                this.user.is_following = 1;
+                                this.$toast.open({
+                                    message: 'Following Updated',
+                                    type: 'success'
+                                });
+
+                            }
+                            else
+                            {
+                                this.user.is_following = 0;
+                                this.$toast.open({
+                                    message: 'UnFollowing Updated',
+                                    type: 'success'
+                                });
+
+
+                            }
+                        }
+
+
+                    })
+                    .catch(function(response) {
+                        console.log('in response methods');
+                        console.log(response);
+                      loader.hide();
+                    });
+            },
  				getUserDetails(userId) {
 				 var bodyFormData = new FormData();
             	 bodyFormData.set('userId', userId);
@@ -109,11 +158,16 @@
 			}
 
 		},
+
 		created(){
  			this.currentProfileId = this.$route.params.id;
  			this.getUserDetails(this.currentProfileId);
         }
 	}
 </script>
+<style scoped>
+    .unfollow{ background-color: #9ca0a3; }
+    .follow{ background-color: #38a9ff; }
+</style>
 
 

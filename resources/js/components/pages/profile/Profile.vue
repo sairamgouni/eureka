@@ -9,11 +9,11 @@
 		<!-- Main Content -->
 
 		<div class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
-			<ActivityItem
-				:CurrentUser="user"
-				:isUserLoggedIn="userLogin"
-				:isSameUser="isSameUser"
-				:loadCurrentUserActivity="true"
+			<ActivityItem 
+				:CurrentUser="user" 
+				:isUserLoggedIn="userLogin" 
+				:isSameUser="isSameUser" 
+				:loadCurrentUserActivity="true" 
 				:profileIdToLoad="currentProfileId"
 				:specificUserRecords="true"
 			/>
@@ -47,8 +47,8 @@
 		<div class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">
 
 
-			<UserFriends totalItems="4" :CurrentUser="user" :isUserLoggedIn="userLogin" :isSameUser="isSameUser":currentProfileId="currentProfileId"/>
-
+			<UserFriends totalItems="4" :CurrentUser="user" :isUserLoggedIn="userLogin" :isSameUser="isSameUser"/>
+	 		 
 
 		</div>
 
@@ -69,7 +69,7 @@
 	//import LastPhotos from './LastPhotos';
 	import ActivityItem from '../sub-components/ActivityItem';
 	export default {
-		name: 'ProfileEuraka',
+		name: 'Profile',
 		components: {
 						ProfileHeader,
 						ActivityItem,
@@ -83,7 +83,7 @@
                 baseUrl: '',
                 userLogin: false,
                 user:{
-
+	              
 		                userId:'',
 		                userSlug:'',
 		                userImage:'',
@@ -127,7 +127,7 @@
 		created(){
 			this.currentProfileId = this.$route.params.id;
             this.userId = this.$store.getters.getUserId;
-
+			
 			if(this.userId == this.currentProfileId)
 			{
 				this.isSameUser = true;
@@ -136,7 +136,7 @@
 	            this.user.userImage = this.$store.getters.getUserImage;
 	            this.user.userName = this.$store.getters.getUserName;
 	            this.user.userImage = this.$store.getters.getUserImage;
-	            this.user.userBackgroundImage = this.$store.getters.getUserBackgroundImage;
+	            this.user.userBackgroundImage = this.$store.getters.getUserBackgroundImage;	
 			}
 			else {
 				this.getUserDetails(this.currentProfileId);

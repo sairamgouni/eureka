@@ -52,6 +52,7 @@ Route::post('challenges/create', 'ChallengeController@saveRecord');
 
 //Route::get('challenges/getlist', 'ChallengeController@getList');
 Route::get('challenges/getlist', 'ChallengeController@getList');
+Route::get('challenges/getlists', 'ChallengeController@getLists');
 Route::get('challenges/getDetails', 'ChallengeController@show');
 Route::post('challenges/toggle-like', 'ChallengeController@toggleLike');
 Route::post('challenges/comment/{comment_id}/owner-like', 'ChallengeController@toggleCommentOwnerLike');
@@ -79,7 +80,9 @@ Route::get('user/get-profile/{id}', 'UsersController@getProfile');
 
 Route::get('user/top-contributors', 'UsersController@topContributors');
 
+Route::get('user/all-notifications', 'UsersController@allNotifications');
 Route::post('user/top-notifications', 'UsersController@topNotifications');
+Route::post('user/read-top-notifications', 'UsersController@readTopNotifications');
 
 Route::get('/activities/get-list/{id?}', 'UsersController@getActivities');
 
@@ -89,6 +92,8 @@ Route::post('api/changePassword', 'Auth\passwordresetcontroller@changePassword')
 Route::get('search/{searchParameter}','UsersController@searchUsers');
 
 Route::get('api/users', 'UsersController@getusers');
+Route::post('search-user', 'UsersController@getusers');
+Route::get('search', 'ChallengeController@search');
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

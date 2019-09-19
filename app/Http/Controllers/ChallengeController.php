@@ -348,6 +348,7 @@ class ChallengeController extends Controller
         } else {
             $comment->update(['finalized' => '0']);
         }
+        return response()->json($comment->finalized == '0' ? 0 : 1);
 
 
     }
@@ -362,6 +363,7 @@ class ChallengeController extends Controller
         } else {
             $comment->update(['winner' => '0']);
         }
+        return response()->json($comment->winner == '0' ? 0 : 1);
 
 
     }
@@ -397,11 +399,15 @@ class ChallengeController extends Controller
 
         $challenges = $challenges->paginate(5);
         $challenges = \App\Challenge::prepareAjaxData($challenges);
-        echo "<pre>";
-        print_r($challenges);
-        die();
         return response()->json(['list' => $challenges, 'user' => \Auth::user()]);
 
 
+    }
+    public function search(Request $request)
+    {
+
+        $data= $request->all();
+        $search = $data['q'];
+        return Challenge::where('title', 'like', '%' . $search . '%')->get();
     }
 }

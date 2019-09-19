@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Challenge;
 use Illuminate\Http\Request;
 use \App\Http\Requests\UsersRequest;
+use Illuminate\Notifications\DatabaseNotificationCollection;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\Models\Activity;
 
@@ -223,6 +224,22 @@ class UsersController extends Controller
 
     }
 
+    public function allNotifications(Request $request)
+    {
+        $user = \Auth::user();
+
+        $notifications = $user->notifications()->simplePaginate();
+
+        $response = [
+            'has_more' => $notifications->hasMorePages(),
+            'current_page' => $notifications->currentPage(),
+            'data' => $user->processNotifications($notifications),
+        ];
+
+        $notifications->markAsRead();
+
+        return response()->json($response);
+    }
 
     public function topNotifications(Request $request)
     {
@@ -237,13 +254,37 @@ class UsersController extends Controller
         ]);
     }
 
-    public function getusers()
+    public function readTopNotifications(Request $request)
     {
-        $users = \App\User::get();
-        $data['title'] = 'Users';
-        $data['users'] = $users;
-        return response()->json($data);
+        $user = \Auth::user();
+
+        $user->unreadNotifications->markAsRead();
+
+        return $this->topNotifications($request);
     }
+
+    public function getusers(Request $request)
+    {
+
+        $data = $request->all();
+        $query = $data['q'];
+        // perfform search in database or algolia
+        $users = \App\User::where('name', 'LIKE', '%' . $query . '%')->simplePaginate();
+
+        $challenges = Challenge::where('title', 'LIKE', "%$query%")
+            ->select('title AS name', 'image', 'id')
+            ->simplePaginate();
+
+//        dd($challenges);
+
+        $result = collect($users->items());
+        $result = $result->merge($challenges->items());
+
+        return response()->json(
+            $result->sortByDesc('name')->values()->all()
+        );
+    }
+
 
     public function searchUsers($param)
     {

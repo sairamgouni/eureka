@@ -1,91 +1,91 @@
 <template>
     <div id="newsfeed-items-grid">
-<!--        <div class="ui-block" v-for="(item, index) in challenges" :key="index">-->
-<!--			<span>-->
-<!--					<article class="hentry post video">-->
+        <!--        <div class="ui-block" v-for="(item, index) in challenges" :key="index">-->
+        <!--			<span>-->
+        <!--					<article class="hentry post video">-->
 
-<!--						<div class="post__author author vcard inline-items">-->
-<!--							<img :src="item.user.image" :alt="item.user.name">-->
+        <!--						<div class="post__author author vcard inline-items">-->
+        <!--							<img :src="item.user.image" :alt="item.user.name">-->
 
-<!--							<div class="author-date">-->
+        <!--							<div class="author-date">-->
 
-<!--								 <router-link-->
-<!--                                     :to="{ name: 'ProfileEuraka', params: { id: item.user.id, slug: item.user.slug } }"-->
-<!--                                     class="h6 post__author-name fn">-->
+        <!--								 <router-link-->
+        <!--                                     :to="{ name: 'ProfileEuraka', params: { id: item.user.id, slug: item.user.slug } }"-->
+        <!--                                     class="h6 post__author-name fn">-->
 
 
-<!--									{{item.user.name}}-->
-<!--								</router-link>-->
+        <!--									{{item.user.name}}-->
+        <!--								</router-link>-->
 
-<!--								<div class="post__date">-->
-<!--									<time class="published" datetime="2004-07-24T18:18">-->
-<!--										{{item.created_at}}-->
-<!--									</time>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--							<br>-->
-<!--						</div>-->
+        <!--								<div class="post__date">-->
+        <!--									<time class="published" datetime="2004-07-24T18:18">-->
+        <!--										{{item.created_at}}-->
+        <!--									</time>-->
+        <!--								</div>-->
+        <!--							</div>-->
+        <!--							<br>-->
+        <!--						</div>-->
 
-<!--						<div class="post-video">-->
-<!--							<div class="video-thumb">-->
-<!--								<img class="challenge-image" :src="item.image" :alt="item.title">-->
+        <!--						<div class="post-video">-->
+        <!--							<div class="video-thumb">-->
+        <!--								<img class="challenge-image" :src="item.image" :alt="item.title">-->
 
-<!--							</div>-->
+        <!--							</div>-->
 
-<!--							<div class="video-content">-->
-<!--								<router-link-->
-<!--                                    :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"-->
-<!--                                    class="h4 title">-->
-<!--								{{item.title}}-->
-<!--							</router-link>-->
-<!--								<p>{{item.description}}-->
-<!--								</p>-->
-<!--                                &lt;!&ndash; <a href="#" class="link-site">YOUTUBE.COM</a> &ndash;&gt;-->
-<!--							</div>-->
-<!--						</div>-->
+        <!--							<div class="video-content">-->
+        <!--								<router-link-->
+        <!--                                    :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"-->
+        <!--                                    class="h4 title">-->
+        <!--								{{item.title}}-->
+        <!--							</router-link>-->
+        <!--								<p>{{item.description}}-->
+        <!--								</p>-->
+        <!--                                &lt;!&ndash; <a href="#" class="link-site">YOUTUBE.COM</a> &ndash;&gt;-->
+        <!--							</div>-->
+        <!--						</div>-->
 
-<!--						<div class="post-additional-info inline-items">-->
+        <!--						<div class="post-additional-info inline-items">-->
 
-<!--							<a href="javascript:void(0);" @click="updateLike(item.id);"-->
-<!--                               class="post-add-icon inline-items"-->
-<!--                               v-bind:class="{ active: (item.isUserLiked==1)? true : false }"-->
-<!--                            >-->
-<!--								<svg class="olymp-heart-icon"><use-->
-<!--                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>-->
-<!--								<span>{{item.likes}}</span>-->
-<!--							</a>-->
+        <!--							<a href="javascript:void(0);" @click="updateLike(item.id);"-->
+        <!--                               class="post-add-icon inline-items"-->
+        <!--                               v-bind:class="{ active: (item.isUserLiked==1)? true : false }"-->
+        <!--                            >-->
+        <!--								<svg class="olymp-heart-icon"><use-->
+        <!--                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>-->
+        <!--								<span>{{item.likes}}</span>-->
+        <!--							</a>-->
 
-<!--							<div class="comments-shared">-->
-<!--								<a href="javascript:void(0);" class="post-add-icon inline-items">-->
-<!--									<svg class="olymp-speech-balloon-icon"><use-->
-<!--                                        xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>-->
-<!--									<span>{{item.comments}}</span>-->
-<!--								</a>-->
-<!--							</div>-->
-<!--						</div>-->
+        <!--							<div class="comments-shared">-->
+        <!--								<a href="javascript:void(0);" class="post-add-icon inline-items">-->
+        <!--									<svg class="olymp-speech-balloon-icon"><use-->
+        <!--                                        xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>-->
+        <!--									<span>{{item.comments}}</span>-->
+        <!--								</a>-->
+        <!--							</div>-->
+        <!--						</div>-->
 
-<!--						<div class="control-block-button post-control-button">-->
+        <!--						<div class="control-block-button post-control-button">-->
 
-<!--							<a href="javascript:void(0);" class="btn btn-control"-->
-<!--                               @click="updateLike(item.id);"-->
-<!--                               v-bind:class="{ active_bg: (item.isUserLiked==1)? true : false }">-->
-<!--								<svg class="olymp-like-post-icon"><use-->
-<!--                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>-->
-<!--							</a>-->
+        <!--							<a href="javascript:void(0);" class="btn btn-control"-->
+        <!--                               @click="updateLike(item.id);"-->
+        <!--                               v-bind:class="{ active_bg: (item.isUserLiked==1)? true : false }">-->
+        <!--								<svg class="olymp-like-post-icon"><use-->
+        <!--                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>-->
+        <!--							</a>-->
 
-<!--                            	<router-link-->
-<!--                                    :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"-->
-<!--                                    class="btn btn-control">-->
-<!--                                    <svg class="olymp-comments-post-icon">-->
-<!--                                        <use-->
-<!--                                            xlink:href="assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>-->
+        <!--                            	<router-link-->
+        <!--                                    :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"-->
+        <!--                                    class="btn btn-control">-->
+        <!--                                    <svg class="olymp-comments-post-icon">-->
+        <!--                                        <use-->
+        <!--                                            xlink:href="assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>-->
 
-<!--							</router-link>-->
-<!--						</div>-->
+        <!--							</router-link>-->
+        <!--						</div>-->
 
-<!--					</article>-->
-<!--					</span>-->
-<!--        </div>-->
+        <!--					</article>-->
+        <!--					</span>-->
+        <!--        </div>-->
 
 
         <div class="ui-block" v-for="(item, index) in challenges" :key="index">
@@ -128,7 +128,9 @@
                     </div>
 
                 </div>
-
+                <router-link :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }" class="h4 title">
+                    {{item.title}}
+                </router-link>
                 <p>{{item.description}}
                 </p>
 
@@ -140,22 +142,22 @@
 
 
 
-                        <a href="javascript:void(0);" @click="updateLike(item.id);"
-                           class="post-add-icon inline-items"
-                           v-bind:class="{ active: (item.isUserLiked==1)? true : false }"
-                        >
-                            <svg class="olymp-heart-icon"><use
-                                xlink:href="assets/svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
-                            <span>{{item.likes}}</span>
-                        </a>
+                    <a href="javascript:void(0);" @click="updateLike(item.id);"
+                       class="post-add-icon inline-items"
+                       v-bind:class="{ active: (item.isUserLiked==1)? true : false }"
+                    >
+                        <svg class="olymp-heart-icon"><use
+                            xlink:href="assets/svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
+                        <span>{{item.likes}}</span>
+                    </a>
 
 
 
 
-<!--                    <div class="names-people-likes">-->
-<!--                        <a href="#">Jimmy</a>, <a href="#">Andrea</a> and-->
-<!--                        <br>47 more liked this-->
-<!--                    </div>-->
+                    <!--                    <div class="names-people-likes">-->
+                    <!--                        <a href="#">Jimmy</a>, <a href="#">Andrea</a> and-->
+                    <!--                        <br>47 more liked this-->
+                    <!--                    </div>-->
 
 
                     <div class="comments-shared">
@@ -170,24 +172,24 @@
                 </div>
 
 
-                    <div class="control-block-button post-control-button">
+                <div class="control-block-button post-control-button">
 
-                        <a href="javascript:void(0);" class="btn btn-control"
-                           @click="updateLike(item.id);"
-                           v-bind:class="{ active_bg: (item.isUserLiked==1)? true : false }">
-                            <svg class="olymp-like-post-icon"><use
-                                xlink:href="assets/svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>
-                        </a>
+                    <a href="javascript:void(0);" class="btn btn-control"
+                       @click="updateLike(item.id);"
+                       v-bind:class="{ active_bg: (item.isUserLiked==1)? true : false }">
+                        <svg class="olymp-like-post-icon"><use
+                            xlink:href="assets/svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>
+                    </a>
 
-                        <router-link
-                            :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
-                            class="btn btn-control">
-                            <svg class="olymp-comments-post-icon">
-                                <use
-                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>
+                    <router-link
+                        :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
+                        class="btn btn-control">
+                        <svg class="olymp-comments-post-icon">
+                            <use
+                                xlink:href="assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>
 
-                        </router-link>
-                    </div>
+                    </router-link>
+                </div>
             </article>
         </div>
 
@@ -248,6 +250,10 @@
                     }
                 }
             };
+        },
+        beforeDestroy() {
+            this.hasMore = false;
+            $(window).off('scroll');
         },
         methods: {
             loadPosts(page = '1') {

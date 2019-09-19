@@ -8,18 +8,10 @@
         <div class="header-content-wrapper">
             <form class="search-bar w-search notification-list friend-requests">
                 <div class="form-group with-button">
-                    <input class="form-control js-user-search" placeholder="Search here people or pages..."
+                    <input class="form-control js-user-search" placeholder="Search here people"
                            type="text">
-                    <button>
-                        <svg class="olymp-magnifying-glass-icon">
-                            <use
-                                :xlink:href="`assets/svg-icons/sprites/icons.svg#olymp-magnifying-glass-icon`"></use>
-                        </svg>
-                    </button>
                 </div>
             </form>
-
-            <a href="#" class="link-find-friend">Find Friends</a>
 
 
 <!--              <router-link   to="/post-challenge">-->
@@ -36,7 +28,6 @@
                 <div class="author-page author vcard inline-items more">
                     <div class="author-thumb">
                         <img  :alt="userName" :src="userImage" class="avatar">
-                        <span class="icon-status online"></span>
                         <div class="more-dropdown more-with-triangle">
                             <div class="mCustomScrollbar" data-mcs-theme="dark">
                                 <div class="ui-block-title ui-block-title-small">
@@ -59,7 +50,7 @@
                                         </router-link>
                                     </li>
                                     <li>
-                                       <router-link  to="/create-challenge" class="nav-link">
+                                       <router-link  to="/post-challenge" class="nav-link">
                                             <svg class="olymp-star-icon left-menu-icon" data-toggle="tooltip"
                                                  data-placement="right" data-original-title="FAV PAGE">
                                                 <use
@@ -80,32 +71,9 @@
                                 </ul>
 
 
-                                <div class="ui-block-title ui-block-title-small">
-                                    <h6 class="title">About Olympus</h6>
-                                </div>
 
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <span>Terms and Conditions</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span>FAQs</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span>Careers</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span>Contact</span>
-                                        </a>
-                                    </li>
-                                </ul>
+
+
                             </div>
 
                         </div>
@@ -122,6 +90,7 @@
 <script>
     import Notifications from '../pages/sub-components/Notifications';
     import Events from '../pages/sub-components/Events';
+    require('selectize');
 
     export default {
         name: "HeaderNav",
@@ -175,6 +144,58 @@
                     // console.log(response);
                 });
             },
+        },
+        mounted() {
+            var topUserSearch = $('.js-user-search');
+
+            if (topUserSearch.length) {
+                topUserSearch.selectize({
+                    persist: false,
+                    maxItems: 1,
+                    valueField: 'id',
+                    labelField: 'name',
+                    searchField: ['name'],
+                    render: {
+                        option: function(item, escape) {
+                            return '<div class="inline-items">' +
+                                (item.image ? '<div class="author-thumb"><img height="40px" width="40px" src="' + escape(item.image) + '" alt="avatar"></div>' : '') +
+                                '<div class="notification-event">' +
+                                (item.name ? '<span class="h6 notification-friend"></a>' + escape(item.name) + '</span>' : '') +
+                                '</div>'+
+                                '</div>';
+                        },
+                        item: function(item, escape) {
+                            var label = item.name;
+                            return '<div>' +
+                                '<span class="label">' + escape(label) + '</span>' +
+                                '</div>';
+                        }
+                    },
+                    load: (query, callback) => {
+                        if (!query.length) return callback();
+
+                        let formData = {
+                            q: query,
+                            page_limit: 10,
+                        };
+                        this.$http.post(`/search-user`, formData).then((response) => {
+                            callback(response.data);
+                            this.busy = false;
+                        }, (reason) => {
+                            callback();
+                            this.busy = false;
+                        });
+                    },
+                    onItemAdd: (value, $item) => {
+                        console.log(value,'sai',$item);
+                        Vue.nextTick(() => {
+                            this.$router.push({ path: '/search/'+value });
+                            let selectize = topUserSearch[0].selectize;
+                            selectize.clear();
+                        });
+                    }
+                });
+            }
         },
         created(){
             this.userLogin = this.$store.getters.getLogin;

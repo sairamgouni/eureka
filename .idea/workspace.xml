@@ -4,6 +4,7 @@
     <list default="true" id="0a16b8e3-7d01-4680-a874-559b0abcb3e5" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/../euraka-live-master/.idea/euraka-live-master.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/manifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/manifest.js" afterDir="false" />
@@ -49,6 +50,16 @@
       <change beforePath="$PROJECT_DIR$/../eurekau/resources/views/layouts/admin/layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../eurekau/resources/views/layouts/admin/layout.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../eurekau/resources/views/layouts/admin/partials/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../eurekau/resources/views/layouts/admin/partials/sidebar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../eurekau/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/../eurekau/routes/web.php" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ReadUnreadNotification.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_09_09_205837_create_read_unread_notifications_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/profile/Notifications.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/profile/Notifications.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+>>>>>>> a96a58da39f8082a5051d56c8bf698b7fb2fa672
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -245,8 +256,16 @@
       <workItem from="1567475682328" duration="101675000" />
       <workItem from="1567849112962" duration="13418000" />
       <workItem from="1568529350872" duration="24000" />
+<<<<<<< HEAD
       <workItem from="1568529450290" duration="6973000" />
       <workItem from="1568625031683" duration="8066000" />
+=======
+      <workItem from="1568529450290" duration="9046000" />
+      <workItem from="1568650059843" duration="608000" />
+      <workItem from="1568655398027" duration="5232000" />
+      <workItem from="1568743052292" duration="48000" />
+      <workItem from="1568743111566" duration="5489000" />
+>>>>>>> a96a58da39f8082a5051d56c8bf698b7fb2fa672
     </task>
     <servers />
   </component>

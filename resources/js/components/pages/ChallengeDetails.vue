@@ -373,7 +373,7 @@
                                             <span>{{challenge.finalized}}</span> ideas
                                         </div>
                                     </li>
-                                    <li class="progress-stage-item not-started"  :class="challenge.finalized?'in-progress':'not-started'">
+                                    <li class="progress-stage-item not-started"  :class="challenge.winner?'in-progress':'not-started'">
                                         <div class="icon icon-winner">
                                             <label>Week</label>
                                             <span>4</span>
@@ -402,7 +402,7 @@
                         </div>
 
                         <div class="post-thumb">
-                            <img :src="challenge.image" :alt="challenge.user.name" class="post-thumb">
+                            <img :src="challenge.image" :alt="challenge.user.name">
                         </div>
 
                         <div class="post-content-wrap">
@@ -615,7 +615,7 @@
 
                 this.axios({
                     method: 'get',
-                    url: 'challenges/getlist?userId='+this.recordsUserId+'&recordsType='+this.type,
+                    url: '/posts',
                     data: bodyFormData
                 })
                     .then((response) => {

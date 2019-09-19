@@ -1,5 +1,5 @@
 <template>
-	
+
 			<div class="ui-block">
 				<div class="ui-block-title">
 					<h6 class="title">Following ({{totalFollowings}})</h6>
@@ -7,21 +7,21 @@
 				<div class="ui-block-content">
 
 					<!-- W-Faved-Page -->
-					
+
 					<ul class="widget w-faved-page js-zoom-gallery">
 						<li v-for="(item, index) in firendsList">
-							  <router-link  
+							  <router-link
                                         :to="{ name: 'ProfileEuraka', params: { id: item.id, slug: item.slug } }"
                                           class="h6 notification-friend">
 								<img :src="item.image" :alt="item.name" class="avatar" :title="item.name">
 							</router-link>
 						</li>
-						 
+
 						<li class="all-users" v-if="remainingFriends>0">
 							<a href="#">+{{remainingFriends}}</a>
 						</li>
 					</ul>
-					
+
 					<!-- .. end W-Faved-Page -->
 				</div>
 			</div>
@@ -31,7 +31,7 @@
 <script>
 	export default {
 		name: 'UserFriends',
-		  props: ['totalItems','CurrentUser', 'isUserLoggedIn', 'isSameUser'],
+		  props: ['totalItems','CurrentUser', 'isUserLoggedIn', 'isSameUser','currentProfileId'],
 			data() {
             return {
                 baseUrl: '',
@@ -52,7 +52,7 @@
                 // bodyFormData.set('password', this.form.password);
                 this.axios({
                         method: 'get',
-                        url: this.baseUrl + 'friends/getFriendsList/'+this.totalItems+'?userId='+this.CurrentUser.userId,
+                        url: this.baseUrl + 'friends/getFriendsList/'+this.totalItems+'?userId='+this.currentProfileId,
                         data: bodyFormData
                     })
                     .then((response) => {
@@ -61,7 +61,7 @@
                     		this.firendsList = response.data.list;
                     		this.totalFollowings = response.data.totalFollowings;
                     		this.remainingFriends = parseInt(this.totalFollowings) -  parseInt(this.firendsList.length);
-                    		
+
                     		// console.log('remaining: '+this.remainingFriends);
                     	}
                         // console.log(response);

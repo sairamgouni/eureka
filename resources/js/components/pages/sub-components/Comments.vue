@@ -46,7 +46,7 @@
                                 v-if="$parent.challenge.isAuthor"
                                 @click="ownertick(comment)">
                                 <i class="fas fa-check " :id="`owner_tick_${comment.id}`"
-                                   :class="{'text-danger':comment.tick_count}"></i>
+                                   :class="{'text-danger':comment.finalized}"></i>
 
 							</a>
 
@@ -54,7 +54,7 @@
                                 v-if="$parent.challenge.isAuthor"
                                 @click="ownerwin(comment)">
                                 <i class="fas fa-trophy " :id="`owner_win_${comment.id}`"
-                                   :class="{'text-danger':comment.win_count}"></i>
+                                   :class="{'text-danger':comment.winner}"></i>
 
 							</a>
 
@@ -93,7 +93,7 @@
 
                         <div class="row">
                             <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group label-floating is-empty replay-form-group">
+                                <div class="form-group label-floating is-empty">
                                     <label class="control-label">Write Reply</label>
                                     <textarea class="form-control" name="comment_text" required rows="1"
                                               placeholder="" style=" border:1px solid red;"></textarea>
@@ -104,7 +104,8 @@
                             <div class="col-12 text-right">
                                     <button type="submit" class="btn btn-primary btn-sm">Reply
                                  </button>
-                                </div>
+                            </div>
+
                         </div>
                     </form>
                             </div>
@@ -178,11 +179,17 @@
         .likes-count {
             margin-top: 2px;
         }
-        .tick_count{
+
+        .tick_count {
             margin-top: 2px;
         }
-        .win_count{
+
+        .win_count {
             margin-top: 2px;
+        }
+
+        .text-danger {
+            color: #f92552 !important;
         }
     }
 
@@ -265,6 +272,8 @@
                                     message: 'Comment posted..! ',
                                     type: 'success'
                                 });
+                                this.$set(this.$parent.challenge, 'ideas', this.$parent.challenge.ideas + 1)
+                                // this.$parent.challenge.ideas=
                                 this.loadComments();
 
                                 $(evt.target)[0].reset();
@@ -283,7 +292,7 @@
             },
 
             loadComments() {
-
+                //we are initiating form data for submit data
                 var bodyFormData = new FormData();
                 bodyFormData.set('challent_id', this.comment_type_id);
 
@@ -303,15 +312,20 @@
             },
 
             ownerLike(comment) {
+
                 if (comment && comment.id)
                     this.axios.post(`${APP.baseUrl}/challenges/comment/${comment.id}/owner-like`).then((response) => {
                         if (response.status === 200) {
-                            if (response.data)
+                            if (response.data) {
+                                this.$set(this.$parent.challenge, 'game_time', this.$parent.challenge.game_time + 1);
                                 $(`#owner_like_${comment.id}`).addClass('text-danger');
-                            else
+                            } else {
+                                this.$set(this.$parent.challenge, 'game_time', this.$parent.challenge.game_time - 1);
                                 $(`#owner_like_${comment.id}`).removeClass('text-danger');
+                            }
 
                             this.$toast.open({
+
                                 message: response.data ? 'Liked' : 'Un liked',
                                 type: 'success'
                             });
@@ -325,13 +339,19 @@
                     })
             },
             ownertick(comment) {
+
                 if (comment && comment.id)
                     this.axios.post(`${APP.baseUrl}/challenges/comment/${comment.id}/owner-tick`).then((response) => {
                         if (response.status === 200) {
-                            if (response.data)
+                            if (response.data == '1') {
+                                this.$set(this.$parent.challenge, 'finalized', this.$parent.challenge.finalized + 1);
                                 $(`#owner_tick_${comment.id}`).addClass('text-danger');
-                            else
+
+                            } else {
+                                this.$set(this.$parent.challenge, 'finalized', this.$parent.challenge.finalized - 1);
                                 $(`#owner_tick_${comment.id}`).removeClass('text-danger');
+
+                            }
 
                             this.$toast.open({
                                 message: response.data ? 'checked' : 'un checked',
@@ -350,10 +370,14 @@
                 if (comment && comment.id)
                     this.axios.post(`${APP.baseUrl}/challenges/comment/${comment.id}/owner-win`).then((response) => {
                         if (response.status === 200) {
-                            if (response.data)
+
+                            if (response.data) {
+                                this.$set(this.$parent.challenge, 'game_time', this.$parent.challenge.winner);
                                 $(`#owner_win_${comment.id}`).addClass('text-danger');
-                            else
+                            } else {
+                                this.$set(this.$parent.challenge, 'game_time', this.$parent.challenge.winner);
                                 $(`#owner_win_${comment.id}`).removeClass('text-danger');
+                            }
 
                             this.$toast.open({
                                 message: response.data ? 'checked' : 'un checked',

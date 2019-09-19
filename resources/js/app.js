@@ -5,6 +5,7 @@ import axios from 'axios';
 import App from './components/App';
 import routes from './routes/routes';
 import store from './services/store';
+window.Vue=Vue;
 
 /**
  * @use Global vue components

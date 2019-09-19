@@ -14,6 +14,8 @@ import Users from "../components/pages/contributors/UsersList";
 import LoginPage from "../components/pages/login";
 import PostChallenge from "../components/pages/challenges/PostChallenge";
 import Approach from "../components/pages/Approach";
+import Profile from "../components/pages/profile/profile";
+
 
 export default [
     {
@@ -153,6 +155,15 @@ export default [
         meta : {
             requiresAuth:true,
             title: "Approach"
+        }
+    },
+    {
+        name: 'profile',
+        path: '/search/:id',
+        component: Profile,
+        meta : {
+            requiresAuth:true,
+            title: "Profile"
         }
     },
 ];

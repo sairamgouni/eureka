@@ -32,15 +32,16 @@
 
 
                         <div class="form-group with-button">
-                            <input class="form-control" type="text" placeholder="Search Blog Posts......">
-                            <button>
+                            <input class="form-control" type="text" placeholder="Search Blog Posts......" v-model="search">
+                            <button @click.prevent="searchchallenges()">
                                 <svg class="olymp-magnifying-glass-icon">
                                     <use
                                         xlink:href="assets/svg-icons/sprites/icons.svg#olymp-magnifying-glass-icon"></use>
                                 </svg>
                             </button>
                         </div>
-                        </form>
+
+
                     </div>
                 </div>
             </div>
@@ -116,7 +117,7 @@
                         </div>
                     </div>
 
-<!--                    <infinite-loading @infinite="infiniteHandler"></infinite-loading>-->
+                    <!--                    <infinite-loading @infinite="infiniteHandler"></infinite-loading>-->
 
                 </div>
 
@@ -196,8 +197,6 @@
 
                 if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
                     if (this.hasMore && this.infinite) {
-                        console.log(this.hasMore);
-                        // $state.loaded();
                         this.loadPosts(this.page);
                     } else {
                         // $state.complete();
@@ -205,7 +204,24 @@
                 }
             };
         },
+        beforeDestroy() {
+            this.hasMore = false;
+            $(window).off('scroll');
+        },
         methods: {
+            searchchallenges(){
+                fetch('/search?q='+this.search)
+                    .then(res => res.json())
+                    .then(res =>{
+                        this.challenges = res;
+                        this.search ='';
+
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+
+            },
             loadCategories() {
                 this.axios.get(`${APP.baseUrl}/categories/getlist`)
                     .then((response) => {
@@ -222,7 +238,7 @@
                 if (!this.infinite && page != '1')
                     return false;
 
-                this.infinite = false
+                this.infinite = false;
 
                 let loader = this.$loading.show({
                     container: this.fullPage ? null : this.$refs.file,
