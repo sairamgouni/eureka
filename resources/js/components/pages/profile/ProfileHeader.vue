@@ -7,14 +7,14 @@
 			<div class="ui-block">
 				<div class="top-header">
 					<div class="top-header-thumb">
-						<img  class="top-header-thumb" :src="user.background_image" :alt="user.name">
+						<img  class="top-header-thumb" :src="user.background_image" :alt="user.name" style="height: 400px">
 					</div>
 					<div class="profile-section">
 						<div class="row">
 							<div class="col col-lg-5 col-md-5 col-sm-12 col-12">
 								<ul class="profile-menu">
 									<li>
-										   <router-link  to="/profile" class="nav-link">
+										   <router-link  to="/" class="nav-link">
 											Timeline
                         					</router-link>
 									</li>

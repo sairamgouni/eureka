@@ -20,7 +20,7 @@ use Overtrue\LaravelFollow\Traits\CanVote;
 use Overtrue\LaravelFollow\Traits\CanBookmark;
 use Actuallymab\LaravelComment\CanComment;
 
-class User extends Authenticatable
+class Userbackup extends Authenticatable
 {
      use HasSlug,  Notifiable, Gamify;
      use  EntrustUserTrait ;
@@ -137,7 +137,7 @@ class User extends Authenticatable
           $user = new \App\User();
           $user->name = $request->name;
           $user->email = $request->email;
-          
+
         /**
          * If admin does not enter password, it will create the default password
          */
@@ -167,7 +167,7 @@ class User extends Authenticatable
           $user->campaign()->attach($request->campaign);
 
           $static_object->processUpload($request, $user);
-          
+
 
           if($response)
               return $static_object->getMessage('success');
@@ -187,7 +187,7 @@ class User extends Authenticatable
 
         $user->name = $request->name;
 
-        
+
 
        if($request->has('password'))
        {
@@ -282,7 +282,7 @@ class User extends Authenticatable
                                 ->get()
                                 ->pluck('followable_id')
                                 ->toArray();
-        
+
         $list = \App\User::whereNotIn('id',$following_users)
                             ->where('id','!=', $this->id)
                             ->limit($limit)->get();
@@ -311,7 +311,7 @@ class User extends Authenticatable
     {
         $following_users = $this->followings()->limit($limit)->get();
         return \App\User::processFrendSuggestions($following_users);
-                                
+
     }
 
 }
