@@ -409,13 +409,13 @@
 
                             <div class="control-block-button post-control-button">
 
-                                <a href="#" class="post-add-icon inline-items">
+
                                     <svg class="olymp-speech-balloon-icon">
                                         <use
                                             xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
                                     </svg>
                                     <span>{{challenge.comments}}</span>
-                                </a>
+
 
 
                             </div>

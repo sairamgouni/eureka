@@ -197,7 +197,7 @@
                                 <use
                                     :xlink:href="`assets/svg-icons/sprites/icons.svg#olymp-calendar-icon`"></use>
                             </svg>
-                            <span class="left-menu-title">Challenges Details</span>
+                            <span class="left-menu-title">Challenges</span>
                         </router-link>
 
                     </li>

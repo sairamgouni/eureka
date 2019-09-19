@@ -24,7 +24,7 @@ export default [
         component: Home,
         meta : {
             requiresAuth: true,
-            title: "News Feed"
+            title: "Challenges"
         }
     },
     {
