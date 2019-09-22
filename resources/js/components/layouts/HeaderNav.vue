@@ -14,20 +14,20 @@
             </form>
 
 
-<!--              <router-link   to="/post-challenge">-->
-<!--                    <a href="javascript:void(0);" class="btn btn-primary btn-md-1 mt-1">Post Challenge</a>-->
-<!--              </router-link>  -->
+            <!--              <router-link   to="/post-challenge">-->
+            <!--                    <a href="javascript:void(0);" class="btn btn-primary btn-md-1 mt-1">Post Challenge</a>-->
+            <!--              </router-link>  -->
 
             <div class="control-block">
 
-           <!--    <Events /> -->
+                <!--    <Events /> -->
 
 
-                <Notifications :notifications="notifications" />
+                <Notifications :notifications="notifications"/>
 
                 <div class="author-page author vcard inline-items more">
                     <div class="author-thumb">
-                        <img  :alt="userName" :src="userImage" class="avatar">
+                        <img :alt="userName" :src="userImage" class="avatar">
                         <div class="more-dropdown more-with-triangle">
                             <div class="mCustomScrollbar" data-mcs-theme="dark">
                                 <div class="ui-block-title ui-block-title-small">
@@ -37,8 +37,8 @@
                                 <ul class="account-settings">
                                     <li>
                                         <router-link
-                                        :to="{ name: 'ProfileEuraka', params: { id: userId, slug: userSlug } }"
-                                         class="nav-link">
+                                            :to="{ name: 'ProfileEuraka', params: { id: userId, slug: userSlug } }"
+                                            class="nav-link">
 
 
                                             <svg class="olymp-menu-icon">
@@ -50,7 +50,7 @@
                                         </router-link>
                                     </li>
                                     <li>
-                                       <router-link  to="/post-challenge" class="nav-link">
+                                        <router-link to="/post-challenge" class="nav-link">
                                             <svg class="olymp-star-icon left-menu-icon" data-toggle="tooltip"
                                                  data-placement="right" data-original-title="FAV PAGE">
                                                 <use
@@ -61,17 +61,17 @@
                                         </router-link>
                                     </li>
                                     <li @click="logout()">
-                                       <a href="javascript:void(0);" >
-                                        <svg class="olymp-logout-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-logout-icon"></use></svg>
+                                        <a href="javascript:void(0);">
+                                            <svg class="olymp-logout-icon">
+                                                <use
+                                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-logout-icon"></use>
+                                            </svg>
 
-                                        Log Out
+                                            Log Out
 
-                                    </a>
+                                        </a>
                                     </li>
                                 </ul>
-
-
-
 
 
                             </div>
@@ -90,6 +90,7 @@
 <script>
     import Notifications from '../pages/sub-components/Notifications';
     import Events from '../pages/sub-components/Events';
+
     require('selectize');
 
     export default {
@@ -98,51 +99,51 @@
             Notifications,
             Events,
         },
-         data() {
+        data() {
             return {
                 baseUrl: '',
                 userLogin: false,
-                userId:'',
-                userSlug:'',
-                userImage:'',
-                userName:'',
-                userLevel:'',
-                notifications:[],
+                userId: '',
+                userSlug: '',
+                userImage: '',
+                userName: '',
+                userLevel: '',
+                notifications: [],
             }
         },
-        methods : {
+        methods: {
             logout() {
 
-                    // evt.preventDefault();
+                // evt.preventDefault();
 
                 var bodyFormData = new FormData();
                 // bodyFormData.set('email', this.form.username);
                 // bodyFormData.set('password', this.form.password);
                 this.axios({
-                        method: 'post',
-                        url: 'portal/logout',
-                        data: bodyFormData
-                    })
+                    method: 'post',
+                    url: 'portal/logout',
+                    data: bodyFormData
+                })
                     .then((response) => {
-                       this.$store.dispatch('destroyAccess');
-                       if(response.data.success==1)
-                        this.$router.push('/');
+                        this.$store.dispatch('destroyAccess');
+                        if (response.data.success == 1)
+                            this.$router.push('/');
                         this.$router.go();
                     });
-                    // console.log('logout ended');
+                // console.log('logout ended');
             },
             getNotifications() {
-                let data = {'userId':this.userId};
+                let data = {'userId': this.userId};
                 this.axios({
-                    method:'post',
-                    url:'user/top-notifications',
+                    method: 'post',
+                    url: 'user/top-notifications',
                     data: data
                 })
-                .then((response) => {
-                    // console.log('got notifications');
-                    this.notifications = response.data.notifications;
-                    // console.log(response);
-                });
+                    .then((response) => {
+                        // console.log('got notifications');
+                        this.notifications = response.data.notifications;
+                        // console.log(response);
+                    });
             },
         },
         mounted() {
@@ -151,22 +152,23 @@
             if (topUserSearch.length) {
                 topUserSearch.selectize({
                     persist: false,
-                    maxItems: 1,
+                    maxItems: null,
                     valueField: 'id',
                     labelField: 'name',
                     searchField: ['name'],
                     render: {
-                        option: function(item, escape) {
-                            return '<div class="inline-items">' +
-                                (item.image ? '<div class="author-thumb"><img height="40px" width="40px" src="' + escape(item.image) + '" alt="avatar"></div>' : '') +
-                                '<div class="notification-event">' +
-                                (item.name ? '<span class="h6 notification-friend"></a>' + escape(item.name) + '</span>' : '') +
-                                '</div>'+
-                                '</div>';
+                        option: function (item, escape) {
+                            return `<div class="inline-items">
+                                ${(item.image ? '<div class="author-thumb"><img height="40px" width="40px" src="' + escape(item.image) + '" alt="avatar"></div>' : '')}
+                                <div class="notification-event">
+                                ${(item.name ? '<span class="h6 notification-friend"></a>' + escape(item.name) + '</span>' : '')}
+                                </div>
+                                </div>`;
                         },
-                        item: function(item, escape) {
-                            var label = item.name;
-                            return '<div>' +
+                        item: function (item, escape) {
+                            let label = item.name;
+                            let userType = item.hasOwnProperty('search_type') ? 'challenge' : 'user';
+                            return '<div  data-type="' + userType + '" data-slug="' + item.slug + '">' +
                                 '<span class="label">' + escape(label) + '</span>' +
                                 '</div>';
                         }
@@ -187,17 +189,21 @@
                         });
                     },
                     onItemAdd: (value, $item) => {
-                        console.log(value,'sai',$item);
-                        Vue.nextTick(() => {
-                            this.$router.push({ path: '/search/'+value });
+                        console.log(value, $item, $($item).data());
+                        this.$nextTick(() => {
                             let selectize = topUserSearch[0].selectize;
+                            selectize.close();
                             selectize.clear();
+                            if ($($item).data('type') === 'user')
+                                this.$router.push({path: '/search/' + value});
+                            else
+                                this.$router.push({path: `/challenge-details/${value}/${$($item).data('slug')}`});
                         });
                     }
                 });
             }
         },
-        created(){
+        created() {
             this.userLogin = this.$store.getters.getLogin;
             this.userId = this.$store.getters.getUserId;
             this.userSlug = this.$store.getters.getUserSlug;
@@ -211,8 +217,12 @@
 </script>
 
 <style>
-.avatar{
-    height: 36px;
-    width:36px;
-}
+    .avatar {
+        height: 36px;
+        width: 36px;
+    }
+
+    .search-bar .form-group.with-button input {
+        outline: none;
+    }
 </style>

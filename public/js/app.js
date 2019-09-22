@@ -1951,17 +1951,18 @@ __webpack_require__(/*! selectize */ "./node_modules/selectize/dist/js/selectize
     if (topUserSearch.length) {
       topUserSearch.selectize({
         persist: false,
-        maxItems: 1,
+        maxItems: null,
         valueField: 'id',
         labelField: 'name',
         searchField: ['name'],
         render: {
           option: function option(item, escape) {
-            return '<div class="inline-items">' + (item.image ? '<div class="author-thumb"><img height="40px" width="40px" src="' + escape(item.image) + '" alt="avatar"></div>' : '') + '<div class="notification-event">' + (item.name ? '<span class="h6 notification-friend"></a>' + escape(item.name) + '</span>' : '') + '</div>' + '</div>';
+            return "<div class=\"inline-items\">\n                            ".concat(item.image ? '<div class="author-thumb"><img height="40px" width="40px" src="' + escape(item.image) + '" alt="avatar"></div>' : '', "\n                            <div class=\"notification-event\">\n                            ").concat(item.name ? '<span class="h6 notification-friend"></a>' + escape(item.name) + '</span>' : '', "\n                            </div>\n                            </div>");
           },
           item: function item(_item, escape) {
             var label = _item.name;
-            return '<div>' + '<span class="label">' + escape(label) + '</span>' + '</div>';
+            var userType = _item.hasOwnProperty('search_type') ? 'challenge' : 'user';
+            return '<div  data-type="' + userType + '" data-slug="' + _item.slug + '">' + '<span class="label">' + escape(label) + '</span>' + '</div>';
           }
         },
         load: function load(query, callback) {
@@ -1980,14 +1981,17 @@ __webpack_require__(/*! selectize */ "./node_modules/selectize/dist/js/selectize
           });
         },
         onItemAdd: function onItemAdd(value, $item) {
-          console.log(value, 'sai', $item);
-          Vue.nextTick(function () {
-            _this3.$router.push({
-              path: '/search/' + value
-            });
+          console.log(value, $item, $($item).data());
 
+          _this3.$nextTick(function () {
             var selectize = topUserSearch[0].selectize;
+            selectize.close();
             selectize.clear();
+            if ($($item).data('type') === 'user') _this3.$router.push({
+              path: '/search/' + value
+            });else _this3.$router.push({
+              path: "/challenge-details/".concat(value, "/").concat($($item).data('slug'))
+            });
           });
         }
       });
@@ -31815,7 +31819,7 @@ var VBTooltip = {
 /*!*************************************************!*\
   !*** ./node_modules/bootstrap-vue/esm/index.js ***!
   \*************************************************/
-/*! exports provided: componentsPlugin, BVModalPlugin, BVToastPlugin, AlertPlugin, BAlert, BadgePlugin, BBadge, BreadcrumbPlugin, BBreadcrumb, BBreadcrumbItem, ButtonPlugin, BButton, BButtonClose, ButtonGroupPlugin, BButtonGroup, ButtonToolbarPlugin, BButtonToolbar, CardPlugin, BCard, BCardBody, BCardFooter, BCardGroup, BCardHeader, BCardImg, BCardImgLazy, BCardSubTitle, BCardText, BCardTitle, CarouselPlugin, BCarousel, BCarouselSlide, CollapsePlugin, BCollapse, DropdownPlugin, BDropdown, BDropdownItem, BDropdownItemButton, BDropdownDivider, BDropdownForm, BDropdownGroup, BDropdownHeader, BDropdownText, EmbedPlugin, BEmbed, FormPlugin, BForm, BFormDatalist, BFormText, BFormInvalidFeedback, BFormValidFeedback, FormCheckboxPlugin, BFormCheckbox, BFormCheckboxGroup, FormFilePlugin, BFormFile, FormGroupPlugin, BFormGroup, FormInputPlugin, BFormInput, FormRadioPlugin, BFormRadio, BFormRadioGroup, FormSelectPlugin, BFormSelect, FormTextareaPlugin, BFormTextarea, ImagePlugin, BImg, BImgLazy, InputGroupPlugin, BInputGroup, BInputGroupAddon, BInputGroupAppend, BInputGroupPrepend, BInputGroupText, JumbotronPlugin, BJumbotron, LayoutPlugin, BContainer, BRow, BCol, BFormRow, LinkPlugin, BLink, ListGroupPlugin, BListGroup, BListGroupItem, MediaPlugin, BMedia, BMediaAside, BMediaBody, ModalPlugin, BModal, NavPlugin, BNav, BNavForm, BNavItem, BNavItemDropdown, BNavText, NavbarPlugin, BNavbar, BNavbarBrand, BNavbarNav, BNavbarToggle, PaginationPlugin, BPagination, PaginationNavPlugin, BPaginationNav, PopoverPlugin, BPopover, ProgressPlugin, BProgress, BProgressBar, SpinnerPlugin, BSpinner, TablePlugin, TableLitePlugin, TableSimplePlugin, BTable, BTableLite, BTableSimple, BTbody, BThead, BTfoot, BTr, BTh, BTd, TabsPlugin, BTabs, BTab, ToastPlugin, BToast, BToaster, TooltipPlugin, BTooltip, directivesPlugin, VBModalPlugin, VBModal, VBPopoverPlugin, VBPopover, VBScrollspyPlugin, VBScrollspy, VBTogglePlugin, VBToggle, VBTooltipPlugin, VBTooltip, install, NAME, BVConfigPlugin, BVConfig, BootstrapVue, default */
+/*! exports provided: install, NAME, BVConfigPlugin, BVConfig, BootstrapVue, default, componentsPlugin, BVModalPlugin, BVToastPlugin, AlertPlugin, BAlert, BadgePlugin, BBadge, BreadcrumbPlugin, BBreadcrumb, BBreadcrumbItem, ButtonPlugin, BButton, BButtonClose, ButtonGroupPlugin, BButtonGroup, ButtonToolbarPlugin, BButtonToolbar, CardPlugin, BCard, BCardBody, BCardFooter, BCardGroup, BCardHeader, BCardImg, BCardImgLazy, BCardSubTitle, BCardText, BCardTitle, CarouselPlugin, BCarousel, BCarouselSlide, CollapsePlugin, BCollapse, DropdownPlugin, BDropdown, BDropdownItem, BDropdownItemButton, BDropdownDivider, BDropdownForm, BDropdownGroup, BDropdownHeader, BDropdownText, EmbedPlugin, BEmbed, FormPlugin, BForm, BFormDatalist, BFormText, BFormInvalidFeedback, BFormValidFeedback, FormCheckboxPlugin, BFormCheckbox, BFormCheckboxGroup, FormFilePlugin, BFormFile, FormGroupPlugin, BFormGroup, FormInputPlugin, BFormInput, FormRadioPlugin, BFormRadio, BFormRadioGroup, FormSelectPlugin, BFormSelect, FormTextareaPlugin, BFormTextarea, ImagePlugin, BImg, BImgLazy, InputGroupPlugin, BInputGroup, BInputGroupAddon, BInputGroupAppend, BInputGroupPrepend, BInputGroupText, JumbotronPlugin, BJumbotron, LayoutPlugin, BContainer, BRow, BCol, BFormRow, LinkPlugin, BLink, ListGroupPlugin, BListGroup, BListGroupItem, MediaPlugin, BMedia, BMediaAside, BMediaBody, ModalPlugin, BModal, NavPlugin, BNav, BNavForm, BNavItem, BNavItemDropdown, BNavText, NavbarPlugin, BNavbar, BNavbarBrand, BNavbarNav, BNavbarToggle, PaginationPlugin, BPagination, PaginationNavPlugin, BPaginationNav, PopoverPlugin, BPopover, ProgressPlugin, BProgress, BProgressBar, SpinnerPlugin, BSpinner, TablePlugin, TableLitePlugin, TableSimplePlugin, BTable, BTableLite, BTableSimple, BTbody, BThead, BTfoot, BTr, BTh, BTd, TabsPlugin, BTabs, BTab, ToastPlugin, BToast, BToaster, TooltipPlugin, BTooltip, directivesPlugin, VBModalPlugin, VBModal, VBPopoverPlugin, VBPopover, VBScrollspyPlugin, VBScrollspy, VBTogglePlugin, VBToggle, VBTooltipPlugin, VBTooltip */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39452,7 +39456,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.avatar{\n    height: 36px;\n    width:36px;\n}\n", ""]);
+exports.push([module.i, "\n.avatar {\n    height: 36px;\n    width: 36px;\n}\n.search-bar .form-group.with-button input {\n    outline: none;\n}\n", ""]);
 
 // exports
 

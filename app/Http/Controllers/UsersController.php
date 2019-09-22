@@ -270,20 +270,19 @@ class UsersController extends Controller
 
         $data = $request->all();
         $query = $data['q'];
+        $paginateLength = $request->input('page_limit') ?? 15;
         // perfform search in database or algolia
-        $users = \App\User::where('name', 'LIKE', '%' . $query . '%')->simplePaginate();
+        $users = \App\User::where('name', 'LIKE', '%' . $query . '%')->simplePaginate($paginateLength);
 
         $challenges = Challenge::where('title', 'LIKE', "%$query%")
-            ->select('title AS name', 'image', 'id')
-            ->simplePaginate();
-
-//        dd($challenges);
+            ->select('title AS name', 'image', 'id', 'id as search_type', 'slug')
+            ->simplePaginate($paginateLength);
 
         $result = collect($users->items());
         $result = $result->merge($challenges->items());
-
+        $result = collect($result->sortBy('name')->values()->all());
         return response()->json(
-            $result->sortByDesc('name')->values()->all()
+            $result->splice(0, ($result->count() > $paginateLength ? $paginateLength : $result->count()))
         );
     }
 
