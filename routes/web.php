@@ -97,4 +97,59 @@ Route::get('search', 'ChallengeController@search');
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('admin')->group(function () {
+//    die('herer');
+
+    Route::get('/login', 'Auth\LoginadminController@showLoginForm')->name('login');
+// Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+    // Route::post('/admin/login', 'Auth\LoginController@login')->name('admin.login');;
+    Route::post ( '/login', 'Auth\LoginadminController@login' )->name('admin.login');
+    Route::post ( '/logout', 'Auth\LoginadminController@logout' )->name('logout');;
+
+
+    // Auth::routes();
+    Route::get('/home', 'CategoriesController@index')->name('category_list');
+    Route::get('/categories', 'CategoriesController@index')->name('category_list');
+    Route::get('/categories/add', 'CategoriesController@add')->name('categories_add');
+    Route::post('/categories/add', 'CategoriesController@store')->name('categories_store');
+    Route::get('/categories/edit/{slug}', 'CategoriesController@edit')->name('categories.edit');;
+    Route::patch('/categories/edit/{slug}', 'CategoriesController@update')->name('categories_update');
+    Route::post('/categories/delete', 'CategoriesController@destroy')->name('categories_delete');
+    Route::get('/categories/data', 'CategoriesController@data')->name('categories_data');
+
+// USER ROUTES
+
+    Route::get('/users','UsersController@index')->name('users_list');
+    Route::get('/users/add','UsersController@add')->name('users_add');
+    Route::post('/users/store', 'UsersController@store')->name('users_store');
+// Route::post('/users/add','UsersController@store')->name('users_store');
+    Route::get('/users/edit/{slug}','UsersController@edit');
+    Route::patch('/users/edit/{slug}','UsersController@update')->name('users_update');
+    Route::post('/users/delete', 'UsersController@destroy');
+    Route::get('/users/data', 'UsersController@data')->name('users_data');
+
+
+//CHANLENGES ROUTES
+
+    Route::get('/challenges', 'ChallengeController@index')->name('challenge_list');
+    Route::get('/challenges/add', 'ChallengeController@add')->name('challenges_add');
+    Route::post('/challenges/store', 'ChallengeController@store')->name('challenges_store');
+    Route::get('/challenges/edit/{slug}', 'ChallengeController@edit')->name('challenges_edit');
+    Route::patch('/challenges/edit/{slug}', 'ChallengeController@update')->name('challenge_update');
+    Route::post('/challenges/delete', 'ChallengeController@destroy')->name('challenge_delete');
+    Route::get('/challenges/data', 'ChallengeController@data')->name('challenge_data');
+// Route::get('/edit/ticket/{id}','TicketController@edit');
+// Route::post('/edit/ticket/{id}','TicketController@update');
+
+    Route::get('/campaigns', 'CampaignController@index')->name('campaign_list');
+    Route::get('/campaigns/getlist', 'CampaignController@getcampaign')->name('campaign_get');
+    Route::get('/campaigns/add', 'CampaignController@add')->name('campaigns_add');
+    Route::post('/campaigns/store', 'CampaignController@store')->name('category_store');
+// Route::post('/campaigns/add', 'CampaignController@store')->name('category_store');;
+    Route::get('/campaigns/edit/{slug}', 'CampaignController@edit');
+    Route::patch('/campaigns/edit/{slug}', 'CampaignController@update')->name('campaign_update');
+    Route::post('/campaigns/delete', 'CampaignController@destroy');
+});
+
+Route::get('categories/getlists', 'CategoriesController@select2LoadMore');
 

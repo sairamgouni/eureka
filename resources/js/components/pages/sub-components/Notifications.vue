@@ -24,8 +24,6 @@
                                 <router-link
                                     :to="{ name: 'ProfileEuraka', params: { id: item.id, slug: item.notifier_slug } }"
                                     class="h6 notification-friend">
-
-
                                     {{item.notifier_name}}
                                 </router-link>
 

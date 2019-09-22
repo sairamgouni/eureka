@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 use App\Challenge;
+use App\User;
 use Illuminate\Http\Request;
 use \App\Http\Requests\UsersRequest;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\Models\Activity;
+use Yajra\DataTables\Facades\DataTables;
 
 class UsersController extends Controller
 {
@@ -23,9 +25,7 @@ class UsersController extends Controller
 
     public function index()
     {
-        $users = \App\User::paginate(PAGINATE);
         $data['title'] = 'Users';
-        $data['users'] = $users;
         return view('admin.users.index', $data);
     }
 
@@ -55,9 +55,11 @@ class UsersController extends Controller
     {
         $data['title'] = 'Edit User';
         $data['record'] = \App\User::getRecord($slug);
+        $campaign = \App\Campaign::get()->pluck('campaign', 'id');
+        $data['campaign'] = $campaign;
         $data['button_text'] = 'Update User';
         $data['active_class'] = 'users';
-        return view('admin.users.add-edit', $data);
+        return view('admin.users.edit', $data);
     }
 
     /**
@@ -70,7 +72,7 @@ class UsersController extends Controller
     {
         $result = (object)\App\User::updateRecord($request, $slug);
         flash($result->message, $result->type);
-        return redirect(URL_USERS_LIST);
+        return redirect(route('users_list'));
     }
 
     /**
@@ -294,6 +296,40 @@ class UsersController extends Controller
         return response()->json(
             $users
         );
+    }
+    public function data(){
+        $User = User::with(['campaign', 'role'])->select('users.id','users.cid','users.slug' , 'users.name', 'users.email','users.image');
+//        dd($User->take(5)->get());
+        return DataTables::eloquent($User)
+            ->addColumn('action', function($row){
+                return '<a href="'.action('UsersController@edit',$row->slug).'" class="btn btn-success">Edit</a>
+				      	 ';
+            })
+
+            ->addColumn('campaign', function($row){
+                if($row->campaign) {
+                    return $row->campaign->campaign;
+                }
+                return '-';
+            })
+            ->addColumn('role', function($row){
+                if($row->role) {
+                    $rolename = '';
+                    foreach ($row->role as $role) {
+                        $rolename = $role->display_name;
+
+                    }
+                    return $rolename;
+                }
+                return '-';
+            })
+            ->editColumn('image', function($row){
+
+                return '<img width="100px" src="'.asset('storage/'.$row->image).'">';
+            })
+
+            ->rawColumns(['campaign', 'action','image'])
+            ->make(true);
     }
 
 

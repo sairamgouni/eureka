@@ -107,10 +107,11 @@ class User extends Authenticatable
      * @param string $value [description]
      * @return [type]        [description]
      */
-    public function campaign($value = '')
+    public function campaign()
     {
-        return $this->belongsToMany('App\Campaign', 'campaign_user');
+        return $this->belongsTo(Campaign::class, 'cid');
     }
+
 
     /**
      * This method will send the role name of the user

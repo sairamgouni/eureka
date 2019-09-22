@@ -19,6 +19,7 @@
         "qcod/laravel-gamify": "^1.0",
         "spatie/laravel-activitylog": "^3.7",
         "spatie/laravel-sluggable": "^2.1",
+        "yajra/laravel-datatables-oracle": "~9.0",
         "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {

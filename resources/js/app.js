@@ -56,7 +56,14 @@ window.axios = axios;
 const router = new VueRouter({
     routes: routes,
     hashbang: true,
-    linkExactActiveClass: 'active'
+    linkExactActiveClass: 'active',
+    scrollBehavior: function(to, from, savedPosition) {
+        if (to.hash) {
+            return {selector: to.hash}
+        } else {
+            return {x: 0, y: 0}
+        }
+    },
 });
 
 router.beforeEach((to, from, next) => {

@@ -149,9 +149,9 @@
                                 <div class="form-group label-floating">
                                     <label class="control-label">Your Comment</label>
                                     <textarea v-model="comment_text" name="comment_text" class="form-control"
-                                              placeholder="" style=" border:1px solid red;"></textarea>
+                                              placeholder="" style=" border:1px solid red;" ></textarea>
                                 </div>
-                                    <button type="submit" class="btn btn-primary w-100">Post your Comment
+                                    <button type="submit" class="btn btn-primary w-100" id="comment-box">Post your Comment
                                  </button>
                             </div>
                         </div>
@@ -218,10 +218,6 @@
             margin-bottom: 10px;
         }
 
-        /*.author-date {*/
-        /*    display: flex;*/
-        /*    justify-content: space-between;*/
-        /*}*/
     }
 
     @media only screen and (max-width: 460px) {
@@ -290,7 +286,6 @@
                             loader.hide();
                         });
             },
-
             loadComments() {
                 //we are initiating form data for submit data
                 var bodyFormData = new FormData();
@@ -310,7 +305,6 @@
                     });
 
             },
-
             ownerLike(comment) {
 
                 if (comment && comment.id)
@@ -392,10 +386,12 @@
 
                     })
             }
-
         },
         created() {
             this.loadComments();
+        },
+        updated() {
+            window.document.getElementById('comment-box').scrollIntoView(false);
         }
     }
 </script>

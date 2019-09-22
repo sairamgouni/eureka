@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 
 class CategoriesController extends Controller
@@ -100,6 +102,18 @@ class CategoriesController extends Controller
     {
         $list = \App\Category::getList();
         return ['success'=> 1, 'object'=>$list];
+    }
+
+    public function data(){
+        $category = Category::select('categories.id','categories.title','categories.slug');
+        return DataTables::eloquent($category)
+            ->addColumn('action', function($row){
+                return '<a href="'.action('CategoriesController@edit',$row->slug).'" class="btn btn-success">Edit</a>
+				      	 <a href="javascript:void(0)" class="btn btn-primary" onClick="deleteCategory(\''.$row->slug.'\')">Delete</a>';
+            })
+
+            ->rawColumns(['action'])
+            ->make(true);
     }
 
 

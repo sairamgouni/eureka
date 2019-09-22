@@ -183,12 +183,14 @@
 
                     <router-link
                         :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
+
                         class="btn btn-control">
                         <svg class="olymp-comments-post-icon">
                             <use
                                 xlink:href="assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>
 
                     </router-link>
+
                 </div>
             </article>
         </div>

@@ -8,6 +8,26 @@
 		<!-- Main Content -->
 
 		<main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+            <div class="ui-block">
+
+				<!-- News Feed Form  -->
+
+				<div class="news-feed-form">
+					<!-- Nav tabs -->
+
+                    <!-- Tab panes -->
+                      <form>
+
+								<div class="form-group with-icon label-floating is-empty">
+									<label class="control-label">Share what you are thinking here...</label>
+									<textarea class="form-control" placeholder="" row="2" @click="postChallenge"></textarea>
+								<span class="material-input"></span></div>
+
+
+							</form>
+                </div>
+
+                <!-- ... end News Feed Form  -->			</div>
 		<!--  <div role="tablist " v-if="userLogin">
 		    <b-card no-body class="mb-1">
 		      <b-card-header header-tag="header" class="p-1 " role="tab">
@@ -20,9 +40,9 @@
 		      </b-collapse>
 		    </b-card>
 		  </div> -->
-    <router-link to="/post-challenge">
-                    <a href="javascript:void(0);" class="btn btn-primary btn-md-1 mt-1 post-button">Post Challenge</a>
-              </router-link>
+<!--    <router-link to="/post-challenge">-->
+<!--                    <a href="javascript:void(0);" class="btn btn-primary btn-md-1 mt-1 post-button">Post Challenge</a>-->
+<!--              </router-link>-->
 		<ActivityItem/>
 
 			<a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="items-to-load.html"
@@ -96,6 +116,11 @@
                 userLogin: false
             }
         },
+        methods: {
+            postChallenge() {
+                this.$router.push('/post-challenge');
+            }
+        },
         created() {
             this.userLogin = this.$store.getters.getLogin;
         },
@@ -107,5 +132,14 @@
     .post-button {
         line-height: 40px;
         width: 100%;
+    }
+    .news-feed-form textarea {
+        min-height: 34px !important;
+    }
+    .label-floating.with-icon label.control-label, .label-placeholder.with-icon label.control-label {
+        left: 30px !important;
+    }
+    .label-floating.with-icon .form-control, .label-floating.with-icon input, .label-floating.with-icon textarea {
+        padding-left: 30px !important;
     }
 </style>

@@ -9,12 +9,14 @@ use Illuminate\Http\Request;
 use \App\Http\Requests\ChallengeRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
+
 
 class ChallengeController extends Controller
 {
     public function index()
     {
-        $challenges = \App\Challenge::paginate(5);
+        $challenges = \App\Challenge::orderBy('id', 'desc')->paginate(5);
         $data['title'] = 'Challenges';
         $data['challenges'] = $challenges;
         return view('admin.challenges.index', $data);
@@ -24,11 +26,11 @@ class ChallengeController extends Controller
     {
 
 
-        $category = \App\Category::get()->pluck('title', 'id');
+        $categories = \App\Category::get()->pluck('title', 'id');
 
         $data['title'] = 'Add Challenge';
 
-        return view('admin.challenges.add-edit')->with('category', $category);
+        return view('admin.challenges.add')->with('categories', $categories);
     }
 
     /**
@@ -56,9 +58,14 @@ class ChallengeController extends Controller
     {
         $data['title'] = 'edit';
         $data['record'] = \App\Challenge::getRecord($slug);
+        $category = \App\Category::get()->pluck('title', 'id');
+        $data['category'] = $category;
+        $data['selectedCategories'] = $data['record']->categories->pluck('id')->toArray();
 
-        dd($data);
-        return view('admin.challenges.add-edit', $data);
+//     dd($data['selectedCategories']);
+
+        // dd($data);
+        return view('admin.challenges.edit')->with($data);
     }
 
     /**
@@ -409,5 +416,35 @@ class ChallengeController extends Controller
         $data= $request->all();
         $search = $data['q'];
         return Challenge::where('title', 'like', '%' . $search . '%')->get();
+    }
+    public function data()
+    {
+        $challenge = Challenge::with('categories')->select('challenges.id', 'challenges.slug', 'challenges.title', 'challenges.status', 'challenges.image');
+        return DataTables::eloquent($challenge)
+            ->addColumn('action', function ($row) {
+                return '<a href="' . route('challenges_edit', $row->slug) . '" class="btn btn-success">Edit</a>
+				      	 <a href="javascript:void(0)" class="btn btn-primary" onClick="deleteChallenge(\'' . $row->slug . '\')">Delete</a>';
+            })
+            ->addColumn('categories', function ($row) {
+                $categories = '<ul class="custom-ul">';
+                foreach ($row->categories as $category) {
+                    $categories .= '<li>' . $category->title . '</li>';
+                }
+                $categories .= '</ul>';
+                return $categories;
+            })
+            ->editColumn('image', function ($row) {
+
+                return '<img width="100px" src="' . asset('storage/' . $row->image) . '">';
+            })
+            ->rawColumns(['categories', 'action', 'image'])
+            ->make(true);
+    }
+
+    public function destroy(Request $request)
+    {
+        $slug = $request->slug;
+        $status = \App\Challenge::where('slug', $slug)->delete();
+        return ['status' => $status, 'message' => 'record_deleted_successfully'];
     }
 }

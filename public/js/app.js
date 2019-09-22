@@ -4383,6 +4383,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4403,6 +4423,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       userLogin: false
     };
+  },
+  methods: {
+    postChallenge: function postChallenge() {
+      this.$router.push('/post-challenge');
+    }
   },
   created: function created() {
     this.userLogin = this.$store.getters.getLogin;
@@ -6286,145 +6311,6 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -10131,6 +10017,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ActivityItem',
   props: ['CurrentUser', 'isUserLoggedIn', 'isSameUser', 'loadCurrentUserActivity', 'profileIdToLoad', 'specificUserRecords'],
@@ -10550,10 +10438,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Comments',
   props: ['comment_type', 'comment_type_id'],
@@ -10699,6 +10583,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.loadComments();
+  },
+  updated: function updated() {
+    window.document.getElementById('comment-box').scrollIntoView(false);
   }
 });
 
@@ -11033,8 +10920,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -39491,7 +39376,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".comments-list .comment-item {\n  padding: 0px 15px;\n}\n.comments-list .comment-item .comment {\n  margin-bottom: 5px;\n}\n.comments-list .comment-item .likes-count {\n  margin-top: 2px;\n}\n.comments-list .comment-item .tick_count {\n  margin-top: 2px;\n}\n.comments-list .comment-item .win_count {\n  margin-top: 2px;\n}\n.comments-list .comment-item .text-danger {\n  color: #f92552 !important;\n}\n.comments-list.style-3 .comment-item {\n  background-color: transparent;\n  border-bottom: 1px solid #ccc6;\n  margin-bottom: 15px;\n}\n.comments-list.style-3 .post__author-thumb img {\n  width: 35px;\n  height: 35px;\n}\n.replay-form-group {\n  /*height: 50px;*/\n  margin: 0;\n}\n.replay-form-group textarea {\n  min-height: 70px !important;\n}\n.comment-reply-item {\n  /*.author-date {*/\n  /*    display: flex;*/\n  /*    justify-content: space-between;*/\n  /*}*/\n}\n.comment-reply-item .post__author {\n  margin-bottom: 10px;\n}\n@media only screen and (max-width: 460px) {\n.comment-reply-item .author-date {\n    /*display: block;*/\n    margin-bottom: 10px;\n}\n}", ""]);
+exports.push([module.i, ".comments-list .comment-item {\n  padding: 0px 15px;\n}\n.comments-list .comment-item .comment {\n  margin-bottom: 5px;\n}\n.comments-list .comment-item .likes-count {\n  margin-top: 2px;\n}\n.comments-list .comment-item .tick_count {\n  margin-top: 2px;\n}\n.comments-list .comment-item .win_count {\n  margin-top: 2px;\n}\n.comments-list .comment-item .text-danger {\n  color: #f92552 !important;\n}\n.comments-list.style-3 .comment-item {\n  background-color: transparent;\n  border-bottom: 1px solid #ccc6;\n  margin-bottom: 15px;\n}\n.comments-list.style-3 .post__author-thumb img {\n  width: 35px;\n  height: 35px;\n}\n.replay-form-group {\n  /*height: 50px;*/\n  margin: 0;\n}\n.replay-form-group textarea {\n  min-height: 70px !important;\n}\n.comment-reply-item .post__author {\n  margin-bottom: 10px;\n}\n@media only screen and (max-width: 460px) {\n.comment-reply-item .author-date {\n    /*display: block;*/\n    margin-bottom: 10px;\n}\n}", ""]);
 
 // exports
 
@@ -39605,7 +39490,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.post-button[data-v-1a6c1bf2] {\n    line-height: 40px;\n    width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.post-button[data-v-1a6c1bf2] {\n    line-height: 40px;\n    width: 100%;\n}\n.news-feed-form textarea[data-v-1a6c1bf2] {\n    min-height: 34px !important;\n}\n.label-floating.with-icon label.control-label[data-v-1a6c1bf2], .label-placeholder.with-icon label.control-label[data-v-1a6c1bf2] {\n    left: 30px !important;\n}\n.label-floating.with-icon .form-control[data-v-1a6c1bf2], .label-floating.with-icon input[data-v-1a6c1bf2], .label-floating.with-icon textarea[data-v-1a6c1bf2] {\n    padding-left: 30px !important;\n}\n", ""]);
 
 // exports
 
@@ -63453,15 +63338,31 @@ var render = function() {
               "col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12"
           },
           [
-            _c("router-link", { attrs: { to: "/post-challenge" } }, [
-              _c(
-                "a",
-                {
-                  staticClass: "btn btn-primary btn-md-1 mt-1 post-button",
-                  attrs: { href: "javascript:void(0);" }
-                },
-                [_vm._v("Post Challenge")]
-              )
+            _c("div", { staticClass: "ui-block" }, [
+              _c("div", { staticClass: "news-feed-form" }, [
+                _c("form", [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "form-group with-icon label-floating is-empty"
+                    },
+                    [
+                      _c("label", { staticClass: "control-label" }, [
+                        _vm._v("Share what you are thinking here...")
+                      ]),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        staticClass: "form-control",
+                        attrs: { placeholder: "", row: "2" },
+                        on: { click: _vm.postChallenge }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "material-input" })
+                    ]
+                  )
+                ])
+              ])
             ]),
             _vm._v(" "),
             _c("ActivityItem"),
@@ -66509,36 +66410,61 @@ var render = function() {
                               1
                             ),
                             _vm._v(" "),
-                            _c("div", { staticClass: "notification-event" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "h6 notification-friend",
-                                  attrs: { href: "#" }
-                                },
-                                [_vm._v(_vm._s(notification.notifier_name))]
-                              ),
-                              _vm._v(" " + _vm._s(notification.message) + " "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "notification-link",
-                                  attrs: { href: "#" }
-                                },
-                                [_vm._v(_vm._s(notification.item_title))]
-                              ),
-                              _vm._v(".\n\t\t\t\t\t\t\t"),
-                              _c("span", { staticClass: "notification-date" }, [
+                            _c(
+                              "div",
+                              { staticClass: "notification-event" },
+                              [
                                 _c(
-                                  "time",
+                                  "router-link",
                                   {
-                                    staticClass: "entry-date updated",
-                                    attrs: { datetime: "2004-07-24T18:18" }
+                                    staticClass: "h6 notification-friend",
+                                    attrs: {
+                                      to: {
+                                        name: "ProfileEuraka",
+                                        params: {
+                                          id: notification.id,
+                                          slug: notification.notifier_slug
+                                        }
+                                      }
+                                    }
                                   },
-                                  [_vm._v(_vm._s(notification.created_at))]
+                                  [
+                                    _vm._v(
+                                      "\n                                    " +
+                                        _vm._s(notification.notifier_name) +
+                                        "\n                                "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(
+                                  " " + _vm._s(notification.message) + " "
+                                ),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "notification-link",
+                                    attrs: { href: "#" }
+                                  },
+                                  [_vm._v(_vm._s(notification.item_title))]
+                                ),
+                                _vm._v(".\n\t\t\t\t\t\t\t"),
+                                _c(
+                                  "span",
+                                  { staticClass: "notification-date" },
+                                  [
+                                    _c(
+                                      "time",
+                                      {
+                                        staticClass: "entry-date updated",
+                                        attrs: { datetime: "2004-07-24T18:18" }
+                                      },
+                                      [_vm._v(_vm._s(notification.created_at))]
+                                    )
+                                  ]
                                 )
-                              ])
-                            ]),
+                              ],
+                              1
+                            ),
                             _vm._v(" "),
                             _c("span", { staticClass: "notification-icon" })
                           ]
@@ -74995,7 +74921,7 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary w-100",
-                    attrs: { type: "submit" }
+                    attrs: { type: "submit", id: "comment-box" }
                   },
                   [
                     _vm._v(
@@ -75650,7 +75576,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n\n\n                                " +
+                              "\n                                " +
                                 _vm._s(item.notifier_name) +
                                 "\n                            "
                             )
@@ -82969,7 +82895,19 @@ window.axios = axios__WEBPACK_IMPORTED_MODULE_3___default.a;
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: _routes_routes__WEBPACK_IMPORTED_MODULE_5__["default"],
   hashbang: true,
-  linkExactActiveClass: 'active'
+  linkExactActiveClass: 'active',
+  scrollBehavior: function scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        selector: to.hash
+      };
+    } else {
+      return {
+        x: 0,
+        y: 0
+      };
+    }
+  }
 });
 router.beforeEach(function (to, from, next) {
   if (!USER.last_login && to.name !== 'ChangePassword') return next('/change-password');else next();

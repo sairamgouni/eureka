@@ -181,8 +181,7 @@ class Challenge extends Model
     public static function getRecord($slug)
     {
 
-        return \App\Challenge::leftJoin('eureka_categories', 'id', 'challenges.category_id')
-            ->where('challenges.slug', '=', $slug)->first();
+        return \App\Challenge::where('slug', '=', $slug)->first();
     }
 
     /**
