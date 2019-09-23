@@ -142,13 +142,14 @@ Route::prefix('admin')->group(function () {
 // Route::post('/edit/ticket/{id}','TicketController@update');
 
     Route::get('/campaigns', 'CampaignController@index')->name('campaign_list');
-    Route::get('/campaigns/getlist', 'CampaignController@getcampaign')->name('campaign_get');
-    Route::get('/campaigns/add', 'CampaignController@add')->name('campaigns_add');
-    Route::post('/campaigns/store', 'CampaignController@store')->name('category_store');
+//    Route::get('/campaigns/getlist', 'CampaignController@getcampaign')->name('campaign_get');
+    Route::get('/campaigns/add', 'CampaignController@add')->name('campaign_add');
+    Route::post('/campaigns/store', 'CampaignController@store')->name('campaign_store');
 // Route::post('/campaigns/add', 'CampaignController@store')->name('category_store');;
-    Route::get('/campaigns/edit/{slug}', 'CampaignController@edit');
+    Route::get('/campaigns/edit/{slug}', 'CampaignController@edit')->name('campaign_edit');;
     Route::patch('/campaigns/edit/{slug}', 'CampaignController@update')->name('campaign_update');
-    Route::post('/campaigns/delete', 'CampaignController@destroy');
+    Route::post('/campaigns/delete', 'CampaignController@destroy')->name('campaign_delete');;
+    Route::get('/campaigns/data', 'CampaignController@data')->name('campaign_data');
 });
 
 Route::get('categories/getlists', 'CategoriesController@select2LoadMore');

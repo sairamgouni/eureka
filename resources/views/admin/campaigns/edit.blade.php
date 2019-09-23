@@ -16,19 +16,19 @@
 					</div>
 				</div>
 				<div class="ui-block-content">
-					
-            {{ Form::model($record, 
-            array('url' => 'admin/campaigns/edit/'.$record->slug, 
+
+            {{ Form::model($record,
+            array('url' => 'admin/campaigns/edit/'.$record->slug,
             'method'=>'patch','novalidate'=>'','name'=>'formUsers ', 'files'=>'true' )) }}
 
-        
-						<div class="row">	
+
+						<div class="row">
 						<div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
 								<div class="form-group">
 									<label class="control-label">Campaign</label>
 									<?php
 							             $title  = '';
-							             if(isset(($record)))
+                                    if(isset($record))
 							             {
 							              	if($record->campaign)
 							              	$title  = $record->campaign;
@@ -38,24 +38,31 @@
 								</div>
 
                                 <?php
-			             	if(isset(($record))) {
+                            if(isset($record)) {
      						?>
 								<input type="hidden" name="id" value="{{$record->id}}"  class="form-control">
 								<input type="hidden" name="slug" value="{{$record->slug}}"  class="form-control">
-							<?php 
+							<?php
 								}
 							?>
 							</div>
-
                             <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-								<!-- <div class="form-group">
-									<label class="control-label">Image</label>
-									<input class="form-control" type="file" name="image" placeholder="Choose Optional Tags">
-								</div> -->
-							</div>
+                                <div class="form-group">
+                                    <label class="control-label">Code</label>
+                                    <?php
+                                    $code  = '';
+                                    if(isset($record))
+                                    {
+                                        if($record->code)
+                                            $title  = $record->code;
+                                    }
+                                    ?>
+                                    <input class="form-control" type="text" name="code" placeholder="Title here" value="{{$code}}">
+                                </div>
 
-                         
-				
+                            </div>
+
+
                             <div class="col col-xl-2 col-lg-2 col-md-3 col-sm-3 col-3">
 								<button class="btn btn-blue  btn-small">Update</button>
 							</div>
@@ -66,7 +73,7 @@
 
 		</div>
 
-		
+
 	</div>
 </div>
 

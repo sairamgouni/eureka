@@ -25,7 +25,7 @@ class CampaignController extends Controller
         $campaigns = \App\Campaign::pluck('campaign', 'id');
         $data['title'] = 'Add Campaigne';
         $data['campaigns'] = $campaigns;
-    	return view('admin.campaigns.add-edit');
+    	return view('admin.campaigns.add',$data);
     }
 
      /**
@@ -53,7 +53,7 @@ class CampaignController extends Controller
     {
         $data['title'] = 'edit';
         $data['record'] = \App\Campaign::getRecord($slug);
-        return view('admin.campaigns.add-edit',$data);
+        return view('admin.campaigns.edit',$data);
     }
 
     /**
@@ -72,14 +72,21 @@ class CampaignController extends Controller
         return redirect('admin/campaigns');
     }
     public function data(){
-        $category = Campaign::select('eureka_campaigns.id','eureka_campaigns.campaign','eureka_campaigns.slug');
+        $category = Campaign::select('eureka_campaigns.id','eureka_campaigns.campaign','eureka_campaigns.code','eureka_campaigns.slug');
         return DataTables::eloquent($category)
             ->addColumn('action', function($row){
-                return '<a href="'.action('CategoriesController@edit',$row->slug).'" class="btn btn-success">Edit</a>
-				      	 <a href="javascript:void(0)" class="btn btn-primary" onClick="deleteCategory(\''.$row->slug.'\')">Delete</a>';
+                return '<a href="' . route('campaign_edit', $row->slug) . '" class="btn btn-success">Edit</a>
+				      	 <a href="javascript:void(0)" class="btn btn-primary" onClick="deleteCampaign(\''.$row->slug.'\')">Delete</a>';
             })
 
             ->rawColumns(['action'])
             ->make(true);
+    }
+
+    public function destroy(Request $request)
+    {
+        $slug = $request->slug;
+        $status = Campaign::where('slug', $slug)->delete();
+        return ['status' => $status, 'message' => 'record_deleted_successfully'];
     }
 }
