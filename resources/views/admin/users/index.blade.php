@@ -37,6 +37,7 @@
                                 <th scope="col">Campaign</th>
                                 <th scope="col">Role</th>
                                 <th scope="col">Action</th>
+                                <th scope="col">Status</th>
                             </tr>
                             </thead>
                         </table>
@@ -69,15 +70,15 @@
                 {data: 'image', name: 'image', "searchable": false, "sortable": false},
                 {data: 'campaign', name: 'campaign.campaign'},
                 {data: 'role', name: 'role.display_name'},
-                // {data: 'status', name: 'status'},
+                {data: 'status', name: 'status'},
                 {data: 'action', name: 'action', "searchable": false, "sortable": false}
             ]
         });
-        function deleteCategory(slug)
+        function deleteUser(slug)
         {
             swal({
                 title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this Category!",
+                text: "Once deleted, you will not be able to recover this User!",
                 buttons: true,
                 dangerMode: true,
             })
@@ -86,7 +87,7 @@
 
                         $.ajax({
                             method: "POST",
-                            url: '/challenges/delete',
+                            url: '{{ route('users_delete') }}',
                             data:{
                                 "_token": "{{ csrf_token() }}",
                                 "slug": slug

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Campaign;
+use App\Category;
 use Illuminate\Http\Request;
 use \App\Http\Requests\ChallengeRequest;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class CampaignController extends Controller
 {
@@ -33,7 +36,7 @@ class CampaignController extends Controller
      */
     public function store(Request $request)
     {
-    	
+
         $result = (object) \App\Campaign::saveRecord($request);
         \Session::flash('type',$result->type);
     	\Session::flash('message',$result->message);
@@ -67,5 +70,16 @@ class CampaignController extends Controller
         \Session::flash('type',$result->type);
     	\Session::flash('message',$result->message);
         return redirect('admin/campaigns');
+    }
+    public function data(){
+        $category = Campaign::select('eureka_campaigns.id','eureka_campaigns.campaign','eureka_campaigns.slug');
+        return DataTables::eloquent($category)
+            ->addColumn('action', function($row){
+                return '<a href="'.action('CategoriesController@edit',$row->slug).'" class="btn btn-success">Edit</a>
+				      	 <a href="javascript:void(0)" class="btn btn-primary" onClick="deleteCategory(\''.$row->slug.'\')">Delete</a>';
+            })
+
+            ->rawColumns(['action'])
+            ->make(true);
     }
 }

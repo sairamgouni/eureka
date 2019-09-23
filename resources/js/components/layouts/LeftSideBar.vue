@@ -256,6 +256,7 @@
                         </router-link>
                     </li>
                     <li>
+                    <li>
                             <a v-if="userLevel=='admin'"  href="http://localhost:8000/admin/challenges" class="nav-link" target="_blank">
                             <svg version="1.1" class="left-menu-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve" data-toggle="tooltip" data-placement="right"   data-original-title="Settings">
 						<g>

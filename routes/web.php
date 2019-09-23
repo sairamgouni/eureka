@@ -108,7 +108,7 @@ Route::prefix('admin')->group(function () {
 
 
     // Auth::routes();
-    Route::get('/home', 'CategoriesController@index')->name('category_list');
+//    Route::get('/home', 'CategoriesController@index')->name('category_list');
     Route::get('/categories', 'CategoriesController@index')->name('category_list');
     Route::get('/categories/add', 'CategoriesController@add')->name('categories_add');
     Route::post('/categories/add', 'CategoriesController@store')->name('categories_store');
@@ -123,15 +123,15 @@ Route::prefix('admin')->group(function () {
     Route::get('/users/add','UsersController@add')->name('users_add');
     Route::post('/users/store', 'UsersController@store')->name('users_store');
 // Route::post('/users/add','UsersController@store')->name('users_store');
-    Route::get('/users/edit/{slug}','UsersController@edit');
+    Route::get('/users/edit/{slug}','UsersController@edit')->name('users_edit');;
     Route::patch('/users/edit/{slug}','UsersController@update')->name('users_update');
-    Route::post('/users/delete', 'UsersController@destroy');
+    Route::post('/users/delete', 'UsersController@destroy')->name('users_delete');
     Route::get('/users/data', 'UsersController@data')->name('users_data');
 
 
 //CHANLENGES ROUTES
 
-    Route::get('/challenges', 'ChallengeController@index')->name('challenge_list');
+    Route::get('/home', 'ChallengeController@index')->name('challenge_list');
     Route::get('/challenges/add', 'ChallengeController@add')->name('challenges_add');
     Route::post('/challenges/store', 'ChallengeController@store')->name('challenges_store');
     Route::get('/challenges/edit/{slug}', 'ChallengeController@edit')->name('challenges_edit');
