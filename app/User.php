@@ -205,7 +205,6 @@ class User extends Authenticatable
                 $user->password = bcrypt($request->password);
         }
         $user->role()->sync($request->role);
-        $user->campaign()->sync($request->campaign);
         $response = $user->save();
         $static_object->processUpload($request, $user);
 
