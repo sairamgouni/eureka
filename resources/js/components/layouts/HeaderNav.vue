@@ -36,9 +36,7 @@
 
                                 <ul class="account-settings">
                                     <li>
-                                        <router-link
-                                            :to="{ name: 'ProfileEuraka', params: { id: userId, slug: userSlug } }"
-                                            class="nav-link">
+                                        <router-link to="/edit-profile" class="nav-link">
 
 
                                             <svg class="olymp-menu-icon">

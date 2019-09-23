@@ -14,19 +14,15 @@
 							<div class="col col-lg-5 col-md-5 col-sm-12 col-12">
 								<ul class="profile-menu">
 									<li>
-										   <router-link  to="/" class="nav-link">
-											Timeline
-                        					</router-link>
+                                        <router-link
+                                            :to="{ name: 'Profile', params: { id: user.id, slug: user.slug } }"
+                                            class="nav-link">
+                                            Timeline
+                                        </router-link>
 									</li>
 
 									<li>
-										<router-link
 
-										 :to="{ name: 'Friends',
-										 params: { id: user.id, slug: user.slug } }" >
-
-										Friends
-										</router-link>
 									</li>
 								</ul>
 							</div>

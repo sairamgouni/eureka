@@ -161,11 +161,16 @@
 
 
                     <div class="comments-shared">
-                        <a href="javascript:void(0);" class="post-add-icon inline-items">
-                            <svg class="olymp-speech-balloon-icon"><use
-                                xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>
+                        <router-link
+                            :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
+
+                            class="post-add-icon inline-items">
+                            <svg class="olymp-speech-balloon-icon">
+                                <use
+                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>
                             <span>{{item.comments}}</span>
-                        </a>
+                        </router-link>
+
                     </div>
 
 

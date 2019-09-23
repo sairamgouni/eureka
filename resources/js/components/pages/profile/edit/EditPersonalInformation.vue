@@ -170,7 +170,6 @@ export default {
                 userSlug:'',
                 userImage:'',
                 userBackgroundImage:'',
-                userName:'',
                 form:{
                     username:'',
                 	nickname:'',
@@ -209,12 +208,6 @@ export default {
 
 
                         if (response.status==200) {
-
-                            this.$toast.open({
-                                message: 'Profile Updated',
-                                type: 'success'
-                            });
-
                               this.$store.commit('setUserName', this.form.username );
                               this.$store.commit('setUserNickname', this.form.nickname );
                               this.$store.commit('setUserAbout', this.form.about );
@@ -227,6 +220,12 @@ export default {
 					            this.userName = this.$store.getters.getUserName;
 					  			this.userAbout = this.$store.getters.getUserAbout;
 					            this.userNickname = this.$store.getters.getUserNickname;
+                            this.$toast.open({
+                                message: 'Profile Updated',
+                                type: 'success'
+                            });
+                            this.$router. push({name:'ProfileEuraka', params:{id: userId, slug: userSlug }});
+
 
                         } else {
                         	loader.hide();
@@ -248,11 +247,11 @@ export default {
             this.userSlug = this.$store.getters.getUserSlug;
             this.userImage = this.$store.getters.getUserImage;
             this.userBackgroundImage = this.$store.getters.getUserBackgroundImage;
-            this.userName = this.$store.getters.getUserName;
             this.userEmail = this.$store.getters.getUserEmail;
             this.userAbout = this.$store.getters.getUserAbout;
+            this.userUserName = this.$store.getters.getUserName;
             this.userNickname = this.$store.getters.getUserNickname;
-            this.form.username = this.userName;
+            this.form.username = this.userUserName;
             this.form.email = this.userEmail;
             this.form.about = this.userAbout;
             this.form.nickname = this.userNickname;
