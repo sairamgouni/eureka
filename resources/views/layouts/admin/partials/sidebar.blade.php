@@ -16,7 +16,7 @@
 				</li>
 				<li>
 					<a href="{{url('admin/categories')}}">
-						<svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip" data-placement="right"   data-original-title="Categories"><use xlink:href="{{asset('assets/svg-icons/sprites/icons.svg')}}#olymp-newsfeed-icon"></use></svg>
+						<svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip" data-placement="right"   data-original-title="Categories"><use xlink:href="{{asset('assets/svg-icons/category-icon.svg')}}#olymp-newsfeed-icon"></use></svg>
 					</a>
 				</li>
 				<li>
@@ -34,7 +34,7 @@
 						<svg class="olymp-star-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="Campaigns"><use xlink:href="{{asset('assets/svg-icons/sprites/icons.svg')}}#olymp-star-icon"></use></svg>
 					</a>
 				</li>
-			
+
 			</ul>
 		</div>
 	</div>
@@ -59,31 +59,31 @@
 				</li>
 				<li>
 					<a href="{{url('admin/categories')}}">
-						<svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip" data-placement="right"   data-original-title="NEWSFEED"><use xlink:href="{{asset('assets/svg-icons/sprites/icons.svg')}}#olymp-newsfeed-icon"></use></svg>
+						<svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip" data-placement="right"   data-original-title="Categories"><use xlink:href="{{asset('assets/svg-icons/category-icon.svg')}}#olymp-newsfeed-icon"></use></svg>
 						<span class="left-menu-title">Categories</span>
 					</a>
 				</li>
 				<li>
 					<a href="{{url('admin/users')}}">
-						<svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip" data-placement="right"   data-original-title="NEWSFEED"><use xlink:href="{{asset('assets/svg-icons/sprites/icons.svg')}}#olymp-happy-faces-icon"></use></svg>
+						<svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip" data-placement="right"   data-original-title="Users"><use xlink:href="{{asset('assets/svg-icons/sprites/icons.svg')}}#olymp-happy-faces-icon"></use></svg>
 						<span class="left-menu-title">Users</span>
 					</a>
 				</li>
 				<li>
-					<a href="{{url('admin/challenges')}}">
-						<svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip" data-placement="right"   data-original-title="NEWSFEED"><use xlink:href="{{asset('assets/svg-icons/sprites/icons.svg')}}#olymp-newsfeed-icon"></use></svg>
+					<a href="{{url('admin/home')}}">
+						<svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip" data-placement="right"   data-original-title="Challenges"><use xlink:href="{{asset('assets/svg-icons/sprites/icons.svg')}}#olymp-newsfeed-icon"></use></svg>
 						<span class="left-menu-title">Challenges</span>
 					</a>
 				</li>
 				<li>
 					<a href="{{url('admin/campaigns')}}">
-						<svg class="olymp-star-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="FAV PAGE"><use xlink:href="{{asset('assets/svg-icons/sprites/icons.svg')}}#olymp-star-icon"></use></svg>
+						<svg class="olymp-star-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="Campaigns"><use xlink:href="{{asset('assets/svg-icons/sprites/icons.svg')}}#olymp-star-icon"></use></svg>
 						<span class="left-menu-title">Campaigns</span>
 					</a>
 				</li>
-			
 
- 
+
+
 		</div>
 	</div>
 </div>
@@ -230,9 +230,9 @@
 					</a>
 				</li>
 			</ul>
- 
 
-		 
+
+
 
 		</div>
 	</div>

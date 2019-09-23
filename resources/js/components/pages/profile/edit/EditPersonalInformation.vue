@@ -14,28 +14,28 @@
 				</div>
 				<div class="ui-block-content">
 
-					
+
 					<!-- Personal Information Form  -->
-					
+
 					 <b-form @submit="onSubmit">
-                
+
                     	<div class="row">
 
 
-					  			
-					
-					
+
+
+
 							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
 								<div class="form-group label-floating">
 									<label class="control-label">Full Name</label>
-									
 
-                    		<b-form-input 
+
+                    		<b-form-input
 					                    class="mt-2 form-control"
-					                    id="fullname" 
-					                    type="text" 
-					                    v-model="form.fullname" 
-					                    required 
+					                    id="username"
+					                    type="text"
+					                    v-model="form.username"
+					                    required
 					                   />
 					                </b-form-group>
 								</div>
@@ -43,44 +43,57 @@
 								<div class="form-group label-floating">
 									<label class="control-label">Nick Name</label>
 
-                    		<b-form-input 
+                    		<b-form-input
 					                    class="mt-2 form-control"
-					                    id="nickname" 
-					                    type="text" 
-					                    v-model="form.nickname" 
-					                    required 
+					                    id="nickname"
+					                    type="text"
+					                    v-model="form.nickname"
+					                    required
 					                   />
 					                </b-form-group>
 
 								</div>
-					
+
 								<div class="form-group label-floating">
 									<label class="control-label">Your Email</label>
-								
-                    		<b-form-input 
+
+                    		<b-form-input
 					                    class="mt-2 form-control"
-					                    id="email" 
-					                    type="text" 
-					                    v-model="form.email" 
+					                    id="email"
+					                    type="text"
+					                    v-model="form.email"
 					                    required readonly
 					                   />
 					                </b-form-group>
 								</div>
-					
- 
+                                	<div class="form-group label-floating">
+									<label class="control-label">Campaign</label>
+
+                    		<b-form-input
+                                class="mt-2 form-control"
+                                id="nickname"
+                                type="text"
+                                v-model="form.nickname"
+                                required
+                            />
+                                        </b-form-group>
+
+								</div>
+
+
 							</div>
-					
+
 							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
-			 
-					
- 
+
+
+
 								<div class="form-group label-floating">
 									<label class="control-label">Write a little description about you</label>
 									<b-form-textarea
 							    class="mt-2 form-control"
 							      id="description"
 							      v-model="form.about"
-							      
+
 							      rows="3"
 							      max-rows="6"
 						    ></b-form-textarea>
@@ -101,31 +114,31 @@
 								<span class="control-label">Background Image</span>
 							<b-form-file
 							class="mt-2"
-						      v-model="form.background_image"
-						      :state="Boolean(form.background_image)"
+						      v-model="form.userBackgroundImage"
+						      :state="Boolean(form.userBackgroundImage)"
 						      placeholder="Upload an Image"
 						      drop-placeholder="Drop Image here..."
 						    ></b-form-file>
 							</div>
- 
+
  							</div>
-		 
+
 <!-- 							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
-	
- 
+
+
 							</div> -->
- 
-						 
+
+
 							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
 								<button class="btn btn-secondary btn-lg full-width">Restore all Attributes</button>
 							</div>
 							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
 								<button class="btn btn-primary btn-lg full-width">Save all Changes</button>
 							</div>
-					
+
 						</div>
 					</b-form>
-					
+
 					<!-- ... end Personal Information Form  -->
 				</div>
 			</div>
@@ -159,7 +172,7 @@ export default {
                 userBackgroundImage:'',
                 userName:'',
                 form:{
-                	fullname:'',
+                    username:'',
                 	nickname:'',
                 	email:'',
                 	about:'',
@@ -178,13 +191,13 @@ export default {
                 evt.preventDefault();
 
                 var bodyFormData = new FormData();
-                bodyFormData.set('fullname', this.form.fullname);
+                bodyFormData.set('userName', this.form.username);
                 bodyFormData.set('nickname', this.form.nickname);
                 bodyFormData.set('email', this.form.email);
                 bodyFormData.set('about', this.form.about);
                 bodyFormData.set('image', this.form.image);
                 bodyFormData.set('background_image', this.form.background_image);
-                
+
                 this.axios({
                         method: 'post',
                         url: '/user/update-profile',
@@ -193,16 +206,16 @@ export default {
                     .then((response) => {
 
                         loader.hide();
- 
-                       
+
+
                         if (response.status==200) {
-   
+
                             this.$toast.open({
                                 message: 'Profile Updated',
                                 type: 'success'
                             });
 
-                              this.$store.commit('setUserName', this.form.fullname );
+                              this.$store.commit('setUserName', this.form.username );
                               this.$store.commit('setUserNickname', this.form.nickname );
                               this.$store.commit('setUserAbout', this.form.about );
                               this.$store.commit('setUserAbout', this.form.about );
@@ -239,11 +252,11 @@ export default {
             this.userEmail = this.$store.getters.getUserEmail;
             this.userAbout = this.$store.getters.getUserAbout;
             this.userNickname = this.$store.getters.getUserNickname;
-            this.form.fullname = this.userName;
+            this.form.username = this.userName;
             this.form.email = this.userEmail;
             this.form.about = this.userAbout;
             this.form.nickname = this.userNickname;
-     
+
         },
 }
 </script>

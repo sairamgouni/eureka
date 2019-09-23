@@ -31,7 +31,7 @@ class CategoriesController extends Controller
     {
         $data['title'] = 'Add Category';
     	$data['button_text'] = 'Save Category';
-    	return view('admin.categories.add-edit',$data);
+    	return view('admin.categories.add',$data);
     }
 
      /**
@@ -50,7 +50,7 @@ class CategoriesController extends Controller
         $result = (object) \App\Category::saveRecord($request);
         \Session::flash('type',$result->type);
     	\Session::flash('message',$result->message);
-        return redirect('admin/categories');
+        return redirect(route('category_list'));
     }
 
     /**
@@ -64,7 +64,7 @@ class CategoriesController extends Controller
         $data['title'] = 'Edit Category';
         $data['record'] = \App\Category::getRecord($slug);
         $data['button_text'] = 'Update Category';
-        return view('admin.categories.add-edit',$data);
+        return view('admin.categories.edit',$data);
     }
 
     /**

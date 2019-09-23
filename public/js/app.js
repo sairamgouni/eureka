@@ -1884,6 +1884,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2512,6 +2521,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -9330,6 +9340,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -9348,7 +9371,7 @@ __webpack_require__.r(__webpack_exports__);
       userBackgroundImage: '',
       userName: '',
       form: {
-        fullname: '',
+        username: '',
         nickname: '',
         email: '',
         about: '',
@@ -9367,7 +9390,7 @@ __webpack_require__.r(__webpack_exports__);
 
       evt.preventDefault();
       var bodyFormData = new FormData();
-      bodyFormData.set('fullname', this.form.fullname);
+      bodyFormData.set('userName', this.form.username);
       bodyFormData.set('nickname', this.form.nickname);
       bodyFormData.set('email', this.form.email);
       bodyFormData.set('about', this.form.about);
@@ -9386,7 +9409,7 @@ __webpack_require__.r(__webpack_exports__);
             type: 'success'
           });
 
-          _this.$store.commit('setUserName', _this.form.fullname);
+          _this.$store.commit('setUserName', _this.form.username);
 
           _this.$store.commit('setUserNickname', _this.form.nickname);
 
@@ -9427,7 +9450,7 @@ __webpack_require__.r(__webpack_exports__);
     this.userEmail = this.$store.getters.getUserEmail;
     this.userAbout = this.$store.getters.getUserAbout;
     this.userNickname = this.$store.getters.getUserNickname;
-    this.form.fullname = this.userName;
+    this.form.username = this.userName;
     this.form.email = this.userEmail;
     this.form.about = this.userAbout;
     this.form.nickname = this.userNickname;
@@ -31819,7 +31842,7 @@ var VBTooltip = {
 /*!*************************************************!*\
   !*** ./node_modules/bootstrap-vue/esm/index.js ***!
   \*************************************************/
-/*! exports provided: install, NAME, BVConfigPlugin, BVConfig, BootstrapVue, default, componentsPlugin, BVModalPlugin, BVToastPlugin, AlertPlugin, BAlert, BadgePlugin, BBadge, BreadcrumbPlugin, BBreadcrumb, BBreadcrumbItem, ButtonPlugin, BButton, BButtonClose, ButtonGroupPlugin, BButtonGroup, ButtonToolbarPlugin, BButtonToolbar, CardPlugin, BCard, BCardBody, BCardFooter, BCardGroup, BCardHeader, BCardImg, BCardImgLazy, BCardSubTitle, BCardText, BCardTitle, CarouselPlugin, BCarousel, BCarouselSlide, CollapsePlugin, BCollapse, DropdownPlugin, BDropdown, BDropdownItem, BDropdownItemButton, BDropdownDivider, BDropdownForm, BDropdownGroup, BDropdownHeader, BDropdownText, EmbedPlugin, BEmbed, FormPlugin, BForm, BFormDatalist, BFormText, BFormInvalidFeedback, BFormValidFeedback, FormCheckboxPlugin, BFormCheckbox, BFormCheckboxGroup, FormFilePlugin, BFormFile, FormGroupPlugin, BFormGroup, FormInputPlugin, BFormInput, FormRadioPlugin, BFormRadio, BFormRadioGroup, FormSelectPlugin, BFormSelect, FormTextareaPlugin, BFormTextarea, ImagePlugin, BImg, BImgLazy, InputGroupPlugin, BInputGroup, BInputGroupAddon, BInputGroupAppend, BInputGroupPrepend, BInputGroupText, JumbotronPlugin, BJumbotron, LayoutPlugin, BContainer, BRow, BCol, BFormRow, LinkPlugin, BLink, ListGroupPlugin, BListGroup, BListGroupItem, MediaPlugin, BMedia, BMediaAside, BMediaBody, ModalPlugin, BModal, NavPlugin, BNav, BNavForm, BNavItem, BNavItemDropdown, BNavText, NavbarPlugin, BNavbar, BNavbarBrand, BNavbarNav, BNavbarToggle, PaginationPlugin, BPagination, PaginationNavPlugin, BPaginationNav, PopoverPlugin, BPopover, ProgressPlugin, BProgress, BProgressBar, SpinnerPlugin, BSpinner, TablePlugin, TableLitePlugin, TableSimplePlugin, BTable, BTableLite, BTableSimple, BTbody, BThead, BTfoot, BTr, BTh, BTd, TabsPlugin, BTabs, BTab, ToastPlugin, BToast, BToaster, TooltipPlugin, BTooltip, directivesPlugin, VBModalPlugin, VBModal, VBPopoverPlugin, VBPopover, VBScrollspyPlugin, VBScrollspy, VBTogglePlugin, VBToggle, VBTooltipPlugin, VBTooltip */
+/*! exports provided: componentsPlugin, BVModalPlugin, BVToastPlugin, AlertPlugin, BAlert, BadgePlugin, BBadge, BreadcrumbPlugin, BBreadcrumb, BBreadcrumbItem, ButtonPlugin, BButton, BButtonClose, ButtonGroupPlugin, BButtonGroup, ButtonToolbarPlugin, BButtonToolbar, CardPlugin, BCard, BCardBody, BCardFooter, BCardGroup, BCardHeader, BCardImg, BCardImgLazy, BCardSubTitle, BCardText, BCardTitle, CarouselPlugin, BCarousel, BCarouselSlide, CollapsePlugin, BCollapse, DropdownPlugin, BDropdown, BDropdownItem, BDropdownItemButton, BDropdownDivider, BDropdownForm, BDropdownGroup, BDropdownHeader, BDropdownText, EmbedPlugin, BEmbed, FormPlugin, BForm, BFormDatalist, BFormText, BFormInvalidFeedback, BFormValidFeedback, FormCheckboxPlugin, BFormCheckbox, BFormCheckboxGroup, FormFilePlugin, BFormFile, FormGroupPlugin, BFormGroup, FormInputPlugin, BFormInput, FormRadioPlugin, BFormRadio, BFormRadioGroup, FormSelectPlugin, BFormSelect, FormTextareaPlugin, BFormTextarea, ImagePlugin, BImg, BImgLazy, InputGroupPlugin, BInputGroup, BInputGroupAddon, BInputGroupAppend, BInputGroupPrepend, BInputGroupText, JumbotronPlugin, BJumbotron, LayoutPlugin, BContainer, BRow, BCol, BFormRow, LinkPlugin, BLink, ListGroupPlugin, BListGroup, BListGroupItem, MediaPlugin, BMedia, BMediaAside, BMediaBody, ModalPlugin, BModal, NavPlugin, BNav, BNavForm, BNavItem, BNavItemDropdown, BNavText, NavbarPlugin, BNavbar, BNavbarBrand, BNavbarNav, BNavbarToggle, PaginationPlugin, BPagination, PaginationNavPlugin, BPaginationNav, PopoverPlugin, BPopover, ProgressPlugin, BProgress, BProgressBar, SpinnerPlugin, BSpinner, TablePlugin, TableLitePlugin, TableSimplePlugin, BTable, BTableLite, BTableSimple, BTbody, BThead, BTfoot, BTr, BTh, BTd, TabsPlugin, BTabs, BTab, ToastPlugin, BToast, BToaster, TooltipPlugin, BTooltip, directivesPlugin, VBModalPlugin, VBModal, VBPopoverPlugin, VBPopover, VBScrollspyPlugin, VBScrollspy, VBTogglePlugin, VBToggle, VBTooltipPlugin, VBTooltip, install, NAME, BVConfigPlugin, BVConfig, BootstrapVue, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59053,8 +59076,42 @@ var render = function() {
                     ]
                   )
                 ])
-              ])
-            ]
+              ]),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  staticClass: "nav-link author-name fn",
+                  attrs: {
+                    to: {
+                      name: "ProfileEuraka",
+                      params: { id: _vm.userId, slug: _vm.userSlug }
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "author-title" }, [
+                    _vm._v(
+                      "\n                       " + _vm._s(_vm.userName) + " "
+                    ),
+                    _c("svg", { staticClass: "olymp-dropdown-arrow-icon" }, [
+                      _c("use", {
+                        attrs: {
+                          "xlink:href":
+                            "svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "author-subtitle" }, [
+                    _vm._v("SPACE COWBOY")
+                  ])
+                ]
+              ),
+              _vm._v(">\n\n            ")
+            ],
+            1
           )
         ],
         1
@@ -60931,6 +60988,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
+              _c("li"),
               _c("li", [
                 _vm.userLevel == "admin"
                   ? _c(
@@ -60938,7 +60996,7 @@ var render = function() {
                       {
                         staticClass: "nav-link",
                         attrs: {
-                          href: "http://localhost/eurekaadmin/public/login",
+                          href: "http://localhost:8000/admin/challenges",
                           target: "_blank"
                         }
                       },
@@ -73711,16 +73769,16 @@ var render = function() {
                                 _c("b-form-input", {
                                   staticClass: "mt-2 form-control",
                                   attrs: {
-                                    id: "fullname",
+                                    id: "username",
                                     type: "text",
                                     required: ""
                                   },
                                   model: {
-                                    value: _vm.form.fullname,
+                                    value: _vm.form.username,
                                     callback: function($$v) {
-                                      _vm.$set(_vm.form, "fullname", $$v)
+                                      _vm.$set(_vm.form, "username", $$v)
                                     },
-                                    expression: "form.fullname"
+                                    expression: "form.username"
                                   }
                                 })
                               ],
@@ -73776,6 +73834,33 @@ var render = function() {
                                       _vm.$set(_vm.form, "email", $$v)
                                     },
                                     expression: "form.email"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "form-group label-floating" },
+                              [
+                                _c("label", { staticClass: "control-label" }, [
+                                  _vm._v("Campaign")
+                                ]),
+                                _vm._v(" "),
+                                _c("b-form-input", {
+                                  staticClass: "mt-2 form-control",
+                                  attrs: {
+                                    id: "nickname",
+                                    type: "text",
+                                    required: ""
+                                  },
+                                  model: {
+                                    value: _vm.form.nickname,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.form, "nickname", $$v)
+                                    },
+                                    expression: "form.nickname"
                                   }
                                 })
                               ],
@@ -73856,20 +73941,22 @@ var render = function() {
                                 _c("b-form-file", {
                                   staticClass: "mt-2",
                                   attrs: {
-                                    state: Boolean(_vm.form.background_image),
+                                    state: Boolean(
+                                      _vm.form.userBackgroundImage
+                                    ),
                                     placeholder: "Upload an Image",
                                     "drop-placeholder": "Drop Image here..."
                                   },
                                   model: {
-                                    value: _vm.form.background_image,
+                                    value: _vm.form.userBackgroundImage,
                                     callback: function($$v) {
                                       _vm.$set(
                                         _vm.form,
-                                        "background_image",
+                                        "userBackgroundImage",
                                         $$v
                                       )
                                     },
-                                    expression: "form.background_image"
+                                    expression: "form.userBackgroundImage"
                                   }
                                 })
                               ],

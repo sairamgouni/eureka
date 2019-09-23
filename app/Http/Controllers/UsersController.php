@@ -171,7 +171,7 @@ class UsersController extends Controller
         $list = [];
         foreach ($activities as $activity) {
             $user = \App\User::where('id', '=', $activity->causer_id)->first();
-            // dd($user);
+//          dd($user);
             $item['id'] = $activity->id;
             $item['username'] = $user->name;
             $item['image'] = $user->getProfileImage();

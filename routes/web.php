@@ -111,7 +111,7 @@ Route::prefix('admin')->group(function () {
 //    Route::get('/home', 'CategoriesController@index')->name('category_list');
     Route::get('/categories', 'CategoriesController@index')->name('category_list');
     Route::get('/categories/add', 'CategoriesController@add')->name('categories_add');
-    Route::post('/categories/add', 'CategoriesController@store')->name('categories_store');
+    Route::post('/categories/store', 'CategoriesController@store')->name('categories_store');
     Route::get('/categories/edit/{slug}', 'CategoriesController@edit')->name('categories.edit');;
     Route::patch('/categories/edit/{slug}', 'CategoriesController@update')->name('categories_update');
     Route::post('/categories/delete', 'CategoriesController@destroy')->name('categories_delete');
@@ -132,6 +132,7 @@ Route::prefix('admin')->group(function () {
 //CHANLENGES ROUTES
 
     Route::get('/home', 'ChallengeController@index')->name('challenge_list');
+    Route::get('/challenges', 'ChallengeController@index')->name('challenge_list');
     Route::get('/challenges/add', 'ChallengeController@add')->name('challenges_add');
     Route::post('/challenges/store', 'ChallengeController@store')->name('challenges_store');
     Route::get('/challenges/edit/{slug}', 'ChallengeController@edit')->name('challenges_edit');
