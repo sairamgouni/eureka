@@ -16,7 +16,7 @@
 				</li>
 				<li>
 					<a href="{{url('admin/categories')}}">
-						<svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip" data-placement="right"   data-original-title="Categories"><use xlink:href="{{asset('assets/svg-icons/category-icon.svg')}}#olymp-newsfeed-icon"></use></svg>
+                        <img src="{{asset('assets/svg-icons/category-icon.svg')}}" alt="arrow">
 					</a>
 				</li>
 				<li>
@@ -26,8 +26,7 @@
 				</li>
 				<li>
 					<a href="{{url('admin/challenges')}}">
-						<svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip" data-placement="right"   data-original-title="Challenges"><use xlink:href="{{asset('assets/svg-icons/sprites/icons.svg')}}#olymp-newsfeed-icon"></use></svg>
-					</a>
+                        <img src="{{asset('assets/svg-icons/postchallenge-icon.svg')}}" alt="arrow">					</a>
 				</li>
 				<li>
 				<a href="{{url('admin/campaigns')}}">
@@ -237,3 +236,10 @@
 		</div>
 	</div>
 </div>
+<style>
+    img {
+        max-width: 44%;
+        /*height: auto;*/
+        /*display: inline-block;*/
+    }
+</style>
