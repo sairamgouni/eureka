@@ -36,7 +36,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
-<body class="page-has-left-panels page-has-right-panels">
+<body class="page-has-left-panels">
 
 
 

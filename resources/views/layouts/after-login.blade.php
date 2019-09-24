@@ -33,7 +33,7 @@
 
 
 </head>
-<body class="page-has-left-panels page-has-right-panels">
+<body class="page-has-left-panels">
 
 
 
