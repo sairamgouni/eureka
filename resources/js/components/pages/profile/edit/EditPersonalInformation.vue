@@ -114,8 +114,8 @@
 								<span class="control-label">Background Image</span>
 							<b-form-file
 							class="mt-2"
-						      v-model="form.userBackgroundImage"
-						      :state="Boolean(form.userBackgroundImage)"
+						      v-model="form.background_image"
+						      :state="Boolean(form.background_image)"
 						      placeholder="Upload an Image"
 						      drop-placeholder="Drop Image here..."
 						    ></b-form-file>
@@ -224,7 +224,7 @@ export default {
                                 message: 'Profile Updated',
                                 type: 'success'
                             });
-                            this.$router. push({name:'ProfileEuraka', params:{id: userId, slug: userSlug }});
+                            this.$router. push({name:'ProfileEuraka', params:{id: this.userId, slug: this.userSlug }});
 
 
                         } else {

@@ -9587,8 +9587,8 @@ __webpack_require__.r(__webpack_exports__);
           _this.$router.push({
             name: 'ProfileEuraka',
             params: {
-              id: userId,
-              slug: userSlug
+              id: _this.userId,
+              slug: _this.userSlug
             }
           });
         } else {
@@ -74424,22 +74424,20 @@ var render = function() {
                                 _c("b-form-file", {
                                   staticClass: "mt-2",
                                   attrs: {
-                                    state: Boolean(
-                                      _vm.form.userBackgroundImage
-                                    ),
+                                    state: Boolean(_vm.form.background_image),
                                     placeholder: "Upload an Image",
                                     "drop-placeholder": "Drop Image here..."
                                   },
                                   model: {
-                                    value: _vm.form.userBackgroundImage,
+                                    value: _vm.form.background_image,
                                     callback: function($$v) {
                                       _vm.$set(
                                         _vm.form,
-                                        "userBackgroundImage",
+                                        "background_image",
                                         $$v
                                       )
                                     },
-                                    expression: "form.userBackgroundImage"
+                                    expression: "form.background_image"
                                   }
                                 })
                               ],

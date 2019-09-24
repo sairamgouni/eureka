@@ -99,14 +99,14 @@ class UsersController extends Controller
         $user->name = $request->fullname;
         $user->nickname = $request->nickname;
         $user->about = $request->about;
-        $result = $user->save();
+        $user->save();
         $this->uploadPics($request, $user, 'image');
         $this->uploadPics($request, $user, 'background_image');
         $result = \Auth::user();
         return response()->json($result);
     }
 
-    public function uploadPics(Request $request, \App\User $record, $field_name = 'image')
+    public function uploadPics(Request $request, $record, $field_name = 'image')
     {
         if ($request->hasFile($field_name)) {
             $path = $request->file($field_name);
