@@ -64,7 +64,7 @@
         deferRender: true,
         pageLength: 10,
 
-        order: [[ 0, "asc" ]],
+        order: [[ 0, "desc" ]],
         columns: [
             {data: 'id', name: 'id'},
             {data: 'title', name: 'title'},
