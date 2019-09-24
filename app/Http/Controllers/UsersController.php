@@ -81,11 +81,16 @@ class UsersController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy(Request $request)
     {
         $slug = $request->slug;
-        $result = \App\User::deleteRecord($slug);
-        return $result;
+        $user = \App\User::find($slug);
+        if ($user) {
+            $user->status = 0;
+            $user->save();
+        }
+        return ['status' => $user, 'message' => 'record_deleted_successfully'];
     }
 
     public function updateProfile(Request $request)
@@ -94,14 +99,14 @@ class UsersController extends Controller
         $user->name = $request->fullname;
         $user->nickname = $request->nickname;
         $user->about = $request->about;
-        $result = $user->save();
+        $user->save();
         $this->uploadPics($request, $user, 'image');
         $this->uploadPics($request, $user, 'background_image');
         $result = \Auth::user();
         return response()->json($result);
     }
 
-    public function uploadPics(Request $request, \App\User $record, $field_name = 'image')
+    public function uploadPics(Request $request, $record, $field_name = 'image')
     {
         if ($request->hasFile($field_name)) {
             $path = $request->file($field_name);
@@ -166,7 +171,7 @@ class UsersController extends Controller
         $list = [];
         foreach ($activities as $activity) {
             $user = \App\User::where('id', '=', $activity->causer_id)->first();
-            // dd($user);
+//          dd($user);
             $item['id'] = $activity->id;
             $item['username'] = $user->name;
             $item['image'] = $user->getProfileImage();
@@ -297,11 +302,12 @@ class UsersController extends Controller
         );
     }
     public function data(){
-        $User = User::with(['campaign', 'role'])->select('users.id','users.cid','users.slug' , 'users.name', 'users.email','users.image');
+        $User = User::with(['campaign', 'role'])->select('users.id','users.cid','users.slug' , 'users.name', 'users.email','users.image','users.status');
 //        dd($User->take(5)->get());
         return DataTables::eloquent($User)
             ->addColumn('action', function($row){
-                return '<a href="'.action('UsersController@edit',$row->slug).'" class="btn btn-success">Edit</a>
+                return '<a href="' . route('users_edit', $row->slug) . '" class="btn btn-success">Edit</a>
+            <a href="javascript:void(0)" class="btn btn-primary" onClick="deleteUser(\''.$row->slug.'\')">Delete</a>
 				      	 ';
             })
 
@@ -325,9 +331,21 @@ class UsersController extends Controller
             ->editColumn('image', function($row){
 
                 return '<img width="100px" src="'.asset('storage/'.$row->image).'">';
+            })  ->editColumn('image', function($row){
+
+                return '<img width="100px" src="'.asset('storage/'.$row->image).'">';
+            })
+            ->editColumn('status', function ($row) {
+                if ($row->status == 1) {
+                    $label = '<span class="label label-success">Active</span>';
+                } else {
+                    $label = '<span class="label label-danger">Inactive</span>';
+                }
+
+                return $label;
             })
 
-            ->rawColumns(['campaign', 'action','image'])
+            ->rawColumns(['campaign', 'action','image','status'])
             ->make(true);
     }
 

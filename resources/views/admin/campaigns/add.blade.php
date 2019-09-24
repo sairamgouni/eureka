@@ -18,16 +18,24 @@
 				<div class="ui-block-content">
 
             {!! Form::open(array('url' => 'admin/campaigns/store', 'method' => 'POST', 'name'=>'formUsers ', 'files'=>'true')) !!}
-       
-						<div class="row">	
+
+						<div class="row">
 						<div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
 								<div class="form-group">
 									<label class="control-label">Campaign</label>
-									
+
 									<input class="form-control" type="text" name="campaign" placeholder="Title here">
 								</div>
 
 							</div>
+                            <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                    <label class="control-label">Code</label>
+
+                                    <input class="form-control" type="text" name="code" placeholder="Code here">
+                                </div>
+
+                            </div>
 
                             <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
 								<!-- <div class="form-group">
@@ -38,8 +46,8 @@
 								<input type="hidden" name="id" value=""  class="form-control">
 								<input type="hidden" name="slug" value=""  class="form-control">
 
-                         
-				
+
+
                             <div class="col col-xl-2 col-lg-2 col-md-3 col-sm-3 col-3">
 								<button class="btn btn-blue  btn-small">Save</button>
 							</div>
@@ -50,7 +58,7 @@
 
 		</div>
 
-		
+
 	</div>
 </div>
 

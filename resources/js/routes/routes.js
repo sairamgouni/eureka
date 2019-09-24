@@ -55,6 +55,15 @@ export default [
         }
     },
     {
+        name: 'Profile',
+        path: '/personal/:id/:slug',
+        component: Profile,
+        meta : {
+            requiresAuth:true,
+            title: "Profile"
+        }
+    },
+    {
         name: 'About',
         path: '/about',
         component: About,
@@ -166,5 +175,6 @@ export default [
             title: "Profile"
         }
     },
+
 ];
 

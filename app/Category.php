@@ -22,7 +22,7 @@ class Category extends Model
     							'message'=> 'Please try again later',
     							'type'   => 'error'
     						];
-	
+
     /**
      * Get the options for generating the slug.
      */
@@ -38,7 +38,7 @@ class Category extends Model
     	$list = \App\Category::where('status','!=', 'inactive')
     							->where('parent_id', '=', 0)
     							->get();
-		$list->prepend(array('id'=>0, 'title'=>'Parent'));					
+		$list->prepend(array('id'=>0, 'title'=>'Parent'));
     	return $list;
 
     }
@@ -69,8 +69,8 @@ class Category extends Model
          $static_object     = (new self);
 
           $record->title    = $request->title;
-          $record->status   = $request->status;
-          $record->parent_id    = $request->parent_id;
+          $record->status   = 'active';
+          $record->parent_id    = '0';
           $record->about_user    = $request->about_user;
           $record->created_by = \Auth::user()->id;
 		  $response = $record->save();
@@ -111,7 +111,7 @@ class Category extends Model
         	$response =    $record->save();
         	return $response;
     	}
-       
+
     }
 
     /**

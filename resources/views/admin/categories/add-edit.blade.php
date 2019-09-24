@@ -16,10 +16,10 @@
 					</div>
 				</div>
 				<div class="ui-block-content">
-					
+
 		@if(isset($record))
-            {{ Form::model($record, 
-            array('url' => '/categories/edit/'.$record->slug, 
+            {{ Form::model($record,
+            array('url' => '/categories/edit/'.$record->slug,
             'method'=>'patch','novalidate'=>'','name'=>'formUsers ', 'files'=>'true' )) }}
 
           @else
@@ -35,18 +35,18 @@
              }
              $options = \App\Category::getParents()->pluck('title','id');
 
-             
+
              ?>
-					
+
 							<div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
 								<div class="form-group">
 									<label class="control-label">Is Parent</label>
 
-									
+
 									{!!Form::select('parent_id', $options, $selected)!!}
 								</div>
 							</div>
-					
+
 							<div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
 								<div class="form-group">
 									<label class="control-label">Title</label>
@@ -59,7 +59,7 @@
 							             }
              						?>
 									<input class="form-control" type="text" name="title" placeholder="Title here" value="{{$title}}">
-									
+
 								</div>
 								@if ($errors->has('title'))
 						            <span class="invalid-input">
@@ -67,10 +67,10 @@
 						            </span>
 						        	@endif
 							</div>
-					
+
 							<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 								<div class="form-group">
-									<label class="control-label">About User</label>
+									<label class="control-label">About </label>
 									<?php
 							             $about_user  = '';
 							             if(isset(($record)))
@@ -86,15 +86,9 @@
 						                <strong>{{ $errors->first('about_user') }}</strong>
 						            </span>
 						        	@endif
-								
+
 							</div>
-							<div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-								<div class="form-group">
-									<label class="control-label">Image</label>
-									<input class="form-control" type="file" name="image" placeholder="Choose Optional Tags">
-								</div>
-							</div>
-					
+
 							<div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
 								<div class="form-group">
 									<label class="control-label">Status</label>
@@ -109,22 +103,22 @@
 							             $options = array('active'=>'Active','inactive'=>'Inactive');
              						?>
              						{!!Form::select('status', $options, $status)!!}
-									
+
 								</div>
 								<?php
 			             	if(isset(($record))) {
      						?>
 								<input type="hidden" name="id" value="{{$record->id}}"  class="form-control">
 								<input type="hidden" name="slug" value="{{$record->slug}}"  class="form-control">
-							<?php 
+							<?php
 								}
 							?>
 							</div>
-							
-							
-					
+
+
+
 							<div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-								<button class="btn btn-blue btn-lg full-width">{{$button_text}}</button>
+								<button class="btn btn-blue btn-lg full-width">Update</button>
 							</div>
 						</div>
 					</form>
@@ -133,7 +127,7 @@
 
 		</div>
 
-		
+
 	</div>
 </div>
 

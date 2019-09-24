@@ -22,9 +22,9 @@ class Campaign extends Model
     							'message'=> 'please_try_again_later',
     							'type'   => 'error'
     						];
-	private $base_path = 'http://localhost/euraka-live/public/';    						  		
-   	private $edit_path = 'campaigns/edit/';				
-    
+	private $base_path = 'http://localhost/euraka-live/public/';
+   	private $edit_path = 'campaigns/edit/';
+
     /**
      * Get the options for generating the slug.
      */
@@ -61,6 +61,7 @@ class Campaign extends Model
          $static_object     = (new self);
 
           $record->campaign    = $request->campaign;
+          $record->code    = $request->code;
           $record->created_by = \Auth::user()->id;
 		  $response = $record->save();
           return $response;

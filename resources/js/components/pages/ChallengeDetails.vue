@@ -563,13 +563,15 @@
 
                                 <div class="post-additional-info inline-items">
 
-                                    <a href="#" class="post-add-icon inline-items">
+                                    <router-link
+                                        :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
+
+                                        class="post-add-icon inline-items">
                                         <svg class="olymp-speech-balloon-icon">
                                             <use
-                                                xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
-                                        </svg>
+                                                xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>
                                         <span>{{item.comments}}</span>
-                                    </a>
+                                    </router-link>
 
                                     </div>
 
@@ -697,5 +699,8 @@
 </script>
 
 <style scoped>
+    .post-content{
+        font-size: .875rem!important;
+    }
 
 </style>

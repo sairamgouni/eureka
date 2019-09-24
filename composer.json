@@ -20,7 +20,8 @@
         "spatie/laravel-activitylog": "^3.7",
         "spatie/laravel-sluggable": "^2.1",
         "yajra/laravel-datatables-oracle": "~9.0",
-        "zizaco/entrust": "5.2.x-dev"
+        "zizaco/entrust": "5.2.x-dev",
+        "laravelcollective/html": "^5.4.8"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",

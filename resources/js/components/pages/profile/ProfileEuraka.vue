@@ -15,7 +15,7 @@
 				:isSameUser="isSameUser"
 				:loadCurrentUserActivity="true"
 				:profileIdToLoad="currentProfileId"
-				:specificUserRecords="true"
+				:specificUserRecords="false"
 			/>
 
 			<a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="items-to-load.html" data-container="newsfeed-items-grid">

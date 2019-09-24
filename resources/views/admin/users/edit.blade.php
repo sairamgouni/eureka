@@ -12,12 +12,12 @@
           </div>
         </div>
         <div class="ui-block-content">
-          {{ Form::model($record, 
-          array('url' => 'admin/users/edit/'.$record->slug, 
-          'method'=>'patch','novalidate'=>'','name'=>'formUsers ', 'files'=>'true' )) }}         
+          {{ Form::model($record,
+          array('url' => 'admin/users/edit/'.$record->slug,
+          'method'=>'patch','novalidate'=>'','name'=>'formUsers ', 'files'=>'true' )) }}
           <div class="row">
             <?php
-              $roles = \App\Role::getRoles(); 
+              $roles = \App\Role::getRoles();
                         $selected = ROLE_USER;
                 if(isset($record))
                 {
@@ -55,7 +55,7 @@
               <div class="form-group">
                 <label class="control-label">Campaign</label>
                 <?php
-    
+
                   if(isset($record))
                            {
                               if($record->campaign_id)
@@ -105,8 +105,8 @@
                     if($record->status)
                     $status  = $record->status;
                   }
-                  
-                  $options = array('active'=>'Active','inactive'=>'Inactive');
+
+                  $options = array('active'=>'Active','inactive'=>'Resigned');
                   ?>
                 {!!Form::select('status', $options, $status)!!}
               </div>
@@ -115,7 +115,7 @@
                 ?>
               <input type="hidden" name="id" value="{{$record->id}}"  class="form-control">
               <input type="hidden" name="slug" value="{{$record->slug}}"  class="form-control">
-              <?php 
+              <?php
                 }
                 ?>
             </div>

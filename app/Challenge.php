@@ -180,7 +180,6 @@ class Challenge extends Model
      */
     public static function getRecord($slug)
     {
-
         return \App\Challenge::where('slug', '=', $slug)->first();
     }
 

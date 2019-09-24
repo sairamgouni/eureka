@@ -1,18 +1,13 @@
 <template>
 <span>
 
-<ProfileHeader />
+<PersonalHeader/>
 
 <div class="container">
 	<div class="row">
 		<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 			<div class="ui-block responsive-flex">
 				<div class="ui-block-title">
-					<div class="h6 title"
-					style="cursor: pointer;"
-					:class="{active_title:showFollowers}"
-					@click="updateList('followers')"
-					>Followers ({{followers.length}})</div>
 					<div
 					style="cursor: pointer;"
 					@click="updateList('followings')"
@@ -146,12 +141,12 @@
 </template>
 
 <script>
-	import ProfileHeader from './ProfileHeader';
+	import PersonalHeader from './PersonalHeader';
 
 	export default {
 		name: 'ProfileEuraka',
 		components: {
-						ProfileHeader,
+            PersonalHeader,
 					},
 		data() {
 			return {
