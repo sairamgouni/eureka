@@ -70,7 +70,7 @@
                         :class="{ follow: (item.is_following==0) ? true : false, unfollow: (item.is_following==1) ? true : false,  }"
                         class="btn btn-primary btn-sm"
                       >
-                        <template v-if="item.is_following==1">UnFollow</template>
+                        <template v-if="item.is_following==1">Unfollow</template>
                         <template v-if="item.is_following==0">Follow</template>
                       </a>
                     </li>
