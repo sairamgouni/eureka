@@ -85,7 +85,6 @@
 		},
 		methods: {
             toggleFollow(userId) {
-
                 let loader = this.$loading.show({
                     container: this.fullPage ? null : this.$refs.file,
                 });
@@ -100,10 +99,8 @@
                     .then((response) => {
                         loader.hide();
                         let like_value = response.data;
-
                         if(this.user.id==userId)
                         {
-
                             if(like_value==1)
                             {
                                 this.user.is_following = 1;
@@ -111,21 +108,16 @@
                                     message: 'Following Updated',
                                     type: 'success'
                                 });
-
                             }
                             else
                             {
                                 this.user.is_following = 0;
                                 this.$toast.open({
-                                    message: 'UnFollowing Updated',
+                                    message: 'Unfollowing Updated',
                                     type: 'success'
                                 });
-
-
                             }
                         }
-
-
                     })
                     .catch(function(response) {
                         console.log('in response methods');
@@ -143,7 +135,6 @@
                     })
                     .then((response) => {
                     	this.user = response.data;
-
                     })
                     .catch(function(response) {
                     	console.log('in profile header exception');
@@ -151,9 +142,7 @@
                         // loader.hide();
                     });
 			}
-
 		},
-
 		created(){
  			this.currentProfileId = this.$route.params.id;
  			this.getUserDetails(this.currentProfileId);
@@ -164,5 +153,3 @@
     .unfollow{ background-color: #9ca0a3; }
     .follow{ background-color: #38a9ff; }
 </style>
-
-
