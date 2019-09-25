@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Challenge;
+use App\Country;
 use App\User;
 use Illuminate\Http\Request;
 use \App\Http\Requests\UsersRequest;
@@ -95,6 +96,7 @@ class UsersController extends Controller
 
     public function updateProfile(Request $request)
     {
+
         $user = \Auth::user();
         $user->name = $request->fullname;
         $user->nickname = $request->nickname;
@@ -222,8 +224,6 @@ class UsersController extends Controller
             ->limit(10)
             ->get();
         $list = \App\User::processFrendSuggestions($top_contributors);
-
-
         $country_records = \App\Country::getTopContributors();
         $data['top_contributors'] = $list;
         $data['country_contributors'] = $country_records;
@@ -347,6 +347,18 @@ class UsersController extends Controller
 
             ->rawColumns(['campaign', 'action','image','status'])
             ->make(true);
+    }
+
+    public function getUsersByCountry(Country $country)
+    {
+        return response()->json([
+            'country' => $country,
+            'users' => $country->users()
+                ->where('reputation', '>', '0')
+                ->latest('reputation')
+                ->simplePaginate()
+        ]);
+
     }
 
 

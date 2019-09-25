@@ -35,7 +35,7 @@
 					                    id="username"
 					                    type="text"
 					                    v-model="form.username"
-					                    required
+                                        required readonly
 					                   />
 					                </b-form-group>
 								</div>
@@ -73,8 +73,8 @@
                                 class="mt-2 form-control"
                                 id="nickname"
                                 type="text"
-                                v-model="form.nickname"
-                                required
+                                v-model="form.campaign.campaign"
+                                required readonly
                             />
                                         </b-form-group>
 
@@ -206,11 +206,12 @@ export default {
 
                         loader.hide();
 
+                        console.log(response,'saira');
+
 
                         if (response.status==200) {
                               this.$store.commit('setUserName', this.form.username );
                               this.$store.commit('setUserNickname', this.form.nickname );
-                              this.$store.commit('setUserAbout', this.form.about );
                               this.$store.commit('setUserAbout', this.form.about );
                               this.$store.commit('setUserBackgroundImage', response.data.background_image );
                               this.$store.commit('setUserImage', response.data.image );
@@ -251,10 +252,12 @@ export default {
             this.userAbout = this.$store.getters.getUserAbout;
             this.userUserName = this.$store.getters.getUserName;
             this.userNickname = this.$store.getters.getUserNickname;
+            this.userCampaign = this.$store.getters.getUserCampaign;
             this.form.username = this.userUserName;
             this.form.email = this.userEmail;
             this.form.about = this.userAbout;
             this.form.nickname = this.userNickname;
+            this.form.campaign = this.userCampaign;
 
         },
 }

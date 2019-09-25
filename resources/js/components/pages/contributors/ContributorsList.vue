@@ -124,9 +124,10 @@
                 </div>
               </li>
             </ol>
-            <!--  <div class="ui-block-footer">
-                             <a href="#">Show all</a>
-            </div>-->
+              <div class="ui-block-footer">
+                  <!--                            <a href="javascript:void(0)"></a>-->
+                  <router-link :to="{name:'Users',params:{country_id:item.country.id}}">Show All</router-link>
+              </div>
           </div>
         </div>
       </div>

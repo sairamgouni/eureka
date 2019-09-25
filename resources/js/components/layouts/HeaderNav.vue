@@ -8,7 +8,7 @@
         <div class="header-content-wrapper">
             <form class="search-bar w-search notification-list friend-requests">
                 <div class="form-group with-button">
-                    <input class="form-control js-user-search" placeholder="Search here people"
+                    <input class="form-control js-user-search" placeholder="Search here people or Challenges"
                            type="text">
                 </div>
             </form>
@@ -37,7 +37,6 @@
                                 <ul class="account-settings">
                                     <li>
                                         <router-link to="/edit-profile" class="nav-link">
-
 
                                             <svg class="olymp-menu-icon">
                                                 <use
@@ -83,7 +82,7 @@
                         <div class="author-title">
                            {{userName}} <svg class="olymp-dropdown-arrow-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"></use></svg>
                         </div>
-                        <span class="author-subtitle">SPACE COWBOY</span>
+                        <span class="author-subtitle">{{ userCampaign.campaign}}</span>
                     </router-link>>
 
                 </div>
@@ -217,6 +216,7 @@
             this.userImage = this.$store.getters.getUserImage;
             this.userName = this.$store.getters.getUserName;
             this.userLevel = this.$store.getters.getUserLevel;
+            this.userCampaign = this.$store.getters.getUserCampaign;
             this.getNotifications();
         }
 

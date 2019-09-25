@@ -31,8 +31,45 @@
 		<!-- Left Sidebar -->
 
 		<div class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
+            <div class="ui-block">
+				<div class="ui-block-title">
+					<h6 class="title">Profile Intro</h6>
+				</div>
+				<div class="ui-block-content">
 
-			<ProfileIntro  :CurrentUser="user" :isUserLoggedIn="userLogin" :isSameUser="isSameUser"/>
+					<!-- W-Personal-Info -->
+
+					<ul class="widget w-personal-info item-block">
+						<li>
+							<span class="title">About Me:</span>
+							<span class="text">{{user.userAbout}}</span>
+						</li>
+
+					</ul>
+
+                    <!-- .. end W-Personal-Info -->
+                    <!-- W-Socials -->
+
+                    <!-- 					<div class="widget w-socials">
+                                            <h6 class="title">Other Social Networks:</h6>
+                                            <a href="#" class="social-item bg-facebook">
+                                                <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                                                Facebook
+                                            </a>
+                                            <a href="#" class="social-item bg-twitter">
+                                                <i class="fab fa-twitter" aria-hidden="true"></i>
+                                                Twitter
+                                            </a>
+                                            <a href="#" class="social-item bg-dribbble">
+                                                <i class="fab fa-dribbble" aria-hidden="true"></i>
+                                                Dribbble
+                                            </a>
+                                        </div> -->
+
+
+                    <!-- ... end W-Socials -->
+				</div>
+			</div>
 
 			<!-- <UserBadges /> -->
 
@@ -63,7 +100,6 @@
 
 <script>
 	import ProfileHeader from './ProfileHeader';
-	import ProfileIntro from './ProfileIntro';
 	import UserBadges from './UserBadges';
 	import UserFriends from './UserFriends';
 	//import LastPhotos from './LastPhotos';
@@ -73,7 +109,6 @@
 		components: {
 						ProfileHeader,
 						ActivityItem,
-						ProfileIntro,
 						UserBadges,
 						UserFriends,
 
@@ -108,6 +143,7 @@
                     .then((response) => {
                     	if(response.status==200)
  						{
+ 						    console.log('sai',response)
 				            this.user.userId = response.data.id;
 				            this.user.userSlug = response.data.slug;
 				            this.user.userImage = response.data.image;
@@ -136,6 +172,7 @@
 	            this.user.userImage = this.$store.getters.getUserImage;
 	            this.user.userName = this.$store.getters.getUserName;
 	            this.user.userImage = this.$store.getters.getUserImage;
+	            this.user.userAbout = this.$store.getters.getUserAbout;
 	            this.user.userBackgroundImage = this.$store.getters.getUserBackgroundImage;
 			}
 			else {

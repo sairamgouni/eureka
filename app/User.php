@@ -400,5 +400,9 @@ class User extends Authenticatable
         return $item_data;
 
     }
+    public function getImageAttribute($value)
+    {
+        return $value ?? '/users/thumbs/boy.png';
+    }
 
 }

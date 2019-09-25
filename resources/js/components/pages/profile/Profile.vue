@@ -97,12 +97,12 @@
             }
 		},
 		methods: {
-			getUserDetails(userId) {
+			getUserDetails(currentProfileId) {
 				 var bodyFormData = new FormData();
             	 bodyFormData.set('userId', userId);
             	 this.axios({
                         method: 'get',
-                        url: 'user/get-profile/'+userId,
+                        url: 'user/get-profile/'+currentProfileId,
                         data: bodyFormData
                     })
                     .then((response) => {

@@ -73,6 +73,7 @@ Route::get('challenges/getChallenges/{total?}', 'ChallengeController@getChalleng
 Route::get('friends/getFriendsList/{total?}', 'ChallengeController@getFriends');
 Route::post('friends/toggle-follow', 'ChallengeController@toggleFollow');
 Route::get('user/followers-list', 'UsersController@getFollowers');
+Route::get('users-list/{country}', 'UsersController@getUsersByCountry');
 
 
 Route::post('user/update-profile', 'UsersController@updateProfile');

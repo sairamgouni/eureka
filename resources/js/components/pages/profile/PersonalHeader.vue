@@ -22,15 +22,6 @@
                                                 Friends
                                             </router-link>
                                         </li>
-                                        <li>
-                                            <router-link
-
-                                                :to="{ name: 'About',
-										 params: { id: user.id, slug: user.slug } }" >
-
-                                                About
-                                            </router-link>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>

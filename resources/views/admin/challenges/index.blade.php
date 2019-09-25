@@ -26,7 +26,7 @@
 				<div class="ui-block-title bg-blue">
 					<h6 class="title c-white">Challenge List</h6>
 					<div class="align-right">
-						<a href="{{route('challenges_add')}}" class="btn btn-primary btn-md-2">New Challenge</a>
+{{--						<a href="{{route('challenges_add')}}" class="btn btn-primary btn-md-2">New Challenge</a>--}}
 					</div>
 				</div>
 				<div class="ui-block-content">

@@ -112,7 +112,7 @@ class Challenge extends Model
         // dd(explode(",", $request->categories));
         $record->created_by = \Auth::user()->id;
         $response = $record->save();
-        $record->categories()->sync(explode(",", $request->categories));
+        $record->categories()->sync($request->categories);
         $static_object->processUpload($request, $record);
 
         return $response;

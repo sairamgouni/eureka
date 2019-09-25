@@ -96,7 +96,7 @@
                                 <div class="form-group label-floating is-empty">
                                     <label class="control-label">Write Reply</label>
                                     <textarea class="form-control" name="comment_text" required rows="1"
-                                              placeholder="" style=" border:1px solid red;"></textarea>
+                                              placeholder="" style=" border:1px solid darkgrey;"></textarea>
                                 </div>
                                 <input type="hidden" name="replay" :value="comment.id" required>
                             </div>
@@ -149,7 +149,7 @@
                                 <div class="form-group label-floating">
                                     <label class="control-label">Your Comment</label>
                                     <textarea v-model="comment_text" name="comment_text" class="form-control"
-                                              placeholder="" style=" border:1px solid red;" ></textarea>
+                                              placeholder="" style=" border:1px solid darkgrey;"required></textarea>
                                 </div>
                                     <button type="submit" class="btn btn-primary w-100" id="comment-box">Post your Comment
                                  </button>
@@ -247,6 +247,14 @@
         },
         methods: {
             onSubmit(evt) {
+                if (!$(evt.target)[0].checkValidity()) {
+                    this.$toast.open({
+                        message: 'Comment can\'t be empty',
+                        type: 'error'
+                    });
+                    return false;
+                }
+
                 let loader = this.$loading.show({
                     container: this.fullPage ? null : this.$refs.file,
                 });

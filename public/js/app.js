@@ -1890,7 +1890,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -2011,6 +2010,7 @@ __webpack_require__(/*! selectize */ "./node_modules/selectize/dist/js/selectize
     this.userImage = this.$store.getters.getUserImage;
     this.userName = this.$store.getters.getUserName;
     this.userLevel = this.$store.getters.getUserLevel;
+    this.userCampaign = this.$store.getters.getUserCampaign;
     this.getNotifications();
   }
 });
@@ -3067,12 +3067,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -4325,6 +4319,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sub_components_PostStatus__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./sub-components/PostStatus */ "./resources/js/components/pages/sub-components/PostStatus.vue");
 /* harmony import */ var _sub_components_ActivityItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./sub-components/ActivityItem */ "./resources/js/components/pages/sub-components/ActivityItem.vue");
 /* harmony import */ var _challenges_PostChallenge__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./challenges/PostChallenge */ "./resources/js/components/pages/challenges/PostChallenge.vue");
+/* harmony import */ var _challenges_ChallengeForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./challenges/ChallengeForm */ "./resources/js/components/pages/challenges/ChallengeForm.vue");
 //
 //
 //
@@ -4417,6 +4412,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -4431,7 +4427,8 @@ __webpack_require__.r(__webpack_exports__);
     PagesMayLike: _sub_components_PagesMayLike__WEBPACK_IMPORTED_MODULE_2__["default"],
     PostStatus: _sub_components_PostStatus__WEBPACK_IMPORTED_MODULE_3__["default"],
     ActivityItem: _sub_components_ActivityItem__WEBPACK_IMPORTED_MODULE_4__["default"],
-    PostChallenge: _challenges_PostChallenge__WEBPACK_IMPORTED_MODULE_5__["default"]
+    PostChallenge: _challenges_PostChallenge__WEBPACK_IMPORTED_MODULE_5__["default"],
+    ChallengeForm: _challenges_ChallengeForm__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
   data: function data() {
     return {
@@ -4440,7 +4437,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     postChallenge: function postChallenge() {
-      this.$router.push('/post-challenge');
+      this.$refs.challenge.showModal(); // this.$router.push('/post-challenge');
+    },
+    output: function output(massege) {
+      console.log(massege, 'inoutputmethod');
+      this.$refs.activityItem.loadPosts();
     }
   },
   created: function created() {
@@ -4839,6 +4840,320 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      modalId: 'challenge',
+      form: {
+        title: '',
+        description: '',
+        image: '',
+        selectedList: [],
+        activeFrom: '',
+        activeTo: ''
+      },
+      title: 'Add Challenge',
+      buttonText: 'Add',
+      show: true,
+      categoriesList: [],
+      optionsList: [],
+      state: {
+        date: new Date(2016, 9, 16)
+      },
+      userLogin: false
+    };
+  },
+  components: {
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
+  },
+  mounted: function mounted() {//
+  },
+  updated: function updated() {},
+  computed: {},
+  methods: {
+    addTag: function addTag(newTag) {
+      var tag = {
+        name: newTag,
+        code: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
+      };
+      this.optionsList.push(tag);
+      this.selectedList.push(tag);
+    },
+    cancel: function cancel() {
+      this.hideModal();
+    },
+    showModal: function showModal() {
+      $("#".concat(this.modalId)).modal('show');
+    },
+    hideModal: function hideModal() {
+      $("#".concat(this.modalId)).modal('hide');
+    },
+    addChallenge: function addChallenge(evt) {
+      var _this = this;
+
+      evt.preventDefault();
+
+      for (var i = 0; i < this.form.selectedList.length; i++) {
+        this.categoriesList[i] = this.form.selectedList[i].code;
+      } // console.log(this.categoriesList);
+      // return ;
+
+
+      var loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.file
+      }); // this.showDismissibleAlert = false
+
+      var bodyFormData = new FormData();
+      bodyFormData.set('title', this.form.title);
+      bodyFormData.set('description', this.form.description);
+      bodyFormData.set('image', this.form.image);
+      bodyFormData.set('categories', this.categoriesList);
+      bodyFormData.set('status', this.form.selectedStatus);
+      bodyFormData.set('active_from', this.form.activeFrom);
+      bodyFormData.set('active_to', this.form.activeTo);
+      this.axios({
+        method: 'post',
+        url: '/challenges/create',
+        data: bodyFormData
+      }).then(function (response) {
+        loader.hide();
+        console.log(response.data.success);
+
+        if (response.data.success == 1) {
+          // console.log('yep');
+          console.log(response.data.object);
+          _this.form = {
+            title: '',
+            description: '',
+            image: '',
+            selectedList: [],
+            selectedStatus: 'Active',
+            activeFrom: ''
+          };
+
+          _this.$toast.open({
+            message: 'Challenge Created ',
+            type: 'success'
+          });
+
+          _this.hideModal();
+
+          _this.$emit('output', 'success');
+        } else {
+          console.log('inelse boy');
+
+          _this.$toast.open({
+            message: 'Cannot Post Challenge, Please contact developer',
+            type: 'error'
+          });
+        }
+      })["catch"](function (response) {
+        loader.hide();
+      });
+    }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    this.userLogin = this.$store.getters.getLogin;
+    if (!this.userLogin) return;
+    var loader = this.$loading.show({
+      container: this.fullPage ? null : this.$refs.file
+    });
+    var bodyFormData = new FormData();
+    var self = this;
+    this.axios({
+      method: 'get',
+      url: '/categories/getlist',
+      data: bodyFormData
+    }).then(function (response) {
+      loader.hide(); // console.log(response);
+
+      _this2.optionsList = response.data.object;
+    })["catch"](function (response) {
+      loader.hide(); // console.log('yep jack');
+      // console.log(this.optionsList);
+      // self.$store.dispatch('destroyAccess');
+      //         this.$toast.open({
+      //         message: 'Please login to continue',
+      //         type: 'success'
+      //     });
+
+      self.$router.push('/login');
+    });
+  },
+  watch: {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/challenges/PostChallenge.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/challenges/PostChallenge.vue?vue&type=script&lang=js& ***!
@@ -5214,23 +5529,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'ContributorsList',
+  name: "ContributorsList",
   data: function data() {
     return {
       topContributors: [],
@@ -5248,15 +5548,15 @@ __webpack_require__.r(__webpack_exports__);
         container: this.fullPage ? null : this.$refs.file
       });
       this.axios({
-        method: 'get',
-        url: 'user/top-contributors'
+        method: "get",
+        url: "user/top-contributors"
       }).then(function (response) {
         loader.hide();
         _this.topContributors = response.data.top_contributors;
         _this.list = _this.topContributors;
         _this.countryList = response.data.country_contributors;
       })["catch"](function (response) {
-        console.log('in exception');
+        console.log("in exception");
         loader.hide();
       });
     },
@@ -5266,33 +5566,33 @@ __webpack_require__.r(__webpack_exports__);
       // console.log('index '+index);
       if (!this.userLogin) {
         this.$toast.open({
-          message: 'Please login to like',
-          type: 'info'
+          message: "Please login to like",
+          type: "info"
         });
         return;
       }
 
       var bodyFormData = new FormData();
-      bodyFormData.set('item_id', itemId);
+      bodyFormData.set("item_id", itemId);
       this.axios({
-        method: 'post',
-        url: 'friends/toggle-follow',
+        method: "post",
+        url: "friends/toggle-follow",
         data: bodyFormData
       }).then(function (response) {
         // loader.hide();
         var like_value = response.data;
-        console.log('liked: ' + itemId);
+        console.log("liked: " + itemId);
 
         for (var index = 0; index < _this2.list.length; index++) {
-          console.log('in loop with index: ' + _this2.list[index].id);
+          console.log("in loop with index: " + _this2.list[index].id);
 
           if (_this2.list[index].id == itemId) {
             if (like_value == 1) {
               _this2.list[index].is_following = 1;
 
               _this2.$toast.open({
-                message: 'Following Updated',
-                type: 'success'
+                message: "Following Updated",
+                type: "success"
               });
 
               break;
@@ -5301,15 +5601,15 @@ __webpack_require__.r(__webpack_exports__);
                 _this2.list[index].is_following = 0;
 
                 _this2.$toast.open({
-                  message: 'UnFollowing Updated',
-                  type: 'success'
+                  message: "UnFollowing Updated",
+                  type: "success"
                 });
               }
             }
           }
         }
       })["catch"](function (response) {
-        console.log('in response methods');
+        console.log("in response methods");
         console.log(response); // loader.hide();
       });
     },
@@ -5322,18 +5622,18 @@ __webpack_require__.r(__webpack_exports__);
     this.getTopContributors();
   },
   mounted: function mounted() {
-    $('ol.expandible').each(function () {
+    $("ol.expandible").each(function () {
       var $ul = $(this),
-          $lis = $ul.find('li:gt(5)'),
-          isExpanded = $ul.hasClass('expanded');
-      $lis[isExpanded ? 'show' : 'hide']();
+          $lis = $ul.find("li:gt(5)"),
+          isExpanded = $ul.hasClass("expanded");
+      $lis[isExpanded ? "show" : "hide"]();
 
       if ($lis.length > 0) {
-        $ul.append($('<span class="showmore"><li class="expand">' + (isExpanded ? 'Show Less' : 'Show More') + '</li></span>').click(function (event) {
-          var isExpanded = $ul.hasClass('expanded');
+        $ul.append($('<span class="showmore"><li class="expand">' + (isExpanded ? "Show Less" : "Show More") + "</li></span>").click(function (event) {
+          var isExpanded = $ul.hasClass("expanded");
           event.preventDefault();
-          $(this).html(isExpanded ? 'Show More' : 'Show Less');
-          $ul.toggleClass('expanded');
+          $(this).html(isExpanded ? "Show More" : "Show Less");
+          $ul.toggleClass("expanded");
           $lis.toggle();
         }));
       }
@@ -5352,211 +5652,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 //
 //
 //
@@ -5798,7 +5901,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'UsersList'
+  name: 'UsersList',
+  data: function data() {
+    return {
+      users: [],
+      country: null,
+      hasMore: false,
+      page: 1,
+      counter: 1
+    };
+  },
+  created: function created() {
+    this.getUsers();
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    window.onscroll = function (ev) {
+      if (_this.hasMore && window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        _this.getUserAbout(_this.page);
+      }
+    };
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.hasMore = false;
+    $(window).off('scroll');
+  },
+  methods: {
+    getUsers: function getUsers() {
+      var _this2 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      var loader = this.$loading.show({
+        container: this.$refs.usersList
+      });
+      this.axios.get("".concat(APP.baseUrl, "/users-list/").concat(this.$route.params.country_id, "?page=").concat(page)).then(function (response) {
+        loader.hide();
+        _this2.hasMore = !!response.data.users.next_page_url;
+        if (page === 1) _this2.country = response.data.country;
+        _this2.users = page === 1 ? response.data.users.data : [].concat(_toConsumableArray(_this2.users), _toConsumableArray(response.data.users.data));
+      })["catch"](function (error) {
+        loader.hide();
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -6493,15 +6639,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -8668,10 +8805,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ProfileHeader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProfileHeader */ "./resources/js/components/pages/profile/ProfileHeader.vue");
-/* harmony import */ var _ProfileIntro__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProfileIntro */ "./resources/js/components/pages/profile/ProfileIntro.vue");
-/* harmony import */ var _UserBadges__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserBadges */ "./resources/js/components/pages/profile/UserBadges.vue");
-/* harmony import */ var _UserFriends__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UserFriends */ "./resources/js/components/pages/profile/UserFriends.vue");
-/* harmony import */ var _sub_components_ActivityItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../sub-components/ActivityItem */ "./resources/js/components/pages/sub-components/ActivityItem.vue");
+/* harmony import */ var _UserBadges__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserBadges */ "./resources/js/components/pages/profile/UserBadges.vue");
+/* harmony import */ var _UserFriends__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserFriends */ "./resources/js/components/pages/profile/UserFriends.vue");
+/* harmony import */ var _sub_components_ActivityItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../sub-components/ActivityItem */ "./resources/js/components/pages/sub-components/ActivityItem.vue");
 //
 //
 //
@@ -8735,7 +8871,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
  //import LastPhotos from './LastPhotos';
@@ -8745,10 +8917,9 @@ __webpack_require__.r(__webpack_exports__);
   name: 'ProfileEuraka',
   components: {
     ProfileHeader: _ProfileHeader__WEBPACK_IMPORTED_MODULE_0__["default"],
-    ActivityItem: _sub_components_ActivityItem__WEBPACK_IMPORTED_MODULE_4__["default"],
-    ProfileIntro: _ProfileIntro__WEBPACK_IMPORTED_MODULE_1__["default"],
-    UserBadges: _UserBadges__WEBPACK_IMPORTED_MODULE_2__["default"],
-    UserFriends: _UserFriends__WEBPACK_IMPORTED_MODULE_3__["default"]
+    ActivityItem: _sub_components_ActivityItem__WEBPACK_IMPORTED_MODULE_3__["default"],
+    UserBadges: _UserBadges__WEBPACK_IMPORTED_MODULE_1__["default"],
+    UserFriends: _UserFriends__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -8779,6 +8950,7 @@ __webpack_require__.r(__webpack_exports__);
         data: bodyFormData
       }).then(function (response) {
         if (response.status == 200) {
+          console.log('sai', response);
           _this.user.userId = response.data.id;
           _this.user.userSlug = response.data.slug;
           _this.user.userImage = response.data.image;
@@ -8804,6 +8976,7 @@ __webpack_require__.r(__webpack_exports__);
       this.user.userImage = this.$store.getters.getUserImage;
       this.user.userName = this.$store.getters.getUserName;
       this.user.userImage = this.$store.getters.getUserImage;
+      this.user.userAbout = this.$store.getters.getUserAbout;
       this.user.userBackgroundImage = this.$store.getters.getUserBackgroundImage;
     } else {
       this.getUserDetails(this.currentProfileId);
@@ -8822,7 +8995,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -9129,6 +9301,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -9559,13 +9740,12 @@ __webpack_require__.r(__webpack_exports__);
         data: bodyFormData
       }).then(function (response) {
         loader.hide();
+        console.log(response, 'saira');
 
         if (response.status == 200) {
           _this.$store.commit('setUserName', _this.form.username);
 
           _this.$store.commit('setUserNickname', _this.form.nickname);
-
-          _this.$store.commit('setUserAbout', _this.form.about);
 
           _this.$store.commit('setUserAbout', _this.form.about);
 
@@ -9615,10 +9795,12 @@ __webpack_require__.r(__webpack_exports__);
     this.userAbout = this.$store.getters.getUserAbout;
     this.userUserName = this.$store.getters.getUserName;
     this.userNickname = this.$store.getters.getUserNickname;
+    this.userCampaign = this.$store.getters.getUserCampaign;
     this.form.username = this.userUserName;
     this.form.email = this.userEmail;
     this.form.about = this.userAbout;
     this.form.nickname = this.userNickname;
+    this.form.campaign = this.userCampaign;
   }
 });
 
@@ -9865,14 +10047,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getUserDetails: function getUserDetails(userId) {
+    getUserDetails: function getUserDetails(currentProfileId) {
       var _this = this;
 
       var bodyFormData = new FormData();
       bodyFormData.set('userId', userId);
       this.axios({
         method: 'get',
-        url: 'user/get-profile/' + userId,
+        url: 'user/get-profile/' + currentProfileId,
         data: bodyFormData
       }).then(function (response) {
         if (response.status == 200) {
@@ -9975,7 +10157,7 @@ __webpack_require__.r(__webpack_exports__);
         data: bodyFormData
       }).then(function (response) {
         console.log(response.data.success);
-        console.log(response);
+        console.log(response, 'sai');
 
         if (response.status == 200) {
           _this.activities = response.data;
@@ -10652,6 +10834,14 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     onSubmit: function onSubmit(evt) {
       var _this = this;
+
+      if (!$(evt.target)[0].checkValidity()) {
+        this.$toast.open({
+          message: 'Comment can\'t be empty',
+          type: 'error'
+        });
+        return false;
+      }
 
       var loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.file
@@ -39725,26 +39915,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.unfollow[data-v-642d7c07]{\n    background: #5a64d8;\n    border: black;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=style&index=1&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=style&index=1&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.order{\n    font-size: 10px !important;\n    color: #888da8 !important;\n    margin-right: 10px !important;\n}\nol li {\n    list-style: decimal !important;\n}\nol li:before {\n    position: relative;\n    counter-increment: list1;\n    content: unset !important;\n    color: #888da8;\n    display: inline-block;\n    margin-right: 10px;\n    font-size: 10px;\n}\n\n", ""]);
+exports.push([module.i, "\n.unfollow[data-v-642d7c07] {\n  background: #5a64d8;\n  border: black;\n}\n", ""]);
 
 // exports
 
@@ -58422,33 +58593,6 @@ if (content.locals) {
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=style&index=1&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=style&index=1&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ContributorsList.vue?vue&type=style&index=1&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=style&index=1&lang=css&");
-
-if (typeof content === 'string') {
-  content = [[module.i, content, '']];
-}
-
-var options = {}
-
-options.insert = "head";
-options.singleton = false;
-
-var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js")(content, options);
-
-if (content.locals) {
-  module.exports = content.locals;
-}
-
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/login.vue?vue&type=style&index=0&lang=css&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/login.vue?vue&type=style&index=0&lang=css& ***!
@@ -59359,7 +59503,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("span", { staticClass: "author-subtitle" }, [
-                    _vm._v("SPACE COWBOY")
+                    _vm._v(_vm._s(_vm.userCampaign.campaign))
                   ])
                 ]
               ),
@@ -59385,7 +59529,10 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group with-button" }, [
           _c("input", {
             staticClass: "form-control js-user-search",
-            attrs: { placeholder: "Search here people", type: "text" }
+            attrs: {
+              placeholder: "Search here people or Challenges",
+              type: "text"
+            }
           })
         ])
       ]
@@ -61733,7 +61880,59 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
-    _vm._m(1),
+    _c(
+      "section",
+      {
+        staticClass:
+          "align-right pt160 pb80 section-move-bg call-to-action-animation scrollme negative-margin-top150"
+      },
+      [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "col col-xl-10 m-auto col-lg-10 col-md-12 col-sm-12 col-12"
+              },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-primary btn-lg ",
+                    attrs: {
+                      to: "/contributors",
+                      "data-toggle": "modal",
+                      "data-target": "#registration-login-form-popup"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "Start Making Friends Now!\n                        "
+                    )
+                  ]
+                )
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "first-img",
+          staticStyle: { opacity: "1", bottom: "0px", transform: "scale(1)" },
+          attrs: { alt: "guy", src: "assets/img/guy.png" }
+        }),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "second-img",
+          staticStyle: { opacity: "1", bottom: "50%", right: "40%" },
+          attrs: { alt: "rocket", src: "assets/img/rocket1.png" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "content-bg-wrap bg-section1" })
+      ]
+    ),
     _vm._v(" "),
     _c(
       "div",
@@ -61874,9 +62073,9 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _vm._m(2),
+            _vm._m(1),
             _vm._v(" "),
-            _vm._m(3)
+            _vm._m(2)
           ])
         ])
       ]
@@ -62067,59 +62266,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "section",
-      {
-        staticClass:
-          "align-right pt160 pb80 section-move-bg call-to-action-animation scrollme negative-margin-top150"
-      },
-      [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "col col-xl-10 m-auto col-lg-10 col-md-12 col-sm-12 col-12"
-              },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-primary btn-lg",
-                    attrs: {
-                      href: "#",
-                      "data-toggle": "modal",
-                      "data-target": "#registration-login-form-popup"
-                    }
-                  },
-                  [_vm._v("Start Making Friends Now!")]
-                )
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "first-img",
-          staticStyle: { opacity: "1", bottom: "0px", transform: "scale(1)" },
-          attrs: { alt: "guy", src: "assets/img/guy.png" }
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "second-img",
-          staticStyle: { opacity: "1", bottom: "50%", right: "40%" },
-          attrs: { alt: "rocket", src: "assets/img/rocket1.png" }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "content-bg-wrap bg-section1" })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
       "div",
       { staticClass: "col col-lg-9 col-md-8 col-sm-12 col-12" },
       [
@@ -62134,16 +62280,8 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("li", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("How it works")])
-            ]),
-            _vm._v(" "),
-            _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Badges")])]),
-            _vm._v(" "),
-            _c("li", [
               _c("a", { attrs: { href: "#" } }, [_vm._v("Contributors")])
-            ]),
-            _vm._v(" "),
-            _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Settings")])])
+            ])
           ])
         ])
       ]
@@ -63650,93 +63788,99 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("span", [
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "main",
-          {
-            staticClass:
-              "col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12"
-          },
-          [
-            _c("div", { staticClass: "ui-block" }, [
-              _c("div", { staticClass: "news-feed-form" }, [
-                _c("form", [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "form-group with-icon label-floating is-empty"
-                    },
-                    [
-                      _c("label", { staticClass: "control-label" }, [
-                        _vm._v("Share what you are thinking here...")
-                      ]),
-                      _vm._v(" "),
-                      _c("textarea", {
-                        staticClass: "form-control",
-                        attrs: { placeholder: "", row: "2" },
-                        on: { click: _vm.postChallenge }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "material-input" })
-                    ]
-                  )
+  return _c(
+    "span",
+    [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "main",
+            {
+              staticClass:
+                "col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12"
+            },
+            [
+              _c("div", { staticClass: "ui-block" }, [
+                _c("div", { staticClass: "news-feed-form" }, [
+                  _c("form", [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "form-group with-icon label-floating is-empty"
+                      },
+                      [
+                        _c("label", { staticClass: "control-label" }, [
+                          _vm._v("Create Your Challenge here...")
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          staticClass: "form-control",
+                          attrs: { placeholder: "", row: "2" },
+                          on: { click: _vm.postChallenge }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "material-input" })
+                      ]
+                    )
+                  ])
                 ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("ActivityItem"),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-control btn-more",
-                attrs: {
-                  id: "load-more-button",
-                  href: "#",
-                  "data-load-link": "items-to-load.html",
-                  "data-container": "newsfeed-items-grid"
-                }
-              },
-              [
-                _c("svg", { staticClass: "olymp-three-dots-icon" }, [
-                  _c("use", {
-                    attrs: {
-                      "xlink:href":
-                        "assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"
-                    }
-                  })
-                ])
-              ]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "aside",
-          {
-            staticClass:
-              "col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12"
-          },
-          [_c("FriendSuggestions")],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "aside",
-          {
-            staticClass:
-              "col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12"
-          },
-          [_c("ActivityFeed")],
-          1
-        )
-      ])
-    ])
-  ])
+              ]),
+              _vm._v(" "),
+              _c("ActivityItem", { ref: "activityItem" }),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-control btn-more",
+                  attrs: {
+                    id: "load-more-button",
+                    href: "#",
+                    "data-load-link": "items-to-load.html",
+                    "data-container": "newsfeed-items-grid"
+                  }
+                },
+                [
+                  _c("svg", { staticClass: "olymp-three-dots-icon" }, [
+                    _c("use", {
+                      attrs: {
+                        "xlink:href":
+                          "assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"
+                      }
+                    })
+                  ])
+                ]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "aside",
+            {
+              staticClass:
+                "col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12"
+            },
+            [_c("FriendSuggestions")],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "aside",
+            {
+              staticClass:
+                "col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12"
+            },
+            [_c("ActivityFeed")],
+            1
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("ChallengeForm", { ref: "challenge", on: { output: _vm.output } })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -64378,6 +64522,253 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=template&id=3d2eb884&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=template&id=3d2eb884&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: _vm.modalId,
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "update-header-photo",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog window-popup update-header-photo",
+            attrs: { role: "document" }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "modal-content w-100" },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "close icon-close",
+                    attrs: {
+                      href: "#",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.hideModal()
+                      }
+                    }
+                  },
+                  [
+                    _c("svg", { staticClass: "olymp-close-icon" }, [
+                      _c("use", {
+                        attrs: {
+                          "xlink:href":
+                            "assets/svg-icons/sprites/icons.svg#olymp-close-icon"
+                        }
+                      })
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-card",
+                  {
+                    staticClass: "mb-2 shadow p-3 mb-5 bg-white rounded",
+                    staticStyle: { "max-width": "60rem" }
+                  },
+                  [
+                    _c(
+                      "b-form",
+                      { on: { submit: _vm.addChallenge } },
+                      [
+                        _c("b-form-input", {
+                          staticClass: "mt-2",
+                          attrs: {
+                            id: "title",
+                            type: "text",
+                            required: "",
+                            placeholder: "Title"
+                          },
+                          model: {
+                            value: _vm.form.title,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "title", $$v)
+                            },
+                            expression: "form.title"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("b-form-textarea", {
+                          staticClass: "mt-2",
+                          attrs: {
+                            id: "description",
+                            placeholder: "Enter description...",
+                            rows: "3",
+                            "max-rows": "6"
+                          },
+                          model: {
+                            value: _vm.form.description,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "description", $$v)
+                            },
+                            expression: "form.description"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("b-form-file", {
+                          staticClass: "mt-2",
+                          attrs: {
+                            state: Boolean(_vm.form.image),
+                            placeholder: "Upload an Image",
+                            "drop-placeholder": "Drop Image here..."
+                          },
+                          model: {
+                            value: _vm.form.image,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "image", $$v)
+                            },
+                            expression: "form.image"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("multiselect", {
+                          staticClass: "mt-3",
+                          attrs: {
+                            "tag-placeholder": "Add this as new tag",
+                            placeholder: "Search or add a tag",
+                            label: "name",
+                            "track-by": "code",
+                            options: _vm.optionsList,
+                            multiple: true,
+                            taggable: true
+                          },
+                          on: { tag: _vm.addTag },
+                          model: {
+                            value: _vm.form.selectedList,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "selectedList", $$v)
+                            },
+                            expression: "form.selectedList"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "b-row",
+                          [
+                            _c(
+                              "b-col",
+                              { staticClass: "col-6" },
+                              [
+                                _c("datepicker", {
+                                  staticClass: "mt-3",
+                                  attrs: {
+                                    name: "active_from",
+                                    placeholder: "Active from"
+                                  },
+                                  model: {
+                                    value: _vm.form.activeFrom,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.form, "activeFrom", $$v)
+                                    },
+                                    expression: "form.activeFrom"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-col",
+                              { staticClass: "col-6" },
+                              [
+                                _c("datepicker", {
+                                  staticClass: "mt-3",
+                                  attrs: {
+                                    name: "active_to",
+                                    placeholder: "Active To"
+                                  },
+                                  model: {
+                                    value: _vm.form.activeTo,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.form, "activeTo", $$v)
+                                    },
+                                    expression: "form.activeTo"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-row",
+                          { staticClass: "mt-4" },
+                          [
+                            _c(
+                              "b-col",
+                              { staticClass: "text-right" },
+                              [
+                                _c(
+                                  "b-button",
+                                  {
+                                    staticClass: "btn btn-primary btn-md-2",
+                                    attrs: {
+                                      type: "submit",
+                                      variant: "primary",
+                                      size: "lg"
+                                    }
+                                  },
+                                  [_vm._v("Post Challange")]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/challenges/PostChallenge.vue?vue&type=template&id=0d580ccc&scoped=true&":
 /*!*********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/challenges/PostChallenge.vue?vue&type=template&id=0d580ccc&scoped=true& ***!
@@ -64602,10 +64993,10 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col col-6 col-lg-6" }, [
+                  _c("div", { staticClass: "col col-12 col-lg-6" }, [
                     _c(
                       "ol",
-                      { staticClass: "widget w-contributor-list order" },
+                      { staticClass: "widget w-contributor-list" },
                       _vm._l(_vm.list, function(item, index) {
                         return index <= 4
                           ? _c("li", { key: index }, [
@@ -64633,13 +65024,7 @@ var render = function() {
                                         }
                                       }
                                     },
-                                    [
-                                      _vm._v(
-                                        "\n                                                " +
-                                          _vm._s(item.name) +
-                                          "\n                                            "
-                                      )
-                                    ]
+                                    [_vm._v(_vm._s(item.name))]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -64649,14 +65034,20 @@ var render = function() {
                                       attrs: { href: "javascript:void(0);" }
                                     },
                                     [_vm._v(_vm._s(item.location))]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "contributor-points" },
+                                    [
+                                      _vm._v(
+                                        _vm._s(item.reputation) + " points"
+                                      )
+                                    ]
                                   )
                                 ],
                                 1
                               ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "contributor-points" }, [
-                                _vm._v(_vm._s(item.reputation) + " points")
-                              ]),
                               _vm._v(" "),
                               _vm.$store.state.userId !== item.id
                                 ? _c(
@@ -64678,19 +65069,11 @@ var render = function() {
                                     },
                                     [
                                       item.is_following == 1
-                                        ? [
-                                            _vm._v(
-                                              "\n                                                UnFollow\n                                            "
-                                            )
-                                          ]
+                                        ? [_vm._v("UnFollow")]
                                         : _vm._e(),
                                       _vm._v(" "),
                                       item.is_following == 0
-                                        ? [
-                                            _vm._v(
-                                              "\n                                                Follow\n                                            "
-                                            )
-                                          ]
+                                        ? [_vm._v("Follow")]
                                         : _vm._e()
                                     ],
                                     2
@@ -64703,13 +65086,10 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col col-6 col-lg-6" }, [
+                  _c("div", { staticClass: "col col-12 col-lg-6" }, [
                     _c(
                       "ol",
-                      {
-                        staticClass: "widget w-contributor-list order",
-                        attrs: { start: "5" }
-                      },
+                      { staticClass: "widget w-contributor-list right" },
                       _vm._l(_vm.list, function(item, index) {
                         return index > 4 && index + 4
                           ? _c("li", [
@@ -64737,13 +65117,7 @@ var render = function() {
                                         }
                                       }
                                     },
-                                    [
-                                      _vm._v(
-                                        "\n                                                " +
-                                          _vm._s(item.name) +
-                                          "\n                                            "
-                                      )
-                                    ]
+                                    [_vm._v(_vm._s(item.name))]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -64753,14 +65127,20 @@ var render = function() {
                                       attrs: { href: "javascript:void(0);" }
                                     },
                                     [_vm._v(_vm._s(item.location))]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "contributor-points" },
+                                    [
+                                      _vm._v(
+                                        _vm._s(item.reputation) + " points"
+                                      )
+                                    ]
                                   )
                                 ],
                                 1
                               ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "contributor-points" }, [
-                                _vm._v(_vm._s(item.reputation) + " points")
-                              ]),
                               _vm._v(" "),
                               _vm.$store.state.userId !== item.id
                                 ? _c(
@@ -64782,19 +65162,11 @@ var render = function() {
                                     },
                                     [
                                       item.is_following == 1
-                                        ? [
-                                            _vm._v(
-                                              "\n                                                UnFollow\n                                            "
-                                            )
-                                          ]
+                                        ? [_vm._v("Unfollow")]
                                         : _vm._e(),
                                       _vm._v(" "),
                                       item.is_following == 0
-                                        ? [
-                                            _vm._v(
-                                              "\n                                                Follow\n                                            "
-                                            )
-                                          ]
+                                        ? [_vm._v("Follow")]
                                         : _vm._e()
                                     ],
                                     2
@@ -64845,7 +65217,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "ol",
-                    { staticClass: "widget w-contributor-list " },
+                    { staticClass: "widget w-contributor-list" },
                     _vm._l(item.toppers, function(userItem) {
                       return _c("li", [
                         _c("div", { staticClass: "contributor-thumb" }, [
@@ -64870,13 +65242,7 @@ var render = function() {
                                   }
                                 }
                               },
-                              [
-                                _vm._v(
-                                  "\n\n\n                                    " +
-                                    _vm._s(userItem.name) +
-                                    "\n                                "
-                                )
-                              ]
+                              [_vm._v(_vm._s(userItem.name))]
                             ),
                             _vm._v(" "),
                             _c(
@@ -64899,6 +65265,26 @@ var render = function() {
                       ])
                     }),
                     0
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "ui-block-footer" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          attrs: {
+                            to: {
+                              name: "Users",
+                              params: { country_id: item.country.id }
+                            }
+                          }
+                        },
+                        [_vm._v("Show All")]
+                      )
+                    ],
+                    1
                   )
                 ]
               )
@@ -64958,7 +65344,17 @@ var render = function() {
           [
             _c("div", { staticClass: "ui-block responsive-flex" }, [
               _c("div", { staticClass: "ui-block-title" }, [
-                _vm._m(0),
+                _vm.country
+                  ? _c("div", { staticClass: "inline-items" }, [
+                      _c("div", { staticClass: "ui-block-title__icon" }, [
+                        _c("img", { attrs: { src: _vm.country.icon } })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "h6 title" }, [
+                        _vm._v(_vm._s(_vm.country.title))
+                      ])
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("form", { staticClass: "w-search" }, [
                   _c("div", { staticClass: "form-group with-button" }, [
@@ -64990,29 +65386,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(1)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inline-items" }, [
-      _c("div", { staticClass: "ui-block-title__icon" }, [
-        _c("img", {
-          attrs: { src: "assets/img/eureka/contributors/flag-my.png" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "h6 title" }, [_vm._v("Malaysia")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
+    _c("div", { ref: "usersList", staticClass: "container" }, [
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
@@ -65020,980 +65394,225 @@ var staticRenderFns = [
           [
             _c("div", { staticClass: "ui-block" }, [
               _c("table", { staticClass: "forums-table user-list-table" }, [
-                _c("thead", [
-                  _c("tr", [
-                    _c("th", { staticClass: "user-name" }, [
-                      _vm._v(
-                        "\n                                Name\n                            "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("th", { staticClass: "badges-achieved" }, [
-                      _vm._v(
-                        "\n                                Badges Achieved\n                            "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("th", { staticClass: "total-points" }, [
-                      _vm._v(
-                        "\n                                Total Points\n                            "
-                      )
-                    ])
-                  ])
-                ]),
+                _vm._m(0),
                 _vm._v(" "),
-                _c("tbody", [
-                  _c("tr", [
-                    _c("td", { staticClass: "user-name" }, [
-                      _c("div", { staticClass: "forum-item" }, [
-                        _c("span", [_vm._v("1")]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "forum-item__thumb" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/author-main1.jpg",
-                              alt: ""
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "content" }, [
-                          _c(
-                            "a",
-                            { staticClass: "h6 title", attrs: { href: "#" } },
-                            [_vm._v("John Blake")]
-                          ),
+                _vm.users && _vm.users.length
+                  ? _c(
+                      "tbody",
+                      _vm._l(_vm.users, function(user, index) {
+                        return _c("tr", { key: user.id }, [
+                          _c("td", { staticClass: "user-name" }, [
+                            _c("div", { staticClass: "forum-item" }, [
+                              _c("span", [_vm._v(_vm._s(index + 1))]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "forum-item__thumb" }, [
+                                _c("img", {
+                                  attrs: { src: user.image, alt: user.name }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "content" },
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      staticClass: "h6 post__author-name fn",
+                                      attrs: {
+                                        to: {
+                                          name: "ProfileEuraka",
+                                          params: {
+                                            id: user.id,
+                                            slug: user.slug
+                                          }
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n\n\n                                            " +
+                                          _vm._s(user.name) +
+                                          "\n                                        "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("p", { staticClass: "text" }, [
+                                    _vm._v("Digital Lab, Malaysia")
+                                  ])
+                                ],
+                                1
+                              )
+                            ])
+                          ]),
                           _vm._v(" "),
-                          _c("p", { staticClass: "text" }, [
-                            _vm._v("Digital Lab, Malaysia")
+                          _c("td", { staticClass: "total-points" }, [
+                            _c(
+                              "a",
+                              { staticClass: "h6 count", attrs: { href: "#" } },
+                              [_vm._v(_vm._s(user.reputation))]
+                            )
                           ])
                         ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "badges-achieved" }, [
-                      _c("ul", { staticClass: "contributor-badges" }, [
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge3.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge2.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge11.png",
-                              alt: "author"
-                            }
-                          })
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "total-points" }, [
-                      _c(
-                        "a",
-                        { staticClass: "h6 count", attrs: { href: "#" } },
-                        [_vm._v("320")]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", { staticClass: "user-name" }, [
-                      _c("div", { staticClass: "forum-item" }, [
-                        _c("span", [_vm._v("2")]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "forum-item__thumb" }, [
-                          _c("img", {
-                            attrs: { src: "assets/img/avatar3.jpg", alt: "" }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "content" }, [
-                          _c(
-                            "a",
-                            { staticClass: "h6 title", attrs: { href: "#" } },
-                            [_vm._v("Audrie Gohr")]
-                          ),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text" }, [
-                            _vm._v("Digital Lab, Malaysia")
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "badges-achieved" }, [
-                      _c("ul", { staticClass: "contributor-badges" }, [
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge13.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge14.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge9.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge6.png",
-                              alt: "author"
-                            }
-                          })
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "total-points" }, [
-                      _c(
-                        "a",
-                        { staticClass: "h6 count", attrs: { href: "#" } },
-                        [_vm._v("526")]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", { staticClass: "user-name" }, [
-                      _c("div", { staticClass: "forum-item" }, [
-                        _c("span", [_vm._v("3")]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "forum-item__thumb" }, [
-                          _c("img", {
-                            attrs: { src: "assets/img/avatar4.jpg", alt: "" }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "content" }, [
-                          _c(
-                            "a",
-                            { staticClass: "h6 title", attrs: { href: "#" } },
-                            [_vm._v("Patrick Hildebrant")]
-                          ),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text" }, [
-                            _vm._v("Digital Lab, Malaysia")
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "badges-achieved" }, [
-                      _c("ul", { staticClass: "contributor-badges" }, [
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge12.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge2.png",
-                              alt: "author"
-                            }
-                          })
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "total-points" }, [
-                      _c(
-                        "a",
-                        { staticClass: "h6 count", attrs: { href: "#" } },
-                        [_vm._v("360")]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", { staticClass: "user-name" }, [
-                      _c("div", { staticClass: "forum-item" }, [
-                        _c("span", [_vm._v("4")]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "forum-item__thumb" }, [
-                          _c("img", {
-                            attrs: { src: "assets/img/avatar16.jpg", alt: "" }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "content" }, [
-                          _c(
-                            "a",
-                            { staticClass: "h6 title", attrs: { href: "#" } },
-                            [_vm._v("Mason Heer")]
-                          ),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text" }, [
-                            _vm._v("Digital Lab, Malaysia")
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "badges-achieved" }, [
-                      _c("ul", { staticClass: "contributor-badges" }, [
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge6.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge9.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge12.png",
-                              alt: "author"
-                            }
-                          })
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "total-points" }, [
-                      _c(
-                        "a",
-                        { staticClass: "h6 count", attrs: { href: "#" } },
-                        [_vm._v("320")]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", { staticClass: "user-name" }, [
-                      _c("div", { staticClass: "forum-item" }, [
-                        _c("span", [_vm._v("5")]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "forum-item__thumb" }, [
-                          _c("img", {
-                            attrs: { src: "assets/img/avatar8.jpg", alt: "" }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "content" }, [
-                          _c(
-                            "a",
-                            { staticClass: "h6 title", attrs: { href: "#" } },
-                            [_vm._v("Dallas Kremer")]
-                          ),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text" }, [
-                            _vm._v("Digital Lab, Malaysia")
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "badges-achieved" }, [
-                      _c("ul", { staticClass: "contributor-badges" }, [
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge14.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge7.png",
-                              alt: "author"
-                            }
-                          })
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "total-points" }, [
-                      _c(
-                        "a",
-                        { staticClass: "h6 count", attrs: { href: "#" } },
-                        [_vm._v("150")]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", { staticClass: "user-name" }, [
-                      _c("div", { staticClass: "forum-item" }, [
-                        _c("span", [_vm._v("6")]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "forum-item__thumb" }, [
-                          _c("img", {
-                            attrs: { src: "assets/img/avatar6.jpg", alt: "" }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "content" }, [
-                          _c(
-                            "a",
-                            { staticClass: "h6 title", attrs: { href: "#" } },
-                            [_vm._v("Wes Gluck")]
-                          ),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text" }, [
-                            _vm._v("Digital Lab, Malaysia")
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "badges-achieved" }, [
-                      _c("ul", { staticClass: "contributor-badges" }, [
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge1.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge10.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge4.png",
-                              alt: "author"
-                            }
-                          })
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "total-points" }, [
-                      _c(
-                        "a",
-                        { staticClass: "h6 count", attrs: { href: "#" } },
-                        [_vm._v("540")]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", { staticClass: "user-name" }, [
-                      _c("div", { staticClass: "forum-item" }, [
-                        _c("span", [_vm._v("7")]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "forum-item__thumb" }, [
-                          _c("img", {
-                            attrs: { src: "assets/img/avatar20.jpg", alt: "" }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "content" }, [
-                          _c(
-                            "a",
-                            { staticClass: "h6 title", attrs: { href: "#" } },
-                            [_vm._v("Velvet Asberry")]
-                          ),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text" }, [
-                            _vm._v("Digital Lab, Malaysia")
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "badges-achieved" }, [
-                      _c("ul", { staticClass: "contributor-badges" }, [
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge12.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge3.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge5.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge6.png",
-                              alt: "author"
-                            }
-                          })
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "total-points" }, [
-                      _c(
-                        "a",
-                        { staticClass: "h6 count", attrs: { href: "#" } },
-                        [_vm._v("753")]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", { staticClass: "user-name" }, [
-                      _c("div", { staticClass: "forum-item" }, [
-                        _c("span", [_vm._v("8")]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "forum-item__thumb" }, [
-                          _c("img", {
-                            attrs: { src: "assets/img/avatar2.jpg", alt: "" }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "content" }, [
-                          _c(
-                            "a",
-                            { staticClass: "h6 title", attrs: { href: "#" } },
-                            [_vm._v("Nicol Whetsel")]
-                          ),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text" }, [
-                            _vm._v("Digital Lab, Malaysia")
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "badges-achieved" }, [
-                      _c("ul", { staticClass: "contributor-badges" }, [
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge15.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge10.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge7.png",
-                              alt: "author"
-                            }
-                          })
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "total-points" }, [
-                      _c(
-                        "a",
-                        { staticClass: "h6 count", attrs: { href: "#" } },
-                        [_vm._v("650")]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", { staticClass: "user-name" }, [
-                      _c("div", { staticClass: "forum-item" }, [
-                        _c("span", [_vm._v("9")]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "forum-item__thumb" }, [
-                          _c("img", {
-                            attrs: { src: "assets/img/avatar7.jpg", alt: "" }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "content" }, [
-                          _c(
-                            "a",
-                            { staticClass: "h6 title", attrs: { href: "#" } },
-                            [_vm._v("Dierdre Corrao")]
-                          ),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text" }, [
-                            _vm._v("Digital Lab, Malaysia")
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "badges-achieved" }, [
-                      _c("ul", { staticClass: "contributor-badges" }, [
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge1.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge4.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge8.png",
-                              alt: "author"
-                            }
-                          })
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "total-points" }, [
-                      _c(
-                        "a",
-                        { staticClass: "h6 count", attrs: { href: "#" } },
-                        [_vm._v("1010")]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", { staticClass: "user-name" }, [
-                      _c("div", { staticClass: "forum-item" }, [
-                        _c("span", [_vm._v("10")]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "forum-item__thumb" }, [
-                          _c("img", {
-                            attrs: { src: "assets/img/avatar9.jpg", alt: "" }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "content" }, [
-                          _c(
-                            "a",
-                            { staticClass: "h6 title", attrs: { href: "#" } },
-                            [_vm._v("Marvin Roof")]
-                          ),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text" }, [
-                            _vm._v("Digital Lab, Malaysia")
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "badges-achieved" }, [
-                      _c("ul", { staticClass: "contributor-badges" }, [
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge11.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge15.png",
-                              alt: "author"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/badge1.png",
-                              alt: "author"
-                            }
-                          })
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "total-points" }, [
-                      _c(
-                        "a",
-                        { staticClass: "h6 count", attrs: { href: "#" } },
-                        [_vm._v("680")]
-                      )
-                    ])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("nav", { attrs: { "aria-label": "Page navigation" } }, [
-              _c("ul", { staticClass: "pagination justify-content-center" }, [
-                _c("li", { staticClass: "page-item disabled" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "page-link",
-                      attrs: { href: "#", tabindex: "-1" }
-                    },
-                    [_vm._v("Previous")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "page-item" }, [
-                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-                    _vm._v("1"),
-                    _c("div", { staticClass: "ripple-container" }, [
-                      _c("div", {
-                        staticClass: "ripple ripple-on ripple-out",
-                        staticStyle: {
-                          left: "-10.3833px",
-                          top: "-16.8333px",
-                          "background-color": "rgb(255, 255, 255)",
-                          transform: "scale(16.7857)"
-                        }
-                      })
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "page-item" }, [
-                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-                    _vm._v("2")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "page-item" }, [
-                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-                    _vm._v("3")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "page-item" }, [
-                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-                    _vm._v("...")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "page-item" }, [
-                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-                    _vm._v("12")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "page-item" }, [
-                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-                    _vm._v("Next")
-                  ])
-                ])
+                      }),
+                      0
+                    )
+                  : _vm._e()
               ])
             ])
           ]
         ),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12" },
-          [
-            _c("div", { staticClass: "ui-block" }, [
-              _c("div", { staticClass: "ui-block-title" }, [
-                _c("h6", { staticClass: "title" }, [_vm._v("Other Countries")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "ui-block-content" }, [
-                _c("ul", { staticClass: "widget w-featured-countries" }, [
-                  _c("li", [
-                    _c("div", { staticClass: "featured-countries__icon" }, [
-                      _c("img", {
-                        attrs: {
-                          src: "assets/img/eureka/contributors/flag-sg.png"
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "featured-countries__title" }, [
-                      _vm._v("Singapore")
-                    ])
+        _vm._m(1)
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "user-name" }, [
+          _vm._v(
+            "\n                                Name\n                            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "total-points" }, [
+          _vm._v(
+            "\n                                Total Points\n                            "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12" },
+      [
+        _c("div", { staticClass: "ui-block" }, [
+          _c("div", { staticClass: "ui-block-title" }, [
+            _c("h6", { staticClass: "title" }, [_vm._v("Recent Challenges")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "ui-block-content" }, [
+            _c("ul", { staticClass: "widget w-featured-topics" }, [
+              _c("li", [
+                _c("div", { staticClass: "content" }, [
+                  _c("a", { staticClass: "h6 title", attrs: { href: "#" } }, [
+                    _vm._v(
+                      "Summer is Coming! Picnic in the east boulevard\n                                        park"
+                    )
                   ]),
                   _vm._v(" "),
-                  _c("li", [
-                    _c("div", { staticClass: "featured-countries__icon" }, [
-                      _c("img", {
-                        attrs: {
-                          src: "assets/img/eureka/contributors/flag-th.png"
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "featured-countries__title" }, [
-                      _vm._v("Thailand")
-                    ])
-                  ]),
+                  _c(
+                    "time",
+                    {
+                      staticClass: "entry-date updated",
+                      attrs: { datetime: "2017-06-24T18:18" }
+                    },
+                    [
+                      _vm._v(
+                        "26 minutes ago\n                                    "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("li", [
-                    _c("div", { staticClass: "featured-countries__icon" }, [
-                      _c("img", {
-                        attrs: {
-                          src: "assets/img/eureka/contributors/flag-ph.png"
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "featured-countries__title" }, [
-                      _vm._v("Philippines")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("div", { staticClass: "featured-countries__icon" }, [
-                      _c("img", {
-                        attrs: {
-                          src: "assets/img/eureka/contributors/flag-hk.png"
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "featured-countries__title" }, [
-                      _vm._v("Hong Kong")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("div", { staticClass: "featured-countries__icon" }, [
-                      _c("img", {
-                        attrs: {
-                          src: "assets/img/eureka/contributors/flag-cn.png"
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "featured-countries__title" }, [
-                      _vm._v("China")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("div", { staticClass: "featured-countries__icon" }, [
-                      _c("img", {
-                        attrs: {
-                          src: "assets/img/eureka/contributors/flag-jp.png"
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "featured-countries__title" }, [
-                      _vm._v("Japan")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("div", { staticClass: "featured-countries__icon" }, [
-                      _c("img", {
-                        attrs: {
-                          src: "assets/img/eureka/contributors/flag-es.png"
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "featured-countries__title" }, [
-                      _vm._v("Spain")
-                    ])
+                  _c("div", { staticClass: "forums" }, [
+                    _vm._v("The Community")
                   ])
                 ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "ui-block" }, [
-              _c("div", { staticClass: "ui-block-title" }, [
-                _c("h6", { staticClass: "title" }, [
-                  _vm._v("Recent Challenges")
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("div", { staticClass: "content" }, [
+                  _c("a", { staticClass: "h6 title", attrs: { href: "#" } }, [
+                    _vm._v(
+                      "Kung Fighters released a new video, check it out\n                                        here!"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "time",
+                    {
+                      staticClass: "entry-date updated",
+                      attrs: { datetime: "2017-06-24T18:18" }
+                    },
+                    [
+                      _vm._v(
+                        "44 minutes ago\n                                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "forums" }, [_vm._v("The Boombox")])
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "ui-block-content" }, [
-                _c("ul", { staticClass: "widget w-featured-topics" }, [
-                  _c("li", [
-                    _c("div", { staticClass: "content" }, [
-                      _c(
-                        "a",
-                        { staticClass: "h6 title", attrs: { href: "#" } },
-                        [
-                          _vm._v(
-                            "Summer is Coming! Picnic in the east boulevard park"
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "time",
-                        {
-                          staticClass: "entry-date updated",
-                          attrs: { datetime: "2017-06-24T18:18" }
-                        },
-                        [_vm._v("26 minutes ago")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "forums" }, [
-                        _vm._v("The Community")
-                      ])
-                    ])
+              _c("li", [
+                _c("div", { staticClass: "content" }, [
+                  _c("a", { staticClass: "h6 title", attrs: { href: "#" } }, [
+                    _vm._v("What’s your favourite season?")
                   ]),
                   _vm._v(" "),
-                  _c("li", [
-                    _c("div", { staticClass: "content" }, [
-                      _c(
-                        "a",
-                        { staticClass: "h6 title", attrs: { href: "#" } },
-                        [
-                          _vm._v(
-                            "Kung Fighters released a new video, check it out here!"
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "time",
-                        {
-                          staticClass: "entry-date updated",
-                          attrs: { datetime: "2017-06-24T18:18" }
-                        },
-                        [_vm._v("44 minutes ago")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "forums" }, [
-                        _vm._v("The Boombox")
-                      ])
-                    ])
+                  _c(
+                    "time",
+                    {
+                      staticClass: "entry-date updated",
+                      attrs: { datetime: "2017-06-24T18:18" }
+                    },
+                    [
+                      _vm._v(
+                        "59 minutes ago\n                                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "forums" }, [
+                    _vm._v("The Community")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("div", { staticClass: "content" }, [
+                  _c("a", { staticClass: "h6 title", attrs: { href: "#" } }, [
+                    _vm._v(
+                      "Who had the best presentation at this year’s E3?\n                                        Rate them!"
+                    )
                   ]),
                   _vm._v(" "),
-                  _c("li", [
-                    _c("div", { staticClass: "content" }, [
-                      _c(
-                        "a",
-                        { staticClass: "h6 title", attrs: { href: "#" } },
-                        [_vm._v("What’s your favourite season?")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "time",
-                        {
-                          staticClass: "entry-date updated",
-                          attrs: { datetime: "2017-06-24T18:18" }
-                        },
-                        [_vm._v("59 minutes ago")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "forums" }, [
-                        _vm._v("The Community")
-                      ])
-                    ])
-                  ]),
+                  _c(
+                    "time",
+                    {
+                      staticClass: "entry-date updated",
+                      attrs: { datetime: "2017-06-24T18:18" }
+                    },
+                    [
+                      _vm._v(
+                        "1 hour, 3 minutes\n                                        ago\n                                    "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("li", [
-                    _c("div", { staticClass: "content" }, [
-                      _c(
-                        "a",
-                        { staticClass: "h6 title", attrs: { href: "#" } },
-                        [
-                          _vm._v(
-                            "Who had the best presentation at this year’s E3? Rate them!"
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "time",
-                        {
-                          staticClass: "entry-date updated",
-                          attrs: { datetime: "2017-06-24T18:18" }
-                        },
-                        [_vm._v("1 hour, 3 minutes ago")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "forums" }, [
-                        _vm._v("Arcade Planet")
-                      ])
-                    ])
+                  _c("div", { staticClass: "forums" }, [
+                    _vm._v("Arcade Planet")
                   ])
                 ])
               ])
             ])
-          ]
-        )
-      ])
-    ])
+          ])
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -66886,32 +66505,6 @@ var render = function() {
                               [
                                 _vm._v(
                                   "\n\n                                                Friends\n                                            "
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "li",
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                attrs: {
-                                  to: {
-                                    name: "About",
-                                    params: {
-                                      id: _vm.user.id,
-                                      slug: _vm.user.slug
-                                    }
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n\n                                                About\n                                            "
                                 )
                               ]
                             )
@@ -73376,15 +72969,28 @@ var render = function() {
                 "col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12"
             },
             [
-              _c("ProfileIntro", {
-                attrs: {
-                  CurrentUser: _vm.user,
-                  isUserLoggedIn: _vm.userLogin,
-                  isSameUser: _vm.isSameUser
-                }
-              })
-            ],
-            1
+              _c("div", { staticClass: "ui-block" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "ui-block-content" }, [
+                  _c(
+                    "ul",
+                    { staticClass: "widget w-personal-info item-block" },
+                    [
+                      _c("li", [
+                        _c("span", { staticClass: "title" }, [
+                          _vm._v("About Me:")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "text" }, [
+                          _vm._v(_vm._s(_vm.user.userAbout))
+                        ])
+                      ])
+                    ]
+                  )
+                ])
+              ])
+            ]
           ),
           _vm._v(" "),
           _c(
@@ -73412,7 +73018,16 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ui-block-title" }, [
+      _c("h6", { staticClass: "title" }, [_vm._v("Profile Intro")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -73463,10 +73078,9 @@ var render = function() {
                             _c(
                               "router-link",
                               {
-                                staticClass: "nav-link",
                                 attrs: {
                                   to: {
-                                    name: "Profile",
+                                    name: "Friends",
                                     params: {
                                       id: _vm.user.id,
                                       slug: _vm.user.slug
@@ -73476,15 +73090,13 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                                            Timeline\n                                        "
+                                  "\n\n\t\t\t\t\t\t\t\t\t\tFriends\n\t\t\t\t\t\t\t\t\t\t"
                                 )
                               ]
                             )
                           ],
                           1
-                        ),
-                        _vm._v(" "),
-                        _c("li")
+                        )
                       ])
                     ]
                   )
@@ -74254,7 +73866,8 @@ var render = function() {
                                   attrs: {
                                     id: "username",
                                     type: "text",
-                                    required: ""
+                                    required: "",
+                                    readonly: ""
                                   },
                                   model: {
                                     value: _vm.form.username,
@@ -74336,14 +73949,19 @@ var render = function() {
                                   attrs: {
                                     id: "nickname",
                                     type: "text",
-                                    required: ""
+                                    required: "",
+                                    readonly: ""
                                   },
                                   model: {
-                                    value: _vm.form.nickname,
+                                    value: _vm.form.campaign.campaign,
                                     callback: function($$v) {
-                                      _vm.$set(_vm.form, "nickname", $$v)
+                                      _vm.$set(
+                                        _vm.form.campaign,
+                                        "campaign",
+                                        $$v
+                                      )
                                     },
-                                    expression: "form.nickname"
+                                    expression: "form.campaign.campaign"
                                   }
                                 })
                               ],
@@ -74721,7 +74339,7 @@ var render = function() {
           _c(
             "router-link",
             { staticClass: "h6 title", attrs: { to: "/post-challenge" } },
-            [_vm._v("\n\t\t\t\tCreate Challange\n\t\t\t")]
+            [_vm._v("\n\t\t\t\tCreate Challenge\n\t\t\t")]
           )
         ],
         1
@@ -75485,8 +75103,12 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    staticStyle: { border: "1px solid red" },
-                    attrs: { name: "comment_text", placeholder: "" },
+                    staticStyle: { border: "1px solid darkgrey" },
+                    attrs: {
+                      name: "comment_text",
+                      placeholder: "",
+                      required: ""
+                    },
                     domProps: { value: _vm.comment_text },
                     on: {
                       input: function($event) {
@@ -75556,7 +75178,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("textarea", {
         staticClass: "form-control",
-        staticStyle: { border: "1px solid red" },
+        staticStyle: { border: "1px solid darkgrey" },
         attrs: {
           name: "comment_text",
           required: "",
@@ -84434,6 +84056,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/pages/challenges/ChallengeForm.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/pages/challenges/ChallengeForm.vue ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ChallengeForm_vue_vue_type_template_id_3d2eb884_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ChallengeForm.vue?vue&type=template&id=3d2eb884&scoped=true& */ "./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=template&id=3d2eb884&scoped=true&");
+/* harmony import */ var _ChallengeForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChallengeForm.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ChallengeForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ChallengeForm_vue_vue_type_template_id_3d2eb884_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ChallengeForm_vue_vue_type_template_id_3d2eb884_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "3d2eb884",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/pages/challenges/ChallengeForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChallengeForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ChallengeForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChallengeForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=template&id=3d2eb884&scoped=true&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=template&id=3d2eb884&scoped=true& ***!
+  \***************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChallengeForm_vue_vue_type_template_id_3d2eb884_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ChallengeForm.vue?vue&type=template&id=3d2eb884&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=template&id=3d2eb884&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChallengeForm_vue_vue_type_template_id_3d2eb884_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChallengeForm_vue_vue_type_template_id_3d2eb884_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/pages/challenges/PostChallenge.vue":
 /*!********************************************************************!*\
   !*** ./resources/js/components/pages/challenges/PostChallenge.vue ***!
@@ -84515,9 +84206,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ContributorsList_vue_vue_type_template_id_642d7c07_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ContributorsList.vue?vue&type=template&id=642d7c07&scoped=true& */ "./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=template&id=642d7c07&scoped=true&");
 /* harmony import */ var _ContributorsList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ContributorsList.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _ContributorsList_vue_vue_type_style_index_0_id_642d7c07_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ContributorsList.vue?vue&type=style&index=0&id=642d7c07&scoped=true&lang=css& */ "./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=style&index=0&id=642d7c07&scoped=true&lang=css&");
-/* harmony import */ var _ContributorsList_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ContributorsList.vue?vue&type=style&index=1&lang=css& */ "./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=style&index=1&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -84526,7 +84215,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _ContributorsList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _ContributorsList_vue_vue_type_template_id_642d7c07_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
   _ContributorsList_vue_vue_type_template_id_642d7c07_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -84571,22 +84260,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ContributorsList_vue_vue_type_style_index_0_id_642d7c07_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ContributorsList_vue_vue_type_style_index_0_id_642d7c07_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ContributorsList_vue_vue_type_style_index_0_id_642d7c07_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ContributorsList_vue_vue_type_style_index_0_id_642d7c07_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
  /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ContributorsList_vue_vue_type_style_index_0_id_642d7c07_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=style&index=1&lang=css&":
-/*!**********************************************************************************************************!*\
-  !*** ./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=style&index=1&lang=css& ***!
-  \**********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ContributorsList_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ContributorsList.vue?vue&type=style&index=1&lang=css& */ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=style&index=1&lang=css&");
-/* harmony import */ var _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ContributorsList_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ContributorsList_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ContributorsList_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ContributorsList_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ContributorsList_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -86582,7 +86255,7 @@ __webpack_require__.r(__webpack_exports__);
   }
 }, {
   name: 'Users',
-  path: '/users',
+  path: '/users/:country_id',
   component: _components_pages_contributors_UsersList__WEBPACK_IMPORTED_MODULE_12__["default"],
   meta: {
     requiresAuth: true
@@ -86676,6 +86349,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     userAbout: USER ? USER.about : '',
     userNickname: USER ? USER.nickname : '',
     userLevel: USER ? USER.level : '',
+    userCampaign: USER ? USER.campaign : '',
     baseUrl: 'http://localhost:8000/'
   },
   getters: {
@@ -86719,6 +86393,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     getUserNickname: function getUserNickname(state) {
       return state.userNickname;
+    },
+    getUserCampaign: function getUserCampaign(state) {
+      return state.userCampaign;
     }
   },
   mutations: {
@@ -86757,6 +86434,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     setUserNickname: function setUserNickname(state, token) {
       state.userNickname = token;
+    },
+    setUserCampaign: function setUserCampaign(state, token) {
+      state.userCampaign = token;
     },
     removeAccess: function removeAccess(state) {
       state.userLogin = false;

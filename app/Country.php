@@ -33,4 +33,8 @@ class Country extends Model
 
     	return $list;
     }
+    public function users()
+    {
+        return $this->hasMany(User::class, 'rid');
+    }
 }
