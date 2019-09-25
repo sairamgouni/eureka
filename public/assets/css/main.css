@@ -6537,6 +6537,12 @@ ol ol li {
     position: relative; }
 .comments-list .comment-item.has-children {
     padding-bottom: 0; }
+.comments-list .comment-item .form-control,
+.comments-form .form-control {
+    border: 1px solid #a9a9a9; }
+.comments-list .comment-item .form-control:focus,
+.comments-form .form-control:focus {
+    border-color: #e91d24; }
 .comments-list .post-add-icon {
     margin-right: 20px; }
 .comments-list .post__author img {
@@ -16018,40 +16024,12 @@ input[type=checkbox] {
 .progress-stage-item.completed .icon-podium .style-filled .st0 { fill: #E91D24; }
 .progress-stage-item.completed .icon-podium .style-filled .st1 { fill: #ffffff; }
 
-.progress-stage-item .icon-winner {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    margin-bottom: 14px; }
-@media(min-width: 768px) {
-    .progress-stage-item .icon-winner {
-        width: 50px;
-        height: 50px; } }
-.progress-stage-item .icon-winner label {
-    display: block;
-    font-size: 8px;
-    line-height: 1;
-    text-transform: uppercase;
-    margin-top: 2px;
-    margin-bottom: 0; }
-@media(min-width: 768px) {
-    .progress-stage-item .icon-winner label {
-        font-size: 10px; } }
-.progress-stage-item .icon-winner span {
-    font-size: 1.25rem;
-    line-height: 1;
-    display: block; }
-@media(min-width: 768px) {
-    .progress-stage-item .icon-winner span {
-        font-size: 1.5rem; } }
-.progress-stage-item .icon-winner label,
-.progress-stage-item .icon-winner span {
-    color: #d8d8d8; }
-.progress-stage-item.not-started .icon-winner {
-    border: 1px solid #d8d8d8;
-    border-radius: 50%; }
+.progress-stage-item.not-started .icon-winner .style-empty .st0 { fill: none; }
+.progress-stage-item.not-started .icon-winner .style-empty .st1 { fill: #d8d8d8; }
+.progress-stage-item.in-progress .icon-winner .style-empty .st0 { fill: none; }
+.progress-stage-item.in-progress .icon-winner .style-empty .st1 { fill: #E91D24; }
+.progress-stage-item.completed .icon-winner .style-filled .st0 { fill: #ffffff; }
+.progress-stage-item.completed .icon-winner .style-filled .st1 { fill: #E91D24; }
 
 .progress-stage-item .icon-podium .bg {
     position: absolute;

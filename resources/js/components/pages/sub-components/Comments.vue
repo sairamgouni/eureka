@@ -96,7 +96,7 @@
                                 <div class="form-group label-floating is-empty">
                                     <label class="control-label">Write Reply</label>
                                     <textarea class="form-control" name="comment_text" required rows="1"
-                                              placeholder="" style=" border:1px solid darkgrey;"></textarea>
+                                              placeholder=""></textarea>
                                 </div>
                                 <input type="hidden" name="replay" :value="comment.id" required>
                             </div>
@@ -127,7 +127,7 @@
 
                     <!-- Comment Form -->
 
-                    <form @submit="onSubmit">
+                    <form @submit="onSubmit" class="comments-form">
                         <div class="crumina-module crumina-heading with-title-decoration">
                             <h5 class="heading-title">Write a Comment</h5>
                         </div>
@@ -149,7 +149,7 @@
                                 <div class="form-group label-floating">
                                     <label class="control-label">Your Comment</label>
                                     <textarea v-model="comment_text" name="comment_text" class="form-control"
-                                              placeholder="" style=" border:1px solid darkgrey;"required></textarea>
+                                              placeholder="" required></textarea>
                                 </div>
                                     <button type="submit" class="btn btn-primary w-100" id="comment-box">Post your Comment
                                  </button>
