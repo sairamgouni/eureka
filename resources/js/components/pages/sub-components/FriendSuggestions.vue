@@ -7,8 +7,10 @@
 
     <!-- W-Action -->
 
-    <ul class="widget w-friend-pages-added notification-list friend-requests">
-      <li class="inline-items" v-for="(item,index) in list" :key="index">
+    <ul
+      class="widget w-friend-pages-added notification-list friend-requests friend-suggestions-card"
+    >
+      <li class="friend-suggestions-card__item" v-for="(item,index) in list" :key="index">
         <div class="author-thumb">
           <img :src="item.image" :alt="item.name" class="avatar" :title="item.name" />
         </div>
