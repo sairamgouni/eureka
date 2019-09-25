@@ -19,7 +19,7 @@
                       <form>
 
 								<div class="form-group with-icon label-floating is-empty">
-									<label class="control-label">Share what you are thinking here...</label>
+									<label class="control-label">Create Your Challenge here...</label>
 									<textarea class="form-control" placeholder="" row="2" @click="postChallenge"></textarea>
 								<span class="material-input"></span></div>
 
@@ -43,7 +43,7 @@
 <!--    <router-link to="/post-challenge">-->
 <!--                    <a href="javascript:void(0);" class="btn btn-primary btn-md-1 mt-1 post-button">Post Challenge</a>-->
 <!--              </router-link>-->
-		<ActivityItem/>
+		<ActivityItem ref="activityItem"/>
 
 			<a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="items-to-load.html"
                data-container="newsfeed-items-grid"><svg class="olymp-three-dots-icon"><use
@@ -84,7 +84,7 @@
 	</div>
 </div>
 
-
+<ChallengeForm ref="challenge" v-on:output="output"></ChallengeForm>
 
 </span>
 </template>
@@ -98,6 +98,7 @@
     import PostStatus from './sub-components/PostStatus';
     import ActivityItem from './sub-components/ActivityItem';
     import PostChallenge from './challenges/PostChallenge';
+    import ChallengeForm from './challenges/ChallengeForm';
 
     export default {
         name: 'Newsfeed',
@@ -109,16 +110,22 @@
             PostStatus,
 
             ActivityItem,
-            PostChallenge
+            PostChallenge,
+            ChallengeForm
         },
         data() {
             return {
-                userLogin: false
+                userLogin: false,
             }
         },
         methods: {
             postChallenge() {
-                this.$router.push('/post-challenge');
+                this.$refs.challenge.showModal();
+                // this.$router.push('/post-challenge');
+            },
+            output(massege) {
+                console.log(massege,'inoutputmethod');
+                this.$refs.activityItem.loadPosts();
             }
         },
         created() {

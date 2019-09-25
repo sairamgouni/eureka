@@ -19,6 +19,15 @@
 
 						<li class="all-users" v-if="remainingFriends>0">
 							<a href="#">+{{remainingFriends}}</a>
+
+
+<!--                            <router-link-->
+
+<!--                                :to="{ name: 'Friends',-->
+<!--										 params: { id: item.id, slug: item.slug } }" >+-->
+
+<!--                                {{remainingFriends}}-->
+<!--                            </router-link>-->
 						</li>
 					</ul>
 

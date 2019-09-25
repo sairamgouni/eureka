@@ -68,7 +68,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col col-xl-10 m-auto col-lg-10 col-md-12 col-sm-12 col-12">
-                        <a href="#" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#registration-login-form-popup">Start Making Friends Now!</a>
+                        <router-link  to="/contributors" class="btn btn-primary btn-lg " data-toggle="modal" data-target="#registration-login-form-popup">Start Making Friends Now!
+                        </router-link>
+<!--                        <a href="#" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#registration-login-form-popup">Start Making Friends Now!</a>-->
                     </div>
                 </div>
             </div>
@@ -120,17 +122,9 @@
                                 <li>
                                     <a href="#">EUREKA Approach</a>
                                 </li>
-                                <li>
-                                    <a href="#">How it works</a>
-                                </li>
-                                <li>
-                                    <a href="#">Badges</a>
-                                </li>
+
                                 <li>
                                     <a href="#">Contributors</a>
-                                </li>
-                                <li>
-                                    <a href="#">Settings</a>
                                 </li>
                             </ul>
                         </div>

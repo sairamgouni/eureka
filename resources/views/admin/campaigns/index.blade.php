@@ -26,7 +26,7 @@
                     <div class="ui-block-title bg-blue">
                         <h6 class="title c-white">Campaign List</h6>
                         <div class="align-right">
-                            <a href="{{route('campaign_add')}}" class="btn btn-primary btn-md-2">New Campaign</a>
+{{--                            <a href="{{route('campaign_add')}}" class="btn btn-primary btn-md-2">New Campaign</a>--}}
                         </div>
                     </div>
                     <div class="ui-block-content">

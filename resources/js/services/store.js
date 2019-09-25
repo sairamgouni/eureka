@@ -18,6 +18,7 @@ export default new Vuex.Store({
         userAbout: USER ? USER.about : '',
         userNickname: USER ? USER.nickname : '',
         userLevel: USER ? USER.level : '',
+        userCampaign: USER ? USER.campaign : '',
         baseUrl: 'http://localhost:8000/',
     },
     getters: {
@@ -66,6 +67,9 @@ export default new Vuex.Store({
         getUserNickname: state => {
             return state.userNickname;
         },
+        getUserCampaign: state => {
+            return state.userCampaign;
+        },
     },
     mutations: {
         setLogin(state, token) {
@@ -105,6 +109,9 @@ export default new Vuex.Store({
         },
         setUserNickname(state, token) {
             state.userNickname = token;
+        },
+        setUserCampaign(state, token) {
+            state.userCampaign= token;
         },
         removeAccess(state) {
             state.userLogin = false;

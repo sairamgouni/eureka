@@ -108,7 +108,7 @@ export default [
     },
     {
         name: 'Users',
-        path: '/users',
+        path: '/users/:country_id',
         component: Users,
         meta : {
             requiresAuth:true,

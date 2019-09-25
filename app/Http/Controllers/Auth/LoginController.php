@@ -46,7 +46,7 @@ class LoginController extends Controller
 
         if (\Auth::check()) {
             $login = 1;
-            $user = \Auth::user();
+            $user = \Auth::user()->with('campaign');
             $role = $user->role->role_id;
 
             $firstTimeLogin = $user->last_login ?? false;

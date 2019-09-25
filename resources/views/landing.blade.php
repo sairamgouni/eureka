@@ -354,7 +354,7 @@
         baseUrl: "{{url('/')}}",
         assetUrl: "{{asset('/')}}"
     };
-    let USER = JSON.parse(`@Json(auth()->user())`);
+    let USER = JSON.parse(`@Json(auth()->user()->load('campaign'))`);
 
     console.log(USER);
 
