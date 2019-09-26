@@ -8,7 +8,7 @@
     <!-- W-Action -->
 
     <ul
-      class="widget w-friend-pages-added notification-list friend-requests friend-suggestions-card"
+      class="widget w-friend-pages-added notification-list friend-requests friend-suggestions-card friend-card-1"
     >
       <li class="friend-suggestions-card__item" v-for="(item,index) in list" :key="index">
         <div class="author-thumb">
