@@ -1,17 +1,16 @@
 <template>
 <span>
 
-<PersonalHeader/>
+<ProfileHeader />
 
 <div class="container">
 	<div class="row">
 		<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 			<div class="ui-block responsive-flex">
 				<div class="ui-block-title">
-					<div
-					style="cursor: pointer;"
-					@click="updateList('followings')"
-					class="h6 title" :class="{active_title:!showFollowers}">Following ({{followings.length}})</div>
+					<div class="h6 title"
+                         style="cursor: pointer;"
+                    >Friends</div>
 					<form class="w-search">
 						<div class="form-group with-button">
 							<input class="form-control" type="text" placeholder="Search Friends...">
@@ -20,7 +19,7 @@
 							</button>
 						</div>
 					</form>
-					<!-- <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a> -->
+                    <!-- <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a> -->
 				</div>
 			</div>
 		</div>
@@ -28,7 +27,7 @@
 </div>
 
 
-<!-- Friends -->
+    <!-- Friends -->
 
 <div class="container">
 	<div class="row">
@@ -40,8 +39,8 @@
 				<div class="friend-item" >
 					<div class="friend-header-thumb">
 						<img style="width: 293px; height: 112px;"
-						:src="item.background_image"
-						:alt="item.name">
+                             :src="item.background_image"
+                             :alt="item.name">
 					</div>
 
 					<div class="friend-item-content">
@@ -64,14 +63,14 @@
 
 							<div class="author-thumb">
 								<img
-								 style="width: 100px; height: 100px;"
-								:src="item.image" :alt="item.name">
+                                    style="width: 100px; height: 100px;"
+                                    :src="item.image" :alt="item.name">
 							</div>
 							<div class="author-content">
 								<router-link
                                     :to="{ 	name: 'ProfileEuraka',
                                     		params: { id: item.id, slug: item.slug } }"
-                                          class="h5 author-name">
+                                    class="h5 author-name">
 								{{item.name}}
 								</router-link>
 								<div class="country">{{item.location}}</div>
@@ -96,16 +95,16 @@
 											<div class="title">Challenges</div>
 										</a>
 									</div>
-<!-- 									<div class="control-block-button" data-swiper-parallax="-100">
-										<a href="#" class="btn btn-control bg-blue">
-											<svg class="olymp-happy-face-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
-										</a>
+                                    <!-- 									<div class="control-block-button" data-swiper-parallax="-100">
+                                                                            <a href="#" class="btn btn-control bg-blue">
+                                                                                <svg class="olymp-happy-face-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
+                                                                            </a>
 
-										<a href="#" class="btn btn-control bg-purple">
-											<svg class="olymp-chat---messages-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-chat---messages-icon"></use></svg>
-										</a>
+                                                                            <a href="#" class="btn btn-control bg-purple">
+                                                                                <svg class="olymp-chat---messages-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-chat---messages-icon"></use></svg>
+                                                                            </a>
 
-									</div> -->
+                                                                        </div> -->
 								</div>
 
 								<div class="swiper-slide">
@@ -116,91 +115,93 @@
 									<div class="friend-since" data-swiper-parallax="-100">
 										<span>Friends Since:</span>
 										<div class="h6">{{item.member_from}}</div>
-										<!-- <div class="h6">December 2014</div> -->
+                                        <!-- <div class="h6">December 2014</div> -->
 									</div>
 								</div>
 							</div>
 
-							<!-- If we need pagination -->
+                            <!-- If we need pagination -->
 							<div class="swiper-pagination"></div>
 						</div>
 					</div>
 				</div>
 
-				<!-- ... end Friend Item -->			</div>
+                <!-- ... end Friend Item -->			</div>
 		</div>
 
 
 	</div>
 </div>
 
-<!-- ... end Friends -->
+    <!-- ... end Friends -->
 
 
 </span>
 </template>
 
 <script>
-	import PersonalHeader from './PersonalHeader';
+    import ProfileHeader from './ProfileHeader';
 
-	export default {
-		name: 'ProfileEuraka',
-		components: {
-            PersonalHeader,
-					},
-		data() {
-			return {
-				currentProfileId:'',
-				followers:[],
-				followings:[],
-				showFollowers:true,
-				list:[],
-			}
-		},
-		methods: {
-			loadRecords() {
+    export default {
+        name: 'ProfileEuraka',
+        components: {
+            ProfileHeader,
+        },
+        data() {
+            return {
+                currentProfileId:'',
+                followers:[],
+                followings:[],
+                showFollowers:true,
+                list:[],
+            }
+        },
+        methods: {
+            loadRecords() {
 
-			 this.axios({
-                        method: 'get',
-                        url: 'user/followers-list?userId='+this.currentProfileId,
+                let loader = this.$loading.show({
+                    container: this.fullPage ? null : this.$refs.file
+                });
+                this.axios({
+                    method: 'get',
+                    url: 'user/followers-list?userId='+this.currentProfileId,
 
-                    })
+                })
                     .then((response) => {
-                        // loader.hide();
-                        this.followers = response.data.followers;
+                        loader.hide();
+
                         this.followings = response.data.following;
-                        this.list = this.followers;
-                        console.log(this.followers);
+                        this.list = this.followings;
                         console.log(this.followings);
 
                     })
                     .catch(function(response) {
-                        // loader.hide();
+                        loader.hide();
                     });
-			},
+            },
 
-			updateList(itemType) {
-				if(itemType=='followers')
-				{
-					this.showFollowers = true;
-					this.list = this.followers;
-				}
-				else {
-					this.showFollowers = false;
-					this.list = this.followings;
-				}
-			},
-		},
-		created(){
-			this.currentProfileId = this.$route.params.id;
-			console.log('in friends list');
-			this.loadRecords();
-		},
-	}
+            // updateList(itemType) {
+            //     if(itemType=='followers')
+            //     {
+            //         this.showFollowers = true;
+            //         this.list = this.followers;
+            //     }
+            //     else {
+            //         this.showFollowers = false;
+            //         this.list = this.followings;
+            //     }
+            // },
+        },
+        created(){
+            this.currentProfileId = this.$route.params.id;
+            console.log('in friends list');
+            this.loadRecords();
+        },
+    }
 </script>
 
 <style scoped>
-.active_title{
-	color:#e91d24;
-}
+    .active_title{
+        color:#e91d24;
+    }
 </style>

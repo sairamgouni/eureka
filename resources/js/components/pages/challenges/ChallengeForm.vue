@@ -85,22 +85,26 @@
                                 id="description"
                                 v-model="form.description"
                                 placeholder="Enter description..."
+                                required
                             ></b-form-textarea>
 
-
+<!--                            <b-form-group label="Default:" label-for="file-default" label-cols-sm="2">-->
+<!--                                <b-form-file id="file-default"  v-model="form.image"   :state="Boolean(form.image)"></b-form-file>-->
+<!--                            </b-form-group>-->
 
                             <b-form-file
-                                class="mt-2"
+                                class="mt-2 b-form-color"
                                 v-model="form.image"
                                 :state="Boolean(form.image)"
                                 placeholder="Upload an Image"
                                 drop-placeholder="Drop Image here..."
+                                required
                             ></b-form-file>
 
 
-                            <multiselect
+                            <multiselect required
                                 class="mt-3"
-                                v-model="form.selectedList" tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="code" :options="optionsList" :multiple="true" :taggable="true" @tag="addTag"></multiselect>
+                                v-model="form.selectedList" tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="code" :options="optionsList" :multiple="true" :taggable="true" @tag="addTag" aria-required="true"></multiselect>
 
                             <!--    <b-form-group label="Categories"  class="mt-2 checkbox">
                                  <b-form-checkbox-group
@@ -122,7 +126,7 @@
                                         v-model="form.activeFrom"
 
                                         placeholder="Active from"
-                                        class="mt-3"></datepicker>
+                                        class="mt-3" required></datepicker>
                                 </b-col>
                                 <b-col class="col-6">
                                     <datepicker
@@ -131,7 +135,7 @@
                                         v-model="form.activeTo"
 
                                         placeholder="Active To"
-                                        class="mt-3"></datepicker>
+                                        class="mt-3" required></datepicker>
                                 </b-col>
                             </b-row>
 
@@ -323,4 +327,10 @@
          border: 0;
 
     }
+
 </style>
+ <style>
+     .custom-file-input.is-invalid~.custom-file-label, .custom-select.is-invalid, .form-control.is-invalid, .was-validated .custom-file-input:invalid~.custom-file-label, .was-validated .custom-select:invalid, .was-validated .form-control:invalid {
+         border-color: rgba(154, 159, 191, 0.13);
+     }
+ </style>

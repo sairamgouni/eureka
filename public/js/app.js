@@ -3883,81 +3883,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ChallengeDetails",
@@ -4984,6 +4909,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
 //
 //
 //
@@ -6425,8 +6354,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PersonalHeader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PersonalHeader */ "./resources/js/components/pages/profile/PersonalHeader.vue");
-//
+/* harmony import */ var _ProfileHeader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProfileHeader */ "./resources/js/components/pages/profile/ProfileHeader.vue");
 //
 //
 //
@@ -6572,7 +6500,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ProfileEuraka',
   components: {
-    PersonalHeader: _PersonalHeader__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ProfileHeader: _ProfileHeader__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
@@ -6587,27 +6515,20 @@ __webpack_require__.r(__webpack_exports__);
     loadRecords: function loadRecords() {
       var _this = this;
 
+      var loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.file
+      });
       this.axios({
         method: 'get',
         url: 'user/followers-list?userId=' + this.currentProfileId
       }).then(function (response) {
-        // loader.hide();
-        _this.followers = response.data.followers;
+        loader.hide();
         _this.followings = response.data.following;
-        _this.list = _this.followers;
-        console.log(_this.followers);
+        _this.list = _this.followings;
         console.log(_this.followings);
-      })["catch"](function (response) {// loader.hide();
+      })["catch"](function (response) {
+        loader.hide();
       });
-    },
-    updateList: function updateList(itemType) {
-      if (itemType == 'followers') {
-        this.showFollowers = true;
-        this.list = this.followers;
-      } else {
-        this.showFollowers = false;
-        this.list = this.followings;
-      }
     }
   },
   created: function created() {
@@ -9167,15 +9088,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -32457,7 +32369,7 @@ var VBTooltip = {
 /*!*************************************************!*\
   !*** ./node_modules/bootstrap-vue/esm/index.js ***!
   \*************************************************/
-/*! exports provided: install, NAME, BVConfigPlugin, BVConfig, BootstrapVue, default, componentsPlugin, BVModalPlugin, BVToastPlugin, AlertPlugin, BAlert, BadgePlugin, BBadge, BreadcrumbPlugin, BBreadcrumb, BBreadcrumbItem, ButtonPlugin, BButton, BButtonClose, ButtonGroupPlugin, BButtonGroup, ButtonToolbarPlugin, BButtonToolbar, CardPlugin, BCard, BCardBody, BCardFooter, BCardGroup, BCardHeader, BCardImg, BCardImgLazy, BCardSubTitle, BCardText, BCardTitle, CarouselPlugin, BCarousel, BCarouselSlide, CollapsePlugin, BCollapse, DropdownPlugin, BDropdown, BDropdownItem, BDropdownItemButton, BDropdownDivider, BDropdownForm, BDropdownGroup, BDropdownHeader, BDropdownText, EmbedPlugin, BEmbed, FormPlugin, BForm, BFormDatalist, BFormText, BFormInvalidFeedback, BFormValidFeedback, FormCheckboxPlugin, BFormCheckbox, BFormCheckboxGroup, FormFilePlugin, BFormFile, FormGroupPlugin, BFormGroup, FormInputPlugin, BFormInput, FormRadioPlugin, BFormRadio, BFormRadioGroup, FormSelectPlugin, BFormSelect, FormTextareaPlugin, BFormTextarea, ImagePlugin, BImg, BImgLazy, InputGroupPlugin, BInputGroup, BInputGroupAddon, BInputGroupAppend, BInputGroupPrepend, BInputGroupText, JumbotronPlugin, BJumbotron, LayoutPlugin, BContainer, BRow, BCol, BFormRow, LinkPlugin, BLink, ListGroupPlugin, BListGroup, BListGroupItem, MediaPlugin, BMedia, BMediaAside, BMediaBody, ModalPlugin, BModal, NavPlugin, BNav, BNavForm, BNavItem, BNavItemDropdown, BNavText, NavbarPlugin, BNavbar, BNavbarBrand, BNavbarNav, BNavbarToggle, PaginationPlugin, BPagination, PaginationNavPlugin, BPaginationNav, PopoverPlugin, BPopover, ProgressPlugin, BProgress, BProgressBar, SpinnerPlugin, BSpinner, TablePlugin, TableLitePlugin, TableSimplePlugin, BTable, BTableLite, BTableSimple, BTbody, BThead, BTfoot, BTr, BTh, BTd, TabsPlugin, BTabs, BTab, ToastPlugin, BToast, BToaster, TooltipPlugin, BTooltip, directivesPlugin, VBModalPlugin, VBModal, VBPopoverPlugin, VBPopover, VBScrollspyPlugin, VBScrollspy, VBTogglePlugin, VBToggle, VBTooltipPlugin, VBTooltip */
+/*! exports provided: componentsPlugin, BVModalPlugin, BVToastPlugin, AlertPlugin, BAlert, BadgePlugin, BBadge, BreadcrumbPlugin, BBreadcrumb, BBreadcrumbItem, ButtonPlugin, BButton, BButtonClose, ButtonGroupPlugin, BButtonGroup, ButtonToolbarPlugin, BButtonToolbar, CardPlugin, BCard, BCardBody, BCardFooter, BCardGroup, BCardHeader, BCardImg, BCardImgLazy, BCardSubTitle, BCardText, BCardTitle, CarouselPlugin, BCarousel, BCarouselSlide, CollapsePlugin, BCollapse, DropdownPlugin, BDropdown, BDropdownItem, BDropdownItemButton, BDropdownDivider, BDropdownForm, BDropdownGroup, BDropdownHeader, BDropdownText, EmbedPlugin, BEmbed, FormPlugin, BForm, BFormDatalist, BFormText, BFormInvalidFeedback, BFormValidFeedback, FormCheckboxPlugin, BFormCheckbox, BFormCheckboxGroup, FormFilePlugin, BFormFile, FormGroupPlugin, BFormGroup, FormInputPlugin, BFormInput, FormRadioPlugin, BFormRadio, BFormRadioGroup, FormSelectPlugin, BFormSelect, FormTextareaPlugin, BFormTextarea, ImagePlugin, BImg, BImgLazy, InputGroupPlugin, BInputGroup, BInputGroupAddon, BInputGroupAppend, BInputGroupPrepend, BInputGroupText, JumbotronPlugin, BJumbotron, LayoutPlugin, BContainer, BRow, BCol, BFormRow, LinkPlugin, BLink, ListGroupPlugin, BListGroup, BListGroupItem, MediaPlugin, BMedia, BMediaAside, BMediaBody, ModalPlugin, BModal, NavPlugin, BNav, BNavForm, BNavItem, BNavItemDropdown, BNavText, NavbarPlugin, BNavbar, BNavbarBrand, BNavbarNav, BNavbarToggle, PaginationPlugin, BPagination, PaginationNavPlugin, BPaginationNav, PopoverPlugin, BPopover, ProgressPlugin, BProgress, BProgressBar, SpinnerPlugin, BSpinner, TablePlugin, TableLitePlugin, TableSimplePlugin, BTable, BTableLite, BTableSimple, BTbody, BThead, BTfoot, BTr, BTh, BTd, TabsPlugin, BTabs, BTab, ToastPlugin, BToast, BToaster, TooltipPlugin, BTooltip, directivesPlugin, VBModalPlugin, VBModal, VBPopoverPlugin, VBPopover, VBScrollspyPlugin, VBScrollspy, VBTogglePlugin, VBToggle, VBTooltipPlugin, VBTooltip, install, NAME, BVConfigPlugin, BVConfig, BootstrapVue, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -40177,7 +40089,6 @@ exports.push([module.i, "\n.post-button[data-v-1a6c1bf2] {\n    line-height: 40p
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=style&index=0&id=3d2eb884&scoped=true&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=style&index=0&id=3d2eb884&scoped=true&lang=css& ***!
@@ -40190,17 +40101,17 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.w-100[data-v-3d2eb884] {\n    width: 100%!important;\n}\n.modal-content[data-v-3d2eb884] {\n\n    background-color:  transparent !important;\n     border: 0;\n}\n", ""]);
+exports.push([module.i, "\n.w-100[data-v-3d2eb884] {\n    width: 100%!important;\n}\n.modal-content[data-v-3d2eb884] {\n\n    background-color:  transparent !important;\n     border: 0;\n}\n\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=style&index=0&id=642d7c07&scoped=true&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=style&index=0&id=642d7c07&scoped=true&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=style&index=1&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=style&index=1&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40209,15 +40120,13 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.unfollow[data-v-642d7c07] {\n  background: #5a64d8;\n  border: black;\n}\n", ""]);
+exports.push([module.i, "\n.custom-file-input.is-invalid~.custom-file-label, .custom-select.is-invalid, .form-control.is-invalid, .was-validated .custom-file-input:invalid~.custom-file-label, .was-validated .custom-select:invalid, .was-validated .form-control:invalid {\n    border-color: rgba(154, 159, 191, 0.13);\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-=======
->>>>>>> 0e54470ebc355755627f417496af492a5c685ece
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/login.vue?vue&type=style&index=0&lang=css&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/login.vue?vue&type=style&index=0&lang=css& ***!
@@ -40249,7 +40158,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.active_title[data-v-4eeaef89]{\r\n\tcolor:#e91d24;\n}\r\n", ""]);
+exports.push([module.i, "\n.active_title[data-v-4eeaef89]{\n    color:#e91d24;\n}\n", ""]);
 
 // exports
 
@@ -58862,7 +58771,6 @@ if (content.locals) {
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=style&index=0&id=3d2eb884&scoped=true&lang=css&":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=style&index=0&id=3d2eb884&scoped=true&lang=css& ***!
@@ -58890,14 +58798,14 @@ if (content.locals) {
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=style&index=0&id=642d7c07&scoped=true&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=style&index=0&id=642d7c07&scoped=true&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=style&index=1&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=style&index=1&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ContributorsList.vue?vue&type=style&index=0&id=642d7c07&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/contributors/ContributorsList.vue?vue&type=style&index=0&id=642d7c07&scoped=true&lang=css&");
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ChallengeForm.vue?vue&type=style&index=1&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=style&index=1&lang=css&");
 
 if (typeof content === 'string') {
   content = [[module.i, content, '']];
@@ -58917,8 +58825,6 @@ if (content.locals) {
 
 /***/ }),
 
-=======
->>>>>>> 0e54470ebc355755627f417496af492a5c685ece
 /***/ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/login.vue?vue&type=style&index=0&lang=css&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/login.vue?vue&type=style&index=0&lang=css& ***!
@@ -68046,7 +67952,8 @@ var render = function() {
                           staticClass: "mt-2",
                           attrs: {
                             id: "description",
-                            placeholder: "Enter description..."
+                            placeholder: "Enter description...",
+                            required: ""
                           },
                           model: {
                             value: _vm.form.description,
@@ -68058,11 +67965,12 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("b-form-file", {
-                          staticClass: "mt-2",
+                          staticClass: "mt-2 b-form-color",
                           attrs: {
                             state: Boolean(_vm.form.image),
                             placeholder: "Upload an Image",
-                            "drop-placeholder": "Drop Image here..."
+                            "drop-placeholder": "Drop Image here...",
+                            required: ""
                           },
                           model: {
                             value: _vm.form.image,
@@ -68076,13 +67984,15 @@ var render = function() {
                         _c("multiselect", {
                           staticClass: "mt-3",
                           attrs: {
+                            required: "",
                             "tag-placeholder": "Add this as new tag",
                             placeholder: "Search or add a tag",
                             label: "name",
                             "track-by": "code",
                             options: _vm.optionsList,
                             multiple: true,
-                            taggable: true
+                            taggable: true,
+                            "aria-required": "true"
                           },
                           on: { tag: _vm.addTag },
                           model: {
@@ -68105,7 +68015,8 @@ var render = function() {
                                   staticClass: "mt-3",
                                   attrs: {
                                     name: "active_from",
-                                    placeholder: "Active from"
+                                    placeholder: "Active from",
+                                    required: ""
                                   },
                                   model: {
                                     value: _vm.form.activeFrom,
@@ -68127,7 +68038,8 @@ var render = function() {
                                   staticClass: "mt-3",
                                   attrs: {
                                     name: "active_to",
-                                    placeholder: "Active To"
+                                    placeholder: "Active To",
+                                    required: ""
                                   },
                                   model: {
                                     value: _vm.form.activeTo,
@@ -69346,7 +69258,7 @@ var render = function() {
   return _c(
     "span",
     [
-      _c("PersonalHeader"),
+      _c("ProfileHeader"),
       _vm._v(" "),
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "row" }, [
@@ -69362,19 +69274,9 @@ var render = function() {
                     "div",
                     {
                       staticClass: "h6 title",
-                      class: { active_title: !_vm.showFollowers },
-                      staticStyle: { cursor: "pointer" },
-                      on: {
-                        click: function($event) {
-                          return _vm.updateList("followings")
-                        }
-                      }
+                      staticStyle: { cursor: "pointer" }
                     },
-                    [
-                      _vm._v(
-                        "Following (" + _vm._s(_vm.followings.length) + ")"
-                      )
-                    ]
+                    [_vm._v("Friends")]
                   ),
                   _vm._v(" "),
                   _c("form", { staticClass: "w-search" }, [
@@ -69454,9 +69356,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\r\n\t\t\t\t\t\t\t\t" +
+                                  "\n\t\t\t\t\t\t\t\t" +
                                     _vm._s(item.name) +
-                                    "\r\n\t\t\t\t\t\t\t\t"
+                                    "\n\t\t\t\t\t\t\t\t"
                                 )
                               ]
                             ),
@@ -69548,9 +69450,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\r\n\t\t\t\t\t\t\t\t\t\t" +
+                                    "\n\t\t\t\t\t\t\t\t\t\t" +
                                       _vm._s(item.about) +
-                                      "\r\n\t\t\t\t\t\t\t\t\t"
+                                      "\n\t\t\t\t\t\t\t\t\t"
                                   )
                                 ]
                               ),
@@ -76417,41 +76319,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "profile-section" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col col-lg-5 col-md-5 col-sm-12 col-12" },
-                    [
-                      _c("ul", { staticClass: "profile-menu" }, [
-                        _c(
-                          "li",
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                attrs: {
-                                  to: {
-                                    name: "Friends",
-                                    params: {
-                                      id: _vm.user.id,
-                                      slug: _vm.user.slug
-                                    }
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n\n\t\t\t\t\t\t\t\t\t\tFriends\n\t\t\t\t\t\t\t\t\t\t"
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ])
-                    ]
-                  )
-                ]),
+                _vm._m(0),
                 _vm._v(" "),
                 _c("div", { staticClass: "control-block-button" }, [
                   _vm.$store.state.userId !== _vm.user.id
@@ -76607,7 +76475,18 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col col-lg-5 col-md-5 col-sm-12 col-12" }, [
+        _c("ul", { staticClass: "profile-menu" })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -79033,27 +78912,6 @@ var render = function() {
                   click: function($event) {
                     return _vm.toggleFollow(item.id)
                   }
-<<<<<<< HEAD
-                },
-                [_vm._v(_vm._s(item.name))]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "chat-message-item" }, [
-                _vm._v("8 Friends in Common")
-              ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "span",
-            {
-              staticClass: "notification-icon",
-              on: {
-                click: function($event) {
-                  return _vm.toggleFollow(item.id)
-=======
->>>>>>> 0e54470ebc355755627f417496af492a5c685ece
                 }
               },
               [
@@ -87532,7 +87390,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ChallengeForm_vue_vue_type_template_id_3d2eb884_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ChallengeForm.vue?vue&type=template&id=3d2eb884&scoped=true& */ "./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=template&id=3d2eb884&scoped=true&");
 /* harmony import */ var _ChallengeForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChallengeForm.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _ChallengeForm_vue_vue_type_style_index_0_id_3d2eb884_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ChallengeForm.vue?vue&type=style&index=0&id=3d2eb884&scoped=true&lang=css& */ "./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=style&index=0&id=3d2eb884&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _ChallengeForm_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ChallengeForm.vue?vue&type=style&index=1&lang=css& */ "./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=style&index=1&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -87541,7 +87401,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
   _ChallengeForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _ChallengeForm_vue_vue_type_template_id_3d2eb884_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
   _ChallengeForm_vue_vue_type_template_id_3d2eb884_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -87586,6 +87446,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ChallengeForm_vue_vue_type_style_index_0_id_3d2eb884_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ChallengeForm_vue_vue_type_style_index_0_id_3d2eb884_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ChallengeForm_vue_vue_type_style_index_0_id_3d2eb884_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ChallengeForm_vue_vue_type_style_index_0_id_3d2eb884_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
  /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ChallengeForm_vue_vue_type_style_index_0_id_3d2eb884_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=style&index=1&lang=css&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=style&index=1&lang=css& ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ChallengeForm_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ChallengeForm.vue?vue&type=style&index=1&lang=css& */ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/challenges/ChallengeForm.vue?vue&type=style&index=1&lang=css&");
+/* harmony import */ var _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ChallengeForm_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ChallengeForm_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ChallengeForm_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ChallengeForm_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ChallengeForm_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
