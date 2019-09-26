@@ -59,7 +59,7 @@ export default new Vuex.Store({
         getUserImage: state => {
             if (state.userImage)
                 return state.userImage;
-            return '/users/thumbs/boy.png';
+            return '/users/thumbs/user.png';
         },
         getUserBackgroundImage: state => {
 
