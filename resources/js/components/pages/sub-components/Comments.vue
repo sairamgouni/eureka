@@ -123,29 +123,12 @@
               <a href="#" class="btn btn-grey btn-md mb60 mt60">Load More Comments...</a>
           </div> -->
 
-                <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-
-
-                    <!-- Comment Form -->
-
+                <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" v-if="!winner">
                     <form @submit="onSubmit" class="comments-form">
                         <div class="crumina-module crumina-heading with-title-decoration">
                             <h5 class="heading-title">Write a Comment</h5>
                         </div>
                         <div class="row">
-                          <!--   <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group label-floating">
-                                    <label class="control-label">Your Name</label>
-                                    <input class="form-control" placeholder="" value="James Spiegel" type="text">
-                                </div>
-                            </div>
-                            <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group label-floating">
-                                    <label class="control-label">Your Email</label>
-                                    <input class="form-control" placeholder="" value="jspiegel@yourmail.com" type="email">
-                                </div>
-                            </div> -->
-
                             <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Your Comment</label>
@@ -305,9 +288,8 @@
                     .then((response) => {
 
                         if (response.status == 200) {
-                            this.comments = response.data;
-                        } else {
-
+                            this.comments = response.data.comments;
+                            this.winner = response.data.winner;
                         }
                     })
                     .catch(function (response) {
@@ -426,7 +408,6 @@
                     })
             },
             ownerwin(comment, index) {
-
                 if (comment && comment.winner)
                     return this.$toast.open({
                         message: "The winner can't be change",

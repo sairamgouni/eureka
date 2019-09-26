@@ -5063,6 +5063,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5085,7 +5086,11 @@ __webpack_require__.r(__webpack_exports__);
       state: {
         date: new Date(2016, 9, 16)
       },
-      userLogin: false
+      userLogin: false,
+      disabledDates: {
+        to: '' // Disable all dates up to specific date
+
+      }
     };
   },
   components: {
@@ -5097,6 +5102,10 @@ __webpack_require__.r(__webpack_exports__);
   updated: function updated() {},
   computed: {},
   methods: {
+    activefromdate: function activefromdate() {
+      console.log('sdate', this.form.activeFrom);
+      this.disabledDates.to = new Date(this.form.activeFrom);
+    },
     addTag: function addTag(newTag) {
       var tag = {
         name: newTag,
@@ -10900,23 +10909,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Comments',
   props: ['comment_type', 'comment_type_id'],
@@ -10989,8 +10981,9 @@ __webpack_require__.r(__webpack_exports__);
       bodyFormData.set('challent_id', this.comment_type_id);
       this.axios.get("".concat(APP.baseUrl, "/challenges/comments?challenge_id=").concat(this.comment_type_id)).then(function (response) {
         if (response.status == 200) {
-          _this2.comments = response.data;
-        } else {}
+          _this2.comments = response.data.comments;
+          _this2.winner = response.data.winner;
+        }
       })["catch"](function (response) {});
     },
     ownerLike: function ownerLike(comment, index) {
@@ -68021,8 +68014,14 @@ var render = function() {
                                   staticClass: "mt-3",
                                   attrs: {
                                     name: "active_from",
+                                    "disabled-dates": _vm.disabledDates,
                                     placeholder: "Active from",
                                     required: ""
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      return _vm.activefromdate()
+                                    }
                                   },
                                   model: {
                                     value: _vm.form.activeFrom,
@@ -68044,6 +68043,7 @@ var render = function() {
                                   staticClass: "mt-3",
                                   attrs: {
                                     name: "active_to",
+                                    "disabled-dates": _vm.disabledDates,
                                     placeholder: "Active To",
                                     required: ""
                                   },
@@ -78351,75 +78351,77 @@ var render = function() {
       0
     ),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" },
-      [
-        _c(
-          "form",
-          { staticClass: "comments-form", on: { submit: _vm.onSubmit } },
+    !_vm.winner
+      ? _c(
+          "div",
+          { staticClass: "col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" },
           [
-            _vm._m(5),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
-                },
-                [
-                  _c("div", { staticClass: "form-group label-floating" }, [
-                    _c("label", { staticClass: "control-label" }, [
-                      _vm._v("Your Comment")
-                    ]),
-                    _vm._v(" "),
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.comment_text,
-                          expression: "comment_text"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        name: "comment_text",
-                        placeholder: "",
-                        required: ""
-                      },
-                      domProps: { value: _vm.comment_text },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.comment_text = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
+            _c(
+              "form",
+              { staticClass: "comments-form", on: { submit: _vm.onSubmit } },
+              [
+                _vm._m(5),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
                   _c(
-                    "button",
+                    "div",
                     {
-                      staticClass: "btn btn-primary w-100",
-                      attrs: { type: "submit", id: "comment-box" }
+                      staticClass:
+                        "col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
                     },
                     [
-                      _vm._v(
-                        "Post your Comment\n                                 "
+                      _c("div", { staticClass: "form-group label-floating" }, [
+                        _c("label", { staticClass: "control-label" }, [
+                          _vm._v("Your Comment")
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.comment_text,
+                              expression: "comment_text"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            name: "comment_text",
+                            placeholder: "",
+                            required: ""
+                          },
+                          domProps: { value: _vm.comment_text },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.comment_text = $event.target.value
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary w-100",
+                          attrs: { type: "submit", id: "comment-box" }
+                        },
+                        [
+                          _vm._v(
+                            "Post your Comment\n                                 "
+                          )
+                        ]
                       )
                     ]
                   )
-                ]
-              )
-            ])
+                ])
+              ]
+            )
           ]
         )
-      ]
-    )
+      : _vm._e()
   ])
 }
 var staticRenderFns = [

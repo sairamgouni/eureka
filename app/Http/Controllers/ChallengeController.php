@@ -248,9 +248,8 @@ class ChallengeController extends Controller
             ->whereChallengeId($request->input('challenge_id'))
             ->whereNull('parent_id')
             ->get();
-        return response()->json($comments);
+        return response()->json(['comments' => $comments, 'winner' => $comments->where('winner', 1)->count()]);
     }
-
     public function getFriendSuggestions(Request $request, $total = 5)
     {
         $user = \Auth::user();

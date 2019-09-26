@@ -124,8 +124,9 @@
 
                                         name="active_from"
                                         v-model="form.activeFrom"
-
+                                        :disabled-dates="disabledDates"
                                         placeholder="Active from"
+                                        @input="activefromdate()"
                                         class="mt-3" required></datepicker>
                                 </b-col>
                                 <b-col class="col-6">
@@ -133,7 +134,7 @@
 
                                         name="active_to"
                                         v-model="form.activeTo"
-
+                                        :disabled-dates="disabledDates"
                                         placeholder="Active To"
                                         class="mt-3" required></datepicker>
                                 </b-col>
@@ -174,7 +175,10 @@
                 categoriesList:[],
                 optionsList:[],
                 state : { date: new Date(2016, 9,  16)},
-                userLogin : false
+                userLogin : false,
+                disabledDates: {
+                    to: '', // Disable all dates up to specific date
+                }
             }
         },
         components: {
@@ -190,7 +194,10 @@
 
         },
         methods: {
-
+            activefromdate() {
+                console.log('sdate',this.form.activeFrom);
+                this.disabledDates.to = new Date(this.form.activeFrom);
+            },
             addTag (newTag) {
                 const tag = {
                     name: newTag,
