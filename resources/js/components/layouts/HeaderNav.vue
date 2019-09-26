@@ -224,11 +224,6 @@
 </script>
 
 <style>
-    .avatar {
-        height: 36px;
-        width: 36px;
-    }
-
     .search-bar .form-group.with-button input {
         outline: none;
     }

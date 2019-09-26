@@ -16122,3 +16122,24 @@ input[type=checkbox] {
     color: #515365; }
 .w-eureka-footer-list ul li a:hover {
     color: #e91d24; }
+
+.notification-list .friend-suggestions-card__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+    .notification-list .friend-suggestions-card__item .author-thumb {
+        width: 34px;
+        height: 34px;
+        flex: 0 0 34px;
+        max-width: 34px; }
+        .notification-list .friend-suggestions-card__item .author-thumb img {
+            max-width: 100%; }
+    .notification-list .friend-suggestions-card__item .notification-event {
+        flex: 1;
+        padding-left: 8px;
+        padding-right: 8px; }
+
+.header-content-wrapper .author-thumb .avatar {
+    width: 36px;
+    height: 36px;
+}

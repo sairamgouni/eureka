@@ -329,7 +329,7 @@ class User extends Authenticatable
     {
         if ($this->image)
             return $this->image;
-        return '/users/thumbs/boy.png';
+        return '/users/thumbs/user.png';
     }
 
     public function getProfileLink()
@@ -402,7 +402,7 @@ class User extends Authenticatable
     }
     public function getImageAttribute($value)
     {
-        return $value ?? '/users/thumbs/boy.png';
+        return $value ?? '/users/thumbs/user.png';
     }
 
 }
