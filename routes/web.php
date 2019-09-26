@@ -84,6 +84,7 @@ Route::get('user/top-contributors', 'UsersController@topContributors');
 Route::get('user/all-notifications', 'UsersController@allNotifications');
 Route::post('user/top-notifications', 'UsersController@topNotifications');
 Route::post('user/read-top-notifications', 'UsersController@readTopNotifications');
+Route::get('userssearch', 'ChallengeController@search');
 
 Route::get('/activities/get-list/{id?}', 'UsersController@getActivities');
 

@@ -62,4 +62,8 @@ class Comment extends Model
     {
         return $this->morphOne(Tick::class, 'tick')->whereUserId(\Auth::id());
     }
+    public function win()
+    {
+        return $this->morphOne(Win::class, 'win')->whereUserId(\Auth::id());
+    }
 }

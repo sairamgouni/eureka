@@ -14,7 +14,7 @@
 				:isUserLoggedIn="userLogin"
 				:isSameUser="isSameUser"
 				:loadCurrentUserActivity="true"
-				:profileIdToLoad="currentProfileId"
+				:profileIdToLoad="userId"
 				:specificUserRecords="false"
 			/>
 

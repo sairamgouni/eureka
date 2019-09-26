@@ -28,7 +28,7 @@
                                             params: { id: item.id, slug: item.slug } }"
                           class="contributor-name"
                         >{{item.name}}</router-link>
-                        <a href="javascript:void(0);" class="contributor-location">{{item.location}}</a>
+                        <a href="javascript:void(0);" class="contributor-location">{{item.campaign}},{{item.location}}</a>
                         <div class="contributor-points">{{item.reputation}} points</div>
                       </div>
 
@@ -59,7 +59,7 @@
                                             params: { id: item.id, slug: item.slug } }"
                           class="contributor-name"
                         >{{item.name}}</router-link>
-                        <a href="javascript:void(0);" class="contributor-location">{{item.location}}</a>
+                        <a href="javascript:void(0);" class="contributor-location">{{item.campaign}},{{item.location}}</a>
                         <div class="contributor-points">{{item.reputation}} points</div>
                       </div>
 
@@ -82,56 +82,74 @@
         </div>
       </div>
     </div>
+      <div class="container">
+          <div class="row">
+              <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"  v-for="(item,index) in countryList"
+                   :key="index">
+                  <div class="ui-block responsive-flex">
+                      <div class="ui-block-title">
+                          <div class="h6 title">See All Contributors!!</div>
 
-    <div class="container">
-      <div class="row">
-        <div
-          class="col col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12"
-          v-for="(item,index) in countryList"
-          :key="index"
-        >
-          <div class="ui-block ui-block-country-contributors">
-            <div class="ui-block-title">
-              <h6 class="title">{{item.country.title}}</h6>
-              <div class="ui-block-title__icon">
-                <img style="height: 34px; width:34px;" :src="item.country.icon" />
-              </div>
-            </div>
-            <ol class="widget w-contributor-list">
-              <li v-for="userItem in item.toppers">
-                <div class="contributor-thumb">
-                  <img :src="userItem.image" alt />
-                </div>
+                          <div class="align-right">
+                              <router-link :to="{name:'Users',params:{country_id:item.country.id}}" class="js-open-popup btn btn-md-2 btn-border-think custom-color c-grey" data-popup-target=".playlist-popup">Show All</router-link>
+<!--                              <a href="#" class="js-open-popup btn btn-md-2 btn-border-think custom-color c-grey" data-popup-target=".playlist-popup">View Badges</a>-->
 
-                <div class="contributor-details">
-                  <router-link
-                    :to="{  name: 'ProfileEuraka',
-                            params: { id: userItem.id, slug: userItem.slug } }"
-                    class="contributor-name"
-                  >{{userItem.name}}</router-link>
-                  <a href="javascript:void(0);" class="contributor-location">{{userItem.location}}</a>
-                </div>
-
-                <div class="contributor-points">
-                  <span>{{userItem.reputation}} Points</span>
-                  <!--   <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
-                                          <ul class="more-dropdown">
-                                              <li>
-                                                  <a href="#">Follow</a>
-                                              </li>
-                                          </ul>
-                  </div>-->
-                </div>
-              </li>
-            </ol>
-              <div class="ui-block-footer">
-                  <!--                            <a href="javascript:void(0)"></a>-->
-                  <router-link :to="{name:'Users',params:{country_id:item.country.id}}">Show All</router-link>
+                          </div>
+                      </div>
+                  </div>
               </div>
           </div>
-        </div>
       </div>
-    </div>
+
+<!--    <div class="container">-->
+<!--      <div class="row">-->
+<!--        <div-->
+<!--          class="col col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12"-->
+<!--          v-for="(item,index) in countryList"-->
+<!--          :key="index"-->
+<!--        >-->
+<!--          <div class="ui-block ui-block-country-contributors">-->
+<!--            <div class="ui-block-title">-->
+<!--              <h6 class="title">{{item.country.title}}</h6>-->
+<!--              <div class="ui-block-title__icon">-->
+<!--                <img style="height: 34px; width:34px;" :src="item.country.icon" />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <ol class="widget w-contributor-list">-->
+<!--              <li v-for="userItem in item.toppers">-->
+<!--                <div class="contributor-thumb">-->
+<!--                  <img :src="userItem.image" alt />-->
+<!--                </div>-->
+
+<!--                <div class="contributor-details">-->
+<!--                  <router-link-->
+<!--                    :to="{  name: 'ProfileEuraka',-->
+<!--                            params: { id: userItem.id, slug: userItem.slug } }"-->
+<!--                    class="contributor-name"-->
+<!--                  >{{userItem.name}}</router-link>-->
+<!--                  <a href="javascript:void(0);" class="contributor-location">{{userItem.location}}</a>-->
+<!--                </div>-->
+
+<!--                <div class="contributor-points">-->
+<!--                  <span>{{userItem.reputation}} Points</span>-->
+<!--                  &lt;!&ndash;   <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>-->
+<!--                                          <ul class="more-dropdown">-->
+<!--                                              <li>-->
+<!--                                                  <a href="#">Follow</a>-->
+<!--                                              </li>-->
+<!--                                          </ul>-->
+<!--                  </div>&ndash;&gt;-->
+<!--                </div>-->
+<!--              </li>-->
+<!--            </ol>-->
+<!--              <div class="ui-block-footer">-->
+<!--                  &lt;!&ndash;                            <a href="javascript:void(0)"></a>&ndash;&gt;-->
+<!--                  <router-link :to="{name:'Users',params:{country_id:item.country.id}}">Show All</router-link>-->
+<!--              </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </template>
 <script>

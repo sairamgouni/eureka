@@ -32,18 +32,15 @@
 
                             <a href="javascript:void(0)" class="post-add-icon inline-items"
                                v-if="$parent.challenge.isAuthor"
-                               @click="ownerLike(comment)">
+                               @click="ownerLike(comment,index)">
                                 <i class="fas fa-thumbs-up" :id="`owner_like_${comment.id}`"
-                                   :class="{'text-danger':comment.like_count}"></i>
+                                   :class="{'text-danger':!!comment.like_count}"></i>
 
 							</a>
-                            <a href="#" class="reply">
-                                <i class="fas fa-reply"></i>
-                                Reply
-                            </a>
+
 
                              <a href="javascript:void(0)" class="post-add-icon inline-items"
-                                v-if="$parent.challenge.isAuthor"
+                                v-if="$parent.challenge.isAuthor && comment.like_count"
                                 @click="ownertick(comment)">
                                 <i class="fas fa-check " :id="`owner_tick_${comment.id}`"
                                    :class="{'text-danger':comment.finalized}"></i>
@@ -51,12 +48,16 @@
 							</a>
 
                              <a href="javascript:void(0)" class="post-add-icon inline-items"
-                                v-if="$parent.challenge.isAuthor"
-                                @click="ownerwin(comment)">
+                                v-if="$parent.challenge.isAuthor && comment.finalized && (!winner || comment.winner)"
+                                @click="ownerwin(comment,index)">
                                 <i class="fas fa-trophy " :id="`owner_win_${comment.id}`"
                                    :class="{'text-danger':comment.winner}"></i>
 
 							</a>
+                             <a href="#" class="reply">
+                                <i class="fas fa-reply"></i>
+                                Reply
+                            </a>
 
                              <ul class="comments-list style-3 mt-3">
 
@@ -238,6 +239,7 @@
             return {
                 comment_text: '',
                 comments: [],
+                winner: false
             }
         },
         watch: {
@@ -313,22 +315,48 @@
                     });
 
             },
-            ownerLike(comment) {
-
+            ownerLike(comment, index) {
+                if (comment.winner)
+                    return this.$toast.open({
+                        message: "Actions can't be process. The challenge already have a winner.",
+                        type: 'warning'
+                    });
+                if (comment.like_count)
+                    this.$swal({
+                        title: 'Do you want to unlike the comment?',
+                        text: comment.finalized ? "It will also remove from finalized list " : "",
+                        type: 'warning',
+                        showCancelButton: true,
+                        // confirmButtonColor: '#e91d24',
+                        // cancelButtonColor: '#d33',
+                        confirmButtonText: 'Unlike'
+                    }).then((result) => {
+                        if (result.value) {
+                            if (comment.finalized)
+                                this.ownertick(comment);
+                            this.toggleOwnerLike(comment, index);
+                        }
+                    });
+                else this.toggleOwnerLike(comment, index);
+            },
+            toggleOwnerLike(comment, index) {
                 if (comment && comment.id)
                     this.axios.post(`${APP.baseUrl}/challenges/comment/${comment.id}/owner-like`).then((response) => {
                         if (response.status === 200) {
                             if (response.data) {
+                                comment.like_count = 1;
                                 this.$set(this.$parent.challenge, 'game_time', this.$parent.challenge.game_time + 1);
                                 $(`#owner_like_${comment.id}`).addClass('text-danger');
                             } else {
+                                comment.like_count = 0;
                                 this.$set(this.$parent.challenge, 'game_time', this.$parent.challenge.game_time - 1);
                                 $(`#owner_like_${comment.id}`).removeClass('text-danger');
                             }
+                            this.$set(this.comments, index, comment);
 
                             this.$toast.open({
 
-                                message: response.data ? 'Liked' : 'Un liked',
+                                message: response.data ? 'Comment Liked' : 'Comment un liked',
                                 type: 'success'
                             });
                         } else
@@ -340,23 +368,52 @@
 
                     })
             },
-            ownertick(comment) {
+            ownertick(comment, index) {
+                if (comment.winner)
+                    return this.$toast.open({
+                        message: "Actions can't be process. The challenge already have a winner.",
+                        type: 'warning'
+                    });
+                if (comment.finalized)
+                    this.$swal({
+                        title: 'Do you want to unselect finalist?',
+                        text: comment.winner ? "It will also remove from Winner  " : "",
+                        type: 'warning',
+                        showCancelButton: true,
+                        // confirmButtonColor: '#e91d24',
+                        // cancelButtonColor: '#d33',
+                        confirmButtonText: 'Unselect'
+                    }).then((result) => {
+                        if (result.value) {
+                            if (comment.winner)
+                                this.ownerwin(comment);
+                            this.toggleownertick(comment, index);
+                        }
+                    });
+                else this.toggleownertick(comment, index);
 
+
+            },
+            toggleownertick(comment, index) {
                 if (comment && comment.id)
                     this.axios.post(`${APP.baseUrl}/challenges/comment/${comment.id}/owner-tick`).then((response) => {
                         if (response.status === 200) {
                             if (response.data == '1') {
+                                comment.finalized = 1;
                                 this.$set(this.$parent.challenge, 'finalized', this.$parent.challenge.finalized + 1);
                                 $(`#owner_tick_${comment.id}`).addClass('text-danger');
 
                             } else {
+                                comment.finalized = 0;
                                 this.$set(this.$parent.challenge, 'finalized', this.$parent.challenge.finalized - 1);
                                 $(`#owner_tick_${comment.id}`).removeClass('text-danger');
 
                             }
 
+                            this.$set(this.comments, index, comment);
+
                             this.$toast.open({
-                                message: response.data ? 'checked' : 'un checked',
+                                message: response.data ? 'Added to the finalize list' : 'Removed from the finalize list',
                                 type: 'success'
                             });
                         } else
@@ -368,21 +425,34 @@
 
                     })
             },
-            ownerwin(comment) {
+            ownerwin(comment, index) {
+                if (comment && comment.winner)
+                    return this.$toast.open({
+                        message: "The winner can't be change",
+                        type: 'warning'
+                    });
+
                 if (comment && comment.id)
                     this.axios.post(`${APP.baseUrl}/challenges/comment/${comment.id}/owner-win`).then((response) => {
                         if (response.status === 200) {
 
                             if (response.data) {
-                                this.$set(this.$parent.challenge, 'game_time', this.$parent.challenge.winner);
+                                comment.winner = 1;
+                                this.$set(this.$parent.challenge, 'winner', this.$parent.challenge.winner);
                                 $(`#owner_win_${comment.id}`).addClass('text-danger');
                             } else {
-                                this.$set(this.$parent.challenge, 'game_time', this.$parent.challenge.winner);
+                                this.$set(this.$parent.challenge, 'winner', this.$parent.challenge.winner);
                                 $(`#owner_win_${comment.id}`).removeClass('text-danger');
+                                comment.winner = 0;
                             }
 
+                            // if (comment.winner)
+                            this.winner = comment.winner;
+
+                            this.$set(this.comments, index, comment);
+
                             this.$toast.open({
-                                message: response.data ? 'checked' : 'un checked',
+                                message: response.data ? 'Marked as Winner' : 'Removed from winner',
                                 type: 'success'
                             });
                         } else

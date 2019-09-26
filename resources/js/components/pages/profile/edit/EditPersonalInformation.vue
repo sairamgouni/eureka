@@ -169,6 +169,7 @@ export default {
                 userId:'',
                 userSlug:'',
                 userImage:'',
+                userUserName:'',
                 userBackgroundImage:'',
                 form:{
                     username:'',
@@ -177,6 +178,9 @@ export default {
                 	about:'',
                 	image:'',
                 	background_image:'',
+                    campaign:{
+                        campaign:'',
+                    },
                 },
             }
 		},
@@ -190,7 +194,7 @@ export default {
                 evt.preventDefault();
 
                 var bodyFormData = new FormData();
-                bodyFormData.set('userName', this.form.username);
+                // bodyFormData.set('userName', this.form.username);
                 bodyFormData.set('nickname', this.form.nickname);
                 bodyFormData.set('email', this.form.email);
                 bodyFormData.set('about', this.form.about);
@@ -210,7 +214,7 @@ export default {
 
 
                         if (response.status==200) {
-                              this.$store.commit('setUserName', this.form.username );
+                              // this.$store.commit('setUserName', this.form.username );
                               this.$store.commit('setUserNickname', this.form.nickname );
                               this.$store.commit('setUserAbout', this.form.about );
                               this.$store.commit('setUserBackgroundImage', response.data.background_image );
@@ -218,7 +222,7 @@ export default {
 
                                 this.userImage = this.$store.getters.getUserImage;
 					            this.userBackgroundImage = this.$store.getters.getUserBackgroundImage;
-					            this.userName = this.$store.getters.getUserName;
+					            // this.userName = this.$store.getters.getUserName;
 					  			this.userAbout = this.$store.getters.getUserAbout;
 					            this.userNickname = this.$store.getters.getUserNickname;
                             this.$toast.open({
@@ -242,7 +246,8 @@ export default {
                     });
             },
 		},
-		created(){
+		mounted() {
+	    console.log('her');
             this.userLogin = this.$store.getters.getLogin;
             this.userId = this.$store.getters.getUserId;
             this.userSlug = this.$store.getters.getUserSlug;
@@ -253,7 +258,7 @@ export default {
             this.userUserName = this.$store.getters.getUserName;
             this.userNickname = this.$store.getters.getUserNickname;
             this.userCampaign = this.$store.getters.getUserCampaign;
-            this.form.username = this.userUserName;
+            this.form.username = this.$store.getters.getUserName;
             this.form.email = this.userEmail;
             this.form.about = this.userAbout;
             this.form.nickname = this.userNickname;

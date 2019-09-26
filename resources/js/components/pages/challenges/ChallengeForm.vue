@@ -85,8 +85,6 @@
                                 id="description"
                                 v-model="form.description"
                                 placeholder="Enter description..."
-                                rows="3"
-                                max-rows="6"
                             ></b-form-textarea>
 
 
@@ -316,5 +314,13 @@
 </script>
 
 <style scoped>
+    .w-100 {
+        width: 100%!important;
+    }
+    .modal-content {
 
+        background-color:  transparent !important;
+         border: 0;
+
+    }
 </style>

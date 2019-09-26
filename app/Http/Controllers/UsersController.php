@@ -98,7 +98,7 @@ class UsersController extends Controller
     {
 
         $user = \Auth::user();
-        $user->name = $request->fullname;
+//        $user->name = $request->fullname;
         $user->nickname = $request->nickname;
         $user->about = $request->about;
         $user->save();
@@ -121,7 +121,7 @@ class UsersController extends Controller
                 $resize->save(public_path($path));
                 $url = "/" . $path;
             } elseif ($field_name == 'background_image') {
-                $resize = \Image::make($path)->resize(1268, 122)->encode('jpg');
+                $resize = \Image::make($path)->resize(1078, 360)->encode('jpg');
                 $hash = md5($resize->__toString());
                 $path = "users/backgrounds/{$hash}.jpg";
 
@@ -141,7 +141,8 @@ class UsersController extends Controller
 
     public function getProfile($userId)
     {
-        $users = \App\User::where('id', '=', $userId)->get();
+
+        $users = \App\User::where('id', '=', $userId)->with('campaign')->get();
         $users = \App\User::processFrendSuggestions($users);
         if (count($users))
             $users = $users[0];
@@ -219,7 +220,7 @@ class UsersController extends Controller
 
     public function topContributors(Request $request)
     {
-        $top_contributors = \App\User::where('reputation', '>', '0')
+        $top_contributors = \App\User::where('reputation', '>', '0')->with('campaign')
             ->orderBy('reputation', 'desc')
             ->limit(10)
             ->get();
@@ -359,6 +360,14 @@ class UsersController extends Controller
                 ->simplePaginate()
         ]);
 
+    }
+
+    public function search(Request $request)
+    {
+
+        $data= $request->all();
+        $search = $data['q'];
+        return User::where('name', 'like', '%' . $search . '%')->get();
     }
 
 

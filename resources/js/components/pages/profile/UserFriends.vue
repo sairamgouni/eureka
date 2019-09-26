@@ -8,7 +8,7 @@
 
 					<!-- W-Faved-Page -->
 
-					<ul class="widget w-faved-page js-zoom-gallery">
+					<ul class="widget w-faved-page">
 						<li v-for="(item, index) in firendsList">
 							  <router-link
                                         :to="{ name: 'ProfileEuraka', params: { id: item.id, slug: item.slug } }"
@@ -18,7 +18,11 @@
 						</li>
 
 						<li class="all-users" v-if="remainingFriends>0">
-							<a href="#">+{{remainingFriends}}</a>
+<!--							<a href="#">+{{remainingFriends}}</a>-->
+                            <router-link
+                                :to="{ name: 'Friends', params: { id: userId, slug: userSlug } }"
+                                class="">+{{remainingFriends}}
+                            </router-link>
 
 
 <!--                            <router-link-->

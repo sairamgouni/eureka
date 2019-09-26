@@ -112,7 +112,7 @@ class Challenge extends Model
         // dd(explode(",", $request->categories));
         $record->created_by = \Auth::user()->id;
         $response = $record->save();
-        $record->categories()->sync($request->categories);
+        $record->categories()->sync(explode(",", $request->categories));
         $static_object->processUpload($request, $record);
 
         return $response;
@@ -143,9 +143,21 @@ class Challenge extends Model
     public function processUpload($request, $record)
     {
 
+//        if ($request->hasFile('image')) {
+//            $path = $request->file('image')->store('challenges');
+//            $record->image = $path;
+//            $response = $record->save();
+//            return $response;
+//        }
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('challenges');
-            $record->image = $path;
+            $resize = \Image::make($request->image)->resize(338, 238)->encode('jpg');
+            $hash =  md5($resize->__toString()).'.jpg';
+            $path = 'public/challenges/'.$hash;
+            Storage::disk('local')->put($path,$resize, 'public');
+
+//            $resize->save(storage_path($path));
+//            $path = $request->file('image')->store('challenges');
+            $record->image = 'challenges/'.$hash;
             $response = $record->save();
             return $response;
         }
@@ -169,6 +181,7 @@ class Challenge extends Model
      */
     public function getImage()
     {
+
         $url = Storage::url($this->image);
         return $this->base_path . $url;
     }
@@ -238,6 +251,7 @@ class Challenge extends Model
 
             $item['game_time'] = Like::whereIn('like_id', $record->comments()->pluck('id'))->whereUserId($record->created_by)->count();
             $item['finalized'] = $record->comments()->whereFinalized(1)->count();
+            $item['winner'] = $record->comments()->whereWinner(1)->count();
 
 
             if ($user) {

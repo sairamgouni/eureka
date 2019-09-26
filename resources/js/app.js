@@ -5,11 +5,23 @@ import axios from 'axios';
 import App from './components/App';
 import routes from './routes/routes';
 import store from './services/store';
+import VueSweetalert2 from 'vue-sweetalert2';
 window.Vue=Vue;
 
+
+import 'sweetalert2/dist/sweetalert2.min.css';
+import 'vue-loading-overlay/dist/vue-loading.css';
+import 'vue-toast-notification/dist/index.css';
+import 'vue-multiselect/dist/vue-multiselect.min.css'
+
+const sweetAlertOptions = {
+    confirmButtonColor: '#e91d24',
+    cancelButtonColor: '#aaa'
+}
 /**
  * @use Global vue components
  */
+Vue.use(VueSweetalert2, sweetAlertOptions);
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 //bootstrap vue

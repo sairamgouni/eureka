@@ -13,8 +13,8 @@
                             </div>
                             <form class="w-search">
                                 <div class="form-group with-button">
-                                    <input class="form-control" type="text" placeholder="Search name...">
-                                    <button>
+                                    <input class="form-control" type="text" placeholder="Search name..." v-model="search">
+                                    <button  @click.prevent="searchusers()">
                                         <svg class="olymp-magnifying-glass-icon">
                                             <use
                                                 xlink:href="assets/svg-icons/sprites/icons.svg#olymp-magnifying-glass-icon"></use>
@@ -191,41 +191,14 @@
 
                             <!-- Widget Recent Topics -->
 
-                            <ul class="widget w-featured-topics">
+                            <ul class="widget w-featured-topics" v-for="(item, index) in posts" :key="index">
                                 <li>
                                     <div class="content">
-                                        <a href="#" class="h6 title">Summer is Coming! Picnic in the east boulevard
-                                            park</a>
-                                        <time class="entry-date updated" datetime="2017-06-24T18:18">26 minutes ago
+                                        <router-link :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }" class="h6 title">
+                                            {{item.title}}
+                                        </router-link>
+                                        <time class="entry-date updated" datetime="2017-06-24T18:18"> {{item.created_at}}
                                         </time>
-                                        <div class="forums">The Community</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="content">
-                                        <a href="#" class="h6 title">Kung Fighters released a new video, check it out
-                                            here!</a>
-                                        <time class="entry-date updated" datetime="2017-06-24T18:18">44 minutes ago
-                                        </time>
-                                        <div class="forums">The Boombox</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="content">
-                                        <a href="#" class="h6 title">What’s your favourite season?</a>
-                                        <time class="entry-date updated" datetime="2017-06-24T18:18">59 minutes ago
-                                        </time>
-                                        <div class="forums">The Community</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="content">
-                                        <a href="#" class="h6 title">Who had the best presentation at this year’s E3?
-                                            Rate them!</a>
-                                        <time class="entry-date updated" datetime="2017-06-24T18:18">1 hour, 3 minutes
-                                            ago
-                                        </time>
-                                        <div class="forums">Arcade Planet</div>
                                     </div>
                                 </li>
                             </ul>
@@ -248,10 +221,12 @@
                 hasMore: false,
                 page: 1,
                 counter: 1,
+                posts:[],
             }
         },
         created() {
             this.getUsers();
+            this.getChallenges();
         },
         mounted() {
             window.onscroll = (ev) => {
@@ -282,7 +257,61 @@
                     .catch((error) => {
                         loader.hide();
                     });
-            }
+            },
+            searchusers(){
+                fetch('/userssearch?q='+this.search)
+                    .then(res => res.json())
+                    .then(res =>{
+                        this.challenges = res;
+                        this.search ='';
+
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+
+            },
+            getChallenges() {
+
+                let loader = this.$loading.show({
+                    container: this.fullPage ? null : this.$refs.file,
+                });
+                var bodyFormData = new FormData();
+
+                this.axios({
+                    method: 'get',
+                    url: '/posts',
+                    data: bodyFormData
+                })
+                    .then((response) => {
+                        loader.hide();
+
+                        if (response.status==200) {
+                            // console.log(response);
+                            // alert(response);
+                            this.posts = response.data.list;
+
+                            console.log("sairam",this.posts);
+
+                        }
+                        else if(response.status==401)
+                        {
+                            console.log('in 401 response');
+                            this.$store.dispatch('destroyAccess');
+                            this.$toast.open({
+                                message: 'Please login to continue',
+                                type: 'success'
+                            });
+                            this.$router.push('/login');
+                        }
+                        else {
+                            console.log('inelse boy');
+                        }
+                    })
+                    .catch(function(response) {
+                        loader.hide();
+                    });
+            },
         }
     }
 </script>

@@ -190,6 +190,7 @@ class User extends Authenticatable
 
     public static function updateRecord(UsersRequest $request, $slug)
     {
+//        die('here');
 
         $static_object = (new self);
         $user = User::getRecord($slug);
@@ -197,7 +198,7 @@ class User extends Authenticatable
         if (!$user)
             return false;
 
-        $user->name = $request->name;
+//        $user->name = $request->name;
 
 
         if ($request->has('password')) {
@@ -310,6 +311,7 @@ class User extends Authenticatable
             $item['is_following'] = (int)$user->isFollowing($friend);
             $item['location'] = $friend->country->title;
             $item['reputation'] = $friend->reputation;
+            $item['campaign'] = $friend->campaign->campaign;
             $item['member_from'] = date('M Y', strtotime($user->updated_at));
 
             $list[] = $item;

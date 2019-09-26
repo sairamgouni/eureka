@@ -230,12 +230,13 @@
             }
         },
         created() {
+            console.log(USER.username,'hereinactivity item');
             // this.userLogin = this.$store.getters.getLogin;
             // this.userId = this.$store.getters.getUserId;
 
             this.$store.commit('setLogin', true);
             this.$store.commit('setUserId', this.userId);
-            this.$store.commit('setUserName', this.username);
+            this.$store.commit('setUserName', USER.username);
             // this.$store.commit('setUserImage', response.data.user.image);
             this.$store.commit('setUserEmail', USER ? USER.email : '');
             this.$store.commit('setUserSlug', this.userSlug);

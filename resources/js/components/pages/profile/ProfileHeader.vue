@@ -7,7 +7,7 @@
 			<div class="ui-block">
 				<div class="top-header">
 					<div class="top-header-thumb">
-						<img  class="top-header-thumb" :src="user.background_image" :alt="user.name" style="height: 400px">
+						<img  class="top-header-thumb" :src="user.background_image" :alt="user.name">
 					</div>
 					<div class="profile-section">
 						<div class="row">
@@ -62,7 +62,7 @@
 						</a>
 						<div class="author-content">
 							<a href="#" class="h4 author-name">{{user.name}}</a>
-							<div class="country">{{user.location}}</div>
+							<div class="country">{{user.campaign}},{{user.location}}</div>
 						</div>
 					</div>
 				</div>

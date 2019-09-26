@@ -110,25 +110,6 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col col-lg-9 col-md-8 col-sm-12 col-12">
-                        <div class="widget w-list w-eureka-footer-list">
-                            <ul>
-                                <li>
-                                    <a href="#">Home</a>
-                                </li>
-                                <li>
-                                    <a href="#">Newsfeed</a>
-                                </li>
-                                <li>
-                                    <a href="#">EUREKA Approach</a>
-                                </li>
-
-                                <li>
-                                    <a href="#">Contributors</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                     <div class="col col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="sub-footer-copyright">
 					<span>
@@ -136,6 +117,7 @@
 					</span>
                         </div>
                     </div>
+                   
                 </div>
             </div>
         </div>

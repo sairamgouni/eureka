@@ -3,9 +3,19 @@ import Vuex from "vuex";
 import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
+const getJSONFromLocalStorage = (key) => {
+    const value = window.localStorage.getItem(key);
 
+    if (value === 'undefined' || value === 'null' || value === undefined || value === null) {
+        return null;
+    }
+    else {
+        return JSON.parse(value);
+    }
+};
 export default new Vuex.Store({
     state: {
+        user:getJSONFromLocalStorage('user'),
         userLogin: USER ? true : false,
         userAccess: '',
         userState: '',
