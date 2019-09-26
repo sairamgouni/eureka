@@ -16142,3 +16142,8 @@ input[type=checkbox] {
 .header-content-wrapper .author-thumb .avatar {
     width: 36px;
     height: 36px; }
+
+.btn.follow {
+    background-color: #e91d24; }
+.btn.unfollow {
+        background-color: #38a9ff; }
