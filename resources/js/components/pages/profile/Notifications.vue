@@ -37,8 +37,14 @@
                                    :to="{ name: 'ProfileEuraka', params: { id: notification.id, slug: notification.notifier_slug } }"
                                    class="h6 notification-friend">
                                     {{notification.notifier_name}}
-                                </router-link> {{notification.message}} <a
-                            href="#" class="notification-link">{{notification.item_title}}</a>.
+                                </router-link> {{notification.message}}
+                             <router-link
+                                 :to="{ name: 'ChallengeDetails', params: { id: notification.item_id, slug: notification.item_slug } }"
+                                 class="notification-link">
+
+
+                                    {{notification.item_title}}
+                                </router-link>.
 							<span class="notification-date">
                                 <time class="entry-date updated"
                                       datetime="2004-07-24T18:18">{{notification.created_at}}</time>

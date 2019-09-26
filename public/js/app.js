@@ -6665,6 +6665,12 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -69617,15 +69623,31 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(
-                                  " " + _vm._s(notification.message) + " "
+                                  " " +
+                                    _vm._s(notification.message) +
+                                    "\n                             "
                                 ),
                                 _c(
-                                  "a",
+                                  "router-link",
                                   {
                                     staticClass: "notification-link",
-                                    attrs: { href: "#" }
+                                    attrs: {
+                                      to: {
+                                        name: "ChallengeDetails",
+                                        params: {
+                                          id: notification.item_id,
+                                          slug: notification.item_slug
+                                        }
+                                      }
+                                    }
                                   },
-                                  [_vm._v(_vm._s(notification.item_title))]
+                                  [
+                                    _vm._v(
+                                      "\n\n\n                                    " +
+                                        _vm._s(notification.item_title) +
+                                        "\n                                "
+                                    )
+                                  ]
                                 ),
                                 _vm._v(".\n\t\t\t\t\t\t\t"),
                                 _c(

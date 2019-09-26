@@ -426,6 +426,7 @@
                     })
             },
             ownerwin(comment, index) {
+
                 if (comment && comment.winner)
                     return this.$toast.open({
                         message: "The winner can't be change",
