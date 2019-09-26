@@ -408,44 +408,88 @@
                     })
             },
             ownerwin(comment, index) {
+                console.log('test');
                 if (comment && comment.winner)
                     return this.$toast.open({
                         message: "The winner can't be change",
                         type: 'warning'
                     });
+                this.$swal({
+                    title: 'you want to choose this as winner?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    // confirmButtonColor: '#e91d24',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: 'Choose'
+                }).then((result) => {
+                    if (result.value) {
+                        if (comment && comment.id)
+                            this.axios.post(`${APP.baseUrl}/challenges/comment/${comment.id}/owner-win`).then((response) => {
+                                if (response.status === 200) {
 
-                if (comment && comment.id)
-                    this.axios.post(`${APP.baseUrl}/challenges/comment/${comment.id}/owner-win`).then((response) => {
-                        if (response.status === 200) {
+                                    if (response.data) {
+                                        comment.winner = 1;
+                                        this.$set(this.$parent.challenge, 'winner', this.$parent.challenge.winner);
+                                        $(`#owner_win_${comment.id}`).addClass('text-danger');
+                                    } else {
+                                        this.$set(this.$parent.challenge, 'winner', this.$parent.challenge.winner);
+                                        $(`#owner_win_${comment.id}`).removeClass('text-danger');
+                                        comment.winner = 0;
+                                    }
 
-                            if (response.data) {
-                                comment.winner = 1;
-                                this.$set(this.$parent.challenge, 'winner', this.$parent.challenge.winner);
-                                $(`#owner_win_${comment.id}`).addClass('text-danger');
-                            } else {
-                                this.$set(this.$parent.challenge, 'winner', this.$parent.challenge.winner);
-                                $(`#owner_win_${comment.id}`).removeClass('text-danger');
-                                comment.winner = 0;
-                            }
+                                    // if (comment.winner)
+                                    this.winner = comment.winner;
 
-                            // if (comment.winner)
-                            this.winner = comment.winner;
+                                    this.$set(this.comments, index, comment);
 
-                            this.$set(this.comments, index, comment);
+                                    this.$toast.open({
+                                        message: response.data ? 'Marked as Winner' : 'Removed from winner',
+                                        type: 'success'
+                                    });
+                                } else
+                                    this.$toast.open({
+                                        message: 'Something went wrong!',
+                                        type: 'error'
+                                    });
+                            }).catch((error) => {
 
-                            this.$toast.open({
-                                message: response.data ? 'Marked as Winner' : 'Removed from winner',
-                                type: 'success'
-                            });
-                        } else
-                            this.$toast.open({
-                                message: 'Something went wrong!',
-                                type: 'error'
-                            });
-                    }).catch((error) => {
-
-                    })
-            }
+                            })
+                    }
+                });
+            },
+            //     toggleownerwin(comment, index){
+            //     if (comment && comment.id)
+            //         this.axios.post(`${APP.baseUrl}/challenges/comment/${comment.id}/owner-win`).then((response) => {
+            //             if (response.status === 200) {
+            //
+            //                 if (response.data) {
+            //                     comment.winner = 1;
+            //                     this.$set(this.$parent.challenge, 'winner', this.$parent.challenge.winner);
+            //                     $(`#owner_win_${comment.id}`).addClass('text-danger');
+            //                 } else {
+            //                     this.$set(this.$parent.challenge, 'winner', this.$parent.challenge.winner);
+            //                     $(`#owner_win_${comment.id}`).removeClass('text-danger');
+            //                     comment.winner = 0;
+            //                 }
+            //
+            //                 // if (comment.winner)
+            //                 this.winner = comment.winner;
+            //
+            //                 this.$set(this.comments, index, comment);
+            //
+            //                 this.$toast.open({
+            //                     message: response.data ? 'Marked as Winner' : 'Removed from winner',
+            //                     type: 'success'
+            //                 });
+            //             } else
+            //                 this.$toast.open({
+            //                     message: 'Something went wrong!',
+            //                     type: 'error'
+            //                 });
+            //         }).catch((error) => {
+            //
+            //         })
+            // }
         },
         created() {
             this.loadComments();

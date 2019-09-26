@@ -11097,39 +11097,51 @@ __webpack_require__.r(__webpack_exports__);
     ownerwin: function ownerwin(comment, index) {
       var _this7 = this;
 
+      console.log('test');
       if (comment && comment.winner) return this.$toast.open({
         message: "The winner can't be change",
         type: 'warning'
       });
-      if (comment && comment.id) this.axios.post("".concat(APP.baseUrl, "/challenges/comment/").concat(comment.id, "/owner-win")).then(function (response) {
-        if (response.status === 200) {
-          if (response.data) {
-            comment.winner = 1;
+      this.$swal({
+        title: 'you want to choose this as winner?',
+        type: 'warning',
+        showCancelButton: true,
+        // confirmButtonColor: '#e91d24',
+        // cancelButtonColor: '#d33',
+        confirmButtonText: 'Choose'
+      }).then(function (result) {
+        if (result.value) {
+          if (comment && comment.id) _this7.axios.post("".concat(APP.baseUrl, "/challenges/comment/").concat(comment.id, "/owner-win")).then(function (response) {
+            if (response.status === 200) {
+              if (response.data) {
+                comment.winner = 1;
 
-            _this7.$set(_this7.$parent.challenge, 'winner', _this7.$parent.challenge.winner);
+                _this7.$set(_this7.$parent.challenge, 'winner', _this7.$parent.challenge.winner);
 
-            $("#owner_win_".concat(comment.id)).addClass('text-danger');
-          } else {
-            _this7.$set(_this7.$parent.challenge, 'winner', _this7.$parent.challenge.winner);
+                $("#owner_win_".concat(comment.id)).addClass('text-danger');
+              } else {
+                _this7.$set(_this7.$parent.challenge, 'winner', _this7.$parent.challenge.winner);
 
-            $("#owner_win_".concat(comment.id)).removeClass('text-danger');
-            comment.winner = 0;
-          } // if (comment.winner)
+                $("#owner_win_".concat(comment.id)).removeClass('text-danger');
+                comment.winner = 0;
+              } // if (comment.winner)
 
 
-          _this7.winner = comment.winner;
+              _this7.winner = comment.winner;
 
-          _this7.$set(_this7.comments, index, comment);
+              _this7.$set(_this7.comments, index, comment);
 
-          _this7.$toast.open({
-            message: response.data ? 'Marked as Winner' : 'Removed from winner',
-            type: 'success'
-          });
-        } else _this7.$toast.open({
-          message: 'Something went wrong!',
-          type: 'error'
-        });
-      })["catch"](function (error) {});
+              _this7.$toast.open({
+                message: response.data ? 'Marked as Winner' : 'Removed from winner',
+                type: 'success'
+              });
+            } else _this7.$toast.open({
+              message: 'Something went wrong!',
+              type: 'error'
+            });
+          })["catch"](function (error) {});
+        }
+      });
     }
   },
   created: function created() {
