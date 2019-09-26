@@ -18,7 +18,7 @@ class ChallengeOwnerResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'image' => '/assets/img/boy.png',
+            'image' => '/assets/img/user.png',
         ];
     }
 }
