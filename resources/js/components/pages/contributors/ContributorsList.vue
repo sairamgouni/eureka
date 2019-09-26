@@ -251,10 +251,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.unfollow {
-  background: #5a64d8;
-  border: black;
-}
-</style>

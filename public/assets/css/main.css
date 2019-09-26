@@ -16144,6 +16144,8 @@ input[type=checkbox] {
     height: 36px; }
 
 .btn.follow {
-    background-color: #e91d24; }
+    background-color: #e91d24;
+    border-color: #e91d24; }
 .btn.unfollow {
-        background-color: #38a9ff; }
+    background-color: #38a9ff;
+    border-color: #38a9ff; }
