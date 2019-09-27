@@ -262,7 +262,7 @@
                 fetch('/userssearch?q='+this.search)
                     .then(res => res.json())
                     .then(res =>{
-                        this.challenges = res;
+                        this.users = res;
                         this.search ='';
 
                     })

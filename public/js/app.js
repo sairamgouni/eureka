@@ -6011,7 +6011,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       fetch('/userssearch?q=' + this.search).then(function (res) {
         return res.json();
       }).then(function (res) {
-        _this3.challenges = res;
+        _this3.users = res;
         _this3.search = '';
       })["catch"](function (err) {
         console.log(err);
@@ -9795,6 +9795,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -9850,7 +9852,10 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response, 'saira');
 
         if (response.status == 200) {
-          // this.$store.commit('setUserName', this.form.username );
+          console.log(response.data, 'imageprofile');
+
+          _this.$store.commit('setUser', response.data);
+
           _this.$store.commit('setUserNickname', _this.form.nickname);
 
           _this.$store.commit('setUserAbout', _this.form.about);
@@ -9859,8 +9864,8 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.$store.commit('setUserImage', response.data.image);
 
-          _this.userImage = _this.$store.getters.getUserImage;
-          _this.userBackgroundImage = _this.$store.getters.getUserBackgroundImage; // this.userName = this.$store.getters.getUserName;
+          _this.userImage = _this.$store.getters.getUserImage.replace('/users/thumbs/', '');
+          _this.userBackgroundImage = _this.$store.getters.getUserBackgroundImage.replace('/users/backgrounds/', ''); // this.userName = this.$store.getters.getUserName;
 
           _this.userAbout = _this.$store.getters.getUserAbout;
           _this.userNickname = _this.$store.getters.getUserNickname;
@@ -9896,8 +9901,8 @@ __webpack_require__.r(__webpack_exports__);
     this.userLogin = this.$store.getters.getLogin;
     this.userId = this.$store.getters.getUserId;
     this.userSlug = this.$store.getters.getUserSlug;
-    this.userImage = this.$store.getters.getUserImage;
-    this.userBackgroundImage = this.$store.getters.getUserBackgroundImage;
+    this.userImage = this.$store.getters.getUserImage.replace('/users/thumbs/', '');
+    this.userBackgroundImage = this.$store.getters.getUserBackgroundImage.replace('/users/backgrounds/', '');
     this.userEmail = this.$store.getters.getUserEmail;
     this.userAbout = this.$store.getters.getUserAbout;
     this.userUserName = this.$store.getters.getUserName;
@@ -10505,6 +10510,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ActivityItem',
   props: ['CurrentUser', 'isUserLoggedIn', 'isSameUser', 'loadCurrentUserActivity', 'profileIdToLoad', 'specificUserRecords'],
@@ -10559,6 +10565,26 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     $(window).off('scroll');
   },
   methods: {
+    challengedetail: function challengedetail(item) {
+      this.$store.commit('setIsPost', 'yes');
+      this.$router.push({
+        name: 'ChallengeDetails',
+        params: {
+          id: item.id,
+          slug: item.slug
+        }
+      });
+    },
+    challengemessage: function challengemessage(item) {
+      this.$store.commit('setIsPost', 'no');
+      this.$router.push({
+        name: 'ChallengeDetails',
+        params: {
+          id: item.id,
+          slug: item.slug
+        }
+      });
+    },
     loadPosts: function loadPosts() {
       var _this2 = this;
 
@@ -10693,7 +10719,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -11148,7 +11173,8 @@ __webpack_require__.r(__webpack_exports__);
     this.loadComments();
   },
   updated: function updated() {
-    window.document.getElementById('comment-box').scrollIntoView(false);
+    var isPost = this.$store.getters.getIsPost;
+    if (isPost !== 'yes') window.document.getElementById('comment-box').scrollIntoView(false);
   }
 });
 
@@ -62670,7 +62696,7 @@ var render = function() {
               _c(
                 "router-link",
                 {
-                  staticClass: "nav-link author-name fn",
+                  staticClass: "author-name fn",
                   attrs: {
                     to: {
                       name: "ProfileEuraka",
@@ -62681,13 +62707,19 @@ var render = function() {
                 [
                   _c("div", { staticClass: "author-title" }, [
                     _vm._v(
-                      "\n                       " + _vm._s(_vm.userName) + " "
+                      "\n                       " +
+                        _vm._s(
+                          _vm.userName.length > 8
+                            ? _vm.userName.substring(0, 8) + ".."
+                            : _vm.userName
+                        ) +
+                        " "
                     ),
                     _c("svg", { staticClass: "olymp-dropdown-arrow-icon" }, [
                       _c("use", {
                         attrs: {
                           "xlink:href":
-                            "svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"
+                            "assets/svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"
                         }
                       })
                     ])
@@ -62697,8 +62729,7 @@ var render = function() {
                     _vm._v(_vm._s(_vm.userCampaign.campaign))
                   ])
                 ]
-              ),
-              _vm._v(">\n\n            ")
+              )
             ],
             1
           )
@@ -77314,7 +77345,9 @@ var render = function() {
                                     },
                                     expression: "form.image"
                                   }
-                                })
+                                }),
+                                _vm._v(" "),
+                                _c("span", [_vm._v(_vm._s(_vm.userImage))])
                               ],
                               1
                             ),
@@ -77345,7 +77378,11 @@ var render = function() {
                                     },
                                     expression: "form.background_image"
                                   }
-                                })
+                                }),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(_vm._s(_vm.userBackgroundImage))
+                                ])
                               ],
                               1
                             )
@@ -77882,107 +77919,156 @@ var render = function() {
     { attrs: { id: "newsfeed-items-grid" } },
     _vm._l(_vm.challenges, function(item, index) {
       return _c("div", { key: index, staticClass: "ui-block" }, [
-        _c(
-          "article",
-          { staticClass: "hentry post has-post-thumbnail" },
-          [
-            _c(
-              "div",
-              { staticClass: "post__author author vcard inline-items" },
-              [
-                _c("img", {
-                  attrs: { src: item.user.image, alt: item.user.name }
-                }),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "author-date" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "h6 post__author-name fn",
-                        attrs: {
-                          to: {
-                            name: "ProfileEuraka",
-                            params: { id: item.user.id, slug: item.user.slug }
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n\n\n                        " +
-                            _vm._s(item.user.name) +
-                            "\n                    "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "post__date" }, [
-                      _c(
-                        "time",
-                        {
-                          staticClass: "published",
-                          attrs: { datetime: "2004-07-24T18:18" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(item.created_at) +
-                              "\n                        "
-                          )
-                        ]
-                      )
-                    ])
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "more" }, [
-                  _c("svg", { staticClass: "olymp-three-dots-icon" }, [
-                    _c("use", {
-                      attrs: {
-                        "xlink:href":
-                          "svg-icons/sprites/icons.svg#olymp-three-dots-icon"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(0, true)
-                ])
-              ]
-            ),
+        _c("article", { staticClass: "hentry post has-post-thumbnail" }, [
+          _c("div", { staticClass: "post__author author vcard inline-items" }, [
+            _c("img", { attrs: { src: item.user.image, alt: item.user.name } }),
             _vm._v(" "),
             _c(
-              "router-link",
+              "div",
+              { staticClass: "author-date" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "h6 post__author-name fn",
+                    attrs: {
+                      to: {
+                        name: "ProfileEuraka",
+                        params: { id: item.user.id, slug: item.user.slug }
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n\n\n                        " +
+                        _vm._s(item.user.name) +
+                        "\n                    "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "post__date" }, [
+                  _c(
+                    "time",
+                    {
+                      staticClass: "published",
+                      attrs: { datetime: "2004-07-24T18:18" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(item.created_at) +
+                          "\n                        "
+                      )
+                    ]
+                  )
+                ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "more" }, [
+              _c("svg", { staticClass: "olymp-three-dots-icon" }, [
+                _c("use", {
+                  attrs: {
+                    "xlink:href":
+                      "svg-icons/sprites/icons.svg#olymp-three-dots-icon"
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _vm._m(0, true)
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "h4 title",
+              attrs: { href: "javascript:;" },
+              on: {
+                click: function($event) {
+                  return _vm.challengedetail(item)
+                }
+              }
+            },
+            [
+              _vm._v(
+                "\n                " + _vm._s(item.title) + "\n            "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(item.description) + "\n            ")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "post-thumb" }, [
+            _c("img", { attrs: { src: item.image, alt: item.title } })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "post-additional-info inline-items" }, [
+            _c(
+              "a",
               {
-                staticClass: "h4 title",
-                attrs: {
-                  to: {
-                    name: "ChallengeDetails",
-                    params: { id: item.id, slug: item.slug }
+                staticClass: "post-add-icon inline-items",
+                class: { active: item.isUserLiked == 1 ? true : false },
+                attrs: { href: "javascript:void(0);" },
+                on: {
+                  click: function($event) {
+                    return _vm.updateLike(item.id)
                   }
                 }
               },
               [
-                _vm._v(
-                  "\n                " + _vm._s(item.title) + "\n            "
-                )
+                _c("svg", { staticClass: "olymp-heart-icon" }, [
+                  _c("use", {
+                    attrs: {
+                      "xlink:href":
+                        "assets/svg-icons/sprites/icons.svg#olymp-heart-icon"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(item.likes))])
               ]
             ),
             _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(item.description) + "\n            ")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "post-thumb" }, [
-              _c("img", { attrs: { src: item.image, alt: item.title } })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "post-additional-info inline-items" }, [
+            _c("div", { staticClass: "comments-shared" }, [
               _c(
                 "a",
                 {
                   staticClass: "post-add-icon inline-items",
-                  class: { active: item.isUserLiked == 1 ? true : false },
+                  attrs: { href: "javascript:;" },
+                  on: {
+                    click: function($event) {
+                      return _vm.challengemessage(item)
+                    }
+                  }
+                },
+                [
+                  _c("svg", { staticClass: "olymp-speech-balloon-icon" }, [
+                    _c("use", {
+                      attrs: {
+                        "xlink:href":
+                          "assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(item.comments))])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "control-block-button post-control-button" },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-control",
+                  class: { active_bg: item.isUserLiked == 1 ? true : false },
                   attrs: { href: "javascript:void(0);" },
                   on: {
                     click: function($event) {
@@ -77991,108 +78077,42 @@ var render = function() {
                   }
                 },
                 [
-                  _c("svg", { staticClass: "olymp-heart-icon" }, [
+                  _c("svg", { staticClass: "olymp-like-post-icon" }, [
                     _c("use", {
                       attrs: {
                         "xlink:href":
-                          "assets/svg-icons/sprites/icons.svg#olymp-heart-icon"
+                          "assets/svg-icons/sprites/icons.svg#olymp-like-post-icon"
                       }
                     })
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(item.likes))])
+                  ])
                 ]
               ),
               _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "comments-shared" },
+                "a",
+                {
+                  staticClass: "btn btn-control",
+                  attrs: { href: "javascript:;" },
+                  on: {
+                    click: function($event) {
+                      return _vm.challengemessage(item)
+                    }
+                  }
+                },
                 [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "post-add-icon inline-items",
+                  _c("svg", { staticClass: "olymp-comments-post-icon" }, [
+                    _c("use", {
                       attrs: {
-                        to: {
-                          name: "ChallengeDetails",
-                          params: { id: item.id, slug: item.slug }
-                        }
+                        "xlink:href":
+                          "assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"
                       }
-                    },
-                    [
-                      _c("svg", { staticClass: "olymp-speech-balloon-icon" }, [
-                        _c("use", {
-                          attrs: {
-                            "xlink:href":
-                              "assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [_vm._v(_vm._s(item.comments))])
-                    ]
-                  )
-                ],
-                1
+                    })
+                  ])
+                ]
               )
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "control-block-button post-control-button" },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-control",
-                    class: { active_bg: item.isUserLiked == 1 ? true : false },
-                    attrs: { href: "javascript:void(0);" },
-                    on: {
-                      click: function($event) {
-                        return _vm.updateLike(item.id)
-                      }
-                    }
-                  },
-                  [
-                    _c("svg", { staticClass: "olymp-like-post-icon" }, [
-                      _c("use", {
-                        attrs: {
-                          "xlink:href":
-                            "assets/svg-icons/sprites/icons.svg#olymp-like-post-icon"
-                        }
-                      })
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "btn btn-control",
-                    attrs: {
-                      to: {
-                        name: "ChallengeDetails",
-                        params: { id: item.id, slug: item.slug }
-                      }
-                    }
-                  },
-                  [
-                    _c("svg", { staticClass: "olymp-comments-post-icon" }, [
-                      _c("use", {
-                        attrs: {
-                          "xlink:href":
-                            "assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"
-                        }
-                      })
-                    ])
-                  ]
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
+            ]
+          )
+        ])
       ])
     }),
     0
@@ -78192,7 +78212,8 @@ var render = function() {
               _vm._v(_vm._s(comment.comment))
             ]),
             _vm._v(" "),
-            _vm.$parent.challenge.isAuthor
+            _vm.$parent.challenge.isAuthor &&
+            _vm.$parent.challenge.user.id != comment.user_id
               ? _c(
                   "a",
                   {
@@ -78214,7 +78235,9 @@ var render = function() {
                 )
               : _vm._e(),
             _vm._v(" "),
-            _vm.$parent.challenge.isAuthor && comment.like_count
+            _vm.$parent.challenge.isAuthor &&
+            comment.like_count &&
+            _vm.$parent.challenge.user.id != comment.user_id
               ? _c(
                   "a",
                   {
@@ -78238,7 +78261,8 @@ var render = function() {
             _vm._v(" "),
             _vm.$parent.challenge.isAuthor &&
             comment.finalized &&
-            (!_vm.winner || comment.winner)
+            (!_vm.winner || comment.winner) &&
+            _vm.$parent.challenge.user.id != comment.user_id
               ? _c(
                   "a",
                   {
@@ -89738,7 +89762,8 @@ var getJSONFromLocalStorage = function getJSONFromLocalStorage(key) {
     userNickname: USER ? USER.nickname : '',
     userLevel: USER ? USER.level : '',
     userCampaign: USER ? USER.campaign : '',
-    baseUrl: 'http://localhost:8000/'
+    baseUrl: 'http://localhost:8000/',
+    isPost: ''
   },
   getters: {
     getLogin: function getLogin(state) {
@@ -89784,6 +89809,9 @@ var getJSONFromLocalStorage = function getJSONFromLocalStorage(key) {
     },
     getUserCampaign: function getUserCampaign(state) {
       return state.userCampaign;
+    },
+    getIsPost: function getIsPost(state) {
+      return state.isPost;
     }
   },
   mutations: {
@@ -89825,6 +89853,9 @@ var getJSONFromLocalStorage = function getJSONFromLocalStorage(key) {
     },
     setUserCampaign: function setUserCampaign(state, token) {
       state.userCampaign = token;
+    },
+    setIsPost: function setIsPost(state, token) {
+      state.isPost = token;
     },
     removeAccess: function removeAccess(state) {
       state.userLogin = false;

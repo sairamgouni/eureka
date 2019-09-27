@@ -77,13 +77,13 @@
                     </div>
                     <router-link
                         :to="{ name: 'ProfileEuraka', params: { id: userId, slug: userSlug } }"
-                        class="nav-link author-name fn">
+                        class="author-name fn">
 
                         <div class="author-title">
-                           {{userName}} <svg class="olymp-dropdown-arrow-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"></use></svg>
+                           {{userName.length > 8 ? userName.substring(0,8)+'..' : userName}} <svg class="olymp-dropdown-arrow-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"></use></svg>
                         </div>
                         <span class="author-subtitle">{{ userCampaign.campaign}}</span>
-                    </router-link>>
+                    </router-link>
 
                 </div>
 

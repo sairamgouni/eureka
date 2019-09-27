@@ -351,8 +351,10 @@ class ChallengeController extends Controller
 
         if ($comment->finalized == 0) {
             $comment->update(['finalized' => '1']);
+            $comment->user()->increment('reputation', 50);
         } else {
             $comment->update(['finalized' => '0']);
+            $comment->user()->decrement('reputation', 50);
         }
         return response()->json($comment->finalized == '0' ? 0 : 1);
 

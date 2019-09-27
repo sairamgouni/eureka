@@ -108,6 +108,7 @@
 						      placeholder="Upload an Image"
 						      drop-placeholder="Drop Image here..."
 						    ></b-form-file>
+                                <span>{{userImage}}</span>
 							</div>
 
 							<div class="form-group label-floating">
@@ -119,6 +120,7 @@
 						      placeholder="Upload an Image"
 						      drop-placeholder="Drop Image here..."
 						    ></b-form-file>
+                                <span>{{userBackgroundImage}}</span>
 							</div>
 
  							</div>
@@ -214,14 +216,15 @@ export default {
 
 
                         if (response.status==200) {
-                              // this.$store.commit('setUserName', this.form.username );
+                            console.log(response.data,'imageprofile')
+                              this.$store.commit('setUser', response.data);
                               this.$store.commit('setUserNickname', this.form.nickname );
                               this.$store.commit('setUserAbout', this.form.about );
                               this.$store.commit('setUserBackgroundImage', response.data.background_image );
                               this.$store.commit('setUserImage', response.data.image );
 
-                                this.userImage = this.$store.getters.getUserImage;
-					            this.userBackgroundImage = this.$store.getters.getUserBackgroundImage;
+                                this.userImage = this.$store.getters.getUserImage.replace('/users/thumbs/', '');
+					            this.userBackgroundImage = this.$store.getters.getUserBackgroundImage.replace('/users/backgrounds/', '');
 					            // this.userName = this.$store.getters.getUserName;
 					  			this.userAbout = this.$store.getters.getUserAbout;
 					            this.userNickname = this.$store.getters.getUserNickname;
@@ -251,8 +254,8 @@ export default {
             this.userLogin = this.$store.getters.getLogin;
             this.userId = this.$store.getters.getUserId;
             this.userSlug = this.$store.getters.getUserSlug;
-            this.userImage = this.$store.getters.getUserImage;
-            this.userBackgroundImage = this.$store.getters.getUserBackgroundImage;
+            this.userImage = this.$store.getters.getUserImage.replace('/users/thumbs/', '');
+            this.userBackgroundImage = this.$store.getters.getUserBackgroundImage.replace('/users/backgrounds/', '');
             this.userEmail = this.$store.getters.getUserEmail;
             this.userAbout = this.$store.getters.getUserAbout;
             this.userUserName = this.$store.getters.getUserName;

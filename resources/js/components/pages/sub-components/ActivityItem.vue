@@ -128,9 +128,9 @@
                     </div>
 
                 </div>
-                <router-link :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }" class="h4 title">
+                <a href="javascript:;" @click="challengedetail(item)" class="h4 title">
                     {{item.title}}
-                </router-link>
+                </a>
                 <p>{{item.description}}
                 </p>
 
@@ -142,7 +142,7 @@
 
 
 
-                    <a href="javascript:void(0);" @click="updateLike(item.id);"
+                    <a href="javascript:void(0);" @click="updateLike(item.id)"
                        class="post-add-icon inline-items"
                        v-bind:class="{ active: (item.isUserLiked==1)? true : false }"
                     >
@@ -161,15 +161,16 @@
 
 
                     <div class="comments-shared">
-                        <router-link
-                            :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
-
+                        <a
+                            href="javascript:;"
+                            @click="challengemessage(item)"
                             class="post-add-icon inline-items">
                             <svg class="olymp-speech-balloon-icon">
                                 <use
                                     xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>
                             <span>{{item.comments}}</span>
-                        </router-link>
+                        </a>
+
 
                     </div>
 
@@ -180,21 +181,21 @@
                 <div class="control-block-button post-control-button">
 
                     <a href="javascript:void(0);" class="btn btn-control"
-                       @click="updateLike(item.id);"
+                       @click="updateLike(item.id)"
                        v-bind:class="{ active_bg: (item.isUserLiked==1)? true : false }">
                         <svg class="olymp-like-post-icon"><use
                             xlink:href="assets/svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>
                     </a>
 
-                    <router-link
-                        :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
-
+                    <a
+                       href="javascript:;"
+                       @click="challengemessage(item)"
                         class="btn btn-control">
                         <svg class="olymp-comments-post-icon">
                             <use
                                 xlink:href="assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>
 
-                    </router-link>
+                    </a>
 
                 </div>
             </article>
@@ -264,6 +265,14 @@
             $(window).off('scroll');
         },
         methods: {
+            challengedetail(item) {
+                this.$store.commit('setIsPost', 'yes' );
+               this.$router.push({name: 'ChallengeDetails', params: { id: item.id, slug: item.slug }});
+            },
+            challengemessage(item) {
+                this.$store.commit('setIsPost', 'no' );
+               this.$router.push({ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } });
+            },
             loadPosts(page = '1') {
                 let loader = this.$loading.show({
                     container: this.fullPage ? null : this.$refs.file,

@@ -29,10 +29,9 @@
                             </div>
 
                             <p class="comment">{{comment.comment}}</p>
-
+<!--                            v-if="$parent.challenge.isAuthor && $parent.challenge.user.id != comment.user_id"-->
                             <a href="javascript:void(0)" class="post-add-icon inline-items"
-                               v-if="$parent.challenge.isAuthor"
-                               @click="ownerLike(comment,index)">
+                               @click="ownerLike(comment,index)"  v-if="$parent.challenge.isAuthor && $parent.challenge.user.id != comment.user_id">
                                 <i class="fas fa-thumbs-up" :id="`owner_like_${comment.id}`"
                                    :class="{'text-danger':!!comment.like_count}"></i>
 
@@ -40,7 +39,7 @@
 
 
                              <a href="javascript:void(0)" class="post-add-icon inline-items"
-                                v-if="$parent.challenge.isAuthor && comment.like_count"
+                                v-if="$parent.challenge.isAuthor && comment.like_count && $parent.challenge.user.id != comment.user_id"
                                 @click="ownertick(comment)">
                                 <i class="fas fa-check " :id="`owner_tick_${comment.id}`"
                                    :class="{'text-danger':comment.finalized}"></i>
@@ -48,7 +47,7 @@
 							</a>
 
                              <a href="javascript:void(0)" class="post-add-icon inline-items"
-                                v-if="$parent.challenge.isAuthor && comment.finalized && (!winner || comment.winner)"
+                                v-if="$parent.challenge.isAuthor && comment.finalized && (!winner || comment.winner) && $parent.challenge.user.id != comment.user_id"
                                 @click="ownerwin(comment,index)">
                                 <i class="fas fa-trophy " :id="`owner_win_${comment.id}`"
                                    :class="{'text-danger':comment.winner}"></i>
@@ -495,6 +494,8 @@
             this.loadComments();
         },
         updated() {
+            let isPost=this.$store.getters.getIsPost;
+            if (isPost !== 'yes')
             window.document.getElementById('comment-box').scrollIntoView(false);
         }
     }

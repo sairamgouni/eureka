@@ -354,7 +354,7 @@ class User extends Authenticatable
             $data = $item->data;
             if (!count($data))
                 continue;
-            $data = $data[0];
+            $data = $data[0]?? $data;
             $data['read_at'] = !!$item->read_at;
             $data['ref_id'] = $item->id;
             $data = (object)$data;
@@ -392,11 +392,14 @@ class User extends Authenticatable
         $item_data['message'] = $data->message;
         $item_data['created_at'] = \Carbon\Carbon::createFromTimeStamp(strtotime($created_at))
             ->diffForHumans();
-        if ($type == 'comment' || $type == 'like') {
+        if ($type == 'comment' || $type == 'like' || 'challenge_winner') {
             $challenge = \App\Challenge::where('id', '=', $data->challenge_id)->first();
             $item_data['item_title'] = $challenge->title;
             $item_data['item_id'] = $challenge->id;
             $item_data['item_slug'] = $challenge->slug;
+        }
+        else if ($type == 'winner') {
+            $challenge = \App\Challenge::where('id', $data->challenge_id)->first();
         }
 
         return $item_data;

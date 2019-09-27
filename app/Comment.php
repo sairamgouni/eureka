@@ -25,6 +25,11 @@ class Comment extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function challenge()
+    {
+        return $this->belongsTo(Challenge::class);
+    }
+
     public function childComments()
     {
         return $this->hasMany(Comment::class, 'parent_id');

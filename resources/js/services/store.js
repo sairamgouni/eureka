@@ -30,6 +30,7 @@ export default new Vuex.Store({
         userLevel: USER ? USER.level : '',
         userCampaign: USER ? USER.campaign : '',
         baseUrl: 'http://localhost:8000/',
+        isPost:'',
     },
     getters: {
         getLogin: state => {
@@ -80,6 +81,9 @@ export default new Vuex.Store({
         getUserCampaign: state => {
             return state.userCampaign;
         },
+        getIsPost: state => {
+            return state.isPost;
+        },
     },
     mutations: {
         setLogin(state, token) {
@@ -122,6 +126,9 @@ export default new Vuex.Store({
         },
         setUserCampaign(state, token) {
             state.userCampaign= token;
+        },
+        setIsPost(state, token) {
+            state.isPost= token;
         },
         removeAccess(state) {
             state.userLogin = false;
