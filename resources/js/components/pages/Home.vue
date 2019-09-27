@@ -32,7 +32,7 @@
 
 
                         <div class="form-group with-button">
-                            <input class="form-control" type="text" placeholder="Search Blog Posts......" v-model="search">
+                            <input class="form-control" type="text" placeholder="Blog Posts......" v-model="search">
                             <button @click.prevent="searchchallenges()">
                                 <svg class="olymp-magnifying-glass-icon">
                                     <use
@@ -47,119 +47,195 @@
             </div>
         </div>
 
+        <div class="container">
+            <div class="row sorting-container" id="posts-grid-1" data-layout="masonry" v-if="challenges && challenges.length">
+                <div class="col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 sorting-item" v-for="(item, index) in challenges">
+                    <div class="ui-block">
 
-        <section class="blog-post-wrap">
-            <div class="container">
-                <div class="row" v-if="challenges && challenges.length">
-                    <div class="col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12" v-for="(item, index) in challenges"
-                         :key="index">
-                        <div class="ui-block">
+                        <!-- Post -->
 
-                            <!-- Post -->
-
-                            <article class="hentry blog-post">
-
-                                <div class="post-thumb">
-                                    <img style="width: 391px; height: 276px;" :src="item.image" :alt="item.title">
-                                </div>
+                        <article class="hentry blog-post blog-post-v1">
+                            <div class="post-ribbon">
+                                <span>Completed</span>
+                            </div>
+                            <div class="post-thumb">
+                                <img style="width: 391px; height: 276px;" :src="item.image" :alt="item.title">
 
                                 <div class="post-content">
-
-
-                                    <!--                                 <router-link :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }" class="post-category bg-blue-light">
-                                                                    {{item.title}}
-                                                                </router-link> -->
+                                    <a href="#" class="post-category bg-primary">Digital</a>
                                     <router-link
-                                        :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
-                                        class="h4 post-title">
+                                                                                :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
+                                                                                class="h4 post-title">
 
-                                        {{item.title}}
-                                    </router-link>
+                                                                                {{item.title}}
+                                                                            </router-link>
 
-                                    <div class="post-additional-info inline-items">
-                                        <div class="friends-harmonic-wrap">
-                                            <ul class="friends-harmonic">
-                                                <li>
-                                                    <a href="javascript:void(0);" @click="updateLike(item.id);"
-                                                       class="post-add-icon inline-items"
-                                                       v-bind:class="{ active: (item.isUserLiked==1)? true : false }"
-                                                    >
-                                                        <svg class="olymp-heart-icon">
-                                                            <use
-                                                                xlink:href="assets/svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
-                                                        </svg>
-
-                                                    </a>
-                                                </li>
-
-                                            </ul>
-                                            <div class="names-people-likes">
-                                                {{item.likes}}
-                                            </div>
+                                    <div class="author-date">
+                                        by
+                                        <a class="h6 post__author-name fn" href="#">{{item.user.name}}</a>
+                                        <div class="post__date">
+                                            <time class="published" datetime="2017-03-24T18:18">
+                                                {{item.created_at}}
+                                            </time>
                                         </div>
+                                        <div class="post__location">Malaysia</div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                        <div class="comments-shared">
-                                            <a href="#" class="post-add-icon inline-items">
-                                                <svg class="olymp-speech-balloon-icon">
-                                                    <use
-                                                        xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
-                                                </svg>
-                                                <span>{{item.comments}}</span>
-                                            </a>
-                                        </div>
+                            <div class="post-additional-info inline-items">
 
+                                <div class="friends-harmonic-wrap">
+                                    <ul class="friends-harmonic">
+                                        <li>
+                                                                                                <a href="javascript:void(0);" @click="updateLike(item.id);"
+                                                                                                   class="post-add-icon inline-items"
+                                                                                                   v-bind:class="{ active: (item.isUserLiked==1)? true : false }"
+                                                                                                >
+                                                                                                    <svg class="olymp-heart-icon">
+                                                                                                        <use
+                                                                                                            xlink:href="assets/svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
+                                                                                                    </svg>
+
+                                                                                                </a>
+                                                                                            </li>
+
+                                    </ul>
+                                    <div class="names-people-likes">
+                                        {{item.likes}}
                                     </div>
                                 </div>
 
-                            </article>
+                                <div class="comments-shared">
+                                    <a href="#" class="post-add-icon inline-items">
+                                        <svg class="olymp-speech-balloon-icon">
+                                            <use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
+                                        </svg>
+                                        <span>{{item.comments}}</span>
+                                    </a>
+                                </div>
 
-                            <!-- ... end Post -->
-                        </div>
-                    </div>
-
-                    <!--                    <infinite-loading @infinite="infiniteHandler"></infinite-loading>-->
-
-                </div>
-
-                <div class="row" v-else>
-                    <div class="col-12">
-                        <article class="hentry post empty-post">
-
-                            <div class="empty-post-content">
-                                <div class="title">Nothing to show</div>
-                                <!--                                <span>Al your posts will go here</span>-->
                             </div>
+
                         </article>
+
+                        <!-- ... end Post -->
                     </div>
                 </div>
             </div>
+        </div>
+<!--        <section class="blog-post-wrap">-->
+<!--            <div class="container">-->
+<!--                <div class="row" v-if="challenges && challenges.length">-->
+<!--                    <div class="col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12" v-for="(item, index) in challenges"-->
+<!--                         :key="index">-->
+<!--                        <div class="ui-block">-->
+
+<!--                            &lt;!&ndash; Post &ndash;&gt;-->
+
+<!--                            <article class="hentry blog-post">-->
+
+<!--                                <div class="post-thumb">-->
+<!--                                    <img style="width: 391px; height: 276px;" :src="item.image" :alt="item.title">-->
+<!--                                </div>-->
+
+<!--                                <div class="post-content">-->
 
 
-            <!-- Pagination -->
+<!--                                    &lt;!&ndash;                                 <router-link :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }" class="post-category bg-blue-light">-->
+<!--                                                                    {{item.title}}-->
+<!--                                                                </router-link> &ndash;&gt;-->
+<!--                                    <router-link-->
+<!--                                        :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"-->
+<!--                                        class="h4 post-title">-->
 
-            <!--             <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1
-                                    <div class="ripple-container">
-                                        <div class="ripple ripple-on ripple-out"
-                                             style="left: -10.3833px; top: -16.8333px; background-color: rgb(255, 255, 255); transform: scale(16.7857);"></div>
-                                    </div>
-                                </a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                <li class="page-item"><a class="page-link" href="#">12</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav> -->
+<!--                                        {{item.title}}-->
+<!--                                    </router-link>-->
 
-            <!-- ... end Pagination -->
-        </section>
+<!--                                    <div class="post-additional-info inline-items">-->
+<!--                                        <div class="friends-harmonic-wrap">-->
+<!--                                            <ul class="friends-harmonic">-->
+<!--                                                <li>-->
+<!--                                                    <a href="javascript:void(0);" @click="updateLike(item.id);"-->
+<!--                                                       class="post-add-icon inline-items"-->
+<!--                                                       v-bind:class="{ active: (item.isUserLiked==1)? true : false }"-->
+<!--                                                    >-->
+<!--                                                        <svg class="olymp-heart-icon">-->
+<!--                                                            <use-->
+<!--                                                                xlink:href="assets/svg-icons/sprites/icons.svg#olymp-heart-icon"></use>-->
+<!--                                                        </svg>-->
+
+<!--                                                    </a>-->
+<!--                                                </li>-->
+
+<!--                                            </ul>-->
+<!--                                            <div class="names-people-likes">-->
+<!--                                                {{item.likes}}-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+
+<!--                                        <div class="comments-shared">-->
+<!--                                            <a href="#" class="post-add-icon inline-items">-->
+<!--                                                <svg class="olymp-speech-balloon-icon">-->
+<!--                                                    <use-->
+<!--                                                        xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>-->
+<!--                                                </svg>-->
+<!--                                                <span>{{item.comments}}</span>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                            </article>-->
+
+<!--                            &lt;!&ndash; ... end Post &ndash;&gt;-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    &lt;!&ndash;                    <infinite-loading @infinite="infiniteHandler"></infinite-loading>&ndash;&gt;-->
+
+<!--                </div>-->
+
+<!--                <div class="row" v-else>-->
+<!--                    <div class="col-12">-->
+<!--                        <article class="hentry post empty-post">-->
+
+<!--                            <div class="empty-post-content">-->
+<!--                                <div class="title">Nothing to show</div>-->
+<!--                                &lt;!&ndash;                                <span>Al your posts will go here</span>&ndash;&gt;-->
+<!--                            </div>-->
+<!--                        </article>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+
+<!--            &lt;!&ndash; Pagination &ndash;&gt;-->
+
+<!--            &lt;!&ndash;             <nav aria-label="Page navigation">-->
+<!--                            <ul class="pagination justify-content-center">-->
+<!--                                <li class="page-item disabled">-->
+<!--                                    <a class="page-link" href="#" tabindex="-1">Previous</a>-->
+<!--                                </li>-->
+<!--                                <li class="page-item"><a class="page-link" href="#">1-->
+<!--                                    <div class="ripple-container">-->
+<!--                                        <div class="ripple ripple-on ripple-out"-->
+<!--                                             style="left: -10.3833px; top: -16.8333px; background-color: rgb(255, 255, 255); transform: scale(16.7857);"></div>-->
+<!--                                    </div>-->
+<!--                                </a></li>-->
+<!--                                <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                                <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--                                <li class="page-item"><a class="page-link" href="#">...</a></li>-->
+<!--                                <li class="page-item"><a class="page-link" href="#">12</a></li>-->
+<!--                                <li class="page-item">-->
+<!--                                    <a class="page-link" href="#">Next</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </nav> &ndash;&gt;-->
+
+<!--            &lt;!&ndash; ... end Pagination &ndash;&gt;-->
+<!--        </section>-->
     </div>
 </template>
 

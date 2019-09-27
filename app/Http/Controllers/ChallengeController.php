@@ -6,6 +6,7 @@ use App\Challenge;
 use App\Comment;
 use App\User;
 use Illuminate\Http\Request;
+use App\Notifications\ChallengeWinner;
 use \App\Http\Requests\ChallengeRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -348,31 +349,26 @@ class ChallengeController extends Controller
     public function toggleCommentOwnertick(Request $request, $commentId)
     {
         $comment = Comment::findOrFail($commentId);
-
         if ($comment->finalized == 0) {
             $comment->update(['finalized' => '1']);
-            $comment->user()->increment('reputation', 50);
+//            $comment->user()->increment('reputation', 50);
         } else {
             $comment->update(['finalized' => '0']);
-            $comment->user()->decrement('reputation', 50);
+//            $comment->user()->decrement('reputation', 50);
         }
         return response()->json($comment->finalized == '0' ? 0 : 1);
-
-
     }
-
-
     public function toggleCommentOwnerwin(Request $request, $commentId)
     {
         $comment = Comment::findOrFail($commentId);
 
         if ($comment->winner == 0) {
             $comment->update(['winner' => '1']);
+            $comment->user->notify(new ChallengeWinner($comment));
         } else {
             $comment->update(['winner' => '0']);
         }
         return response()->json($comment->winner == '0' ? 0 : 1);
-
 
     }
 

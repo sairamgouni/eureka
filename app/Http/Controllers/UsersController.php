@@ -307,8 +307,8 @@ class UsersController extends Controller
 //        dd($User->take(5)->get());
         return DataTables::eloquent($User)
             ->addColumn('action', function($row){
-                return '<a href="' . route('users_edit', $row->slug) . '" class="btn btn-success">Edit</a>
-            <a href="javascript:void(0)" class="btn btn-primary" onClick="deleteUser(\''.$row->slug.'\')">Delete</a>
+                return '<a href="' . route('users_edit', $row->slug) . '" class="btn btn-danger">Edit</a>
+            <a href="javascript:void(0)" class="btn btn-primary" onClick="deleteUser(\''.$row->slug.'\')">Deactivate</a>
 				      	 ';
             })
 

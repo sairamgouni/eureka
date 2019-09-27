@@ -45,6 +45,11 @@
             </div>
         </div>
     </div>
+    <style>
+        .ui-block-title{
+            background-color: #e91d24;
+        }
+    </style>
 @endsection
 @section('javascript')
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -106,4 +111,25 @@
         }
 
     </script>
+    <style>
+        .ui-block-title{
+            background-color: #e91d24;
+        }
+        .btn-primary {
+            color: #fff;
+            background-color: #212529;
+            border-color: #212529;
+
+        }
+        .btn-success {
+            background-color:  #e91d24;
+            border-color: #e91d24;
+        }
+        .page-item.active .page-link {
+            z-index: 1;
+            color: #fff;
+            background-color: #212529;
+            border-color: #212529;
+        }
+    </style>
 @endsection

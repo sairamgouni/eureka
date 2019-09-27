@@ -24,10 +24,10 @@
 
 							<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 								<div class="form-group label-floating">
-									<label class="control-label">Confirm Current Password</label>
+									<label class="control-label">Current Password</label>
 									<input class="form-control" placeholder=""
                                            :class="{'is-invalid': errors.current_password}" type="password"
-                                           v-model="password.current_password">
+                                           v-model="password.current_password" required>
 								    <div class="invalid-feedback" v-if="errors.current_password">{{errors.current_password[0]}}</div>
                                 </div>
 							</div>
@@ -45,7 +45,7 @@
 									<label class="control-label">Confirm New Password</label>
 									<input class="form-control" placeholder=""
                                            :class="{'is-invalid': errors.password_confirmation}" type="password"
-                                           v-model="password.password_confirmation" ref="password">
+                                           v-model="password.password_confirmation" ref="password" required>
                                     <div class="invalid-feedback" v-if="errors.password_confirmation">{{errors.password_confirmation[0]}}</div>
                                 </div>
 							</div>
@@ -105,6 +105,7 @@
                                 message: 'password Updated',
                                 type: 'success'
                             });
+                            this.$router.push('/');
 
 
                         } else {

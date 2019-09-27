@@ -43,7 +43,7 @@
                     $name  = $record->name;
                   }
                   ?>
-                <input class="form-control" type="text" name="name" placeholder="Name" value="{{$name}}">
+                <input class="form-control" type="text" name="name" placeholder="Name" value="{{$name}}" readonly>
               </div>
               @if ($errors->has('name'))
               <span class="invalid-input">
@@ -64,6 +64,7 @@
                 ?>
                  {!!Form::select('campaign_id', $campaign, old('campaign_id'))!!}
               </div>
+
               @if ($errors->has('campaign_id'))
               <span class="invalid-input">
               <strong>{{ $errors->first('campaign_id') }}</strong>
@@ -81,7 +82,7 @@
                     $email  = $record->email;
                   }
                   ?>
-                <input class="form-control" type="email" name="email" placeholder="Email" value="{{$email}}">
+                <input class="form-control" type="email" name="email" placeholder="Email" value="{{$email}}" readonly>
               </div>
               @if ($errors->has('email'))
               <span class="invalid-input">
@@ -129,6 +130,11 @@
     </div>
   </div>
 </div>
+<style>
+    .ui-block-title{
+        background-color: #e91d24;
+    }
+</style>
 <!-- ... end Window Popup Favourite Page -->
 @endsection
 

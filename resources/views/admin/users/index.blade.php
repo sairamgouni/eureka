@@ -23,7 +23,7 @@
                     </div> <!-- end .flash-message -->
                 @endif
                 <div class="ui-block">
-                    <div class="ui-block-title bg-blue">
+                    <div class="ui-block-title">
                         <h6 class="title c-white">User List</h6>
 
                     </div>
@@ -109,4 +109,25 @@
                 });
         }
     </script>
+    <style>
+        .ui-block-title{
+            background-color: #e91d24;
+        }
+        .btn-primary {
+            color: #fff;
+            background-color: #212529;
+            border-color: #212529;
+
+        }
+        .btn-success {
+            background-color:  #e91d24;
+            border-color: #e91d24;
+        }
+        .page-item.active .page-link {
+            z-index: 1;
+            color: #fff;
+            background-color: #212529;
+            border-color: #212529;
+        }
+    </style>
 @endsection

@@ -4161,6 +4161,82 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Home",
   data: function data() {
@@ -9613,6 +9689,8 @@ __webpack_require__.r(__webpack_exports__);
             message: 'password Updated',
             type: 'success'
           });
+
+          _this.$router.push('/');
         } else {
           loader.hide();
           console.log('inelse boy');
@@ -62751,10 +62829,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group with-button" }, [
           _c("input", {
             staticClass: "form-control js-user-search",
-            attrs: {
-              placeholder: "Search here people or Challenges",
-              type: "text"
-            }
+            attrs: { placeholder: "Search people or Challenges", type: "text" }
           })
         ])
       ]
@@ -66863,9 +66938,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    " +
+                              "\n                                        " +
                                 _vm._s(category.name) +
-                                "\n                                "
+                                "\n                                    "
                             )
                           ]
                         )
@@ -66915,10 +66990,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Search Blog Posts......"
-                  },
+                  attrs: { type: "text", placeholder: "Blog Posts......" },
                   domProps: { value: _vm.search },
                   on: {
                     input: function($event) {
@@ -66958,169 +67030,203 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("section", { staticClass: "blog-post-wrap" }, [
-      _c("div", { staticClass: "container" }, [
-        _vm.challenges && _vm.challenges.length
-          ? _c(
-              "div",
-              { staticClass: "row" },
-              _vm._l(_vm.challenges, function(item, index) {
-                return _c(
-                  "div",
-                  {
-                    key: index,
-                    staticClass:
-                      "col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12"
-                  },
-                  [
-                    _c("div", { staticClass: "ui-block" }, [
-                      _c("article", { staticClass: "hentry blog-post" }, [
+    _c("div", { staticClass: "container" }, [
+      _vm.challenges && _vm.challenges.length
+        ? _c(
+            "div",
+            {
+              staticClass: "row sorting-container",
+              attrs: { id: "posts-grid-1", "data-layout": "masonry" }
+            },
+            _vm._l(_vm.challenges, function(item, index) {
+              return _c(
+                "div",
+                {
+                  staticClass:
+                    "col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 sorting-item"
+                },
+                [
+                  _c("div", { staticClass: "ui-block" }, [
+                    _c(
+                      "article",
+                      { staticClass: "hentry blog-post blog-post-v1" },
+                      [
+                        _vm._m(0, true),
+                        _vm._v(" "),
                         _c("div", { staticClass: "post-thumb" }, [
                           _c("img", {
                             staticStyle: { width: "391px", height: "276px" },
                             attrs: { src: item.image, alt: item.title }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "post-content" },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "post-category bg-primary",
+                                  attrs: { href: "#" }
+                                },
+                                [_vm._v("Digital")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "h4 post-title",
+                                  attrs: {
+                                    to: {
+                                      name: "ChallengeDetails",
+                                      params: { id: item.id, slug: item.slug }
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n\n                                                                                " +
+                                      _vm._s(item.title) +
+                                      "\n                                                                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "author-date" }, [
+                                _vm._v(
+                                  "\n                                        by\n                                        "
+                                ),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "h6 post__author-name fn",
+                                    attrs: { href: "#" }
+                                  },
+                                  [_vm._v(_vm._s(item.user.name))]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "post__date" }, [
+                                  _c(
+                                    "time",
+                                    {
+                                      staticClass: "published",
+                                      attrs: { datetime: "2017-03-24T18:18" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                                " +
+                                          _vm._s(item.created_at) +
+                                          "\n                                            "
+                                      )
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "post__location" }, [
+                                  _vm._v("Malaysia")
+                                ])
+                              ])
+                            ],
+                            1
+                          )
                         ]),
                         _vm._v(" "),
                         _c(
                           "div",
-                          { staticClass: "post-content" },
+                          { staticClass: "post-additional-info inline-items" },
                           [
                             _c(
-                              "router-link",
-                              {
-                                staticClass: "h4 post-title",
-                                attrs: {
-                                  to: {
-                                    name: "ChallengeDetails",
-                                    params: { id: item.id, slug: item.slug }
-                                  }
-                                }
-                              },
+                              "div",
+                              { staticClass: "friends-harmonic-wrap" },
                               [
-                                _vm._v(
-                                  "\n\n                                    " +
-                                    _vm._s(item.title) +
-                                    "\n                                "
+                                _c("ul", { staticClass: "friends-harmonic" }, [
+                                  _c("li", [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "post-add-icon inline-items",
+                                        class: {
+                                          active:
+                                            item.isUserLiked == 1 ? true : false
+                                        },
+                                        attrs: { href: "javascript:void(0);" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.updateLike(item.id)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "svg",
+                                          { staticClass: "olymp-heart-icon" },
+                                          [
+                                            _c("use", {
+                                              attrs: {
+                                                "xlink:href":
+                                                  "assets/svg-icons/sprites/icons.svg#olymp-heart-icon"
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "names-people-likes" },
+                                  [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(item.likes) +
+                                        "\n                                    "
+                                    )
+                                  ]
                                 )
                               ]
                             ),
                             _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "post-additional-info inline-items"
-                              },
-                              [
-                                _c(
-                                  "div",
-                                  { staticClass: "friends-harmonic-wrap" },
-                                  [
-                                    _c(
-                                      "ul",
-                                      { staticClass: "friends-harmonic" },
-                                      [
-                                        _c("li", [
-                                          _c(
-                                            "a",
-                                            {
-                                              staticClass:
-                                                "post-add-icon inline-items",
-                                              class: {
-                                                active:
-                                                  item.isUserLiked == 1
-                                                    ? true
-                                                    : false
-                                              },
-                                              attrs: {
-                                                href: "javascript:void(0);"
-                                              },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.updateLike(item.id)
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c(
-                                                "svg",
-                                                {
-                                                  staticClass:
-                                                    "olymp-heart-icon"
-                                                },
-                                                [
-                                                  _c("use", {
-                                                    attrs: {
-                                                      "xlink:href":
-                                                        "assets/svg-icons/sprites/icons.svg#olymp-heart-icon"
-                                                    }
-                                                  })
-                                                ]
-                                              )
-                                            ]
-                                          )
-                                        ])
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "names-people-likes" },
-                                      [
-                                        _vm._v(
-                                          "\n                                            " +
-                                            _vm._s(item.likes) +
-                                            "\n                                        "
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "comments-shared" }, [
+                            _c("div", { staticClass: "comments-shared" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "post-add-icon inline-items",
+                                  attrs: { href: "#" }
+                                },
+                                [
                                   _c(
-                                    "a",
+                                    "svg",
                                     {
-                                      staticClass: "post-add-icon inline-items",
-                                      attrs: { href: "#" }
+                                      staticClass: "olymp-speech-balloon-icon"
                                     },
                                     [
-                                      _c(
-                                        "svg",
-                                        {
-                                          staticClass:
-                                            "olymp-speech-balloon-icon"
-                                        },
-                                        [
-                                          _c("use", {
-                                            attrs: {
-                                              "xlink:href":
-                                                "assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"
-                                            }
-                                          })
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("span", [
-                                        _vm._v(_vm._s(item.comments))
-                                      ])
+                                      _c("use", {
+                                        attrs: {
+                                          "xlink:href":
+                                            "assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"
+                                        }
+                                      })
                                     ]
-                                  )
-                                ])
-                              ]
-                            )
-                          ],
-                          1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("span", [_vm._v(_vm._s(item.comments))])
+                                ]
+                              )
+                            ])
+                          ]
                         )
-                      ])
-                    ])
-                  ]
-                )
-              }),
-              0
-            )
-          : _c("div", { staticClass: "row" }, [_vm._m(0)])
-      ])
+                      ]
+                    )
+                  ])
+                ]
+              )
+            }),
+            0
+          )
+        : _vm._e()
     ])
   ])
 }
@@ -67129,12 +67235,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12" }, [
-      _c("article", { staticClass: "hentry post empty-post" }, [
-        _c("div", { staticClass: "empty-post-content" }, [
-          _c("div", { staticClass: "title" }, [_vm._v("Nothing to show")])
-        ])
-      ])
+    return _c("div", { staticClass: "post-ribbon" }, [
+      _c("span", [_vm._v("Completed")])
     ])
   }
 ]
@@ -76885,7 +76987,7 @@ var render = function() {
                               { staticClass: "form-group label-floating" },
                               [
                                 _c("label", { staticClass: "control-label" }, [
-                                  _vm._v("Confirm Current Password")
+                                  _vm._v("Current Password")
                                 ]),
                                 _vm._v(" "),
                                 _c("input", {
@@ -76901,7 +77003,11 @@ var render = function() {
                                   class: {
                                     "is-invalid": _vm.errors.current_password
                                   },
-                                  attrs: { placeholder: "", type: "password" },
+                                  attrs: {
+                                    placeholder: "",
+                                    type: "password",
+                                    required: ""
+                                  },
                                   domProps: {
                                     value: _vm.password.current_password
                                   },
@@ -77030,7 +77136,11 @@ var render = function() {
                                     "is-invalid":
                                       _vm.errors.password_confirmation
                                   },
-                                  attrs: { placeholder: "", type: "password" },
+                                  attrs: {
+                                    placeholder: "",
+                                    type: "password",
+                                    required: ""
+                                  },
                                   domProps: {
                                     value: _vm.password.password_confirmation
                                   },
@@ -89649,13 +89759,14 @@ __webpack_require__.r(__webpack_exports__);
   component: _components_pages_contributors_ContributorsList__WEBPACK_IMPORTED_MODULE_11__["default"],
   meta: {
     requiresAuth: true,
-    title: "Contributors"
+    title: "Top Contributors"
   }
 }, {
   name: 'Users',
   path: '/users/:country_id',
   component: _components_pages_contributors_UsersList__WEBPACK_IMPORTED_MODULE_12__["default"],
   meta: {
+    title: "Contributors",
     requiresAuth: true
   }
 }, {

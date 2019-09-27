@@ -50,7 +50,7 @@
                             </div>
 
                             <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                                <button class="btn btn-blue btn-lg full-width">Save</button>
+                                <button class="btn btn-blue btn-lg">Save</button>
                             </div>
                         </div>
                         </form>
@@ -62,6 +62,21 @@
 
         </div>
     </div>
+    <style>
+        .ui-block-title{
+            background-color: #e91d24;
+        }
+        .btn-blue {
+            background-color:  #e91d24;
+            border-color: #e91d24;
 
+        }
+        .btn-primary {
+            color: #fff;
+            background-color: #212529;
+            border-color: #212529;
+
+        }
+    </style>
     <!-- ... end Window Popup Favourite Page -->
 @endsection

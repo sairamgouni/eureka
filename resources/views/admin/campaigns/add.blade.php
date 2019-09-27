@@ -61,6 +61,10 @@
 
 	</div>
 </div>
-
+<style>
+    .ui-block-title{
+        background-color: #e91d24;
+    }
+</style>
 <!-- ... end Window Popup Favourite Page -->
 @endsection

@@ -103,7 +103,7 @@ export default [
         component: Contributors,
         meta : {
             requiresAuth:true,
-            title: "Contributors"
+            title: "Top Contributors"
         }
     },
     {
@@ -111,6 +111,7 @@ export default [
         path: '/users/:country_id',
         component: Users,
         meta : {
+            title: "Contributors",
             requiresAuth:true,
         }
     },

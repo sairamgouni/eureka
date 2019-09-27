@@ -151,5 +151,9 @@
 {{--        });--}}
 </script>
 <!-- ... end Window Popup Favourite Page -->
-
+<style>
+    .ui-block-title{
+        background-color: #e91d24;
+    }
+</style>
 @endsection

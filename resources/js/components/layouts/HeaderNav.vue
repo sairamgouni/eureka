@@ -8,7 +8,7 @@
         <div class="header-content-wrapper">
             <form class="search-bar w-search notification-list friend-requests">
                 <div class="form-group with-button">
-                    <input class="form-control js-user-search" placeholder="Search here people or Challenges"
+                    <input class="form-control js-user-search" placeholder="Search people or Challenges"
                            type="text">
                 </div>
             </form>
