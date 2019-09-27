@@ -116,7 +116,7 @@
                                             <span>{{challenge.ideas}}</span> ideas
                                         </div>
                                     </li>
-                                    <li class="progress-stage-item" :class="challenge.ideas?'in-progress':'completed'">
+                                    <li class="progress-stage-item" :class="challenge.game_time?'in-progress':'completed'">
                                         <div class="icon icon-puzzle">
                                             <div class="style-empty">
                                                 <svg viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"

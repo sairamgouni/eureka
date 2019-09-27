@@ -65783,7 +65783,7 @@ var render = function() {
                           "li",
                           {
                             staticClass: "progress-stage-item",
-                            class: _vm.challenge.ideas
+                            class: _vm.challenge.game_time
                               ? "in-progress"
                               : "completed"
                           },
