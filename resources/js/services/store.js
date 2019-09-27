@@ -21,7 +21,7 @@ export default new Vuex.Store({
         userState: '',
         userId: USER ? USER.id : '',
         userSlug: USER ? USER.slug : '',
-        userName: USER ? USER.username : '',
+        userName: USER ? USER.name : '',
         userEmail: USER ? USER.email : '',
         userImage: USER ? USER.image : '',
         userBackgroundImage: USER ? USER.background_image : '',

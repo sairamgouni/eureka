@@ -32,9 +32,9 @@
 
                     		<b-form-input
 					                    class="mt-2 form-control"
-					                    id="username"
+					                    id="name"
 					                    type="text"
-					                    v-model="form.username"
+					                    v-model="form.name"
                                         required readonly
 					                   />
 					                </b-form-group>
@@ -174,7 +174,7 @@ export default {
                 userUserName:'',
                 userBackgroundImage:'',
                 form:{
-                    username:'',
+                    name:'',
                 	nickname:'',
                 	email:'',
                 	about:'',
@@ -261,7 +261,7 @@ export default {
             this.userUserName = this.$store.getters.getUserName;
             this.userNickname = this.$store.getters.getUserNickname;
             this.userCampaign = this.$store.getters.getUserCampaign;
-            this.form.username = this.$store.getters.getUserName;
+            this.form.name = this.$store.getters.getUserName;
             this.form.email = this.userEmail;
             this.form.about = this.userAbout;
             this.form.nickname = this.userNickname;
