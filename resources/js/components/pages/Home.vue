@@ -55,7 +55,7 @@
                         <!-- Post -->
 
                         <article class="hentry blog-post blog-post-v1">
-                            <div class="post-ribbon">
+                            <div class="post-ribbon" v-if="item.winner == 1">
                                 <span>Completed</span>
                             </div>
                             <div class="post-thumb">

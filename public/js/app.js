@@ -67051,7 +67051,11 @@ var render = function() {
                       "article",
                       { staticClass: "hentry blog-post blog-post-v1" },
                       [
-                        _vm._m(0, true),
+                        item.winner == 1
+                          ? _c("div", { staticClass: "post-ribbon" }, [
+                              _c("span", [_vm._v("Completed")])
+                            ])
+                          : _vm._e(),
                         _vm._v(" "),
                         _c("div", { staticClass: "post-thumb" }, [
                           _c("img", {
@@ -67230,16 +67234,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "post-ribbon" }, [
-      _c("span", [_vm._v("Completed")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
