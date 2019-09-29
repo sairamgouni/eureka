@@ -3564,6 +3564,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ChallengeDetails",
@@ -64231,14 +64232,17 @@ var render = function() {
                   _vm._v(_vm._s(_vm.challenge.title))
                 ]),
                 _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "post-category bg-primary",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("Digital")]
-                ),
+                _vm._l(_vm.challenge.categories, function(category) {
+                  return _c(
+                    "a",
+                    {
+                      staticClass: "post-category bg-primary",
+                      staticStyle: { "margin-right": "5px" },
+                      attrs: { href: "javascript:;" }
+                    },
+                    [_vm._v(_vm._s(category.title))]
+                  )
+                }),
                 _vm._v(" "),
                 _c("div", { staticClass: "post-milestone-progress" }, [
                   _c("div", { staticClass: "post-milestone-progress" }, [
@@ -65360,7 +65364,8 @@ var render = function() {
                     )
                   ])
                 ])
-              ]
+              ],
+              2
             )
           ]),
           _vm._v(" "),
@@ -65387,18 +65392,28 @@ var render = function() {
                     "hentry blog-post blog-post-v3 featured-post-item"
                 },
                 [
-                  _c("div", { staticClass: "post-thumb" }, [
-                    _c("img", { attrs: { src: item.image, alt: item.title } }),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "post-category bg-primary",
-                        attrs: { href: "#" }
-                      },
-                      [_vm._v(_vm._s(item.title))]
-                    )
-                  ]),
+                  _c(
+                    "div",
+                    { staticClass: "post-thumb" },
+                    [
+                      _c("img", {
+                        attrs: { src: item.image, alt: item.title }
+                      }),
+                      _vm._v(" "),
+                      _vm._l(item.categories, function(category) {
+                        return _c(
+                          "a",
+                          {
+                            staticClass: "post-category bg-primary",
+                            staticStyle: { "margin-right": "5px" },
+                            attrs: { href: "javascript:;" }
+                          },
+                          [_vm._v(_vm._s(category.title))]
+                        )
+                      })
+                    ],
+                    2
+                  ),
                   _vm._v(" "),
                   _c(
                     "div",

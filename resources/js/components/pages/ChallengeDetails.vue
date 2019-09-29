@@ -9,7 +9,8 @@
 
                     <article class="hentry blog-post single-post single-post-v3">
                         <h1 class="post-title">{{challenge.title}}</h1>
-                        <a href="#" class="post-category bg-primary">Digital</a>
+<!--                        <a href="#" class="post-category bg-primary">Digital</a>-->
+                        <a href="javascript:;" class="post-category bg-primary" v-for="category in challenge.categories" style="margin-right: 5px;">{{ category.title }}</a>
 
                         <div class="post-milestone-progress">
                             <div class="post-milestone-progress">
@@ -611,8 +612,8 @@
                             <div class="post-thumb">
 
                                 <img :src="item.image" :alt="item.title">
+                                <a href="javascript:;" class="post-category bg-primary" v-for="category in item.categories" style="margin-right: 5px;">{{ category.title }}</a>
 
-                                <a href="#" class="post-category bg-primary">{{item.title}}</a>
 
                             </div>
 
