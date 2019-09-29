@@ -217,7 +217,7 @@ export default {
 
                         if (response.status==200) {
                             console.log(response.data,'imageprofile')
-                              this.$store.commit('setUser', response.data);
+                              // this.$store.commit('setUser', response.data);
                               this.$store.commit('setUserNickname', this.form.nickname );
                               this.$store.commit('setUserAbout', this.form.about );
                               this.$store.commit('setUserBackgroundImage', response.data.background_image );
@@ -226,13 +226,15 @@ export default {
                                 this.userImage = this.$store.getters.getUserImage.replace('/users/thumbs/', '');
 					            this.userBackgroundImage = this.$store.getters.getUserBackgroundImage.replace('/users/backgrounds/', '');
 					            // this.userName = this.$store.getters.getUserName;
-					  			this.userAbout = this.$store.getters.getUserAbout;
-					            this.userNickname = this.$store.getters.getUserNickname;
+					  			this.userAbout = this.form.about;
+					            this.userNickname = this.form.nickname;
                             this.$toast.open({
                                 message: 'Profile Updated',
                                 type: 'success'
                             });
-                            this.$router. push({name:'ProfileEuraka', params:{id: this.userId, slug: this.userSlug }});
+                            setTimeout(()=>{
+                                this.$router. push({name:'ProfileEuraka', params:{id: this.userId, slug: this.userSlug }});
+                            },500)
 
 
                         } else {
@@ -250,7 +252,7 @@ export default {
             },
 		},
 		mounted() {
-	    console.log('her');
+	    // console.log('her');
             this.userLogin = this.$store.getters.getLogin;
             this.userId = this.$store.getters.getUserId;
             this.userSlug = this.$store.getters.getUserSlug;
@@ -259,9 +261,10 @@ export default {
             this.userEmail = this.$store.getters.getUserEmail;
             this.userAbout = this.$store.getters.getUserAbout;
             this.userUserName = this.$store.getters.getUserName;
+            this.name = this.$store.getters.getName;
             this.userNickname = this.$store.getters.getUserNickname;
             this.userCampaign = this.$store.getters.getUserCampaign;
-            this.form.name = this.$store.getters.getUserName;
+            this.form.name = this.$store.getters.getName;
             this.form.email = this.userEmail;
             this.form.about = this.userAbout;
             this.form.nickname = this.userNickname;

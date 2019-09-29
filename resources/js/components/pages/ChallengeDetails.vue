@@ -485,11 +485,14 @@
                             <div class="control-block-button post-control-button">
 
 
-                                    <svg class="olymp-speech-balloon-icon">
-                                        <use
-                                            xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
-                                    </svg>
-                                    <span>{{challenge.comments}}</span>
+                                <a href="javascript:void(0);" @click="updateLike(challenge.id)"
+                                   class="post-add-icon inline-items"
+                                   v-bind:class="{ active: (challenge.isUserLiked==1)? true : false }"
+                                >
+                                    <svg class="olymp-heart-icon"><use
+                                        xlink:href="assets/svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
+                                    <span>{{challenge.likes}}</span>
+                                </a>
 
 
 
@@ -683,6 +686,54 @@
             }
         },
         methods:{
+            updateLike(itemId) {
+                // console.log('index '+index);
+                if (!this.userLogin) {
+                    this.$toast.open({
+                        message: 'Please login to like',
+                        type: 'info'
+                    });
+                    return;
+                }
+                var bodyFormData = new FormData();
+                bodyFormData.set('item_id', itemId);
+                bodyFormData.set('userId', this.userId);
+                this.axios({
+                    method: 'post',
+                    url: 'challenges/toggle-like',
+                    data: bodyFormData
+                })
+                    .then((response) => {
+                        // loader.hide();
+                        let like_value = response.data;
+
+                        // console.log('liked: '+itemId);
+                        for (let index = 0; index < this.challenges.length; index++) {
+
+                            // console.log('in loop with index: '+this.challenges[index].id);
+                            if (this.challenges[index].id == itemId) {
+                                console.log('like_value: ' + like_value);
+                                if (like_value == 1) {
+                                    this.challenges[index].likes += 1;
+                                    this.challenges[index].isUserLiked = 1;
+                                    break;
+                                } else {
+                                    if (this.challenges[index].likes > 0) {
+                                        this.challenges[index].likes -= 1;
+                                        this.challenges[index].isUserLiked = 0;
+
+                                    }
+                                }
+                            }
+                        }
+
+                    })
+                    .catch(function (response) {
+                        console.log('in ativityItemView Exception');
+                        // console.log(response);
+                        // loader.hide();
+                    });
+            },
             getChallenges() {
 
                 let loader = this.$loading.show({
@@ -776,6 +827,15 @@
 <style scoped>
     .post-content{
         font-size: .875rem!important;
+    }
+
+    .active {
+        fill: #e91d24;
+        color: #e91d24;
+    }
+
+    .active_bg {
+        background: #e91d24;
     }
 
 </style>

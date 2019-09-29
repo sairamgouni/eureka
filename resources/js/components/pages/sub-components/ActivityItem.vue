@@ -215,11 +215,11 @@
         data() {
             return {
                 userLogin: USER ? true : false,
-                userId: USER ? USER.id : '',
-                userSlug: USER ? USER.slug : '',
-                userName: USER ? USER.username : '',
-                userImage: USER ? USER.image : '',
-                userBackgroundImage: USER ? USER.background_image : '',
+                userId: this.$store.state.userId,
+                userSlug:this.$store.state.slug,
+                userName: this.$store.state.username ,
+                userImage: this.$store.state.image,
+                userBackgroundImage: this.$store.state.background_image,
                 challenges: [],
                 page: 1,
                 type: 'all',
@@ -230,25 +230,26 @@
 
             }
         },
-        created() {
-            console.log(USER.username,'hereinactivity item');
-            // this.userLogin = this.$store.getters.getLogin;
-            // this.userId = this.$store.getters.getUserId;
-
-            this.$store.commit('setLogin', true);
-            this.$store.commit('setUserId', this.userId);
-            this.$store.commit('setUserName', USER.username);
-            // this.$store.commit('setUserImage', response.data.user.image);
-            this.$store.commit('setUserEmail', USER ? USER.email : '');
-            this.$store.commit('setUserSlug', this.userSlug);
-            this.$store.commit('setUserNickname', USER ? USER.nickname : '');
-            this.$store.commit('setUserAbout', USER ? USER.about : '');
-            this.$store.commit('setUserLevel', USER ? USER.level : '');
-
-            this.$store.commit('setUserImage', this.UserImage);
-            this.$store.commit('setUserBackgroundImage', this.userBackgroundImage);
-            //
-            this.loadPosts();
+         created() {
+        //     console.log(USER.username,'hereinactivity item');
+        //     // this.userLogin = this.$store.getters.getLogin;
+        //     // this.userId = this.$store.getters.getUserId;
+        //
+        //     this.$store.commit('setLogin', true);
+        //     this.$store.commit('setUserId', this.userId);
+        //     this.$store.commit('setName', USER.name);
+        //     this.$store.commit('setUserName', USER.username);
+        //     // this.$store.commit('setUserImage', response.data.user.image);
+        //     this.$store.commit('setUserEmail', USER ? USER.email : '');
+        //     this.$store.commit('setUserSlug', this.userSlug);
+        //     this.$store.commit('setUserNickname', USER ? USER.nickname : '');
+        //     this.$store.commit('setUserAbout', USER ? USER.about : '');
+        //     this.$store.commit('setUserLevel', USER ? USER.level : '');
+        //
+        //     this.$store.commit('setUserImage', this.UserImage);
+        //     this.$store.commit('setUserBackgroundImage', this.userBackgroundImage);
+        //     //
+             this.loadPosts();
         },
         mounted() {
             window.onscroll = (ev) => {
@@ -274,6 +275,7 @@
                this.$router.push({ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } });
             },
             loadPosts(page = '1') {
+                console.log('loadposts');
                 let loader = this.$loading.show({
                     container: this.fullPage ? null : this.$refs.file,
                 });

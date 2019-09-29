@@ -59,10 +59,10 @@
                                 <span>Completed</span>
                             </div>
                             <div class="post-thumb">
-                                <img style="width: 391px; height: 276px;" :src="item.image" :alt="item.title">
+                                <img style="width: 391px; height: 276px;" :src="item.resizeImage" :alt="item.title">
 
                                 <div class="post-content">
-                                    <a href="#" class="post-category bg-primary">Digital</a>
+                                    <a href="javascript:;" class="post-category bg-primary" v-for="category in item.categories" style="margin-right: 5px;">{{ category.title }}</a>
                                     <router-link
                                                                                 :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
                                                                                 class="h4 post-title">

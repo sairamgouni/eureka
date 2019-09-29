@@ -118,6 +118,9 @@
                         }
                     })
             }
-        }
+        },
+        mounted() {
+            this.loadPosts();
+        },
     }
 </script>

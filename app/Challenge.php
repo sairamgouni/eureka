@@ -152,12 +152,15 @@ class Challenge extends Model
         if ($request->hasFile('image')) {
             $resize = \Image::make($request->image)->resize(338, 238)->encode('jpg');
             $hash =  md5($resize->__toString()).'.jpg';
-            $path = 'public/challenges/'.$hash;
+            $path = 'public/challenges/resize/'.$hash;
             Storage::disk('local')->put($path,$resize, 'public');
 
+            $resize = \Image::make($request->image)->encode('jpg');
+            $path = 'public/challenges/'.$hash;
+            Storage::disk('local')->put($path,$resize, 'public');
 //            $resize->save(storage_path($path));
 //            $path = $request->file('image')->store('challenges');
-            $record->image = 'challenges/'.$hash;
+            $record->image = $hash;
             $response = $record->save();
             return $response;
         }
@@ -237,6 +240,7 @@ class Challenge extends Model
             $item['title'] = $record->title;
             $item['slug'] = $record->slug;
             $item['image'] = $record->getImageFile();
+            $item['resizeImage'] = $record->getImageResizeFile();
             $item['status'] = $record->status;
             $item['description'] = $record->description;
             $item['likes'] = $record->likers()->count();
@@ -252,6 +256,7 @@ class Challenge extends Model
             $item['game_time'] = Like::whereIn('like_id', $record->comments()->pluck('id'))->whereUserId($record->created_by)->count();
             $item['finalized'] = $record->comments()->whereFinalized(1)->count();
             $item['winner'] = $record->comments()->whereWinner(1)->count();
+            $item['categories'] = $record->categories;
 
 
             if ($user) {
@@ -272,11 +277,23 @@ class Challenge extends Model
         return $list;
     }
 
+    public function getImageResizeFile()
+    {
+        $default_image = 'storage/challenges/default.png';
+        // return $default_image;
+        $image_path = 'storage/challenges/resize/' . $this->image;
+        if ($this->image) {
+            if (file_exists(public_path() . '/' . $image_path))
+                return $image_path;
+        }
+
+        return $default_image;
+    }
     public function getImageFile()
     {
         $default_image = 'storage/challenges/default.png';
         // return $default_image;
-        $image_path = 'storage/' . $this->image;
+        $image_path = 'storage/challenges/' . $this->image;
         if ($this->image) {
             if (file_exists(public_path() . '/' . $image_path))
                 return $image_path;

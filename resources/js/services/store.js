@@ -15,20 +15,20 @@ const getJSONFromLocalStorage = (key) => {
 };
 export default new Vuex.Store({
     state: {
-        user:getJSONFromLocalStorage('user'),
         userLogin: USER ? true : false,
         userAccess: '',
         userState: '',
-        userId: USER ? USER.id : '',
-        userSlug: USER ? USER.slug : '',
-        userName: USER ? USER.name : '',
-        userEmail: USER ? USER.email : '',
-        userImage: USER ? USER.image : '',
-        userBackgroundImage: USER ? USER.background_image : '',
-        userAbout: USER ? USER.about : '',
-        userNickname: USER ? USER.nickname : '',
-        userLevel: USER ? USER.level : '',
-        userCampaign: USER ? USER.campaign : '',
+        userId: getJSONFromLocalStorage('user').id,
+        userSlug: getJSONFromLocalStorage('user').slug,
+        name: getJSONFromLocalStorage('user').name ,
+        userName: getJSONFromLocalStorage('user').name ,
+        userEmail: getJSONFromLocalStorage('user').email ,
+        userImage: getJSONFromLocalStorage('user').image ,
+        userBackgroundImage: getJSONFromLocalStorage('user').background_image ,
+        userAbout: getJSONFromLocalStorage('user').about ,
+        userNickname: getJSONFromLocalStorage('user').nickname ,
+        userLevel: getJSONFromLocalStorage('user').level ,
+        userCampaign: getJSONFromLocalStorage('user').campaign ,
         baseUrl: 'http://localhost:8000/',
         isPost:'',
     },
@@ -50,6 +50,9 @@ export default new Vuex.Store({
         },
         getUserName: state => {
             return state.userName;
+        },
+        getName: state => {
+            return state.name;
         },
         getUserEmail: state => {
             return state.userEmail;
@@ -107,6 +110,9 @@ export default new Vuex.Store({
         setUserName(state, token) {
             state.userName = token;
         },
+        setName(state, token) {
+            state.name = token;
+        },
         setUserLevel(state, token) {
             state.userLevel = token;
         },
@@ -119,6 +125,7 @@ export default new Vuex.Store({
             state.userBackgroundImage = token;
         },
         setUserAbout(state, token) {
+            console.log(token,'inuserabout');
             state.userAbout = token;
         },
         setUserNickname(state, token) {
@@ -130,24 +137,26 @@ export default new Vuex.Store({
         setIsPost(state, token) {
             state.isPost= token;
         },
-        removeAccess(state) {
+        removeAccess(state, token) {
+            console.log('inremoveaccess');
             state.userLogin = false;
-            state.userAccess = '';
-            state.userState = '';
-            state.userId = '';
-            state.userSlug = '';
-            state.userName = '';
-            state.userEmail = '';
-            state.userAbout = '';
-            state.userNickname = '';
-            state.userImage = '';
-            state.userBackgroundImage = '';
+            state.userAccess = token;
+            state.userState = token;
+            state.userId = token;
+            state.userSlug = token;
+            state.userName = token;
+            state.userEmail = token;
+            state.userAbout = token;
+            state.userNickname = token;
+            state.userImage = token;
+            state.userBackgroundImage = token;
+            state.name = token;
         }
 
     },
     actions: {
         destroyAccess(context) {
-            context.commit('removeAccess');
+            context.commit('removeAccess', null);
         },
 
         // showMessage(message, type='success') {

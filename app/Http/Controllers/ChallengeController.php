@@ -87,13 +87,14 @@ class ChallengeController extends Controller
 
     public function saveRecord(Request $request)
     {
+
         $result = (object)\App\Challenge::saveRecord($request);
         return ['success' => 1, 'object' => $result];
     }
 
     public function getList(Request $request)
     {
-//        $user = null;
+        //        $user = null;
 //        $userId = null;
 //        $type = 'all';
 //        if ($request->has('userId')) {

@@ -341,7 +341,7 @@ class User extends Authenticatable
 
     public function getBackgroundImage()
     {
-        if ($this->image)
+        if ($this->background_image)
             return $this->background_image;
         return '/users/backgrounds/default.jpg';
     }

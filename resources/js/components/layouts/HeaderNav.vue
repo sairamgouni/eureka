@@ -77,10 +77,10 @@
                     </div>
                     <router-link
                         :to="{ name: 'ProfileEuraka', params: { id: userId, slug: userSlug } }"
-                        class="author-name fn">
+                        class="nav-link author-name fn">
 
                         <div class="author-title">
-                           {{userName.length > 8 ? userName.substring(0,8)+'..' : userName}} <svg class="olymp-dropdown-arrow-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"></use></svg>
+                           {{name.length > 8 ? name.substring(0,8)+'..' : name}} <svg class="olymp-dropdown-arrow-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"></use></svg>
                         </div>
                         <span class="author-subtitle">{{ userCampaign.campaign}}</span>
                     </router-link>
@@ -113,6 +113,7 @@
                 userSlug: '',
                 userImage: '',
                 userName: '',
+                name:'',
                 userLevel: '',
                 notifications: [],
             }
@@ -131,7 +132,10 @@
                     data: bodyFormData
                 })
                     .then((response) => {
+                        console.log('logout');
                         this.$store.dispatch('destroyAccess');
+                        window.localStorage.removeItem('vuex');
+                        window.localStorage.removeItem('user');
                         if (response.data.success == 1)
                             this.$router.push('/');
                         this.$router.go();
@@ -215,6 +219,7 @@
             this.userSlug = this.$store.getters.getUserSlug;
             this.userImage = this.$store.getters.getUserImage;
             this.userName = this.$store.getters.getUserName;
+            this.name = this.$store.getters.getName;
             this.userLevel = this.$store.getters.getUserLevel;
             this.userCampaign = this.$store.getters.getUserCampaign;
             this.getNotifications();
@@ -226,5 +231,11 @@
 <style>
     .search-bar .form-group.with-button input {
         outline: none;
+    }
+    .selectize-input input{
+             width: 255px!important;
+    }
+    .control-block {
+        margin-right: 31px!important;
     }
 </style>
