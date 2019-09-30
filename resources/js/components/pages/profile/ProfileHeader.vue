@@ -13,7 +13,13 @@
 						<div class="row">
 							<div class="col col-lg-5 col-md-5 col-sm-12 col-12">
 								<ul class="profile-menu">
-
+                                    <li>
+                                        <router-link
+                                            :to="{  name: 'ProfileEuraka',
+                                            params: { id: user.id, slug: user.slug } }"
+                                            class="nav-link"
+                                        >Timeline</router-link>
+                                    </li>
 								</ul>
 							</div>
 						</div>
@@ -53,7 +59,7 @@
 						</a>
 						<div class="author-content">
 							<a href="#" class="h4 author-name">{{user.name}}</a>
-							<div class="country">{{user.campaign}},{{user.location}}</div>
+							<div class="country">{{user.campaign}}, {{user.location}}</div>
 						</div>
 					</div>
 				</div>

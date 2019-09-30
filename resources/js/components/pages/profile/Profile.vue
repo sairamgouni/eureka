@@ -1,7 +1,7 @@
 <template>
 <span>
 
-<PersonalHeader :CurrentUser="user" :isUserLoggedIn="userLogin" :isSameUser="isSameUser"  />
+<ProfileHeader :CurrentUser="user" :isUserLoggedIn="userLogin" :isSameUser="isSameUser"  />
 
 <div class="container">
 	<div class="row">
@@ -47,7 +47,7 @@
 		<div class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">
 
 
-			<UserFriends totalItems="4" :CurrentUser="user" :isUserLoggedIn="userLogin" :isSameUser="isSameUser"/>
+			<UserFriends totalItems="4" :CurrentUser="user" :isUserLoggedIn="userLogin" :isSameUser="isSameUser":currentProfileId="currentProfileId"/>
 
 
 		</div>
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-    import PersonalHeader from './PersonalHeader';
+    import ProfileHeader from './ProfileHeader';
 	import ProfileIntro from './ProfileIntro';
 	import UserBadges from './UserBadges';
 	import UserFriends from './UserFriends';
@@ -71,7 +71,7 @@
 	export default {
 		name: 'Profile',
 		components: {
-						PersonalHeader,
+                        ProfileHeader,
 						ActivityItem,
 						ProfileIntro,
 						UserBadges,
@@ -144,3 +144,8 @@
         }
 	}
 </script>
+<style>
+    .top-header-author {
+        max-width: 500px!important;
+    }
+</style>

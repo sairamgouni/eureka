@@ -78,7 +78,7 @@
                                                 {{item.created_at}}
                                             </time>
                                         </div>
-                                        <div class="post__location">Malaysia</div>
+                                        <div class="post__location">{{item.campaign}}, {{item.location}}</div>
                                     </div>
                                 </div>
                             </div>

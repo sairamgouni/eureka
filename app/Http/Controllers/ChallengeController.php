@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Challenge;
 use App\Comment;
+use App\Gamify\Points\ChallengeFinalized;
 use App\User;
 use Illuminate\Http\Request;
 use App\Notifications\ChallengeWinner;
@@ -352,10 +353,16 @@ class ChallengeController extends Controller
         $comment = Comment::findOrFail($commentId);
         if ($comment->finalized == 0) {
             $comment->update(['finalized' => '1']);
-//            $comment->user()->increment('reputation', 50);
+            $comment->user->givePoint(new ChallengeFinalized($comment));
+            activity()
+                ->performedOn($comment)
+                ->log("added " . $comment->user->name . " to the finalized list");
         } else {
             $comment->update(['finalized' => '0']);
-//            $comment->user()->decrement('reputation', 50);
+            $comment->user->undoPoint(new ChallengeFinalized($comment));
+            activity()
+                ->performedOn($comment)
+                ->log("removed  " . $comment->user->name . " from the finalized");
         }
         return response()->json($comment->finalized == '0' ? 0 : 1);
     }
@@ -366,8 +373,13 @@ class ChallengeController extends Controller
         if ($comment->winner == 0) {
             $comment->update(['winner' => '1']);
             $comment->user->notify(new ChallengeWinner($comment));
+            $comment->user->givePoint(new \App\Gamify\Points\ChallengeWinner($comment));
+            activity()
+                ->performedOn($comment)
+                ->log("Marked " . $comment->user->name . " as the winner of " . $comment->challenge->title);
         } else {
             $comment->update(['winner' => '0']);
+            $comment->user->undoPoint(new\App\Gamify\Points\ChallengeWinner($comment));
         }
         return response()->json($comment->winner == '0' ? 0 : 1);
 

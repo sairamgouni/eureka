@@ -304,8 +304,8 @@
                     });
                 if (comment.like_count)
                     this.$swal({
-                        title: 'Do you want to unlike the comment?',
-                        text: comment.finalized ? "It will also remove from finalized list " : "",
+                        title: 'Are you sure you want to remove your Like?',
+                        text: comment.finalized ? "This will also unselect this Idea as Finalist. " : "",
                         type: 'warning',
                         showCancelButton: true,
                         // confirmButtonColor: '#e91d24',
@@ -357,7 +357,7 @@
                     });
                 if (comment.finalized)
                     this.$swal({
-                        title: 'Do you want to unselect finalist?',
+                        title: 'Are you sure you want to remove your chosen Finalist?',
                         text: comment.winner ? "It will also remove from Winner  " : "",
                         type: 'warning',
                         showCancelButton: true,
@@ -414,7 +414,8 @@
                         type: 'warning'
                     });
                 this.$swal({
-                    title: 'you want to choose this as winner?',
+                    title: '"Are you sure you want to choose this Idea as Winner?\n' +
+                        'Once you have selected the winner, you cannot change your selection anymore."',
                     type: 'warning',
                     showCancelButton: true,
                     // confirmButtonColor: '#e91d24',

@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+            <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12"  v-if="challenge">
 
                 <div class="ui-block mb60">
 
@@ -474,7 +474,7 @@
                                     {{challenge.created_at}}
                                 </time>
                             </div>
-                            <div class="post__location">Malaysia</div>
+                            <div class="post__location">{{challenge.campaign}}, {{challenge.location}}</div>
                         </div>
 
                         <div class="post-thumb">
@@ -483,7 +483,7 @@
 
                         <div class="post-content-wrap">
 
-                            <div class="control-block-button post-control-button">
+                            <div class="control-block-button post-control-button post-additional-info inline-items">
 
 
                                 <a href="javascript:void(0);" @click="updateLike(challenge.id)"
@@ -612,8 +612,8 @@
                             <div class="post-thumb">
 
                                 <img :src="item.image" :alt="item.title">
-                                <a href="javascript:;" class="post-category bg-primary" v-for="category in item.categories" style="margin-right: 5px;">{{ category.title }}</a>
 
+                                <a href="#" class="post-category bg-primary"  v-for="category in item.categories" style="margin-right: 5px;">{{ category.title }}</a>
 
                             </div>
 
@@ -631,6 +631,7 @@
                                     <div class="post__date">
                                         <time class="published" datetime="2017-03-24T18:18">
                                             {{item.created_at}}
+
                                         </time>
                                     </div>
                                 </div>

@@ -14,8 +14,8 @@
 				:isUserLoggedIn="userLogin"
 				:isSameUser="isSameUser"
 				:loadCurrentUserActivity="true"
-				:profileIdToLoad="userId"
-				:specificUserRecords="false"
+				:profileIdToLoad="currentProfileId"
+				:specificUserRecords="true"
 			/>
 
 			<a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="items-to-load.html" data-container="newsfeed-items-grid">
@@ -137,7 +137,7 @@
             	 bodyFormData.set('userId', userId);
             	 this.axios({
                         method: 'get',
-                        url: 'user/get-profile/'+userId,
+                        url: 'user/get-profile/'+currentProfileId,
                         data: bodyFormData
                     })
                     .then((response) => {
@@ -181,3 +181,8 @@
         }
 	}
 </script>
+<style>
+    .top-header-author {
+        max-width: 500px!important;
+    }
+</style>

@@ -74,7 +74,7 @@ export default [
     },
     {
         name: 'Friends',
-        path: '/friends/:id/:slug',
+        path: '/friends/:id',
         component: Friends,
         meta : {
             requiresAuth:true,

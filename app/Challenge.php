@@ -239,6 +239,8 @@ class Challenge extends Model
             $item['id'] = $record->id;
             $item['title'] = $record->title;
             $item['slug'] = $record->slug;
+            $item['location'] = $record->user->country->title;
+            $item['campaign'] = $record->user->campaign->campaign;
             $item['image'] = $record->getImageFile();
             $item['resizeImage'] = $record->getImageResizeFile();
             $item['status'] = $record->status;

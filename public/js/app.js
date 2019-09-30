@@ -3565,6 +3565,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ChallengeDetails",
@@ -5418,6 +5419,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ContributorsList",
   data: function data() {
@@ -6536,164 +6538,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         return loader.hide();
       });
     }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'PersonalHeader',
-  props: ['CurrentUser', 'isUserLoggedIn', 'isSameUser'],
-  data: function data() {
-    return {
-      currentProfileId: '',
-      user: {}
-    };
-  },
-  methods: {
-    toggleFollow: function toggleFollow(userId) {
-      var _this = this;
-
-      var loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.file
-      }); // console.log('index '+index);
-
-      var bodyFormData = new FormData();
-      bodyFormData.set('item_id', userId);
-      this.axios({
-        method: 'post',
-        url: 'friends/toggle-follow',
-        data: bodyFormData
-      }).then(function (response) {
-        loader.hide();
-        var like_value = response.data;
-
-        if (_this.user.id == userId) {
-          if (like_value == 1) {
-            _this.user.is_following = 1;
-
-            _this.$toast.open({
-              message: 'Following Updated',
-              type: 'success'
-            });
-          } else {
-            _this.user.is_following = 0;
-
-            _this.$toast.open({
-              message: 'UnFollowing Updated',
-              type: 'success'
-            });
-          }
-        }
-      })["catch"](function (response) {
-        console.log('in response methods');
-        console.log(response);
-        loader.hide();
-      });
-    },
-    getUserDetails: function getUserDetails(userId) {
-      var _this2 = this;
-
-      var bodyFormData = new FormData();
-      bodyFormData.set('userId', userId);
-      this.axios({
-        method: 'get',
-        url: 'user/get-profile/' + userId,
-        data: bodyFormData
-      }).then(function (response) {
-        _this2.user = response.data;
-      })["catch"](function (response) {
-        console.log('in profile header exception'); // console.log(response);
-        // loader.hide();
-      });
-    }
-  },
-  created: function created() {
-    this.currentProfileId = this.$route.params.id;
-    this.getUserDetails(this.currentProfileId);
   }
 });
 
@@ -8857,7 +8701,7 @@ __webpack_require__.r(__webpack_exports__);
       bodyFormData.set('userId', userId);
       this.axios({
         method: 'get',
-        url: 'user/get-profile/' + userId,
+        url: 'user/get-profile/' + currentProfileId,
         data: bodyFormData
       }).then(function (response) {
         if (response.status == 200) {
@@ -8906,6 +8750,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -9238,14 +9088,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'UserFriends',
   props: ['totalItems', 'CurrentUser', 'isUserLoggedIn', 'isSameUser', 'currentProfileId'],
@@ -9254,6 +9096,7 @@ __webpack_require__.r(__webpack_exports__);
       baseUrl: '',
       userLogin: false,
       userId: '',
+      currentProfileId: '',
       userSlug: '',
       userImage: '',
       userName: '',
@@ -9756,8 +9599,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'EditProfileHead',
   data: function data() {
@@ -9867,7 +9708,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PersonalHeader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PersonalHeader */ "./resources/js/components/pages/profile/PersonalHeader.vue");
+/* harmony import */ var _ProfileHeader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProfileHeader */ "./resources/js/components/pages/profile/ProfileHeader.vue");
 /* harmony import */ var _ProfileIntro__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProfileIntro */ "./resources/js/components/pages/profile/ProfileIntro.vue");
 /* harmony import */ var _UserBadges__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserBadges */ "./resources/js/components/pages/profile/UserBadges.vue");
 /* harmony import */ var _UserFriends__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UserFriends */ "./resources/js/components/pages/profile/UserFriends.vue");
@@ -9944,7 +9785,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Profile',
   components: {
-    PersonalHeader: _PersonalHeader__WEBPACK_IMPORTED_MODULE_0__["default"],
+    ProfileHeader: _ProfileHeader__WEBPACK_IMPORTED_MODULE_0__["default"],
     ActivityItem: _sub_components_ActivityItem__WEBPACK_IMPORTED_MODULE_4__["default"],
     ProfileIntro: _ProfileIntro__WEBPACK_IMPORTED_MODULE_1__["default"],
     UserBadges: _UserBadges__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -10832,8 +10673,8 @@ __webpack_require__.r(__webpack_exports__);
         type: 'warning'
       });
       if (comment.like_count) this.$swal({
-        title: 'Do you want to unlike the comment?',
-        text: comment.finalized ? "It will also remove from finalized list " : "",
+        title: 'Are you sure you want to remove your Like?',
+        text: comment.finalized ? "This will also unselect this Idea as Finalist. " : "",
         type: 'warning',
         showCancelButton: true,
         // confirmButtonColor: '#e91d24',
@@ -10886,7 +10727,7 @@ __webpack_require__.r(__webpack_exports__);
         type: 'warning'
       });
       if (comment.finalized) this.$swal({
-        title: 'Do you want to unselect finalist?',
+        title: 'Are you sure you want to remove your chosen Finalist?',
         text: comment.winner ? "It will also remove from Winner  " : "",
         type: 'warning',
         showCancelButton: true,
@@ -10941,7 +10782,7 @@ __webpack_require__.r(__webpack_exports__);
         type: 'warning'
       });
       this.$swal({
-        title: 'you want to choose this as winner?',
+        title: '"Are you sure you want to choose this Idea as Winner?\n' + 'Once you have selected the winner, you cannot change your selection anymore."',
         type: 'warning',
         showCancelButton: true,
         // confirmButtonColor: '#e91d24',
@@ -40015,10 +39856,10 @@ exports.push([module.i, "\n.active_title[data-v-4eeaef89]{\n    color:#e91d24;\n
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=style&index=0&id=7ef7e3a9&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=style&index=0&id=7ef7e3a9&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/ProfileEuraka.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/profile/ProfileEuraka.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40027,7 +39868,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.unfollow[data-v-7ef7e3a9]{ background-color: #9ca0a3;\n}\n.follow[data-v-7ef7e3a9]{ background-color: #38a9ff;\n}\n", ""]);
+exports.push([module.i, "\n.top-header-author {\n    max-width: 500px!important;\n}\n", ""]);
 
 // exports
 
@@ -40047,6 +39888,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 // module
 exports.push([module.i, "\n.unfollow[data-v-23359e0a]{ background-color: #9ca0a3;\n}\n.follow[data-v-23359e0a]{ background-color: #38a9ff;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/profile.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/profile/profile.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.top-header-author {\n    max-width: 500px!important;\n}\n", ""]);
 
 // exports
 
@@ -58729,14 +58589,14 @@ if (content.locals) {
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=style&index=0&id=7ef7e3a9&scoped=true&lang=css&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=style&index=0&id=7ef7e3a9&scoped=true&lang=css& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/ProfileEuraka.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/profile/ProfileEuraka.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PersonalHeader.vue?vue&type=style&index=0&id=7ef7e3a9&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=style&index=0&id=7ef7e3a9&scoped=true&lang=css&");
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ProfileEuraka.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/ProfileEuraka.vue?vue&type=style&index=0&lang=css&");
 
 if (typeof content === 'string') {
   content = [[module.i, content, '']];
@@ -58764,6 +58624,33 @@ if (content.locals) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ProfileHeader.vue?vue&type=style&index=0&id=23359e0a&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/ProfileHeader.vue?vue&type=style&index=0&id=23359e0a&scoped=true&lang=css&");
+
+if (typeof content === 'string') {
+  content = [[module.i, content, '']];
+}
+
+var options = {}
+
+options.insert = "head";
+options.singleton = false;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js")(content, options);
+
+if (content.locals) {
+  module.exports = content.locals;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/profile.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/profile/profile.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./profile.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/profile.vue?vue&type=style&index=0&lang=css&");
 
 if (typeof content === 'string') {
   content = [[module.i, content, '']];
@@ -63826,7 +63713,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "Start Making Friends Now!\n                        "
+                      "Meet the Creative Idea Strategists\n                        "
                     )
                   ]
                 )
@@ -64219,1165 +64106,1198 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12" },
-        [
-          _c("div", { staticClass: "ui-block mb60" }, [
-            _c(
-              "article",
-              { staticClass: "hentry blog-post single-post single-post-v3" },
-              [
-                _c("h1", { staticClass: "post-title" }, [
-                  _vm._v(_vm._s(_vm.challenge.title))
-                ]),
-                _vm._v(" "),
-                _vm._l(_vm.challenge.categories, function(category) {
-                  return _c(
-                    "a",
-                    {
-                      staticClass: "post-category bg-primary",
-                      staticStyle: { "margin-right": "5px" },
-                      attrs: { href: "javascript:;" }
-                    },
-                    [_vm._v(_vm._s(category.title))]
-                  )
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "post-milestone-progress" }, [
-                  _c("div", { staticClass: "post-milestone-progress" }, [
-                    _c(
-                      "ul",
-                      { staticClass: "progress-stage-wrapper clearfix" },
-                      [
+      _vm.challenge
+        ? _c(
+            "div",
+            { staticClass: "col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12" },
+            [
+              _c("div", { staticClass: "ui-block mb60" }, [
+                _c(
+                  "article",
+                  {
+                    staticClass: "hentry blog-post single-post single-post-v3"
+                  },
+                  [
+                    _c("h1", { staticClass: "post-title" }, [
+                      _vm._v(_vm._s(_vm.challenge.title))
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.challenge.categories, function(category) {
+                      return _c(
+                        "a",
+                        {
+                          staticClass: "post-category bg-primary",
+                          staticStyle: { "margin-right": "5px" },
+                          attrs: { href: "javascript:;" }
+                        },
+                        [_vm._v(_vm._s(category.title))]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "post-milestone-progress" }, [
+                      _c("div", { staticClass: "post-milestone-progress" }, [
                         _c(
-                          "li",
-                          {
-                            staticClass: "progress-stage-item",
-                            class: _vm.challenge.is_valid_challenge
-                              ? "in-progress"
-                              : "completed"
-                          },
+                          "ul",
+                          { staticClass: "progress-stage-wrapper clearfix" },
                           [
-                            _c("div", { staticClass: "icon icon-lightbulb" }, [
-                              _c("div", { staticClass: "style-empty" }, [
+                            _c(
+                              "li",
+                              {
+                                staticClass: "progress-stage-item",
+                                class: _vm.challenge.is_valid_challenge
+                                  ? "in-progress"
+                                  : "completed"
+                              },
+                              [
                                 _c(
-                                  "svg",
-                                  {
-                                    staticStyle: {
-                                      "enable-background": "new 0 0 512 512"
-                                    },
-                                    attrs: {
-                                      viewBox: "0 0 512 512",
-                                      "xml:space": "preserve"
-                                    }
-                                  },
+                                  "div",
+                                  { staticClass: "icon icon-lightbulb" },
                                   [
-                                    _c("g", [
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M196.3,136.5c-14.1,0-25.6,11.5-25.6,25.6c0,14.1,11.5,25.6,25.6,25.6h25.6v-25.6\n                                                            C221.9,148,210.4,136.5,196.3,136.5z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M239,486.4c0,4.7,3.8,8.5,8.5,8.5h17.1c4.7,0,8.5-3.8,8.5-8.5v-8.5H239V486.4z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M341.3,162.1c0-14.1-11.5-25.6-25.6-25.6c-14.1,0-25.6,11.5-25.6,25.6v25.6h25.6\n                                                            C329.8,187.7,341.3,176.2,341.3,162.1z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M272.9,202.8h2v2v119.5c0.2,3.7,3.1,6.5,6.7,6.5c3.6,0,6.5-2.9,6.5-6.5V204.8v-2h2h25.6\n                                                            c22.4,0,40.7-18.3,40.7-40.7c0-22.4-18.3-40.7-40.7-40.7S275,139.7,275,162.1v25.6v2h-2h-34.1h-2v-2v-25.6\n                                                            c0-22.4-18.3-40.7-40.7-40.7c-22.4,0-40.7,18.3-40.7,40.7c0,22.4,18.3,40.7,40.7,40.7h25.6h2v2v119.5c0,3.6,2.9,6.5,6.5,6.5\n                                                            c3.6,0,6.5-2.9,6.5-6.5V204.8v-2h2H272.9z M288.1,187.7v-25.6c0-15.2,12.4-27.6,27.6-27.6s27.6,12.4,27.6,27.6\n                                                            s-12.4,27.6-27.6,27.6h-25.6h-2V187.7z M223.9,187.7v2h-2h-25.6c-15.2,0-27.6-12.4-27.6-27.6s12.4-27.6,27.6-27.6\n                                                            s27.6,12.4,27.6,27.6V187.7z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M62.2,16.7l32.7,27.4c1.2,1,2.7,1.5,4.2,1.5c2,0,3.8-0.8,4.9-2.2c1.2-1.4,1.7-3.1,1.5-4.9\n                                                            c-0.2-1.7-1-3.2-2.3-4.3L70.6,6.6c-1.2-1-2.7-1.5-4.2-1.5c-1.9,0-3.7,0.8-4.9,2.3C59.1,10.1,59.4,14.3,62.2,16.7z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M65.7,94.5l-40-14.6c-0.7-0.3-1.4-0.4-2.2-0.4c-2.7,0-5.2,1.7-6.1,4.3c-0.6,1.6-0.5,3.4,0.2,5\n                                                            c0.7,1.6,2,2.8,3.7,3.4l40,14.6c0.8,0.2,1.5,0.4,2.3,0.4c2.7,0,5.2-1.8,6.1-4.3c0.6-1.6,0.5-3.4-0.2-5\n                                                            C68.7,96.3,67.4,95.1,65.7,94.5z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M407.8,43.1L407.8,43.1c1.3,1.6,3.2,2.5,5.1,2.5c1.5,0,3-0.6,4.2-1.6l32.6-27.5c1.3-1.1,2.2-2.7,2.3-4.4\n                                                            c0.1-1.7-0.4-3.4-1.5-4.7c-1.3-1.5-3.1-2.4-5-2.4c-1.5,0-3,0.5-4.2,1.5l-32.7,27.4c-1.3,1.1-2.2,2.7-2.3,4.4\n                                                            C406.1,40.1,406.7,41.8,407.8,43.1L407.8,43.1z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M57.7,170.7c0-3.6-2.9-6.5-6.5-6.5H8.5c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5h42.7\n                                                            C54.8,177.2,57.7,174.3,57.7,170.7z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M494.5,88.8c0.7-1.6,0.8-3.3,0.2-5c-0.9-2.6-3.4-4.3-6.1-4.3c-0.7,0-1.5,0.1-2.2,0.4l-40.1,14.6\n                                                            c-3.4,1.2-5.1,5-3.9,8.3c1,2.6,3.4,4.3,6.1,4.3c0.7,0,1.5-0.1,2.2-0.4l40.1-14.6C492.4,91.5,493.7,90.3,494.5,88.8z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M424.7,170.1c0-22.6-4.5-44.5-13.3-65.2c-8.5-20-20.7-38-36.2-53.5c-15.5-15.5-33.6-27.6-53.6-36.1\n                                                            C300.8,6.5,278.7,2,256,2C163,2,87.3,77.7,87.3,170.7c0,71.3,28,124.5,88,167.5l0.2,0.1c0.1,0.1,0.3,0.2,0.4,0.2l0.1,0l0.1,0.1\n                                                            c0.1,0.1,10.4,5.4,13,21.3l0.3,1.6l-1.5,0.6c-9.1,3.5-15.2,12.4-15.2,22c0,5.8,2.1,11.3,6,15.8l1.2,1.3l-1.2,1.3\n                                                            c-3.9,4.2-6,9.8-6,15.8c0,5.8,2.1,11.3,6,15.8l1.2,1.3l-1.2,1.3c-3.9,4.2-6,9.8-6,15.8c0,13,10.6,23.6,23.6,23.6\n                                                            c3.6,0,6.5-2.9,6.5-6.5c0-3.6-2.9-6.5-6.5-6.5c-5.8,0-10.5-4.7-10.5-10.5s4.7-10.5,10.5-10.5h85.3c3.6,0,6.5-2.9,6.5-6.5\n                                                            c0-3.6-2.9-6.5-6.5-6.5h-85.3c-5.8,0-10.5-4.7-10.5-10.5s4.7-10.5,10.5-10.5h85.3c3.6,0,6.5-2.9,6.5-6.5c0-3.6-2.9-6.5-6.5-6.5\n                                                            h-85.3c-5.8,0-10.5-4.7-10.5-10.5c0-5.8,4.7-10.5,10.5-10.5h85.3c3.6,0,6.5-2.9,6.5-6.5c0-3.6-2.9-6.5-6.5-6.5h-77.4h-1.7\n                                                            l-0.2-1.7c-2.9-20.9-16.7-29.8-19.4-31.3l-0.1-0.1l-0.1-0.1c-56.9-40.7-82.2-89-82.2-156.5c0-41.8,16.3-81.1,45.7-110.6\n                                                            c29.4-29.5,68.5-45.7,110-45.7c85.8,0,155.6,69.8,155.6,155.6c0,67.5-25.4,115.8-82.2,156.5l-0.1,0.1l-0.1,0\n                                                            c-4.7,2.8-20,13.8-20,39.6c0,3.6,2.9,6.5,6.5,6.5c5.8,0,10.5,4.7,10.5,10.5s-4.7,10.5-10.5,10.5c-3.6,0-6.5,2.9-6.5,6.5\n                                                            c0,3.6,2.9,6.5,6.5,6.5c5.8,0,10.5,4.7,10.5,10.5s-4.7,10.5-10.5,10.5c-3.6,0-6.5,2.9-6.5,6.5c0,3.6,2.9,6.5,6.5,6.5\n                                                            c5.8,0,10.5,4.7,10.5,10.5c0,6-4.5,10.5-10.5,10.5h-85.3c-3.6,0-6.5,2.9-6.5,6.5V486c0,13,10.6,23.6,23.6,23.6h17.1\n                                                            c13,0,23.6-10.6,23.6-23.6v-8.5v-2h2h25.6c13.2,0,23.6-10.4,23.6-23.6c0-5.8-2.1-11.3-6-15.8l-1.2-1.3l1.2-1.3\n                                                            c3.9-4.2,6-9.8,6-15.8c0-5.8-2.1-11.3-6-15.8l-1.2-1.3l1.2-1.3c3.9-4.2,6-9.8,6-15.8c0-9.7-6.1-18.5-15.2-22l-1.5-0.6l0.3-1.6\n                                                            c2.2-13.7,10.3-19.6,12.7-21.1l0.1-0.1l0.1-0.1c0.2-0.1,0.5-0.3,0.6-0.3l0.1-0.1l0.1-0.1C396.7,294.7,424.7,241.5,424.7,170.1z\n                                                            M275.1,477.9v8.5c0,5.8-4.7,10.5-10.5,10.5h-17.1c-5.8,0-10.5-4.7-10.5-10.5v-8.5v-2h2h34.1h2V477.9z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M503.5,164.1h-42.7c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5h42.7c3.6,0,6.5-2.9,6.5-6.5\n                                                            S507.1,164.1,503.5,164.1z"
-                                        }
-                                      })
-                                    ])
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "style-filled" }, [
-                                _c(
-                                  "svg",
-                                  {
-                                    staticStyle: {
-                                      "enable-background": "new 0 0 512 512"
-                                    },
-                                    attrs: {
-                                      viewBox: "0 0 512 512",
-                                      "xml:space": "preserve"
-                                    }
-                                  },
-                                  [
-                                    _c("path", {
-                                      staticClass: "st0",
-                                      attrs: {
-                                        d:
-                                          "M93.3,144.9c0,0,15.3-123.3,163.7-136.7c0,0,125-5.3,160.3,142c0,0,25.3,105.2-92,190.7c0,0-13.2,20-8.6,24.7\n                                                    s30.6,8.7,6.6,32c0,0,21.3,20-0.7,35.3c0,0,26,30-9.3,40h-123c0,0-20.3-24.7-4.9-36.7c0,0-19.3-18.7,1.3-36c0,0-20.1-26,10.6-36\n                                                    c0,0-1.3-22-25.6-39.3C171.7,324.9,81.3,271.5,93.3,144.9z"
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("g", [
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M237,485.7c0,6.2,4.2,11.2,9.5,11.2h19.1c5.3,0,9.5-5,9.5-11.2v-11.2H237V485.7z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M272.9,202.8h2v2v119.5c0.2,3.7,3.1,6.5,6.7,6.5c3.6,0,6.5-2.9,6.5-6.5V204.8v-2h2h25.6\n                                                        c22.4,0,40.7-18.3,40.7-40.7c0-22.4-18.3-40.7-40.7-40.7S275,139.7,275,162.1v25.6v2h-2h-34.1h-2v-2v-25.6\n                                                        c0-22.4-18.3-40.7-40.7-40.7c-22.4,0-40.7,18.3-40.7,40.7c0,22.4,18.3,40.7,40.7,40.7h25.6h2v2v119.5c0,3.6,2.9,6.5,6.5,6.5\n                                                        c3.6,0,6.5-2.9,6.5-6.5V204.8v-2h2H272.9z M288.1,187.7v-25.6c0-15.2,12.4-27.6,27.6-27.6s27.6,12.4,27.6,27.6\n                                                        s-12.4,27.6-27.6,27.6h-25.6h-2V187.7z M223.9,187.7v2h-2h-25.6c-15.2,0-27.6-12.4-27.6-27.6s12.4-27.6,27.6-27.6\n                                                        s27.6,12.4,27.6,27.6V187.7z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M62.2,16.7l32.7,27.4c1.2,1,2.7,1.5,4.2,1.5c2,0,3.8-0.8,4.9-2.2c1.2-1.4,1.7-3.1,1.5-4.9\n                                                        c-0.2-1.7-1-3.2-2.3-4.3L70.6,6.6c-1.2-1-2.7-1.5-4.2-1.5c-1.9,0-3.7,0.8-4.9,2.3C59.1,10.1,59.4,14.3,62.2,16.7z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M65.7,94.5l-40-14.6c-0.7-0.3-1.4-0.4-2.2-0.4c-2.7,0-5.2,1.7-6.1,4.3c-0.6,1.6-0.5,3.4,0.2,5\n                                                        c0.7,1.6,2,2.8,3.7,3.4l40,14.6c0.8,0.2,1.5,0.4,2.3,0.4c2.7,0,5.2-1.8,6.1-4.3c0.6-1.6,0.5-3.4-0.2-5\n                                                        C68.7,96.3,67.4,95.1,65.7,94.5z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M407.8,43.1L407.8,43.1c1.3,1.6,3.2,2.5,5.1,2.5c1.5,0,3-0.6,4.2-1.6l32.6-27.5c1.3-1.1,2.2-2.7,2.3-4.4\n                                                        c0.1-1.7-0.4-3.4-1.5-4.7c-1.3-1.5-3.1-2.4-5-2.4c-1.5,0-3,0.5-4.2,1.5l-32.7,27.4c-1.3,1.1-2.2,2.7-2.3,4.4\n                                                        C406.1,40.1,406.7,41.8,407.8,43.1L407.8,43.1z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M57.7,170.7c0-3.6-2.9-6.5-6.5-6.5H8.5c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5h42.7\n                                                        C54.8,177.2,57.7,174.3,57.7,170.7z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M494.5,88.8c0.7-1.6,0.8-3.3,0.2-5c-0.9-2.6-3.4-4.3-6.1-4.3c-0.7,0-1.5,0.1-2.2,0.4l-40.1,14.6\n                                                        c-3.4,1.2-5.1,5-3.9,8.3c1,2.6,3.4,4.3,6.1,4.3c0.7,0,1.5-0.1,2.2-0.4l40.1-14.6C492.4,91.5,493.7,90.3,494.5,88.8z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M424.7,170.1c0-22.6-4.5-44.5-13.3-65.2c-8.5-20-20.7-38-36.2-53.5c-15.5-15.5-33.6-27.6-53.6-36.1\n                                                        C300.8,6.5,278.7,2,256,2C163,2,87.3,77.7,87.3,170.7c0,71.3,28,124.5,88,167.5l0.2,0.1c0.1,0.1,0.3,0.2,0.4,0.2l0.1,0l0.1,0.1\n                                                        c0.1,0.1,10.4,5.4,13,21.3l0.3,1.6l-1.5,0.6c-9.1,3.5-15.2,12.4-15.2,22c0,5.8,2.1,11.3,6,15.8l1.2,1.3l-1.2,1.3\n                                                        c-3.9,4.2-6,9.8-6,15.8c0,5.8,2.1,11.3,6,15.8l1.2,1.3l-1.2,1.3c-3.9,4.2-6,9.8-6,15.8c0,13,10.6,23.6,23.6,23.6\n                                                        c3.6,0,6.5-2.9,6.5-6.5c0-3.6-2.9-6.5-6.5-6.5c-5.8,0-10.5-4.7-10.5-10.5s4.7-10.5,10.5-10.5h85.3c3.6,0,6.5-2.9,6.5-6.5\n                                                        c0-3.6-2.9-6.5-6.5-6.5h-85.3c-5.8,0-10.5-4.7-10.5-10.5s4.7-10.5,10.5-10.5h85.3c3.6,0,6.5-2.9,6.5-6.5c0-3.6-2.9-6.5-6.5-6.5\n                                                        h-85.3c-5.8,0-10.5-4.7-10.5-10.5c0-5.8,4.7-10.5,10.5-10.5h85.3c3.6,0,6.5-2.9,6.5-6.5c0-3.6-2.9-6.5-6.5-6.5h-77.4h-1.7\n                                                        l-0.2-1.7c-2.9-20.9-16.7-29.8-19.4-31.3l-0.1-0.1l-0.1-0.1c-56.9-40.7-82.2-89-82.2-156.5c0-41.8,16.3-81.1,45.7-110.6\n                                                        c29.4-29.5,68.5-45.7,110-45.7c85.8,0,155.6,69.8,155.6,155.6c0,67.5-25.4,115.8-82.2,156.5l-0.1,0.1l-0.1,0\n                                                        c-4.7,2.8-20,13.8-20,39.6c0,3.6,2.9,6.5,6.5,6.5c5.8,0,10.5,4.7,10.5,10.5s-4.7,10.5-10.5,10.5c-3.6,0-6.5,2.9-6.5,6.5\n                                                        c0,3.6,2.9,6.5,6.5,6.5c5.8,0,10.5,4.7,10.5,10.5s-4.7,10.5-10.5,10.5c-3.6,0-6.5,2.9-6.5,6.5c0,3.6,2.9,6.5,6.5,6.5\n                                                        c5.8,0,10.5,4.7,10.5,10.5c0,6-4.5,10.5-10.5,10.5h-85.3c-3.6,0-6.5,2.9-6.5,6.5V486c0,13,10.6,23.6,23.6,23.6h17.1\n                                                        c13,0,23.6-10.6,23.6-23.6v-8.5v-2h2h25.6c13.2,0,23.6-10.4,23.6-23.6c0-5.8-2.1-11.3-6-15.8l-1.2-1.3l1.2-1.3\n                                                        c3.9-4.2,6-9.8,6-15.8c0-5.8-2.1-11.3-6-15.8l-1.2-1.3l1.2-1.3c3.9-4.2,6-9.8,6-15.8c0-9.7-6.1-18.5-15.2-22l-1.5-0.6l0.3-1.6\n                                                        c2.2-13.7,10.3-19.6,12.7-21.1l0.1-0.1l0.1-0.1c0.2-0.1,0.5-0.3,0.6-0.3l0.1-0.1l0.1-0.1C396.7,294.7,424.7,241.5,424.7,170.1z\n                                                        M275.1,477.9v8.5c0,5.8-4.7,10.5-10.5,10.5h-17.1c-5.8,0-10.5-4.7-10.5-10.5v-8.5v-2h2h34.1h2V477.9z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M503.5,164.1h-42.7c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5h42.7c3.6,0,6.5-2.9,6.5-6.5\n                                                        S507.1,164.1,503.5,164.1z"
-                                        }
-                                      })
-                                    ])
-                                  ]
-                                )
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "title" }, [
-                              _vm._v("Ideas & Inspiration")
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "idea-number" }, [
-                              _c("span", [_vm._v(_vm._s(_vm.challenge.ideas))]),
-                              _vm._v(
-                                " ideas\n                                        "
-                              )
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "li",
-                          {
-                            staticClass: "progress-stage-item",
-                            class: _vm.challenge.game_time
-                              ? "in-progress"
-                              : "completed"
-                          },
-                          [
-                            _c("div", { staticClass: "icon icon-puzzle" }, [
-                              _c("div", { staticClass: "style-empty" }, [
-                                _c(
-                                  "svg",
-                                  {
-                                    staticStyle: {
-                                      "enable-background": "new 0 0 512 512"
-                                    },
-                                    attrs: {
-                                      viewBox: "0 0 512 512",
-                                      "xml:space": "preserve"
-                                    }
-                                  },
-                                  [
-                                    _c("g", [
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M419,267.1v5.5c0.1,0.8,0.4,1.4,0.9,1.9c6.3,9,8.9,20,7.2,31c-4,21-22.2,36.2-43.6,36.2c-0.2,0-0.4,0-0.6,0\n                                                            h-13.4c-0.2,0-0.4,0-0.6,0c-21.3,0-39.6-15.2-43.6-36.2c-1.7-10.8,0.9-22,7.2-31c0.4-0.5,0.8-1.2,0.9-1.9v-5.5\n                                                            c0-1.4-1.2-2.6-2.6-2.6h-66V339c0,10.9-8.8,19.7-19.7,19.7h-5.5c-4.2-0.1-8.4-1.5-11.8-4c-4.3-3-9.3-4.6-14.6-4.6\n                                                            c-1.3,0-2.7,0.1-4,0.3c-12.9,2.7-22.1,14.1-21.6,27.3v13.4c-0.4,13.2,8.8,24.8,21.6,27.3c1.4,0.2,2.8,0.3,4.1,0.3\n                                                            c5.1,0,10.2-1.6,14.5-4.6c3.4-2.6,7.5-3.9,11.8-4h5.5c10.9,0,19.7,8.8,19.7,19.7v66h188.6c23.7,0,42.9-19.2,42.9-42.9V264.6h-74.5\n                                                            C420.1,264.6,419,265.8,419,267.1z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M84.7,244.9v-5.5c-0.1-0.8-0.4-1.4-0.9-1.9c-6.4-9-9-20-7.3-31c3.9-21,22.2-36.2,43.6-36.2c0.2,0,0.4,0,0.6,0\n                                                            h13.3c0.2,0,0.4,0,0.6,0c21.3,0,39.6,15.2,43.6,36.2c1.7,10.8-0.9,22-7.2,31c-0.4,0.5-0.7,1.2-0.9,1.9v5.5c0,1.4,1.2,2.6,2.6,2.6\n                                                            h74.6v-66c0-10.9,8.8-19.7,19.7-19.7h5.5c4.2,0.1,8.4,1.5,11.8,4c4.3,3,9.3,4.6,14.6,4.6c1.3,0,2.7-0.1,4-0.3\n                                                            c12.9-2.7,22.1-14.1,21.6-27.3v-13.4c0.4-13.1-8.8-24.6-21.6-27.2c-1.4-0.2-2.8-0.3-4.1-0.3c-5.1,0-10.2,1.6-14.5,4.6\n                                                            c-3.4,2.6-7.5,3.9-11.8,4h-5.5c-10.9,0-19.7-8.8-19.7-19.7V16H58.9C35.2,16,16,35.2,16,58.9v188.6h66.1\n                                                            C83.5,247.4,84.7,246.2,84.7,244.9z M50.3,178.9H33.1V84.6h17.1V178.9z M50.3,67.4H33.1V50.3h17.1V67.4z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M244.8,427.3h-5.5c-0.8,0.1-1.4,0.4-1.9,0.9c-7.2,5-15.6,7.7-24.3,7.7c-2.2,0-4.4-0.2-6.6-0.5\n                                                            c-21.2-4-36.5-22.6-36.2-44.2v-13.4c-0.3-21.6,15-40.3,36.2-44.2c2.1-0.3,4.3-0.5,6.5-0.5c6,0,11.9,1.3,17.4,3.8\n                                                            c2.6,1.2,4.9,2.5,7.2,4.1c0.5,0.4,1.2,0.8,1.9,0.9h5.5c1.4,0,2.6-1.2,2.6-2.6v-74.6h-74.6c-10.9,0-19.7-8.8-19.7-19.7v-5.5\n                                                            c0.1-4.2,1.5-8.4,4-11.8c3.8-5.4,5.4-12,4.3-18.5c-2.6-12.5-13.6-21.6-26.5-21.6c-0.3,0-0.5,0-0.9,0h-13.3c-0.2,0-0.4,0-0.6,0\n                                                            c-12.9,0-24.1,9-26.7,21.8c-1.1,6.5,0.4,13.2,4.3,18.5c2.6,3.4,3.9,7.5,4,11.8v5.5c0,10.9-8.8,19.7-19.7,19.7H16v188.6\n                                                            c0,23.7,19.2,42.9,42.9,42.9h188.5v-66.1C247.3,428.5,246.1,427.3,244.8,427.3z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M504.6,249.6h-83.1c-9.6,0-17.6,7.9-17.6,17.6v5.5c0.1,3.9,1.3,7.5,3.5,10.5c4.2,5.9,5.9,13,4.7,20.1l0,0l0,0\n                                                            c-2.7,13.5-14.7,23.4-28.5,23.4c-0.3,0-0.6,0-1,0h-13.3c-0.3,0-0.6,0-1,0c-13.7,0-25.7-9.9-28.5-23.4l0,0l0,0\n                                                            c-1.2-7.1,0.5-14.1,4.6-20.1c2.2-3.1,3.4-6.9,3.5-10.6V267c0-9.6-7.9-17.6-17.6-17.6h-65.9h-2.1v-2.1v-66c0-2.6,2.1-4.7,4.7-4.7\n                                                            h5.5h0.1h0.1c1.1,0.1,2,0.5,2.9,1.3c6.7,4.7,14.8,7.3,23,7.3c2,0,4.2-0.2,6.2-0.5c20.2-3.8,34.7-21.5,34.4-42.1v-13.4\n                                                            c0.3-20.7-14.1-38.4-34.4-42.1c-2-0.3-4.2-0.5-6.3-0.5c-8.3,0-16.3,2.5-23,7.3c-0.9,0.6-1.8,1.1-2.9,1.3h-0.1h-0.1H267\n                                                            c-2.6,0-4.7-2.1-4.7-4.7V7.4c0-3.5-2.9-6.4-6.4-6.4h-197C26.9,1,1,26.9,1,58.9v394.3C1,485.1,26.9,511,58.9,511h394.3\n                                                            c31.9,0,57.9-25.9,57.9-57.9V256C511,252.5,508.1,249.6,504.6,249.6z M13.9,247.4V58.9c0-24.9,20.1-45,45-45h188.6h2.1V16v74.6\n                                                            c0,9.6,7.9,17.6,17.6,17.6h5.5c3.9-0.1,7.5-1.3,10.5-3.5c4.6-3.3,10-5,15.8-5c1.5,0,3,0.1,4.5,0.3l0,0l0,0c6.8,1.4,12.8,5,17,10.4\n                                                            c4.3,5.4,6.5,12.1,6.3,19v13.3c0.4,14.1-9.3,26.6-23.4,29.5l0,0l0,0c-1.4,0.2-2.9,0.3-4.4,0.3c-5.7,0-11-1.7-15.8-5\n                                                            c-3.1-2.2-6.9-3.4-10.6-3.5h-5.5c-9.6,0-17.6,7.9-17.6,17.6v66.1v2.1h-2.1h-74.6c-2.6,0-4.7-2.1-4.7-4.7v-5.5v-0.1v-0.1\n                                                            c0.1-1.1,0.5-2,1.3-2.9c5.9-8.5,8.4-19.2,6.8-29.4c-3.8-19.9-21.2-34.4-41.5-34.4c-0.2,0-0.4,0-0.6,0h-13.3c-0.2,0-0.4,0-0.6,0\n                                                            c-20.4,0-37.8,14.5-41.5,34.5c-1.6,10.4,0.9,20.8,6.9,29.3c0.6,0.9,1.1,1.8,1.3,2.9v0.1v0.1v5.5c0,2.6-2.1,4.7-4.7,4.7H16h-2.1\n                                                            V247.4z M249.5,496v2.1h-2.1H58.9c-24.9,0-45-20.1-45-45V264.6v-2.1H16h66c9.6,0,17.6-7.9,17.6-17.6v-5.5\n                                                            c-0.1-3.9-1.3-7.5-3.5-10.5c-4.2-5.9-5.9-13-4.7-20.1l0,0l0,0c2.7-13.6,14.8-23.5,28.7-23.5c0.2,0,0.4,0,0.7,0H134c0.3,0,0.6,0,1,0\n                                                            c13.7,0,25.7,9.9,28.5,23.4l0,0l0,0c1.2,7.1-0.5,14.1-4.6,20.1c-2.2,3.1-3.4,6.9-3.5,10.6v5.5c0,9.6,7.9,17.6,17.6,17.6h74.6h2.1\n                                                            v2.1v74.6c0,2.6-2.1,4.7-4.7,4.7h-5.5h-0.1h-0.1c-1.1-0.1-2-0.5-2.9-1.3c-1.9-1.4-4.1-2.6-6.8-3.9c-5.2-2.4-10.8-3.5-16.5-3.5\n                                                            c-2,0-4.1,0.2-6.1,0.4c-20.2,3.8-34.7,21.5-34.4,42.1v13.4c-0.3,20.7,14.1,38.4,34.4,42.1c2,0.3,4.2,0.5,6.3,0.5\n                                                            c8.2,0,16.3-2.5,23-7.3c0.9-0.6,1.8-1.1,2.9-1.3h0.1h0.1h5.5c2.6,0,4.7,2.1,4.7,4.7V496H249.5z M498.1,264.6v188.6\n                                                            c0,24.9-20.1,45-45,45H264.6h-2.1V496v-66c0-9.6-7.9-17.6-17.6-17.6h-5.5c-3.9,0.1-7.5,1.3-10.5,3.5c-4.6,3.3-10,5-15.8,5\n                                                            c-1.5,0-3-0.1-4.5-0.3l0,0l0,0c-14-2.8-23.8-15.2-23.4-29.5v-13.3c-0.4-14.1,9.3-26.6,23.4-29.5l0,0l0,0c1.4-0.2,2.9-0.3,4.4-0.3\n                                                            c5.7,0,11,1.7,15.8,5c3.1,2.2,6.9,3.4,10.6,3.5h5.5c9.6,0,17.6-7.9,17.6-17.6v-74.6v-2.1h2.1h66c2.6,0,4.7,2.1,4.7,4.7v5.5v0.1v0.1\n                                                            c-0.1,1.1-0.5,2-1.3,2.9c-5.9,8.5-8.4,19.2-6.8,29.4c3.8,19.9,21.2,34.4,41.5,34.4c0.2,0,0.4,0,0.6,0h13.4c0.2,0,0.4,0,0.6,0\n                                                            c20.2,0,37.7-14.5,41.5-34.4c1.6-10.4-0.8-20.8-6.7-29.4c-0.6-0.9-1.1-1.8-1.3-2.9v-0.1v-0.1v-5.5c0-2.6,2.1-4.7,4.7-4.7H496h2.1\n                                                            V264.6z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("rect", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          x: "35.3",
-                                          y: "52.4",
-                                          width: "12.9",
-                                          height: "12.9"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("rect", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          x: "35.3",
-                                          y: "86.7",
-                                          width: "12.9",
-                                          height: "90"
-                                        }
-                                      })
-                                    ])
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "style-filled" }, [
-                                _c(
-                                  "svg",
-                                  {
-                                    staticStyle: {
-                                      "enable-background": "new 0 0 512 512"
-                                    },
-                                    attrs: {
-                                      viewBox: "0 0 512 512",
-                                      "xml:space": "preserve"
-                                    }
-                                  },
-                                  [
-                                    _c("g", [
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M5.1,55.8C5.1,89.2,5.1,55.8,5.1,55.8L4.6,458.8c0,0,0.4,39.6,34.7,42.9s410.4,0,410.4,0s47.1,1.1,51.4-41.8\n                                                            c4.3-42.9,0-207,0-207h-87.9c0,0-11.8,25.9,3.2,43.1s-19.3,40.7-55.7,34.3c0,0-17.5-7.8-24.1-19.3c-7.7-13.4-5.9-31.5-5.9-31.5\n                                                            s11.1-17.9,4.3-26.5h-81.4v-82.3c0,0,11.3-0.6,34.3,5.1c0,0,41.5,2.8,41.8-37.3s-30-49.3-30-49.3s-32.1,15-39.6,9.6\n                                                            c0,0-6.4-0.3-6.4-17.4s0-76.9,0-76.9H47.9C47.9,4.5,5.1,17,5.1,55.8z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("g", [
-                                        _c("path", {
-                                          staticClass: "st1",
+                                    _c("div", { staticClass: "style-empty" }, [
+                                      _c(
+                                        "svg",
+                                        {
+                                          staticStyle: {
+                                            "enable-background":
+                                              "new 0 0 512 512"
+                                          },
                                           attrs: {
-                                            d:
-                                              "M419,267.1v5.5c0.1,0.8,0.4,1.4,0.9,1.9c6.3,9,8.9,20,7.2,31c-4,21-22.2,36.2-43.6,36.2c-0.2,0-0.4,0-0.6,0\n                                                                h-13.4c-0.2,0-0.4,0-0.6,0c-21.3,0-39.6-15.2-43.6-36.2c-1.7-10.8,0.9-22,7.2-31c0.4-0.5,0.8-1.2,0.9-1.9v-5.5\n                                                                c0-1.4-1.2-2.6-2.6-2.6h-66V339c0,10.9-8.8,19.7-19.7,19.7h-5.5c-4.2-0.1-8.4-1.5-11.8-4c-4.3-3-9.3-4.6-14.6-4.6\n                                                                c-1.3,0-2.7,0.1-4,0.3c-12.9,2.7-22.1,14.1-21.6,27.3v13.4c-0.4,13.2,8.8,24.8,21.6,27.3c1.4,0.2,2.8,0.3,4.1,0.3\n                                                                c5.1,0,10.2-1.6,14.5-4.6c3.4-2.6,7.5-3.9,11.8-4h5.5c10.9,0,19.7,8.8,19.7,19.7v66h188.6c23.7,0,42.9-19.2,42.9-42.9V264.6h-74.5\n                                                                C420.1,264.6,419,265.8,419,267.1z"
+                                            viewBox: "0 0 512 512",
+                                            "xml:space": "preserve"
                                           }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("path", {
-                                          staticClass: "st1",
-                                          attrs: {
-                                            d:
-                                              "M84.7,244.9v-5.5c-0.1-0.8-0.4-1.4-0.9-1.9c-6.4-9-9-20-7.3-31c3.9-21,22.2-36.2,43.6-36.2c0.2,0,0.4,0,0.6,0\n                                                                h13.3c0.2,0,0.4,0,0.6,0c21.3,0,39.6,15.2,43.6,36.2c1.7,10.8-0.9,22-7.2,31c-0.4,0.5-0.7,1.2-0.9,1.9v5.5c0,1.4,1.2,2.6,2.6,2.6\n                                                                h74.6v-66c0-10.9,8.8-19.7,19.7-19.7h5.5c4.2,0.1,8.4,1.5,11.8,4c4.3,3,9.3,4.6,14.6,4.6c1.3,0,2.7-0.1,4-0.3\n                                                                c12.9-2.7,22.1-14.1,21.6-27.3v-13.4c0.4-13.1-8.8-24.6-21.6-27.2c-1.4-0.2-2.8-0.3-4.1-0.3c-5.1,0-10.2,1.6-14.5,4.6\n                                                                c-3.4,2.6-7.5,3.9-11.8,4h-5.5c-10.9,0-19.7-8.8-19.7-19.7V16H58.9C35.2,16,16,35.2,16,58.9v188.6h66.1\n                                                                C83.5,247.4,84.7,246.2,84.7,244.9z M50.3,178.9H33.1V84.6h17.1V178.9z M50.3,67.4H33.1V50.3h17.1V67.4z"
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("path", {
-                                          staticClass: "st1",
-                                          attrs: {
-                                            d:
-                                              "M244.8,427.3h-5.5c-0.8,0.1-1.4,0.4-1.9,0.9c-7.2,5-15.6,7.7-24.3,7.7c-2.2,0-4.4-0.2-6.6-0.5\n                                                                c-21.2-4-36.5-22.6-36.2-44.2v-13.4c-0.3-21.6,15-40.3,36.2-44.2c2.1-0.3,4.3-0.5,6.5-0.5c6,0,11.9,1.3,17.4,3.8\n                                                                c2.6,1.2,4.9,2.5,7.2,4.1c0.5,0.4,1.2,0.8,1.9,0.9h5.5c1.4,0,2.6-1.2,2.6-2.6v-74.6h-74.6c-10.9,0-19.7-8.8-19.7-19.7v-5.5\n                                                                c0.1-4.2,1.5-8.4,4-11.8c3.8-5.4,5.4-12,4.3-18.5c-2.6-12.5-13.6-21.6-26.5-21.6c-0.3,0-0.5,0-0.9,0h-13.3c-0.2,0-0.4,0-0.6,0\n                                                                c-12.9,0-24.1,9-26.7,21.8c-1.1,6.5,0.4,13.2,4.3,18.5c2.6,3.4,3.9,7.5,4,11.8v5.5c0,10.9-8.8,19.7-19.7,19.7H16v188.6\n                                                                c0,23.7,19.2,42.9,42.9,42.9h188.5v-66.1C247.3,428.5,246.1,427.3,244.8,427.3z"
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("path", {
-                                          staticClass: "st2",
-                                          attrs: {
-                                            d:
-                                              "M504.6,249.6h-83.1c-9.6,0-17.6,7.9-17.6,17.6v5.5c0.1,3.9,1.3,7.5,3.5,10.5c4.2,5.9,5.9,13,4.7,20.1l0,0l0,0\n                                                                c-2.7,13.5-14.7,23.4-28.5,23.4c-0.3,0-0.6,0-1,0h-13.3c-0.3,0-0.6,0-1,0c-13.7,0-25.7-9.9-28.5-23.4l0,0l0,0\n                                                                c-1.2-7.1,0.5-14.1,4.6-20.1c2.2-3.1,3.4-6.9,3.5-10.6V267c0-9.6-7.9-17.6-17.6-17.6h-65.9h-2.1v-2.1v-66c0-2.6,2.1-4.7,4.7-4.7\n                                                                h5.5h0.1h0.1c1.1,0.1,2,0.5,2.9,1.3c6.7,4.7,14.8,7.3,23,7.3c2,0,4.2-0.2,6.2-0.5c20.2-3.8,34.7-21.5,34.4-42.1v-13.4\n                                                                c0.3-20.7-14.1-38.4-34.4-42.1c-2-0.3-4.2-0.5-6.3-0.5c-8.3,0-16.3,2.5-23,7.3c-0.9,0.6-1.8,1.1-2.9,1.3h-0.1h-0.1H267\n                                                                c-2.6,0-4.7-2.1-4.7-4.7V7.4c0-3.5-2.9-6.4-6.4-6.4h-197C26.9,1,1,26.9,1,58.9v394.3C1,485.1,26.9,511,58.9,511h394.3\n                                                                c31.9,0,57.9-25.9,57.9-57.9V256C511,252.5,508.1,249.6,504.6,249.6z M13.9,247.4V58.9c0-24.9,20.1-45,45-45h188.6h2.1V16v74.6\n                                                                c0,9.6,7.9,17.6,17.6,17.6h5.5c3.9-0.1,7.5-1.3,10.5-3.5c4.6-3.3,10-5,15.8-5c1.5,0,3,0.1,4.5,0.3l0,0l0,0c6.8,1.4,12.8,5,17,10.4\n                                                                c4.3,5.4,6.5,12.1,6.3,19v13.3c0.4,14.1-9.3,26.6-23.4,29.5l0,0l0,0c-1.4,0.2-2.9,0.3-4.4,0.3c-5.7,0-11-1.7-15.8-5\n                                                                c-3.1-2.2-6.9-3.4-10.6-3.5h-5.5c-9.6,0-17.6,7.9-17.6,17.6v66.1v2.1h-2.1h-74.6c-2.6,0-4.7-2.1-4.7-4.7v-5.5v-0.1v-0.1\n                                                                c0.1-1.1,0.5-2,1.3-2.9c5.9-8.5,8.4-19.2,6.8-29.4c-3.8-19.9-21.2-34.4-41.5-34.4c-0.2,0-0.4,0-0.6,0h-13.3c-0.2,0-0.4,0-0.6,0\n                                                                c-20.4,0-37.8,14.5-41.5,34.5c-1.6,10.4,0.9,20.8,6.9,29.2c0.6,0.9,1.1,1.8,1.3,2.9v0.1v0.1v5.5c0,2.6-2.1,4.7-4.7,4.7H16h-2.1\n                                                                V247.4z M249.5,496v2.1h-2.1H58.9c-24.9,0-45-20.1-45-45V264.6v-2.1H16h66c9.6,0,17.6-7.9,17.6-17.6v-5.5\n                                                                c-0.1-3.9-1.3-7.5-3.5-10.5c-4.2-5.9-5.9-13-4.7-20.1l0,0l0,0c2.7-13.6,14.8-23.5,28.7-23.5c0.2,0,0.4,0,0.7,0H134\n                                                                c0.3,0,0.6,0,1,0c13.7,0,25.7,9.9,28.5,23.4l0,0l0,0c1.2,7.1-0.5,14.1-4.6,20.1c-2.2,3.1-3.4,6.9-3.5,10.6v5.5\n                                                                c0,9.6,7.9,17.6,17.6,17.6h74.6h2.1v2.1v74.6c0,2.6-2.1,4.7-4.7,4.7h-5.5h-0.1h-0.1c-1.1-0.1-2-0.5-2.9-1.3\n                                                                c-1.9-1.4-4.1-2.6-6.8-3.9c-5.2-2.4-10.8-3.5-16.5-3.5c-2,0-4.1,0.2-6.1,0.4c-20.2,3.8-34.7,21.5-34.4,42.1v13.4\n                                                                c-0.3,20.7,14.1,38.4,34.4,42.1c2,0.3,4.2,0.5,6.3,0.5c8.2,0,16.3-2.5,23-7.3c0.9-0.6,1.8-1.1,2.9-1.3h0.1h0.1h5.5\n                                                                c2.6,0,4.7,2.1,4.7,4.7V496H249.5z M498.1,264.6v188.6c0,24.9-20.1,45-45,45H264.6h-2.1V496v-66c0-9.6-7.9-17.6-17.6-17.6h-5.5\n                                                                c-3.9,0.1-7.5,1.3-10.5,3.5c-4.6,3.3-10,5-15.8,5c-1.5,0-3-0.1-4.5-0.3l0,0l0,0c-14-2.8-23.8-15.2-23.4-29.5v-13.3\n                                                                c-0.4-14.1,9.3-26.6,23.4-29.5l0,0l0,0c1.4-0.2,2.9-0.3,4.4-0.3c5.7,0,11,1.7,15.8,5c3.1,2.2,6.9,3.4,10.6,3.5h5.5\n                                                                c9.6,0,17.6-7.9,17.6-17.6v-74.6v-2.1h2.1h66c2.6,0,4.7,2.1,4.7,4.7v5.5v0.1v0.1c-0.1,1.1-0.5,2-1.3,2.9\n                                                                c-5.9,8.5-8.4,19.2-6.8,29.4c3.8,19.9,21.2,34.4,41.5,34.4c0.2,0,0.4,0,0.6,0h13.4c0.2,0,0.4,0,0.6,0c20.2,0,37.7-14.5,41.5-34.4\n                                                                c1.6-10.4-0.8-20.8-6.7-29.4c-0.6-0.9-1.1-1.8-1.3-2.9v-0.1v-0.1v-5.5c0-2.6,2.1-4.7,4.7-4.7H496h2.1V264.6z"
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("rect", {
-                                          staticClass: "st2",
-                                          attrs: {
-                                            x: "35.3",
-                                            y: "52.4",
-                                            width: "12.9",
-                                            height: "12.9"
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("rect", {
-                                          staticClass: "st2",
-                                          attrs: {
-                                            x: "35.3",
-                                            y: "86.7",
-                                            width: "12.9",
-                                            height: "90"
-                                          }
-                                        })
-                                      ])
-                                    ])
-                                  ]
-                                )
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "title" }, [
-                              _vm._v("Game Time")
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "idea-number" }, [
-                              _c("span", [
-                                _vm._v(_vm._s(_vm.challenge.game_time))
-                              ]),
-                              _vm._v(
-                                " ideas\n                                        "
-                              )
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "li",
-                          {
-                            staticClass: "progress-stage-item",
-                            class: _vm.challenge.finalized
-                              ? "in-progress"
-                              : "not-started"
-                          },
-                          [
-                            _c("div", { staticClass: "icon icon-podium" }, [
-                              _c("div", { staticClass: "style-empty" }, [
-                                _c("div", { staticClass: "bg" }, [
-                                  _c(
-                                    "svg",
-                                    {
-                                      staticStyle: {
-                                        "enable-background": "new 0 0 635 760.2"
-                                      },
-                                      attrs: {
-                                        viewBox: "0 0 635 760.2",
-                                        "xml:space": "preserve"
-                                      }
-                                    },
-                                    [
-                                      _c("g", [
-                                        _c("defs", [
-                                          _c("rect", {
-                                            attrs: {
-                                              id: "SVGID_1_",
-                                              x: "-141.2",
-                                              y: "-193",
-                                              width: "832.5",
-                                              height: "374.7"
-                                            }
-                                          })
-                                        ]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "clipPath",
-                                          { attrs: { id: "SVGID_2_" } },
-                                          [
-                                            _c("use", {
-                                              staticStyle: {
-                                                overflow: "visible"
-                                              },
+                                        },
+                                        [
+                                          _c("g", [
+                                            _c("path", {
+                                              staticClass: "st0",
                                               attrs: {
-                                                "xlink:href": "#SVGID_1_"
+                                                d:
+                                                  "M196.3,136.5c-14.1,0-25.6,11.5-25.6,25.6c0,14.1,11.5,25.6,25.6,25.6h25.6v-25.6\n                                                            C221.9,148,210.4,136.5,196.3,136.5z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st0",
+                                              attrs: {
+                                                d:
+                                                  "M239,486.4c0,4.7,3.8,8.5,8.5,8.5h17.1c4.7,0,8.5-3.8,8.5-8.5v-8.5H239V486.4z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st0",
+                                              attrs: {
+                                                d:
+                                                  "M341.3,162.1c0-14.1-11.5-25.6-25.6-25.6c-14.1,0-25.6,11.5-25.6,25.6v25.6h25.6\n                                                            C329.8,187.7,341.3,176.2,341.3,162.1z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M272.9,202.8h2v2v119.5c0.2,3.7,3.1,6.5,6.7,6.5c3.6,0,6.5-2.9,6.5-6.5V204.8v-2h2h25.6\n                                                            c22.4,0,40.7-18.3,40.7-40.7c0-22.4-18.3-40.7-40.7-40.7S275,139.7,275,162.1v25.6v2h-2h-34.1h-2v-2v-25.6\n                                                            c0-22.4-18.3-40.7-40.7-40.7c-22.4,0-40.7,18.3-40.7,40.7c0,22.4,18.3,40.7,40.7,40.7h25.6h2v2v119.5c0,3.6,2.9,6.5,6.5,6.5\n                                                            c3.6,0,6.5-2.9,6.5-6.5V204.8v-2h2H272.9z M288.1,187.7v-25.6c0-15.2,12.4-27.6,27.6-27.6s27.6,12.4,27.6,27.6\n                                                            s-12.4,27.6-27.6,27.6h-25.6h-2V187.7z M223.9,187.7v2h-2h-25.6c-15.2,0-27.6-12.4-27.6-27.6s12.4-27.6,27.6-27.6\n                                                            s27.6,12.4,27.6,27.6V187.7z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M62.2,16.7l32.7,27.4c1.2,1,2.7,1.5,4.2,1.5c2,0,3.8-0.8,4.9-2.2c1.2-1.4,1.7-3.1,1.5-4.9\n                                                            c-0.2-1.7-1-3.2-2.3-4.3L70.6,6.6c-1.2-1-2.7-1.5-4.2-1.5c-1.9,0-3.7,0.8-4.9,2.3C59.1,10.1,59.4,14.3,62.2,16.7z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M65.7,94.5l-40-14.6c-0.7-0.3-1.4-0.4-2.2-0.4c-2.7,0-5.2,1.7-6.1,4.3c-0.6,1.6-0.5,3.4,0.2,5\n                                                            c0.7,1.6,2,2.8,3.7,3.4l40,14.6c0.8,0.2,1.5,0.4,2.3,0.4c2.7,0,5.2-1.8,6.1-4.3c0.6-1.6,0.5-3.4-0.2-5\n                                                            C68.7,96.3,67.4,95.1,65.7,94.5z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M407.8,43.1L407.8,43.1c1.3,1.6,3.2,2.5,5.1,2.5c1.5,0,3-0.6,4.2-1.6l32.6-27.5c1.3-1.1,2.2-2.7,2.3-4.4\n                                                            c0.1-1.7-0.4-3.4-1.5-4.7c-1.3-1.5-3.1-2.4-5-2.4c-1.5,0-3,0.5-4.2,1.5l-32.7,27.4c-1.3,1.1-2.2,2.7-2.3,4.4\n                                                            C406.1,40.1,406.7,41.8,407.8,43.1L407.8,43.1z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M57.7,170.7c0-3.6-2.9-6.5-6.5-6.5H8.5c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5h42.7\n                                                            C54.8,177.2,57.7,174.3,57.7,170.7z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M494.5,88.8c0.7-1.6,0.8-3.3,0.2-5c-0.9-2.6-3.4-4.3-6.1-4.3c-0.7,0-1.5,0.1-2.2,0.4l-40.1,14.6\n                                                            c-3.4,1.2-5.1,5-3.9,8.3c1,2.6,3.4,4.3,6.1,4.3c0.7,0,1.5-0.1,2.2-0.4l40.1-14.6C492.4,91.5,493.7,90.3,494.5,88.8z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M424.7,170.1c0-22.6-4.5-44.5-13.3-65.2c-8.5-20-20.7-38-36.2-53.5c-15.5-15.5-33.6-27.6-53.6-36.1\n                                                            C300.8,6.5,278.7,2,256,2C163,2,87.3,77.7,87.3,170.7c0,71.3,28,124.5,88,167.5l0.2,0.1c0.1,0.1,0.3,0.2,0.4,0.2l0.1,0l0.1,0.1\n                                                            c0.1,0.1,10.4,5.4,13,21.3l0.3,1.6l-1.5,0.6c-9.1,3.5-15.2,12.4-15.2,22c0,5.8,2.1,11.3,6,15.8l1.2,1.3l-1.2,1.3\n                                                            c-3.9,4.2-6,9.8-6,15.8c0,5.8,2.1,11.3,6,15.8l1.2,1.3l-1.2,1.3c-3.9,4.2-6,9.8-6,15.8c0,13,10.6,23.6,23.6,23.6\n                                                            c3.6,0,6.5-2.9,6.5-6.5c0-3.6-2.9-6.5-6.5-6.5c-5.8,0-10.5-4.7-10.5-10.5s4.7-10.5,10.5-10.5h85.3c3.6,0,6.5-2.9,6.5-6.5\n                                                            c0-3.6-2.9-6.5-6.5-6.5h-85.3c-5.8,0-10.5-4.7-10.5-10.5s4.7-10.5,10.5-10.5h85.3c3.6,0,6.5-2.9,6.5-6.5c0-3.6-2.9-6.5-6.5-6.5\n                                                            h-85.3c-5.8,0-10.5-4.7-10.5-10.5c0-5.8,4.7-10.5,10.5-10.5h85.3c3.6,0,6.5-2.9,6.5-6.5c0-3.6-2.9-6.5-6.5-6.5h-77.4h-1.7\n                                                            l-0.2-1.7c-2.9-20.9-16.7-29.8-19.4-31.3l-0.1-0.1l-0.1-0.1c-56.9-40.7-82.2-89-82.2-156.5c0-41.8,16.3-81.1,45.7-110.6\n                                                            c29.4-29.5,68.5-45.7,110-45.7c85.8,0,155.6,69.8,155.6,155.6c0,67.5-25.4,115.8-82.2,156.5l-0.1,0.1l-0.1,0\n                                                            c-4.7,2.8-20,13.8-20,39.6c0,3.6,2.9,6.5,6.5,6.5c5.8,0,10.5,4.7,10.5,10.5s-4.7,10.5-10.5,10.5c-3.6,0-6.5,2.9-6.5,6.5\n                                                            c0,3.6,2.9,6.5,6.5,6.5c5.8,0,10.5,4.7,10.5,10.5s-4.7,10.5-10.5,10.5c-3.6,0-6.5,2.9-6.5,6.5c0,3.6,2.9,6.5,6.5,6.5\n                                                            c5.8,0,10.5,4.7,10.5,10.5c0,6-4.5,10.5-10.5,10.5h-85.3c-3.6,0-6.5,2.9-6.5,6.5V486c0,13,10.6,23.6,23.6,23.6h17.1\n                                                            c13,0,23.6-10.6,23.6-23.6v-8.5v-2h2h25.6c13.2,0,23.6-10.4,23.6-23.6c0-5.8-2.1-11.3-6-15.8l-1.2-1.3l1.2-1.3\n                                                            c3.9-4.2,6-9.8,6-15.8c0-5.8-2.1-11.3-6-15.8l-1.2-1.3l1.2-1.3c3.9-4.2,6-9.8,6-15.8c0-9.7-6.1-18.5-15.2-22l-1.5-0.6l0.3-1.6\n                                                            c2.2-13.7,10.3-19.6,12.7-21.1l0.1-0.1l0.1-0.1c0.2-0.1,0.5-0.3,0.6-0.3l0.1-0.1l0.1-0.1C396.7,294.7,424.7,241.5,424.7,170.1z\n                                                            M275.1,477.9v8.5c0,5.8-4.7,10.5-10.5,10.5h-17.1c-5.8,0-10.5-4.7-10.5-10.5v-8.5v-2h2h34.1h2V477.9z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M503.5,164.1h-42.7c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5h42.7c3.6,0,6.5-2.9,6.5-6.5\n                                                            S507.1,164.1,503.5,164.1z"
                                               }
                                             })
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c("circle", {
-                                          staticClass: "st0",
-                                          attrs: {
-                                            cx: "316.3",
-                                            cy: "383",
-                                            r: "368.2"
-                                          }
-                                        })
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("g", [
-                                        _c("defs", [
-                                          _c("rect", {
-                                            attrs: {
-                                              id: "SVGID_3_",
-                                              x: "-141.2",
-                                              y: "590.1",
-                                              width: "832.5",
-                                              height: "386"
-                                            }
-                                          })
-                                        ]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "clipPath",
-                                          { attrs: { id: "SVGID_4_" } },
-                                          [
-                                            _c("use", {
-                                              staticStyle: {
-                                                overflow: "visible"
-                                              },
-                                              attrs: {
-                                                "xlink:href": "#SVGID_3_"
-                                              }
-                                            })
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c("circle", {
-                                          staticClass: "st1",
-                                          attrs: {
-                                            cx: "318.3",
-                                            cy: "383",
-                                            r: "368.2"
-                                          }
-                                        })
-                                      ])
-                                    ]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "svg",
-                                  {
-                                    staticStyle: {
-                                      "enable-background": "new 0 0 512 512"
-                                    },
-                                    attrs: {
-                                      viewBox: "0 0 512 512",
-                                      "xml:space": "preserve"
-                                    }
-                                  },
-                                  [
-                                    _c("g", [
-                                      _c("circle", {
-                                        staticClass: "st0",
-                                        attrs: { cx: "216", cy: "459", r: "6" }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M236,285h10h4v4v60v4h-4h-10c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6s-2.7-6-6-6h-10h-4v-4v-70\n                                                            c0-3.3-2.7-6-6-6h-20c-3.3,0-6,2.7-6,6S232.7,285,236,285z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M73,445h40c3.3,0,6-2.7,6-6s-2.7-6-6-6H83h-4v-4v-20v-4h4h30c3.3,0,6-2.7,6-6v-40c0-3.3-2.7-6-6-6H73\n                                                            c-3.3,0-6,2.7-6,6s2.7,6,6,6h30h4v4v20v4h-4H73c-3.3,0-6,2.7-6,6v40C67,442.3,69.7,445,73,445z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M399,425h30h4v4v20v4h-4h-30c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6v-80c0-3.3-2.7-6-6-6h-40\n                                                            c-3.3,0-6,2.7-6,6s2.7,6,6,6h30h4v4v20v4h-4h-30c-3.3,0-6,2.7-6,6S395.7,425,399,425z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M502,333H346h-4v-4v-93c0-3.3-2.7-6-6-6H176c-3.3,0-6,2.7-6,6v53v4h-4H10c-3.3,0-6,2.7-6,6v203\n                                                            c0,3.3,2.7,6,6,6h166h160h166c3.3,0,6-2.7,6-6V339C508,335.7,505.3,333,502,333z M170,309v183v4h-4H20h-4v-4V309v-4h4h146h4V309z\n                                                            M330,246v246v4h-4H186h-4v-4V246v-4h4h140h4V246z M496,349v143v4h-4H346h-4v-4V349v-4h4h146h4V349z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M161.2,83.7l41.4,40.3l1.5,1.5l-0.3,2.1l-9.8,59.9c-0.4,2.2,0.6,4.5,2.4,5.8c1,0.7,2.3,1.1,3.5,1.1\n                                                            c1,0,1.9-0.2,2.8-0.7l51.1-26.9l1.9-1l1.9,1l51.1,26.9c0.8,0.4,1.7,0.6,2.8,0.6c1.3,0,2.4-0.4,3.4-1.1l0.1,0l0.1,0\n                                                            c1.8-1.3,2.7-3.6,2.4-5.8l-9.8-59.9l-0.3-2.1l1.5-1.5L350,83.5c1.6-1.5,2.1-3.9,1.5-6.1c-0.7-2.2-2.6-3.8-4.8-4.1l0,0l0,0\n                                                            l-56.9-8.3l-2.1-0.3l-0.9-2L261.1,7.5c-1-2.1-3.1-3.5-5.5-3.5c-2.3,0-4.4,1.3-5.5,3.5l-25.6,55.3l-0.9,2l-2.1,0.3l-56.9,8.3l0,0\n                                                            l0,0c-2.2,0.3-4.1,1.9-4.8,4.1C159,79.6,159.6,82,161.2,83.7z M186.3,82.3l42.2-6.1c2-0.3,3.7-1.6,4.5-3.4l18.8-40.6l3.6-7.8\n                                                            l3.6,7.8l18.8,40.6c0.8,1.9,2.5,3.1,4.6,3.4l42.2,6.1l8,1.2l-5.8,5.7L296.5,119c-1.4,1.4-2.1,3.4-1.7,5.3l7.4,45.2l1.3,7.9\n                                                            l-7.1-3.8l-37.9-20c-0.8-0.4-1.8-0.7-2.8-0.7s-2,0.2-2.8,0.7l-38,20l-7.1,3.7l1.3-7.9l7.4-45.2c0.3-1.9-0.4-3.9-1.8-5.3l-30.6-29.8\n                                                            l-5.8-5.7L186.3,82.3z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M296,453h-40c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6S299.3,453,296,453z"
-                                        }
-                                      })
-                                    ])
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "style-filled" }, [
-                                _c("div", { staticClass: "bg" }, [
-                                  _c(
-                                    "svg",
-                                    {
-                                      staticStyle: {
-                                        "enable-background": "new 0 0 635 760.2"
-                                      },
-                                      attrs: {
-                                        viewBox: "0 0 635 760.2",
-                                        "xml:space": "preserve"
-                                      }
-                                    },
-                                    [
-                                      _c("g", [
-                                        _c("defs", [
-                                          _c("rect", {
-                                            attrs: {
-                                              id: "SVGID_1_",
-                                              x: "-141.2",
-                                              y: "-193",
-                                              width: "832.5",
-                                              height: "374.7"
-                                            }
-                                          })
-                                        ]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "clipPath",
-                                          { attrs: { id: "SVGID_2_" } },
-                                          [
-                                            _c("use", {
-                                              staticStyle: {
-                                                overflow: "visible"
-                                              },
-                                              attrs: {
-                                                "xlink:href": "#SVGID_1_"
-                                              }
-                                            })
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c("circle", {
-                                          staticClass: "st0",
-                                          attrs: {
-                                            cx: "316.3",
-                                            cy: "383",
-                                            r: "368.2"
-                                          }
-                                        })
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("g", [
-                                        _c("defs", [
-                                          _c("rect", {
-                                            attrs: {
-                                              id: "SVGID_3_",
-                                              x: "-141.2",
-                                              y: "590.1",
-                                              width: "832.5",
-                                              height: "386"
-                                            }
-                                          })
-                                        ]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "clipPath",
-                                          { attrs: { id: "SVGID_4_" } },
-                                          [
-                                            _c("use", {
-                                              staticStyle: {
-                                                overflow: "visible"
-                                              },
-                                              attrs: {
-                                                "xlink:href": "#SVGID_3_"
-                                              }
-                                            })
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c("circle", {
-                                          staticClass: "st1",
-                                          attrs: {
-                                            cx: "318.3",
-                                            cy: "383",
-                                            r: "368.2"
-                                          }
-                                        })
-                                      ])
-                                    ]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "svg",
-                                  {
-                                    staticStyle: {
-                                      "enable-background": "new 0 0 512 512"
-                                    },
-                                    attrs: {
-                                      viewBox: "0 0 512 512",
-                                      "xml:space": "preserve"
-                                    }
-                                  },
-                                  [
-                                    _c("g", { attrs: { id: "XMLID_2_" } }, [
-                                      _c("g", [
-                                        _c("path", {
-                                          staticClass: "st0",
-                                          attrs: {
-                                            d:
-                                              "M334.7,82.8L299.6,117c-2.6,2.6-3.9,6.4-3.3,10.1l8.5,51.8l-43.4-22.9c-3.3-1.7-7.3-1.7-10.7,0l-43.5,22.9\n                                                                l8.5-51.8c0.6-3.7-0.6-7.4-3.3-10.1l-35.1-34.1l48.3-7c3.8-0.6,7.1-3,8.7-6.5l21.5-46.5l21.5,46.5c1.6,3.6,4.9,6,8.7,6.5\n                                                                L334.7,82.8z"
-                                          }
-                                        })
-                                      ])
+                                          ])
+                                        ]
+                                      )
                                     ]),
                                     _vm._v(" "),
-                                    _c("g", [
-                                      _c("g", { attrs: { id: "XMLID_1_" } }, [
+                                    _c("div", { staticClass: "style-filled" }, [
+                                      _c(
+                                        "svg",
+                                        {
+                                          staticStyle: {
+                                            "enable-background":
+                                              "new 0 0 512 512"
+                                          },
+                                          attrs: {
+                                            viewBox: "0 0 512 512",
+                                            "xml:space": "preserve"
+                                          }
+                                        },
+                                        [
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M93.3,144.9c0,0,15.3-123.3,163.7-136.7c0,0,125-5.3,160.3,142c0,0,25.3,105.2-92,190.7c0,0-13.2,20-8.6,24.7\n                                                    s30.6,8.7,6.6,32c0,0,21.3,20-0.7,35.3c0,0,26,30-9.3,40h-123c0,0-20.3-24.7-4.9-36.7c0,0-19.3-18.7,1.3-36c0,0-20.1-26,10.6-36\n                                                    c0,0-1.3-22-25.6-39.3C171.7,324.9,81.3,271.5,93.3,144.9z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("g", [
+                                            _c("path", {
+                                              staticClass: "st0",
+                                              attrs: {
+                                                d:
+                                                  "M237,485.7c0,6.2,4.2,11.2,9.5,11.2h19.1c5.3,0,9.5-5,9.5-11.2v-11.2H237V485.7z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M272.9,202.8h2v2v119.5c0.2,3.7,3.1,6.5,6.7,6.5c3.6,0,6.5-2.9,6.5-6.5V204.8v-2h2h25.6\n                                                        c22.4,0,40.7-18.3,40.7-40.7c0-22.4-18.3-40.7-40.7-40.7S275,139.7,275,162.1v25.6v2h-2h-34.1h-2v-2v-25.6\n                                                        c0-22.4-18.3-40.7-40.7-40.7c-22.4,0-40.7,18.3-40.7,40.7c0,22.4,18.3,40.7,40.7,40.7h25.6h2v2v119.5c0,3.6,2.9,6.5,6.5,6.5\n                                                        c3.6,0,6.5-2.9,6.5-6.5V204.8v-2h2H272.9z M288.1,187.7v-25.6c0-15.2,12.4-27.6,27.6-27.6s27.6,12.4,27.6,27.6\n                                                        s-12.4,27.6-27.6,27.6h-25.6h-2V187.7z M223.9,187.7v2h-2h-25.6c-15.2,0-27.6-12.4-27.6-27.6s12.4-27.6,27.6-27.6\n                                                        s27.6,12.4,27.6,27.6V187.7z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st0",
+                                              attrs: {
+                                                d:
+                                                  "M62.2,16.7l32.7,27.4c1.2,1,2.7,1.5,4.2,1.5c2,0,3.8-0.8,4.9-2.2c1.2-1.4,1.7-3.1,1.5-4.9\n                                                        c-0.2-1.7-1-3.2-2.3-4.3L70.6,6.6c-1.2-1-2.7-1.5-4.2-1.5c-1.9,0-3.7,0.8-4.9,2.3C59.1,10.1,59.4,14.3,62.2,16.7z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st0",
+                                              attrs: {
+                                                d:
+                                                  "M65.7,94.5l-40-14.6c-0.7-0.3-1.4-0.4-2.2-0.4c-2.7,0-5.2,1.7-6.1,4.3c-0.6,1.6-0.5,3.4,0.2,5\n                                                        c0.7,1.6,2,2.8,3.7,3.4l40,14.6c0.8,0.2,1.5,0.4,2.3,0.4c2.7,0,5.2-1.8,6.1-4.3c0.6-1.6,0.5-3.4-0.2-5\n                                                        C68.7,96.3,67.4,95.1,65.7,94.5z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st0",
+                                              attrs: {
+                                                d:
+                                                  "M407.8,43.1L407.8,43.1c1.3,1.6,3.2,2.5,5.1,2.5c1.5,0,3-0.6,4.2-1.6l32.6-27.5c1.3-1.1,2.2-2.7,2.3-4.4\n                                                        c0.1-1.7-0.4-3.4-1.5-4.7c-1.3-1.5-3.1-2.4-5-2.4c-1.5,0-3,0.5-4.2,1.5l-32.7,27.4c-1.3,1.1-2.2,2.7-2.3,4.4\n                                                        C406.1,40.1,406.7,41.8,407.8,43.1L407.8,43.1z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st0",
+                                              attrs: {
+                                                d:
+                                                  "M57.7,170.7c0-3.6-2.9-6.5-6.5-6.5H8.5c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5h42.7\n                                                        C54.8,177.2,57.7,174.3,57.7,170.7z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st0",
+                                              attrs: {
+                                                d:
+                                                  "M494.5,88.8c0.7-1.6,0.8-3.3,0.2-5c-0.9-2.6-3.4-4.3-6.1-4.3c-0.7,0-1.5,0.1-2.2,0.4l-40.1,14.6\n                                                        c-3.4,1.2-5.1,5-3.9,8.3c1,2.6,3.4,4.3,6.1,4.3c0.7,0,1.5-0.1,2.2-0.4l40.1-14.6C492.4,91.5,493.7,90.3,494.5,88.8z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M424.7,170.1c0-22.6-4.5-44.5-13.3-65.2c-8.5-20-20.7-38-36.2-53.5c-15.5-15.5-33.6-27.6-53.6-36.1\n                                                        C300.8,6.5,278.7,2,256,2C163,2,87.3,77.7,87.3,170.7c0,71.3,28,124.5,88,167.5l0.2,0.1c0.1,0.1,0.3,0.2,0.4,0.2l0.1,0l0.1,0.1\n                                                        c0.1,0.1,10.4,5.4,13,21.3l0.3,1.6l-1.5,0.6c-9.1,3.5-15.2,12.4-15.2,22c0,5.8,2.1,11.3,6,15.8l1.2,1.3l-1.2,1.3\n                                                        c-3.9,4.2-6,9.8-6,15.8c0,5.8,2.1,11.3,6,15.8l1.2,1.3l-1.2,1.3c-3.9,4.2-6,9.8-6,15.8c0,13,10.6,23.6,23.6,23.6\n                                                        c3.6,0,6.5-2.9,6.5-6.5c0-3.6-2.9-6.5-6.5-6.5c-5.8,0-10.5-4.7-10.5-10.5s4.7-10.5,10.5-10.5h85.3c3.6,0,6.5-2.9,6.5-6.5\n                                                        c0-3.6-2.9-6.5-6.5-6.5h-85.3c-5.8,0-10.5-4.7-10.5-10.5s4.7-10.5,10.5-10.5h85.3c3.6,0,6.5-2.9,6.5-6.5c0-3.6-2.9-6.5-6.5-6.5\n                                                        h-85.3c-5.8,0-10.5-4.7-10.5-10.5c0-5.8,4.7-10.5,10.5-10.5h85.3c3.6,0,6.5-2.9,6.5-6.5c0-3.6-2.9-6.5-6.5-6.5h-77.4h-1.7\n                                                        l-0.2-1.7c-2.9-20.9-16.7-29.8-19.4-31.3l-0.1-0.1l-0.1-0.1c-56.9-40.7-82.2-89-82.2-156.5c0-41.8,16.3-81.1,45.7-110.6\n                                                        c29.4-29.5,68.5-45.7,110-45.7c85.8,0,155.6,69.8,155.6,155.6c0,67.5-25.4,115.8-82.2,156.5l-0.1,0.1l-0.1,0\n                                                        c-4.7,2.8-20,13.8-20,39.6c0,3.6,2.9,6.5,6.5,6.5c5.8,0,10.5,4.7,10.5,10.5s-4.7,10.5-10.5,10.5c-3.6,0-6.5,2.9-6.5,6.5\n                                                        c0,3.6,2.9,6.5,6.5,6.5c5.8,0,10.5,4.7,10.5,10.5s-4.7,10.5-10.5,10.5c-3.6,0-6.5,2.9-6.5,6.5c0,3.6,2.9,6.5,6.5,6.5\n                                                        c5.8,0,10.5,4.7,10.5,10.5c0,6-4.5,10.5-10.5,10.5h-85.3c-3.6,0-6.5,2.9-6.5,6.5V486c0,13,10.6,23.6,23.6,23.6h17.1\n                                                        c13,0,23.6-10.6,23.6-23.6v-8.5v-2h2h25.6c13.2,0,23.6-10.4,23.6-23.6c0-5.8-2.1-11.3-6-15.8l-1.2-1.3l1.2-1.3\n                                                        c3.9-4.2,6-9.8,6-15.8c0-5.8-2.1-11.3-6-15.8l-1.2-1.3l1.2-1.3c3.9-4.2,6-9.8,6-15.8c0-9.7-6.1-18.5-15.2-22l-1.5-0.6l0.3-1.6\n                                                        c2.2-13.7,10.3-19.6,12.7-21.1l0.1-0.1l0.1-0.1c0.2-0.1,0.5-0.3,0.6-0.3l0.1-0.1l0.1-0.1C396.7,294.7,424.7,241.5,424.7,170.1z\n                                                        M275.1,477.9v8.5c0,5.8-4.7,10.5-10.5,10.5h-17.1c-5.8,0-10.5-4.7-10.5-10.5v-8.5v-2h2h34.1h2V477.9z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st0",
+                                              attrs: {
+                                                d:
+                                                  "M503.5,164.1h-42.7c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5h42.7c3.6,0,6.5-2.9,6.5-6.5\n                                                        S507.1,164.1,503.5,164.1z"
+                                              }
+                                            })
+                                          ])
+                                        ]
+                                      )
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "title" }, [
+                                  _vm._v("Ideas & Inspiration")
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "idea-number" }, [
+                                  _c("span", [
+                                    _vm._v(_vm._s(_vm.challenge.ideas))
+                                  ]),
+                                  _vm._v(
+                                    " ideas\n                                        "
+                                  )
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "li",
+                              {
+                                staticClass: "progress-stage-item",
+                                class: _vm.challenge.game_time
+                                  ? "in-progress"
+                                  : "completed"
+                              },
+                              [
+                                _c("div", { staticClass: "icon icon-puzzle" }, [
+                                  _c("div", { staticClass: "style-empty" }, [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticStyle: {
+                                          "enable-background": "new 0 0 512 512"
+                                        },
+                                        attrs: {
+                                          viewBox: "0 0 512 512",
+                                          "xml:space": "preserve"
+                                        }
+                                      },
+                                      [
                                         _c("g", [
-                                          _c("rect", {
+                                          _c("path", {
                                             staticClass: "st0",
                                             attrs: {
-                                              x: "340",
-                                              y: "345",
-                                              width: "158.3",
-                                              height: "154.8"
+                                              d:
+                                                "M419,267.1v5.5c0.1,0.8,0.4,1.4,0.9,1.9c6.3,9,8.9,20,7.2,31c-4,21-22.2,36.2-43.6,36.2c-0.2,0-0.4,0-0.6,0\n                                                            h-13.4c-0.2,0-0.4,0-0.6,0c-21.3,0-39.6-15.2-43.6-36.2c-1.7-10.8,0.9-22,7.2-31c0.4-0.5,0.8-1.2,0.9-1.9v-5.5\n                                                            c0-1.4-1.2-2.6-2.6-2.6h-66V339c0,10.9-8.8,19.7-19.7,19.7h-5.5c-4.2-0.1-8.4-1.5-11.8-4c-4.3-3-9.3-4.6-14.6-4.6\n                                                            c-1.3,0-2.7,0.1-4,0.3c-12.9,2.7-22.1,14.1-21.6,27.3v13.4c-0.4,13.2,8.8,24.8,21.6,27.3c1.4,0.2,2.8,0.3,4.1,0.3\n                                                            c5.1,0,10.2-1.6,14.5-4.6c3.4-2.6,7.5-3.9,11.8-4h5.5c10.9,0,19.7,8.8,19.7,19.7v66h188.6c23.7,0,42.9-19.2,42.9-42.9V264.6h-74.5\n                                                            C420.1,264.6,419,265.8,419,267.1z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M84.7,244.9v-5.5c-0.1-0.8-0.4-1.4-0.9-1.9c-6.4-9-9-20-7.3-31c3.9-21,22.2-36.2,43.6-36.2c0.2,0,0.4,0,0.6,0\n                                                            h13.3c0.2,0,0.4,0,0.6,0c21.3,0,39.6,15.2,43.6,36.2c1.7,10.8-0.9,22-7.2,31c-0.4,0.5-0.7,1.2-0.9,1.9v5.5c0,1.4,1.2,2.6,2.6,2.6\n                                                            h74.6v-66c0-10.9,8.8-19.7,19.7-19.7h5.5c4.2,0.1,8.4,1.5,11.8,4c4.3,3,9.3,4.6,14.6,4.6c1.3,0,2.7-0.1,4-0.3\n                                                            c12.9-2.7,22.1-14.1,21.6-27.3v-13.4c0.4-13.1-8.8-24.6-21.6-27.2c-1.4-0.2-2.8-0.3-4.1-0.3c-5.1,0-10.2,1.6-14.5,4.6\n                                                            c-3.4,2.6-7.5,3.9-11.8,4h-5.5c-10.9,0-19.7-8.8-19.7-19.7V16H58.9C35.2,16,16,35.2,16,58.9v188.6h66.1\n                                                            C83.5,247.4,84.7,246.2,84.7,244.9z M50.3,178.9H33.1V84.6h17.1V178.9z M50.3,67.4H33.1V50.3h17.1V67.4z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M244.8,427.3h-5.5c-0.8,0.1-1.4,0.4-1.9,0.9c-7.2,5-15.6,7.7-24.3,7.7c-2.2,0-4.4-0.2-6.6-0.5\n                                                            c-21.2-4-36.5-22.6-36.2-44.2v-13.4c-0.3-21.6,15-40.3,36.2-44.2c2.1-0.3,4.3-0.5,6.5-0.5c6,0,11.9,1.3,17.4,3.8\n                                                            c2.6,1.2,4.9,2.5,7.2,4.1c0.5,0.4,1.2,0.8,1.9,0.9h5.5c1.4,0,2.6-1.2,2.6-2.6v-74.6h-74.6c-10.9,0-19.7-8.8-19.7-19.7v-5.5\n                                                            c0.1-4.2,1.5-8.4,4-11.8c3.8-5.4,5.4-12,4.3-18.5c-2.6-12.5-13.6-21.6-26.5-21.6c-0.3,0-0.5,0-0.9,0h-13.3c-0.2,0-0.4,0-0.6,0\n                                                            c-12.9,0-24.1,9-26.7,21.8c-1.1,6.5,0.4,13.2,4.3,18.5c2.6,3.4,3.9,7.5,4,11.8v5.5c0,10.9-8.8,19.7-19.7,19.7H16v188.6\n                                                            c0,23.7,19.2,42.9,42.9,42.9h188.5v-66.1C247.3,428.5,246.1,427.3,244.8,427.3z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st1",
+                                            attrs: {
+                                              d:
+                                                "M504.6,249.6h-83.1c-9.6,0-17.6,7.9-17.6,17.6v5.5c0.1,3.9,1.3,7.5,3.5,10.5c4.2,5.9,5.9,13,4.7,20.1l0,0l0,0\n                                                            c-2.7,13.5-14.7,23.4-28.5,23.4c-0.3,0-0.6,0-1,0h-13.3c-0.3,0-0.6,0-1,0c-13.7,0-25.7-9.9-28.5-23.4l0,0l0,0\n                                                            c-1.2-7.1,0.5-14.1,4.6-20.1c2.2-3.1,3.4-6.9,3.5-10.6V267c0-9.6-7.9-17.6-17.6-17.6h-65.9h-2.1v-2.1v-66c0-2.6,2.1-4.7,4.7-4.7\n                                                            h5.5h0.1h0.1c1.1,0.1,2,0.5,2.9,1.3c6.7,4.7,14.8,7.3,23,7.3c2,0,4.2-0.2,6.2-0.5c20.2-3.8,34.7-21.5,34.4-42.1v-13.4\n                                                            c0.3-20.7-14.1-38.4-34.4-42.1c-2-0.3-4.2-0.5-6.3-0.5c-8.3,0-16.3,2.5-23,7.3c-0.9,0.6-1.8,1.1-2.9,1.3h-0.1h-0.1H267\n                                                            c-2.6,0-4.7-2.1-4.7-4.7V7.4c0-3.5-2.9-6.4-6.4-6.4h-197C26.9,1,1,26.9,1,58.9v394.3C1,485.1,26.9,511,58.9,511h394.3\n                                                            c31.9,0,57.9-25.9,57.9-57.9V256C511,252.5,508.1,249.6,504.6,249.6z M13.9,247.4V58.9c0-24.9,20.1-45,45-45h188.6h2.1V16v74.6\n                                                            c0,9.6,7.9,17.6,17.6,17.6h5.5c3.9-0.1,7.5-1.3,10.5-3.5c4.6-3.3,10-5,15.8-5c1.5,0,3,0.1,4.5,0.3l0,0l0,0c6.8,1.4,12.8,5,17,10.4\n                                                            c4.3,5.4,6.5,12.1,6.3,19v13.3c0.4,14.1-9.3,26.6-23.4,29.5l0,0l0,0c-1.4,0.2-2.9,0.3-4.4,0.3c-5.7,0-11-1.7-15.8-5\n                                                            c-3.1-2.2-6.9-3.4-10.6-3.5h-5.5c-9.6,0-17.6,7.9-17.6,17.6v66.1v2.1h-2.1h-74.6c-2.6,0-4.7-2.1-4.7-4.7v-5.5v-0.1v-0.1\n                                                            c0.1-1.1,0.5-2,1.3-2.9c5.9-8.5,8.4-19.2,6.8-29.4c-3.8-19.9-21.2-34.4-41.5-34.4c-0.2,0-0.4,0-0.6,0h-13.3c-0.2,0-0.4,0-0.6,0\n                                                            c-20.4,0-37.8,14.5-41.5,34.5c-1.6,10.4,0.9,20.8,6.9,29.3c0.6,0.9,1.1,1.8,1.3,2.9v0.1v0.1v5.5c0,2.6-2.1,4.7-4.7,4.7H16h-2.1\n                                                            V247.4z M249.5,496v2.1h-2.1H58.9c-24.9,0-45-20.1-45-45V264.6v-2.1H16h66c9.6,0,17.6-7.9,17.6-17.6v-5.5\n                                                            c-0.1-3.9-1.3-7.5-3.5-10.5c-4.2-5.9-5.9-13-4.7-20.1l0,0l0,0c2.7-13.6,14.8-23.5,28.7-23.5c0.2,0,0.4,0,0.7,0H134c0.3,0,0.6,0,1,0\n                                                            c13.7,0,25.7,9.9,28.5,23.4l0,0l0,0c1.2,7.1-0.5,14.1-4.6,20.1c-2.2,3.1-3.4,6.9-3.5,10.6v5.5c0,9.6,7.9,17.6,17.6,17.6h74.6h2.1\n                                                            v2.1v74.6c0,2.6-2.1,4.7-4.7,4.7h-5.5h-0.1h-0.1c-1.1-0.1-2-0.5-2.9-1.3c-1.9-1.4-4.1-2.6-6.8-3.9c-5.2-2.4-10.8-3.5-16.5-3.5\n                                                            c-2,0-4.1,0.2-6.1,0.4c-20.2,3.8-34.7,21.5-34.4,42.1v13.4c-0.3,20.7,14.1,38.4,34.4,42.1c2,0.3,4.2,0.5,6.3,0.5\n                                                            c8.2,0,16.3-2.5,23-7.3c0.9-0.6,1.8-1.1,2.9-1.3h0.1h0.1h5.5c2.6,0,4.7,2.1,4.7,4.7V496H249.5z M498.1,264.6v188.6\n                                                            c0,24.9-20.1,45-45,45H264.6h-2.1V496v-66c0-9.6-7.9-17.6-17.6-17.6h-5.5c-3.9,0.1-7.5,1.3-10.5,3.5c-4.6,3.3-10,5-15.8,5\n                                                            c-1.5,0-3-0.1-4.5-0.3l0,0l0,0c-14-2.8-23.8-15.2-23.4-29.5v-13.3c-0.4-14.1,9.3-26.6,23.4-29.5l0,0l0,0c1.4-0.2,2.9-0.3,4.4-0.3\n                                                            c5.7,0,11,1.7,15.8,5c3.1,2.2,6.9,3.4,10.6,3.5h5.5c9.6,0,17.6-7.9,17.6-17.6v-74.6v-2.1h2.1h66c2.6,0,4.7,2.1,4.7,4.7v5.5v0.1v0.1\n                                                            c-0.1,1.1-0.5,2-1.3,2.9c-5.9,8.5-8.4,19.2-6.8,29.4c3.8,19.9,21.2,34.4,41.5,34.4c0.2,0,0.4,0,0.6,0h13.4c0.2,0,0.4,0,0.6,0\n                                                            c20.2,0,37.7-14.5,41.5-34.4c1.6-10.4-0.8-20.8-6.7-29.4c-0.6-0.9-1.1-1.8-1.3-2.9v-0.1v-0.1v-5.5c0-2.6,2.1-4.7,4.7-4.7H496h2.1\n                                                            V264.6z"
                                             }
                                           }),
                                           _vm._v(" "),
                                           _c("rect", {
-                                            staticClass: "st0",
+                                            staticClass: "st1",
                                             attrs: {
-                                              x: "178.3",
-                                              y: "238",
-                                              width: "154.4",
-                                              height: "261.8"
+                                              x: "35.3",
+                                              y: "52.4",
+                                              width: "12.9",
+                                              height: "12.9"
                                             }
                                           }),
                                           _vm._v(" "),
                                           _c("rect", {
-                                            staticClass: "st0",
+                                            staticClass: "st1",
                                             attrs: {
-                                              x: "14",
-                                              y: "305",
-                                              width: "155.4",
-                                              height: "194.8"
+                                              x: "35.3",
+                                              y: "86.7",
+                                              width: "12.9",
+                                              height: "90"
                                             }
                                           })
                                         ])
-                                      ])
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "style-filled" }, [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticStyle: {
+                                          "enable-background": "new 0 0 512 512"
+                                        },
+                                        attrs: {
+                                          viewBox: "0 0 512 512",
+                                          "xml:space": "preserve"
+                                        }
+                                      },
+                                      [
+                                        _c("g", [
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M5.1,55.8C5.1,89.2,5.1,55.8,5.1,55.8L4.6,458.8c0,0,0.4,39.6,34.7,42.9s410.4,0,410.4,0s47.1,1.1,51.4-41.8\n                                                            c4.3-42.9,0-207,0-207h-87.9c0,0-11.8,25.9,3.2,43.1s-19.3,40.7-55.7,34.3c0,0-17.5-7.8-24.1-19.3c-7.7-13.4-5.9-31.5-5.9-31.5\n                                                            s11.1-17.9,4.3-26.5h-81.4v-82.3c0,0,11.3-0.6,34.3,5.1c0,0,41.5,2.8,41.8-37.3s-30-49.3-30-49.3s-32.1,15-39.6,9.6\n                                                            c0,0-6.4-0.3-6.4-17.4s0-76.9,0-76.9H47.9C47.9,4.5,5.1,17,5.1,55.8z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("g", [
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M419,267.1v5.5c0.1,0.8,0.4,1.4,0.9,1.9c6.3,9,8.9,20,7.2,31c-4,21-22.2,36.2-43.6,36.2c-0.2,0-0.4,0-0.6,0\n                                                                h-13.4c-0.2,0-0.4,0-0.6,0c-21.3,0-39.6-15.2-43.6-36.2c-1.7-10.8,0.9-22,7.2-31c0.4-0.5,0.8-1.2,0.9-1.9v-5.5\n                                                                c0-1.4-1.2-2.6-2.6-2.6h-66V339c0,10.9-8.8,19.7-19.7,19.7h-5.5c-4.2-0.1-8.4-1.5-11.8-4c-4.3-3-9.3-4.6-14.6-4.6\n                                                                c-1.3,0-2.7,0.1-4,0.3c-12.9,2.7-22.1,14.1-21.6,27.3v13.4c-0.4,13.2,8.8,24.8,21.6,27.3c1.4,0.2,2.8,0.3,4.1,0.3\n                                                                c5.1,0,10.2-1.6,14.5-4.6c3.4-2.6,7.5-3.9,11.8-4h5.5c10.9,0,19.7,8.8,19.7,19.7v66h188.6c23.7,0,42.9-19.2,42.9-42.9V264.6h-74.5\n                                                                C420.1,264.6,419,265.8,419,267.1z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M84.7,244.9v-5.5c-0.1-0.8-0.4-1.4-0.9-1.9c-6.4-9-9-20-7.3-31c3.9-21,22.2-36.2,43.6-36.2c0.2,0,0.4,0,0.6,0\n                                                                h13.3c0.2,0,0.4,0,0.6,0c21.3,0,39.6,15.2,43.6,36.2c1.7,10.8-0.9,22-7.2,31c-0.4,0.5-0.7,1.2-0.9,1.9v5.5c0,1.4,1.2,2.6,2.6,2.6\n                                                                h74.6v-66c0-10.9,8.8-19.7,19.7-19.7h5.5c4.2,0.1,8.4,1.5,11.8,4c4.3,3,9.3,4.6,14.6,4.6c1.3,0,2.7-0.1,4-0.3\n                                                                c12.9-2.7,22.1-14.1,21.6-27.3v-13.4c0.4-13.1-8.8-24.6-21.6-27.2c-1.4-0.2-2.8-0.3-4.1-0.3c-5.1,0-10.2,1.6-14.5,4.6\n                                                                c-3.4,2.6-7.5,3.9-11.8,4h-5.5c-10.9,0-19.7-8.8-19.7-19.7V16H58.9C35.2,16,16,35.2,16,58.9v188.6h66.1\n                                                                C83.5,247.4,84.7,246.2,84.7,244.9z M50.3,178.9H33.1V84.6h17.1V178.9z M50.3,67.4H33.1V50.3h17.1V67.4z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M244.8,427.3h-5.5c-0.8,0.1-1.4,0.4-1.9,0.9c-7.2,5-15.6,7.7-24.3,7.7c-2.2,0-4.4-0.2-6.6-0.5\n                                                                c-21.2-4-36.5-22.6-36.2-44.2v-13.4c-0.3-21.6,15-40.3,36.2-44.2c2.1-0.3,4.3-0.5,6.5-0.5c6,0,11.9,1.3,17.4,3.8\n                                                                c2.6,1.2,4.9,2.5,7.2,4.1c0.5,0.4,1.2,0.8,1.9,0.9h5.5c1.4,0,2.6-1.2,2.6-2.6v-74.6h-74.6c-10.9,0-19.7-8.8-19.7-19.7v-5.5\n                                                                c0.1-4.2,1.5-8.4,4-11.8c3.8-5.4,5.4-12,4.3-18.5c-2.6-12.5-13.6-21.6-26.5-21.6c-0.3,0-0.5,0-0.9,0h-13.3c-0.2,0-0.4,0-0.6,0\n                                                                c-12.9,0-24.1,9-26.7,21.8c-1.1,6.5,0.4,13.2,4.3,18.5c2.6,3.4,3.9,7.5,4,11.8v5.5c0,10.9-8.8,19.7-19.7,19.7H16v188.6\n                                                                c0,23.7,19.2,42.9,42.9,42.9h188.5v-66.1C247.3,428.5,246.1,427.3,244.8,427.3z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st2",
+                                              attrs: {
+                                                d:
+                                                  "M504.6,249.6h-83.1c-9.6,0-17.6,7.9-17.6,17.6v5.5c0.1,3.9,1.3,7.5,3.5,10.5c4.2,5.9,5.9,13,4.7,20.1l0,0l0,0\n                                                                c-2.7,13.5-14.7,23.4-28.5,23.4c-0.3,0-0.6,0-1,0h-13.3c-0.3,0-0.6,0-1,0c-13.7,0-25.7-9.9-28.5-23.4l0,0l0,0\n                                                                c-1.2-7.1,0.5-14.1,4.6-20.1c2.2-3.1,3.4-6.9,3.5-10.6V267c0-9.6-7.9-17.6-17.6-17.6h-65.9h-2.1v-2.1v-66c0-2.6,2.1-4.7,4.7-4.7\n                                                                h5.5h0.1h0.1c1.1,0.1,2,0.5,2.9,1.3c6.7,4.7,14.8,7.3,23,7.3c2,0,4.2-0.2,6.2-0.5c20.2-3.8,34.7-21.5,34.4-42.1v-13.4\n                                                                c0.3-20.7-14.1-38.4-34.4-42.1c-2-0.3-4.2-0.5-6.3-0.5c-8.3,0-16.3,2.5-23,7.3c-0.9,0.6-1.8,1.1-2.9,1.3h-0.1h-0.1H267\n                                                                c-2.6,0-4.7-2.1-4.7-4.7V7.4c0-3.5-2.9-6.4-6.4-6.4h-197C26.9,1,1,26.9,1,58.9v394.3C1,485.1,26.9,511,58.9,511h394.3\n                                                                c31.9,0,57.9-25.9,57.9-57.9V256C511,252.5,508.1,249.6,504.6,249.6z M13.9,247.4V58.9c0-24.9,20.1-45,45-45h188.6h2.1V16v74.6\n                                                                c0,9.6,7.9,17.6,17.6,17.6h5.5c3.9-0.1,7.5-1.3,10.5-3.5c4.6-3.3,10-5,15.8-5c1.5,0,3,0.1,4.5,0.3l0,0l0,0c6.8,1.4,12.8,5,17,10.4\n                                                                c4.3,5.4,6.5,12.1,6.3,19v13.3c0.4,14.1-9.3,26.6-23.4,29.5l0,0l0,0c-1.4,0.2-2.9,0.3-4.4,0.3c-5.7,0-11-1.7-15.8-5\n                                                                c-3.1-2.2-6.9-3.4-10.6-3.5h-5.5c-9.6,0-17.6,7.9-17.6,17.6v66.1v2.1h-2.1h-74.6c-2.6,0-4.7-2.1-4.7-4.7v-5.5v-0.1v-0.1\n                                                                c0.1-1.1,0.5-2,1.3-2.9c5.9-8.5,8.4-19.2,6.8-29.4c-3.8-19.9-21.2-34.4-41.5-34.4c-0.2,0-0.4,0-0.6,0h-13.3c-0.2,0-0.4,0-0.6,0\n                                                                c-20.4,0-37.8,14.5-41.5,34.5c-1.6,10.4,0.9,20.8,6.9,29.2c0.6,0.9,1.1,1.8,1.3,2.9v0.1v0.1v5.5c0,2.6-2.1,4.7-4.7,4.7H16h-2.1\n                                                                V247.4z M249.5,496v2.1h-2.1H58.9c-24.9,0-45-20.1-45-45V264.6v-2.1H16h66c9.6,0,17.6-7.9,17.6-17.6v-5.5\n                                                                c-0.1-3.9-1.3-7.5-3.5-10.5c-4.2-5.9-5.9-13-4.7-20.1l0,0l0,0c2.7-13.6,14.8-23.5,28.7-23.5c0.2,0,0.4,0,0.7,0H134\n                                                                c0.3,0,0.6,0,1,0c13.7,0,25.7,9.9,28.5,23.4l0,0l0,0c1.2,7.1-0.5,14.1-4.6,20.1c-2.2,3.1-3.4,6.9-3.5,10.6v5.5\n                                                                c0,9.6,7.9,17.6,17.6,17.6h74.6h2.1v2.1v74.6c0,2.6-2.1,4.7-4.7,4.7h-5.5h-0.1h-0.1c-1.1-0.1-2-0.5-2.9-1.3\n                                                                c-1.9-1.4-4.1-2.6-6.8-3.9c-5.2-2.4-10.8-3.5-16.5-3.5c-2,0-4.1,0.2-6.1,0.4c-20.2,3.8-34.7,21.5-34.4,42.1v13.4\n                                                                c-0.3,20.7,14.1,38.4,34.4,42.1c2,0.3,4.2,0.5,6.3,0.5c8.2,0,16.3-2.5,23-7.3c0.9-0.6,1.8-1.1,2.9-1.3h0.1h0.1h5.5\n                                                                c2.6,0,4.7,2.1,4.7,4.7V496H249.5z M498.1,264.6v188.6c0,24.9-20.1,45-45,45H264.6h-2.1V496v-66c0-9.6-7.9-17.6-17.6-17.6h-5.5\n                                                                c-3.9,0.1-7.5,1.3-10.5,3.5c-4.6,3.3-10,5-15.8,5c-1.5,0-3-0.1-4.5-0.3l0,0l0,0c-14-2.8-23.8-15.2-23.4-29.5v-13.3\n                                                                c-0.4-14.1,9.3-26.6,23.4-29.5l0,0l0,0c1.4-0.2,2.9-0.3,4.4-0.3c5.7,0,11,1.7,15.8,5c3.1,2.2,6.9,3.4,10.6,3.5h5.5\n                                                                c9.6,0,17.6-7.9,17.6-17.6v-74.6v-2.1h2.1h66c2.6,0,4.7,2.1,4.7,4.7v5.5v0.1v0.1c-0.1,1.1-0.5,2-1.3,2.9\n                                                                c-5.9,8.5-8.4,19.2-6.8,29.4c3.8,19.9,21.2,34.4,41.5,34.4c0.2,0,0.4,0,0.6,0h13.4c0.2,0,0.4,0,0.6,0c20.2,0,37.7-14.5,41.5-34.4\n                                                                c1.6-10.4-0.8-20.8-6.7-29.4c-0.6-0.9-1.1-1.8-1.3-2.9v-0.1v-0.1v-5.5c0-2.6,2.1-4.7,4.7-4.7H496h2.1V264.6z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("rect", {
+                                              staticClass: "st2",
+                                              attrs: {
+                                                x: "35.3",
+                                                y: "52.4",
+                                                width: "12.9",
+                                                height: "12.9"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("rect", {
+                                              staticClass: "st2",
+                                              attrs: {
+                                                x: "35.3",
+                                                y: "86.7",
+                                                width: "12.9",
+                                                height: "90"
+                                              }
+                                            })
+                                          ])
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "title" }, [
+                                  _vm._v("Game Time")
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "idea-number" }, [
+                                  _c("span", [
+                                    _vm._v(_vm._s(_vm.challenge.game_time))
+                                  ]),
+                                  _vm._v(
+                                    " ideas\n                                        "
+                                  )
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "li",
+                              {
+                                staticClass: "progress-stage-item",
+                                class: _vm.challenge.finalized
+                                  ? "in-progress"
+                                  : "not-started"
+                              },
+                              [
+                                _c("div", { staticClass: "icon icon-podium" }, [
+                                  _c("div", { staticClass: "style-empty" }, [
+                                    _c("div", { staticClass: "bg" }, [
+                                      _c(
+                                        "svg",
+                                        {
+                                          staticStyle: {
+                                            "enable-background":
+                                              "new 0 0 635 760.2"
+                                          },
+                                          attrs: {
+                                            viewBox: "0 0 635 760.2",
+                                            "xml:space": "preserve"
+                                          }
+                                        },
+                                        [
+                                          _c("g", [
+                                            _c("defs", [
+                                              _c("rect", {
+                                                attrs: {
+                                                  id: "SVGID_1_",
+                                                  x: "-141.2",
+                                                  y: "-193",
+                                                  width: "832.5",
+                                                  height: "374.7"
+                                                }
+                                              })
+                                            ]),
+                                            _vm._v(" "),
+                                            _c(
+                                              "clipPath",
+                                              { attrs: { id: "SVGID_2_" } },
+                                              [
+                                                _c("use", {
+                                                  staticStyle: {
+                                                    overflow: "visible"
+                                                  },
+                                                  attrs: {
+                                                    "xlink:href": "#SVGID_1_"
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("circle", {
+                                              staticClass: "st0",
+                                              attrs: {
+                                                cx: "316.3",
+                                                cy: "383",
+                                                r: "368.2"
+                                              }
+                                            })
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("g", [
+                                            _c("defs", [
+                                              _c("rect", {
+                                                attrs: {
+                                                  id: "SVGID_3_",
+                                                  x: "-141.2",
+                                                  y: "590.1",
+                                                  width: "832.5",
+                                                  height: "386"
+                                                }
+                                              })
+                                            ]),
+                                            _vm._v(" "),
+                                            _c(
+                                              "clipPath",
+                                              { attrs: { id: "SVGID_4_" } },
+                                              [
+                                                _c("use", {
+                                                  staticStyle: {
+                                                    overflow: "visible"
+                                                  },
+                                                  attrs: {
+                                                    "xlink:href": "#SVGID_3_"
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("circle", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                cx: "318.3",
+                                                cy: "383",
+                                                r: "368.2"
+                                              }
+                                            })
+                                          ])
+                                        ]
+                                      )
                                     ]),
                                     _vm._v(" "),
-                                    _c("g", [
-                                      _c("circle", {
-                                        staticClass: "st1",
-                                        attrs: { cx: "216", cy: "459", r: "6" }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticStyle: {
+                                          "enable-background": "new 0 0 512 512"
+                                        },
                                         attrs: {
-                                          d:
-                                            "M236,285h10h4v4v60v4h-4h-10c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6s-2.7-6-6-6h-10h-4v-4v-70\n                                                        c0-3.3-2.7-6-6-6h-20c-3.3,0-6,2.7-6,6S232.7,285,236,285z"
+                                          viewBox: "0 0 512 512",
+                                          "xml:space": "preserve"
                                         }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
+                                      },
+                                      [
+                                        _c("g", [
+                                          _c("circle", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              cx: "216",
+                                              cy: "459",
+                                              r: "6"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M236,285h10h4v4v60v4h-4h-10c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6s-2.7-6-6-6h-10h-4v-4v-70\n                                                            c0-3.3-2.7-6-6-6h-20c-3.3,0-6,2.7-6,6S232.7,285,236,285z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M73,445h40c3.3,0,6-2.7,6-6s-2.7-6-6-6H83h-4v-4v-20v-4h4h30c3.3,0,6-2.7,6-6v-40c0-3.3-2.7-6-6-6H73\n                                                            c-3.3,0-6,2.7-6,6s2.7,6,6,6h30h4v4v20v4h-4H73c-3.3,0-6,2.7-6,6v40C67,442.3,69.7,445,73,445z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M399,425h30h4v4v20v4h-4h-30c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6v-80c0-3.3-2.7-6-6-6h-40\n                                                            c-3.3,0-6,2.7-6,6s2.7,6,6,6h30h4v4v20v4h-4h-30c-3.3,0-6,2.7-6,6S395.7,425,399,425z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M502,333H346h-4v-4v-93c0-3.3-2.7-6-6-6H176c-3.3,0-6,2.7-6,6v53v4h-4H10c-3.3,0-6,2.7-6,6v203\n                                                            c0,3.3,2.7,6,6,6h166h160h166c3.3,0,6-2.7,6-6V339C508,335.7,505.3,333,502,333z M170,309v183v4h-4H20h-4v-4V309v-4h4h146h4V309z\n                                                            M330,246v246v4h-4H186h-4v-4V246v-4h4h140h4V246z M496,349v143v4h-4H346h-4v-4V349v-4h4h146h4V349z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M161.2,83.7l41.4,40.3l1.5,1.5l-0.3,2.1l-9.8,59.9c-0.4,2.2,0.6,4.5,2.4,5.8c1,0.7,2.3,1.1,3.5,1.1\n                                                            c1,0,1.9-0.2,2.8-0.7l51.1-26.9l1.9-1l1.9,1l51.1,26.9c0.8,0.4,1.7,0.6,2.8,0.6c1.3,0,2.4-0.4,3.4-1.1l0.1,0l0.1,0\n                                                            c1.8-1.3,2.7-3.6,2.4-5.8l-9.8-59.9l-0.3-2.1l1.5-1.5L350,83.5c1.6-1.5,2.1-3.9,1.5-6.1c-0.7-2.2-2.6-3.8-4.8-4.1l0,0l0,0\n                                                            l-56.9-8.3l-2.1-0.3l-0.9-2L261.1,7.5c-1-2.1-3.1-3.5-5.5-3.5c-2.3,0-4.4,1.3-5.5,3.5l-25.6,55.3l-0.9,2l-2.1,0.3l-56.9,8.3l0,0\n                                                            l0,0c-2.2,0.3-4.1,1.9-4.8,4.1C159,79.6,159.6,82,161.2,83.7z M186.3,82.3l42.2-6.1c2-0.3,3.7-1.6,4.5-3.4l18.8-40.6l3.6-7.8\n                                                            l3.6,7.8l18.8,40.6c0.8,1.9,2.5,3.1,4.6,3.4l42.2,6.1l8,1.2l-5.8,5.7L296.5,119c-1.4,1.4-2.1,3.4-1.7,5.3l7.4,45.2l1.3,7.9\n                                                            l-7.1-3.8l-37.9-20c-0.8-0.4-1.8-0.7-2.8-0.7s-2,0.2-2.8,0.7l-38,20l-7.1,3.7l1.3-7.9l7.4-45.2c0.3-1.9-0.4-3.9-1.8-5.3l-30.6-29.8\n                                                            l-5.8-5.7L186.3,82.3z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M296,453h-40c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6S299.3,453,296,453z"
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "style-filled" }, [
+                                    _c("div", { staticClass: "bg" }, [
+                                      _c(
+                                        "svg",
+                                        {
+                                          staticStyle: {
+                                            "enable-background":
+                                              "new 0 0 635 760.2"
+                                          },
+                                          attrs: {
+                                            viewBox: "0 0 635 760.2",
+                                            "xml:space": "preserve"
+                                          }
+                                        },
+                                        [
+                                          _c("g", [
+                                            _c("defs", [
+                                              _c("rect", {
+                                                attrs: {
+                                                  id: "SVGID_1_",
+                                                  x: "-141.2",
+                                                  y: "-193",
+                                                  width: "832.5",
+                                                  height: "374.7"
+                                                }
+                                              })
+                                            ]),
+                                            _vm._v(" "),
+                                            _c(
+                                              "clipPath",
+                                              { attrs: { id: "SVGID_2_" } },
+                                              [
+                                                _c("use", {
+                                                  staticStyle: {
+                                                    overflow: "visible"
+                                                  },
+                                                  attrs: {
+                                                    "xlink:href": "#SVGID_1_"
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("circle", {
+                                              staticClass: "st0",
+                                              attrs: {
+                                                cx: "316.3",
+                                                cy: "383",
+                                                r: "368.2"
+                                              }
+                                            })
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("g", [
+                                            _c("defs", [
+                                              _c("rect", {
+                                                attrs: {
+                                                  id: "SVGID_3_",
+                                                  x: "-141.2",
+                                                  y: "590.1",
+                                                  width: "832.5",
+                                                  height: "386"
+                                                }
+                                              })
+                                            ]),
+                                            _vm._v(" "),
+                                            _c(
+                                              "clipPath",
+                                              { attrs: { id: "SVGID_4_" } },
+                                              [
+                                                _c("use", {
+                                                  staticStyle: {
+                                                    overflow: "visible"
+                                                  },
+                                                  attrs: {
+                                                    "xlink:href": "#SVGID_3_"
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("circle", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                cx: "318.3",
+                                                cy: "383",
+                                                r: "368.2"
+                                              }
+                                            })
+                                          ])
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticStyle: {
+                                          "enable-background": "new 0 0 512 512"
+                                        },
                                         attrs: {
-                                          d:
-                                            "M73,445h40c3.3,0,6-2.7,6-6s-2.7-6-6-6H83h-4v-4v-20v-4h4h30c3.3,0,6-2.7,6-6v-40c0-3.3-2.7-6-6-6H73\n                                                        c-3.3,0-6,2.7-6,6s2.7,6,6,6h30h4v4v20v4h-4H73c-3.3,0-6,2.7-6,6v40C67,442.3,69.7,445,73,445z"
+                                          viewBox: "0 0 512 512",
+                                          "xml:space": "preserve"
                                         }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M399,425h30h4v4v20v4h-4h-30c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6v-80c0-3.3-2.7-6-6-6h-40\n                                                        c-3.3,0-6,2.7-6,6s2.7,6,6,6h30h4v4v20v4h-4h-30c-3.3,0-6,2.7-6,6S395.7,425,399,425z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M502,333H346h-4v-4v-93c0-3.3-2.7-6-6-6H176c-3.3,0-6,2.7-6,6v53v4h-4H10c-3.3,0-6,2.7-6,6v203\n                                                        c0,3.3,2.7,6,6,6h166h160h166c3.3,0,6-2.7,6-6V339C508,335.7,505.3,333,502,333z M170,309v183v4h-4H20h-4v-4V309v-4h4h146h4V309z\n                                                        M330,246v246v4h-4H186h-4v-4V246v-4h4h140h4V246z M496,349v143v4h-4H346h-4v-4V349v-4h4h146h4V349z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M161.2,83.7l41.4,40.3l1.5,1.5l-0.3,2.1l-9.8,59.9c-0.4,2.2,0.6,4.5,2.4,5.8c1,0.7,2.3,1.1,3.5,1.1\n                                                        c1,0,1.9-0.2,2.8-0.7l51.1-26.9l1.9-1l1.9,1l51.1,26.9c0.8,0.4,1.7,0.6,2.8,0.6c1.3,0,2.4-0.4,3.4-1.1l0.1,0l0.1,0\n                                                        c1.8-1.3,2.7-3.6,2.4-5.8l-9.8-59.9l-0.3-2.1l1.5-1.5L350,83.5c1.6-1.5,2.1-3.9,1.5-6.1c-0.7-2.2-2.6-3.8-4.8-4.1l0,0l0,0\n                                                        l-56.9-8.3l-2.1-0.3l-0.9-2L261.1,7.5c-1-2.1-3.1-3.5-5.5-3.5c-2.3,0-4.4,1.3-5.5,3.5l-25.6,55.3l-0.9,2l-2.1,0.3l-56.9,8.3l0,0\n                                                        l0,0c-2.2,0.3-4.1,1.9-4.8,4.1C159,79.6,159.6,82,161.2,83.7z M186.3,82.3l42.2-6.1c2-0.3,3.7-1.6,4.5-3.4l18.8-40.6l3.6-7.8\n                                                        l3.6,7.8l18.8,40.6c0.8,1.9,2.5,3.1,4.6,3.4l42.2,6.1l8,1.2l-5.8,5.7L296.5,119c-1.4,1.4-2.1,3.4-1.7,5.3l7.4,45.2l1.3,7.9\n                                                        l-7.1-3.8l-37.9-20c-0.8-0.4-1.8-0.7-2.8-0.7s-2,0.2-2.8,0.7l-38,20l-7.1,3.7l1.3-7.9l7.4-45.2c0.3-1.9-0.4-3.9-1.8-5.3l-30.6-29.8\n                                                        l-5.8-5.7L186.3,82.3z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M296,453h-40c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6S299.3,453,296,453z"
-                                        }
-                                      })
-                                    ])
-                                  ]
-                                )
-                              ])
-                            ]),
+                                      },
+                                      [
+                                        _c("g", { attrs: { id: "XMLID_2_" } }, [
+                                          _c("g", [
+                                            _c("path", {
+                                              staticClass: "st0",
+                                              attrs: {
+                                                d:
+                                                  "M334.7,82.8L299.6,117c-2.6,2.6-3.9,6.4-3.3,10.1l8.5,51.8l-43.4-22.9c-3.3-1.7-7.3-1.7-10.7,0l-43.5,22.9\n                                                                l8.5-51.8c0.6-3.7-0.6-7.4-3.3-10.1l-35.1-34.1l48.3-7c3.8-0.6,7.1-3,8.7-6.5l21.5-46.5l21.5,46.5c1.6,3.6,4.9,6,8.7,6.5\n                                                                L334.7,82.8z"
+                                              }
+                                            })
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", [
+                                          _c(
+                                            "g",
+                                            { attrs: { id: "XMLID_1_" } },
+                                            [
+                                              _c("g", [
+                                                _c("rect", {
+                                                  staticClass: "st0",
+                                                  attrs: {
+                                                    x: "340",
+                                                    y: "345",
+                                                    width: "158.3",
+                                                    height: "154.8"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("rect", {
+                                                  staticClass: "st0",
+                                                  attrs: {
+                                                    x: "178.3",
+                                                    y: "238",
+                                                    width: "154.4",
+                                                    height: "261.8"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("rect", {
+                                                  staticClass: "st0",
+                                                  attrs: {
+                                                    x: "14",
+                                                    y: "305",
+                                                    width: "155.4",
+                                                    height: "194.8"
+                                                  }
+                                                })
+                                              ])
+                                            ]
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", [
+                                          _c("circle", {
+                                            staticClass: "st1",
+                                            attrs: {
+                                              cx: "216",
+                                              cy: "459",
+                                              r: "6"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st1",
+                                            attrs: {
+                                              d:
+                                                "M236,285h10h4v4v60v4h-4h-10c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6s-2.7-6-6-6h-10h-4v-4v-70\n                                                        c0-3.3-2.7-6-6-6h-20c-3.3,0-6,2.7-6,6S232.7,285,236,285z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st1",
+                                            attrs: {
+                                              d:
+                                                "M73,445h40c3.3,0,6-2.7,6-6s-2.7-6-6-6H83h-4v-4v-20v-4h4h30c3.3,0,6-2.7,6-6v-40c0-3.3-2.7-6-6-6H73\n                                                        c-3.3,0-6,2.7-6,6s2.7,6,6,6h30h4v4v20v4h-4H73c-3.3,0-6,2.7-6,6v40C67,442.3,69.7,445,73,445z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st1",
+                                            attrs: {
+                                              d:
+                                                "M399,425h30h4v4v20v4h-4h-30c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6v-80c0-3.3-2.7-6-6-6h-40\n                                                        c-3.3,0-6,2.7-6,6s2.7,6,6,6h30h4v4v20v4h-4h-30c-3.3,0-6,2.7-6,6S395.7,425,399,425z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st1",
+                                            attrs: {
+                                              d:
+                                                "M502,333H346h-4v-4v-93c0-3.3-2.7-6-6-6H176c-3.3,0-6,2.7-6,6v53v4h-4H10c-3.3,0-6,2.7-6,6v203\n                                                        c0,3.3,2.7,6,6,6h166h160h166c3.3,0,6-2.7,6-6V339C508,335.7,505.3,333,502,333z M170,309v183v4h-4H20h-4v-4V309v-4h4h146h4V309z\n                                                        M330,246v246v4h-4H186h-4v-4V246v-4h4h140h4V246z M496,349v143v4h-4H346h-4v-4V349v-4h4h146h4V349z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st1",
+                                            attrs: {
+                                              d:
+                                                "M161.2,83.7l41.4,40.3l1.5,1.5l-0.3,2.1l-9.8,59.9c-0.4,2.2,0.6,4.5,2.4,5.8c1,0.7,2.3,1.1,3.5,1.1\n                                                        c1,0,1.9-0.2,2.8-0.7l51.1-26.9l1.9-1l1.9,1l51.1,26.9c0.8,0.4,1.7,0.6,2.8,0.6c1.3,0,2.4-0.4,3.4-1.1l0.1,0l0.1,0\n                                                        c1.8-1.3,2.7-3.6,2.4-5.8l-9.8-59.9l-0.3-2.1l1.5-1.5L350,83.5c1.6-1.5,2.1-3.9,1.5-6.1c-0.7-2.2-2.6-3.8-4.8-4.1l0,0l0,0\n                                                        l-56.9-8.3l-2.1-0.3l-0.9-2L261.1,7.5c-1-2.1-3.1-3.5-5.5-3.5c-2.3,0-4.4,1.3-5.5,3.5l-25.6,55.3l-0.9,2l-2.1,0.3l-56.9,8.3l0,0\n                                                        l0,0c-2.2,0.3-4.1,1.9-4.8,4.1C159,79.6,159.6,82,161.2,83.7z M186.3,82.3l42.2-6.1c2-0.3,3.7-1.6,4.5-3.4l18.8-40.6l3.6-7.8\n                                                        l3.6,7.8l18.8,40.6c0.8,1.9,2.5,3.1,4.6,3.4l42.2,6.1l8,1.2l-5.8,5.7L296.5,119c-1.4,1.4-2.1,3.4-1.7,5.3l7.4,45.2l1.3,7.9\n                                                        l-7.1-3.8l-37.9-20c-0.8-0.4-1.8-0.7-2.8-0.7s-2,0.2-2.8,0.7l-38,20l-7.1,3.7l1.3-7.9l7.4-45.2c0.3-1.9-0.4-3.9-1.8-5.3l-30.6-29.8\n                                                        l-5.8-5.7L186.3,82.3z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st1",
+                                            attrs: {
+                                              d:
+                                                "M296,453h-40c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6S299.3,453,296,453z"
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "title" }, [
+                                  _vm._v("Finalists")
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "idea-number" }, [
+                                  _c("span", [
+                                    _vm._v(_vm._s(_vm.challenge.finalized))
+                                  ]),
+                                  _vm._v(
+                                    " ideas\n                                        "
+                                  )
+                                ])
+                              ]
+                            ),
                             _vm._v(" "),
-                            _c("div", { staticClass: "title" }, [
-                              _vm._v("Finalists")
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "idea-number" }, [
-                              _c("span", [
-                                _vm._v(_vm._s(_vm.challenge.finalized))
-                              ]),
-                              _vm._v(
-                                " ideas\n                                        "
-                              )
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "li",
-                          {
-                            staticClass: "progress-stage-item",
-                            class: _vm.challenge.winner
-                              ? "in-progress"
-                              : "not-started"
-                          },
-                          [
-                            _c("div", { staticClass: "icon icon-winner" }, [
-                              _c("div", { staticClass: "style-empty" }, [
-                                _c(
-                                  "svg",
-                                  {
-                                    staticStyle: {
-                                      "enable-background": "new 0 0 512 512"
-                                    },
-                                    attrs: {
-                                      viewBox: "0 0 512 512",
-                                      "xml:space": "preserve"
-                                    }
-                                  },
-                                  [
-                                    _c("g", [
-                                      _c("path", {
-                                        staticClass: "st0",
+                            _c(
+                              "li",
+                              {
+                                staticClass: "progress-stage-item",
+                                class: _vm.challenge.winner
+                                  ? "in-progress"
+                                  : "not-started"
+                              },
+                              [
+                                _c("div", { staticClass: "icon icon-winner" }, [
+                                  _c("div", { staticClass: "style-empty" }, [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticStyle: {
+                                          "enable-background": "new 0 0 512 512"
+                                        },
                                         attrs: {
-                                          d:
-                                            "M275.7,441.8v-0.6v-1.5h-1.5h-36.5h-1.5v1.5v0.6c0,18.4-15,33.3-33.3,33.3c-10.9,0-19.7,8.9-19.7,19.7v0.6v1.5\n                                                            h1.5h142.7h1.5v-1.5v-0.6c0-10.9-8.9-19.7-19.7-19.7C290.7,475.1,275.7,460.2,275.7,441.8z"
+                                          viewBox: "0 0 512 512",
+                                          "xml:space": "preserve"
                                         }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
+                                      },
+                                      [
+                                        _c("g", [
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M275.7,441.8v-0.6v-1.5h-1.5h-36.5h-1.5v1.5v0.6c0,18.4-15,33.3-33.3,33.3c-10.9,0-19.7,8.9-19.7,19.7v0.6v1.5\n                                                            h1.5h142.7h1.5v-1.5v-0.6c0-10.9-8.9-19.7-19.7-19.7C290.7,475.1,275.7,460.2,275.7,441.8z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M116.5,185.2V87.4v-1.5H115H52.5c-6,0-10.9,4.9-10.9,10.9v53.1c0,50.3,37.6,92.7,87.5,98.7l2.7,0.3l-1.2-2.5\n                                                            C121.3,227.2,116.5,206.6,116.5,185.2z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M256,360.1c-20.6,0-37.4,16.8-37.4,37.4c0,10.8,4.7,21.1,12.9,28.2l0.4,0.4h0.6h47.2h0.6l0.4-0.4\n                                                            c8.2-7.1,12.9-17.4,12.9-28.2C293.4,376.9,276.6,360.1,256,360.1z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M282.5,324.7h-53.1c-6,0-10.9,4.9-10.9,10.9s4.9,10.9,10.9,10.9h53.1c6,0,10.9-4.9,10.9-10.9\n                                                            S288.6,324.7,282.5,324.7z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M388.7,36.9c6,0,10.9-4.9,10.9-10.9s-4.9-10.9-10.9-10.9H123.3c-6,0-10.9,4.9-10.9,10.9s4.9,10.9,10.9,10.9\n                                                            H388.7z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M459.5,85.9H397h-1.5v1.5v97.9c0,21.4-4.8,42-14.1,61.1l-1.2,2.5l2.7-0.3c49.9-6,87.5-48.4,87.5-98.7V96.8\n                                                            C470.4,90.8,465.5,85.9,459.5,85.9z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              d:
+                                                "M381.9,52v-1.5h-1.5H131.6h-1.5V52v133.3c0,69.4,56.5,125.9,125.9,125.9s125.9-56.5,125.9-125.9V52z\n                                                            M360.1,185.2c0,31.1-13.8,60.4-37.9,80.2c-1.2,1-2.7,1.6-4.3,1.6c-2,0-3.9-0.9-5.2-2.5c-2.4-2.9-2-7.2,0.9-9.6\n                                                            c20.9-17.3,32.9-42.7,32.9-69.8v-53.1c0-3.7,3-6.8,6.8-6.8s6.8,3,6.8,6.8V185.2z M360.1,96.8c0,3.7-3,6.8-6.8,6.8s-6.8-3-6.8-6.8\n                                                            V79.1c0-3.7,3-6.8,6.8-6.8s6.8,3,6.8,6.8V96.8z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st1",
+                                            attrs: {
+                                              d:
+                                                "M459.5,72.3H397h-1.5v-1.5V50.6v-1.1l1-0.3c10-3.4,16.7-12.7,16.7-23.2c0-13.5-11-24.5-24.5-24.5H123.3\n                                                            c-13.5,0-24.5,11-24.5,24.5c0,10.5,6.7,19.8,16.7,23.2l1,0.3v1.1v20.2v1.5H115H52.5C39,72.3,28,83.3,28,96.8v53.1\n                                                            c0,29.8,11.6,58,32.6,79.3c21,21.3,48.9,33.2,78.7,33.7l0.8,0l0.4,0.6c16.9,24.8,41.7,43.9,69.9,53.6l2.1,0.7l-1.5,1.7\n                                                            c-3.9,4.5-6.1,10.2-6.1,16.1c0,10,6,18.9,15.2,22.7l2.1,0.9l-1.7,1.6c-10.1,9.7-15.7,22.8-15.7,36.8c0,14.8,6.1,28.4,17.2,38.2\n                                                            l0.5,0.4v0.7v4.9c0,10.9-8.9,19.7-19.7,19.7c-18.4,0-33.3,15-33.3,33.3v8.8c0,3.7,3,6.8,6.8,6.8h159.2c3.7,0,6.8-3,6.8-6.8v-8.8\n                                                            c0-18.4-15-33.3-33.3-33.3c-10.9,0-19.7-8.9-19.7-19.7v-4.9v-0.7l0.5-0.4c11.1-9.8,17.2-23.3,17.2-38.2c0-14-5.6-27.1-15.7-36.8\n                                                            l-1.7-1.6l2.1-0.9c9.3-3.8,15.2-12.7,15.2-22.7c0-5.9-2.2-11.7-6.1-16.1l-1.5-1.7l2.1-0.7c28.2-9.8,53-28.8,69.9-53.6l0.4-0.6\n                                                            l0.8,0c29.8-0.4,57.7-12.4,78.7-33.7c21-21.3,32.6-49.4,32.6-79.3V96.8C484,83.3,473,72.3,459.5,72.3z M112.4,26\n                                                            c0-6,4.9-10.9,10.9-10.9h265.4c6,0,10.9,4.9,10.9,10.9s-4.9,10.9-10.9,10.9H123.3C117.3,36.9,112.4,32,112.4,26z M129.1,248.5\n                                                            c-49.9-6-87.5-48.4-87.5-98.7V96.8c0-6,4.9-10.9,10.9-10.9H115h1.5v1.5v97.9c0,21.4,4.8,42,14.1,61.1l1.2,2.5L129.1,248.5z\n                                                            M309.1,475.1c10.9,0,19.7,8.9,19.7,19.7v0.6v1.5h-1.5H184.7h-1.5v-1.5v-0.6c0-10.9,8.9-19.7,19.7-19.7c18.4,0,33.3-15,33.3-33.3\n                                                            v-0.6v-1.5h1.5h36.5h1.5v1.5v0.6C275.7,460.2,290.7,475.1,309.1,475.1z M293.4,397.5c0,10.8-4.7,21.1-12.9,28.2l-0.4,0.4h-0.6\n                                                            h-47.2h-0.6l-0.4-0.4c-8.2-7.1-12.9-17.4-12.9-28.2c0-20.6,16.8-37.4,37.4-37.4C276.6,360.1,293.4,376.9,293.4,397.5z M282.5,346.5\n                                                            h-53.1c-6,0-10.9-4.9-10.9-10.9s4.9-10.9,10.9-10.9h53.1c6,0,10.9,4.9,10.9,10.9S288.6,346.5,282.5,346.5z M256,311.1\n                                                            c-69.4,0-125.9-56.5-125.9-125.9V52v-1.5h1.5h248.8h1.5V52v133.3C381.9,254.7,325.4,311.1,256,311.1z M470.4,149.8\n                                                            c0,50.3-37.6,92.7-87.5,98.7l-2.7,0.3l1.2-2.5c9.4-19.1,14.1-39.7,14.1-61.1V87.4v-1.5h1.5h62.5c6,0,10.9,4.9,10.9,10.9V149.8z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st1",
+                                            attrs: {
+                                              d:
+                                                "M353.3,125.4c-3.7,0-6.8,3-6.8,6.8v53.1c0,27-12,52.5-32.9,69.8c-2.9,2.4-3.3,6.7-0.9,9.6\n                                                            c1.3,1.6,3.2,2.5,5.2,2.5c1.6,0,3.1-0.6,4.3-1.6c24.1-19.9,37.9-49.1,37.9-80.2v-53.1C360.1,128.4,357.1,125.4,353.3,125.4z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            staticClass: "st1",
+                                            attrs: {
+                                              d:
+                                                "M353.3,72.3c-3.7,0-6.8,3-6.8,6.8v17.7c0,3.7,3,6.8,6.8,6.8s6.8-3,6.8-6.8V79.1\n                                                            C360.1,75.3,357.1,72.3,353.3,72.3z"
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "style-filled" }, [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticStyle: {
+                                          "enable-background": "new 0 0 512 512"
+                                        },
                                         attrs: {
-                                          d:
-                                            "M116.5,185.2V87.4v-1.5H115H52.5c-6,0-10.9,4.9-10.9,10.9v53.1c0,50.3,37.6,92.7,87.5,98.7l2.7,0.3l-1.2-2.5\n                                                            C121.3,227.2,116.5,206.6,116.5,185.2z"
+                                          viewBox: "0 0 512 512",
+                                          "xml:space": "preserve"
                                         }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M256,360.1c-20.6,0-37.4,16.8-37.4,37.4c0,10.8,4.7,21.1,12.9,28.2l0.4,0.4h0.6h47.2h0.6l0.4-0.4\n                                                            c8.2-7.1,12.9-17.4,12.9-28.2C293.4,376.9,276.6,360.1,256,360.1z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M282.5,324.7h-53.1c-6,0-10.9,4.9-10.9,10.9s4.9,10.9,10.9,10.9h53.1c6,0,10.9-4.9,10.9-10.9\n                                                            S288.6,324.7,282.5,324.7z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M388.7,36.9c6,0,10.9-4.9,10.9-10.9s-4.9-10.9-10.9-10.9H123.3c-6,0-10.9,4.9-10.9,10.9s4.9,10.9,10.9,10.9\n                                                            H388.7z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M459.5,85.9H397h-1.5v1.5v97.9c0,21.4-4.8,42-14.1,61.1l-1.2,2.5l2.7-0.3c49.9-6,87.5-48.4,87.5-98.7V96.8\n                                                            C470.4,90.8,465.5,85.9,459.5,85.9z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st0",
-                                        attrs: {
-                                          d:
-                                            "M381.9,52v-1.5h-1.5H131.6h-1.5V52v133.3c0,69.4,56.5,125.9,125.9,125.9s125.9-56.5,125.9-125.9V52z\n                                                            M360.1,185.2c0,31.1-13.8,60.4-37.9,80.2c-1.2,1-2.7,1.6-4.3,1.6c-2,0-3.9-0.9-5.2-2.5c-2.4-2.9-2-7.2,0.9-9.6\n                                                            c20.9-17.3,32.9-42.7,32.9-69.8v-53.1c0-3.7,3-6.8,6.8-6.8s6.8,3,6.8,6.8V185.2z M360.1,96.8c0,3.7-3,6.8-6.8,6.8s-6.8-3-6.8-6.8\n                                                            V79.1c0-3.7,3-6.8,6.8-6.8s6.8,3,6.8,6.8V96.8z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M459.5,72.3H397h-1.5v-1.5V50.6v-1.1l1-0.3c10-3.4,16.7-12.7,16.7-23.2c0-13.5-11-24.5-24.5-24.5H123.3\n                                                            c-13.5,0-24.5,11-24.5,24.5c0,10.5,6.7,19.8,16.7,23.2l1,0.3v1.1v20.2v1.5H115H52.5C39,72.3,28,83.3,28,96.8v53.1\n                                                            c0,29.8,11.6,58,32.6,79.3c21,21.3,48.9,33.2,78.7,33.7l0.8,0l0.4,0.6c16.9,24.8,41.7,43.9,69.9,53.6l2.1,0.7l-1.5,1.7\n                                                            c-3.9,4.5-6.1,10.2-6.1,16.1c0,10,6,18.9,15.2,22.7l2.1,0.9l-1.7,1.6c-10.1,9.7-15.7,22.8-15.7,36.8c0,14.8,6.1,28.4,17.2,38.2\n                                                            l0.5,0.4v0.7v4.9c0,10.9-8.9,19.7-19.7,19.7c-18.4,0-33.3,15-33.3,33.3v8.8c0,3.7,3,6.8,6.8,6.8h159.2c3.7,0,6.8-3,6.8-6.8v-8.8\n                                                            c0-18.4-15-33.3-33.3-33.3c-10.9,0-19.7-8.9-19.7-19.7v-4.9v-0.7l0.5-0.4c11.1-9.8,17.2-23.3,17.2-38.2c0-14-5.6-27.1-15.7-36.8\n                                                            l-1.7-1.6l2.1-0.9c9.3-3.8,15.2-12.7,15.2-22.7c0-5.9-2.2-11.7-6.1-16.1l-1.5-1.7l2.1-0.7c28.2-9.8,53-28.8,69.9-53.6l0.4-0.6\n                                                            l0.8,0c29.8-0.4,57.7-12.4,78.7-33.7c21-21.3,32.6-49.4,32.6-79.3V96.8C484,83.3,473,72.3,459.5,72.3z M112.4,26\n                                                            c0-6,4.9-10.9,10.9-10.9h265.4c6,0,10.9,4.9,10.9,10.9s-4.9,10.9-10.9,10.9H123.3C117.3,36.9,112.4,32,112.4,26z M129.1,248.5\n                                                            c-49.9-6-87.5-48.4-87.5-98.7V96.8c0-6,4.9-10.9,10.9-10.9H115h1.5v1.5v97.9c0,21.4,4.8,42,14.1,61.1l1.2,2.5L129.1,248.5z\n                                                            M309.1,475.1c10.9,0,19.7,8.9,19.7,19.7v0.6v1.5h-1.5H184.7h-1.5v-1.5v-0.6c0-10.9,8.9-19.7,19.7-19.7c18.4,0,33.3-15,33.3-33.3\n                                                            v-0.6v-1.5h1.5h36.5h1.5v1.5v0.6C275.7,460.2,290.7,475.1,309.1,475.1z M293.4,397.5c0,10.8-4.7,21.1-12.9,28.2l-0.4,0.4h-0.6\n                                                            h-47.2h-0.6l-0.4-0.4c-8.2-7.1-12.9-17.4-12.9-28.2c0-20.6,16.8-37.4,37.4-37.4C276.6,360.1,293.4,376.9,293.4,397.5z M282.5,346.5\n                                                            h-53.1c-6,0-10.9-4.9-10.9-10.9s4.9-10.9,10.9-10.9h53.1c6,0,10.9,4.9,10.9,10.9S288.6,346.5,282.5,346.5z M256,311.1\n                                                            c-69.4,0-125.9-56.5-125.9-125.9V52v-1.5h1.5h248.8h1.5V52v133.3C381.9,254.7,325.4,311.1,256,311.1z M470.4,149.8\n                                                            c0,50.3-37.6,92.7-87.5,98.7l-2.7,0.3l1.2-2.5c9.4-19.1,14.1-39.7,14.1-61.1V87.4v-1.5h1.5h62.5c6,0,10.9,4.9,10.9,10.9V149.8z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M353.3,125.4c-3.7,0-6.8,3-6.8,6.8v53.1c0,27-12,52.5-32.9,69.8c-2.9,2.4-3.3,6.7-0.9,9.6\n                                                            c1.3,1.6,3.2,2.5,5.2,2.5c1.6,0,3.1-0.6,4.3-1.6c24.1-19.9,37.9-49.1,37.9-80.2v-53.1C360.1,128.4,357.1,125.4,353.3,125.4z"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("path", {
-                                        staticClass: "st1",
-                                        attrs: {
-                                          d:
-                                            "M353.3,72.3c-3.7,0-6.8,3-6.8,6.8v17.7c0,3.7,3,6.8,6.8,6.8s6.8-3,6.8-6.8V79.1\n                                                            C360.1,75.3,357.1,72.3,353.3,72.3z"
-                                        }
-                                      })
-                                    ])
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "style-filled" }, [
-                                _c(
-                                  "svg",
-                                  {
-                                    staticStyle: {
-                                      "enable-background": "new 0 0 512 512"
-                                    },
-                                    attrs: {
-                                      viewBox: "0 0 512 512",
-                                      "xml:space": "preserve"
-                                    }
-                                  },
-                                  [
-                                    _c("g", { attrs: { id: "XMLID_1_" } }, [
-                                      _c("g", [
-                                        _c("path", {
-                                          staticClass: "st0",
-                                          attrs: {
-                                            d:
-                                              "M484,96.8v53.1c0,29.8-11.6,58-32.6,79.3c-21,21.3-48.9,33.2-78.7,33.6l-0.8,0l-0.4,0.6\n                                                                c-16.9,24.8-41.7,43.9-69.9,53.6l-2.1,0.7l1.5,1.7c3.9,4.5,6.1,10.2,6.1,16.1c0,10-6,18.9-15.2,22.7l-2.1,0.9l1.7,1.6\n                                                                c10.1,9.7,15.7,22.8,15.7,36.8c0,14.8-6.1,28.4-17.2,38.2l-0.5,0.5v0.7v4.9c0,10.9,8.9,19.8,19.8,19.8c18.4,0,33.3,15,33.3,33.3\n                                                                v8.9c0,3.7-3.1,6.8-6.8,6.8H176.4c-3.8,0-6.8-3-6.8-6.8v-8.9c0-18.4,15-33.3,33.3-33.3c10.9,0,19.7-8.9,19.7-19.8v-4.9v-0.7\n                                                                l-0.5-0.5c-11.1-9.8-17.2-23.4-17.2-38.2c0-14,5.6-27,15.7-36.8l1.7-1.6l-2.1-0.9c-9.3-3.8-15.2-12.7-15.2-22.7\n                                                                c0-5.9,2.2-11.7,6.1-16.1l1.5-1.7l-2.1-0.7c-28.2-9.8-53-28.8-69.9-53.6l-0.4-0.6l-0.8,0c-29.8-0.4-57.7-12.4-78.7-33.6\n                                                                c-21-21.3-32.6-49.4-32.6-79.3V96.8c0-13.5,11-24.5,24.5-24.5H115h1.5v-1.5V50.6v-1.1l-1-0.3c-10-3.4-16.7-12.7-16.7-23.2\n                                                                c0-13.5,11-24.5,24.5-24.5h265.4c13.5,0,24.5,11,24.5,24.5c0,10.5-6.7,19.8-16.7,23.2l-1,0.3v1.1v20.2v1.5h1.5h62.5\n                                                                C473,72.3,484,83.3,484,96.8z M470.4,149.8V96.8c0-6-4.9-10.9-10.9-10.9H397h-1.5v1.5v97.9c0,21.4-4.8,42-14.1,61.1l-1.2,2.5\n                                                                l2.7-0.3C432.8,242.5,470.4,200.1,470.4,149.8z M399.6,26c0-6-4.9-10.9-10.9-10.9H123.3c-6,0-10.9,4.9-10.9,10.9\n                                                                s4.9,10.9,10.9,10.9h265.4C394.7,36.9,399.6,32,399.6,26z M381.9,185.2V52v-1.5h-1.5H131.6h-1.5V52v133.3\n                                                                c0,69.4,56.5,125.9,125.9,125.9C325.4,311.1,381.9,254.6,381.9,185.2z M328.8,496.9v-1.5v-0.6c0-10.9-8.9-19.8-19.7-19.8\n                                                                c-18.4,0-33.3-14.9-33.3-33.3v-0.5v-1.5h-1.5h-36.5h-1.5v1.5v0.5c0,18.4-15,33.3-33.3,33.3c-10.9,0-19.8,8.9-19.8,19.8v0.6v1.5\n                                                                h1.5h142.7H328.8z M293.4,335.6c0-6-4.9-10.9-10.9-10.9h-53.1c-6,0-10.9,4.9-10.9,10.9s4.9,10.9,10.9,10.9h53.1\n                                                                C288.6,346.5,293.4,341.6,293.4,335.6z M280.6,425.8c8.2-7.1,12.9-17.4,12.9-28.2c0-20.6-16.8-37.4-37.4-37.4\n                                                                c-20.7,0-37.4,16.8-37.4,37.4c0,10.8,4.7,21.1,12.8,28.2l0.4,0.4h0.6h47.2h0.6L280.6,425.8z M131.8,248.8l-1.2-2.5\n                                                                c-9.4-19.1-14.1-39.7-14.1-61.1V87.4v-1.5H115H52.5c-6,0-10.9,4.9-10.9,10.9v53.1c0,50.3,37.6,92.7,87.5,98.7L131.8,248.8z"
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("path", {
-                                          staticClass: "st1",
-                                          attrs: {
-                                            d:
-                                              "M388.7,15.1c6,0,10.9,4.9,10.9,10.9s-4.9,10.9-10.9,10.9H123.3c-6,0-10.9-4.9-10.9-10.9s4.9-10.9,10.9-10.9\n                                                                H388.7z"
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("path", {
-                                          staticClass: "st1",
-                                          attrs: {
-                                            d:
-                                              "M381.9,52v133.3c0,69.4-56.5,125.9-125.9,125.9c-69.4,0-125.9-56.5-125.9-125.9V52v-1.5h1.5h248.8h1.5V52z\n                                                                M360.1,185.2v-53.1c0-3.8-3.1-6.8-6.8-6.8c-3.8,0-6.8,3-6.8,6.8v53.1c0,27-12,52.5-32.9,69.8c-2.9,2.4-3.3,6.7-0.9,9.6\n                                                                c1.3,1.6,3.2,2.5,5.2,2.5c1.6,0,3.1-0.5,4.3-1.5C346.3,245.6,360.1,216.3,360.1,185.2z M360.1,96.8V79.1c0-3.8-3.1-6.8-6.8-6.8\n                                                                c-3.8,0-6.8,3.1-6.8,6.8v17.7c0,3.8,3,6.8,6.8,6.8C357.1,103.6,360.1,100.5,360.1,96.8z"
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("path", {
-                                          staticClass: "st0",
-                                          attrs: {
-                                            d:
-                                              "M360.1,132.1v53.1c0,31.1-13.8,60.4-37.9,80.3c-1.2,1-2.8,1.5-4.3,1.5c-2,0-4-0.9-5.2-2.5\n                                                                c-2.4-2.9-2-7.2,0.9-9.6c20.9-17.3,32.9-42.7,32.9-69.8v-53.1c0-3.8,3-6.8,6.8-6.8C357.1,125.3,360.1,128.4,360.1,132.1z"
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("path", {
-                                          staticClass: "st0",
-                                          attrs: {
-                                            d:
-                                              "M360.1,79.1v17.7c0,3.8-3.1,6.8-6.8,6.8c-3.8,0-6.8-3-6.8-6.8V79.1c0-3.8,3-6.8,6.8-6.8\n                                                                C357.1,72.3,360.1,75.3,360.1,79.1z"
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("path", {
-                                          staticClass: "st1",
-                                          attrs: {
-                                            d:
-                                              "M328.8,495.4v1.5h-1.5H184.7h-1.5v-1.5v-0.6c0-10.9,8.9-19.8,19.8-19.8c18.4,0,33.3-14.9,33.3-33.3v-0.5v-1.5\n                                                                h1.5h36.5h1.5v1.5v0.5c0,18.4,15,33.3,33.3,33.3c10.9,0,19.7,8.9,19.7,19.8V495.4z"
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("path", {
-                                          staticClass: "st1",
-                                          attrs: {
-                                            d:
-                                              "M282.5,324.7c6,0,10.9,4.9,10.9,10.9s-4.9,10.9-10.9,10.9h-53.1c-6,0-10.9-4.9-10.9-10.9s4.9-10.9,10.9-10.9\n                                                                H282.5z"
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("path", {
-                                          staticClass: "st1",
-                                          attrs: {
-                                            d:
-                                              "M293.4,397.5c0,10.8-4.7,21.1-12.9,28.2l-0.4,0.4h-0.6h-47.2h-0.6l-0.4-0.4c-8.2-7.1-12.8-17.4-12.8-28.2\n                                                                c0-20.6,16.8-37.4,37.4-37.4C276.6,360.1,293.4,376.9,293.4,397.5z"
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("path", {
-                                          staticClass: "st1",
-                                          attrs: {
-                                            d:
-                                              "M172.2,262.4l-19.3,0c-29.8-0.4-57.7-12.4-78.7-33.6c-21-21.3-32.6-49.4-32.6-79.3V96.3\n                                                                c0-13.5,11-24.5,24.5-24.5h62.5h18.8 M368.9,71.8h14.7h62.5c13.5,0,24.5,11,24.5,24.5v53.1c0,29.8-11.6,58-32.6,79.3\n                                                                c-21,21.3-54.9,33.2-84.7,33.6l10.5-37.8 M457,149.4V96.3c0-6-4.9-10.9-10.9-10.9h-62.5h-1.5v1.5v97.9c0,21.4-4.8,42-14.1,61.1\n                                                                l-1.2,2.5l2.7-0.3C419.4,242.1,457,199.7,457,149.4z M368.5,184.8 M143.7,184.8 M145.4,248.4l-1.2-2.5\n                                                                c-9.4-19.1-14.1-39.7-14.1-61.1V86.9v-1.5h-1.5H66.1c-6,0-10.9,4.9-10.9,10.9v53.1c0,50.3,37.6,92.7,87.5,98.6L145.4,248.4z"
-                                          }
-                                        })
-                                      ])
-                                    ])
-                                  ]
-                                )
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "title" }, [
-                              _vm._v("Winner's Circle")
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "idea-number" })
+                                      },
+                                      [
+                                        _c("g", { attrs: { id: "XMLID_1_" } }, [
+                                          _c("g", [
+                                            _c("path", {
+                                              staticClass: "st0",
+                                              attrs: {
+                                                d:
+                                                  "M484,96.8v53.1c0,29.8-11.6,58-32.6,79.3c-21,21.3-48.9,33.2-78.7,33.6l-0.8,0l-0.4,0.6\n                                                                c-16.9,24.8-41.7,43.9-69.9,53.6l-2.1,0.7l1.5,1.7c3.9,4.5,6.1,10.2,6.1,16.1c0,10-6,18.9-15.2,22.7l-2.1,0.9l1.7,1.6\n                                                                c10.1,9.7,15.7,22.8,15.7,36.8c0,14.8-6.1,28.4-17.2,38.2l-0.5,0.5v0.7v4.9c0,10.9,8.9,19.8,19.8,19.8c18.4,0,33.3,15,33.3,33.3\n                                                                v8.9c0,3.7-3.1,6.8-6.8,6.8H176.4c-3.8,0-6.8-3-6.8-6.8v-8.9c0-18.4,15-33.3,33.3-33.3c10.9,0,19.7-8.9,19.7-19.8v-4.9v-0.7\n                                                                l-0.5-0.5c-11.1-9.8-17.2-23.4-17.2-38.2c0-14,5.6-27,15.7-36.8l1.7-1.6l-2.1-0.9c-9.3-3.8-15.2-12.7-15.2-22.7\n                                                                c0-5.9,2.2-11.7,6.1-16.1l1.5-1.7l-2.1-0.7c-28.2-9.8-53-28.8-69.9-53.6l-0.4-0.6l-0.8,0c-29.8-0.4-57.7-12.4-78.7-33.6\n                                                                c-21-21.3-32.6-49.4-32.6-79.3V96.8c0-13.5,11-24.5,24.5-24.5H115h1.5v-1.5V50.6v-1.1l-1-0.3c-10-3.4-16.7-12.7-16.7-23.2\n                                                                c0-13.5,11-24.5,24.5-24.5h265.4c13.5,0,24.5,11,24.5,24.5c0,10.5-6.7,19.8-16.7,23.2l-1,0.3v1.1v20.2v1.5h1.5h62.5\n                                                                C473,72.3,484,83.3,484,96.8z M470.4,149.8V96.8c0-6-4.9-10.9-10.9-10.9H397h-1.5v1.5v97.9c0,21.4-4.8,42-14.1,61.1l-1.2,2.5\n                                                                l2.7-0.3C432.8,242.5,470.4,200.1,470.4,149.8z M399.6,26c0-6-4.9-10.9-10.9-10.9H123.3c-6,0-10.9,4.9-10.9,10.9\n                                                                s4.9,10.9,10.9,10.9h265.4C394.7,36.9,399.6,32,399.6,26z M381.9,185.2V52v-1.5h-1.5H131.6h-1.5V52v133.3\n                                                                c0,69.4,56.5,125.9,125.9,125.9C325.4,311.1,381.9,254.6,381.9,185.2z M328.8,496.9v-1.5v-0.6c0-10.9-8.9-19.8-19.7-19.8\n                                                                c-18.4,0-33.3-14.9-33.3-33.3v-0.5v-1.5h-1.5h-36.5h-1.5v1.5v0.5c0,18.4-15,33.3-33.3,33.3c-10.9,0-19.8,8.9-19.8,19.8v0.6v1.5\n                                                                h1.5h142.7H328.8z M293.4,335.6c0-6-4.9-10.9-10.9-10.9h-53.1c-6,0-10.9,4.9-10.9,10.9s4.9,10.9,10.9,10.9h53.1\n                                                                C288.6,346.5,293.4,341.6,293.4,335.6z M280.6,425.8c8.2-7.1,12.9-17.4,12.9-28.2c0-20.6-16.8-37.4-37.4-37.4\n                                                                c-20.7,0-37.4,16.8-37.4,37.4c0,10.8,4.7,21.1,12.8,28.2l0.4,0.4h0.6h47.2h0.6L280.6,425.8z M131.8,248.8l-1.2-2.5\n                                                                c-9.4-19.1-14.1-39.7-14.1-61.1V87.4v-1.5H115H52.5c-6,0-10.9,4.9-10.9,10.9v53.1c0,50.3,37.6,92.7,87.5,98.7L131.8,248.8z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M388.7,15.1c6,0,10.9,4.9,10.9,10.9s-4.9,10.9-10.9,10.9H123.3c-6,0-10.9-4.9-10.9-10.9s4.9-10.9,10.9-10.9\n                                                                H388.7z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M381.9,52v133.3c0,69.4-56.5,125.9-125.9,125.9c-69.4,0-125.9-56.5-125.9-125.9V52v-1.5h1.5h248.8h1.5V52z\n                                                                M360.1,185.2v-53.1c0-3.8-3.1-6.8-6.8-6.8c-3.8,0-6.8,3-6.8,6.8v53.1c0,27-12,52.5-32.9,69.8c-2.9,2.4-3.3,6.7-0.9,9.6\n                                                                c1.3,1.6,3.2,2.5,5.2,2.5c1.6,0,3.1-0.5,4.3-1.5C346.3,245.6,360.1,216.3,360.1,185.2z M360.1,96.8V79.1c0-3.8-3.1-6.8-6.8-6.8\n                                                                c-3.8,0-6.8,3.1-6.8,6.8v17.7c0,3.8,3,6.8,6.8,6.8C357.1,103.6,360.1,100.5,360.1,96.8z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st0",
+                                              attrs: {
+                                                d:
+                                                  "M360.1,132.1v53.1c0,31.1-13.8,60.4-37.9,80.3c-1.2,1-2.8,1.5-4.3,1.5c-2,0-4-0.9-5.2-2.5\n                                                                c-2.4-2.9-2-7.2,0.9-9.6c20.9-17.3,32.9-42.7,32.9-69.8v-53.1c0-3.8,3-6.8,6.8-6.8C357.1,125.3,360.1,128.4,360.1,132.1z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st0",
+                                              attrs: {
+                                                d:
+                                                  "M360.1,79.1v17.7c0,3.8-3.1,6.8-6.8,6.8c-3.8,0-6.8-3-6.8-6.8V79.1c0-3.8,3-6.8,6.8-6.8\n                                                                C357.1,72.3,360.1,75.3,360.1,79.1z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M328.8,495.4v1.5h-1.5H184.7h-1.5v-1.5v-0.6c0-10.9,8.9-19.8,19.8-19.8c18.4,0,33.3-14.9,33.3-33.3v-0.5v-1.5\n                                                                h1.5h36.5h1.5v1.5v0.5c0,18.4,15,33.3,33.3,33.3c10.9,0,19.7,8.9,19.7,19.8V495.4z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M282.5,324.7c6,0,10.9,4.9,10.9,10.9s-4.9,10.9-10.9,10.9h-53.1c-6,0-10.9-4.9-10.9-10.9s4.9-10.9,10.9-10.9\n                                                                H282.5z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M293.4,397.5c0,10.8-4.7,21.1-12.9,28.2l-0.4,0.4h-0.6h-47.2h-0.6l-0.4-0.4c-8.2-7.1-12.8-17.4-12.8-28.2\n                                                                c0-20.6,16.8-37.4,37.4-37.4C276.6,360.1,293.4,376.9,293.4,397.5z"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              staticClass: "st1",
+                                              attrs: {
+                                                d:
+                                                  "M172.2,262.4l-19.3,0c-29.8-0.4-57.7-12.4-78.7-33.6c-21-21.3-32.6-49.4-32.6-79.3V96.3\n                                                                c0-13.5,11-24.5,24.5-24.5h62.5h18.8 M368.9,71.8h14.7h62.5c13.5,0,24.5,11,24.5,24.5v53.1c0,29.8-11.6,58-32.6,79.3\n                                                                c-21,21.3-54.9,33.2-84.7,33.6l10.5-37.8 M457,149.4V96.3c0-6-4.9-10.9-10.9-10.9h-62.5h-1.5v1.5v97.9c0,21.4-4.8,42-14.1,61.1\n                                                                l-1.2,2.5l2.7-0.3C419.4,242.1,457,199.7,457,149.4z M368.5,184.8 M143.7,184.8 M145.4,248.4l-1.2-2.5\n                                                                c-9.4-19.1-14.1-39.7-14.1-61.1V86.9v-1.5h-1.5H66.1c-6,0-10.9,4.9-10.9,10.9v53.1c0,50.3,37.6,92.7,87.5,98.6L145.4,248.4z"
+                                              }
+                                            })
+                                          ])
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "title" }, [
+                                  _vm._v("Winner's Circle")
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "idea-number" })
+                              ]
+                            )
                           ]
                         )
-                      ]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "author-date" }, [
-                  _c("div", { staticClass: "author-thumb" }, [
-                    _c("img", {
-                      staticClass: "avatar",
-                      attrs: {
-                        src: _vm.challenge.user.image,
-                        alt: _vm.challenge.user.name
-                      }
-                    })
-                  ]),
-                  _vm._v(
-                    "\n                            by\n                            "
-                  ),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "h6 post__author-name fn",
-                      attrs: { href: "#" }
-                    },
-                    [_vm._v(_vm._s(_vm.challenge.user.name))]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "post__date" }, [
-                    _c(
-                      "time",
-                      {
-                        staticClass: "published",
-                        attrs: { datetime: "2017-03-24T18:18" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.challenge.created_at) +
-                            "\n                                "
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "post__location" }, [
-                    _vm._v("Malaysia")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "post-thumb" }, [
-                  _c("img", {
-                    attrs: {
-                      src: _vm.challenge.image,
-                      alt: _vm.challenge.user.name
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "post-content-wrap" }, [
-                  _c(
-                    "div",
-                    { staticClass: "control-block-button post-control-button" },
-                    [
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "author-date" }, [
+                      _c("div", { staticClass: "author-thumb" }, [
+                        _c("img", {
+                          staticClass: "avatar",
+                          attrs: {
+                            src: _vm.challenge.user.image,
+                            alt: _vm.challenge.user.name
+                          }
+                        })
+                      ]),
+                      _vm._v(
+                        "\n                            by\n                            "
+                      ),
                       _c(
                         "a",
                         {
-                          staticClass: "post-add-icon inline-items",
-                          class: {
-                            active:
-                              _vm.challenge.isUserLiked == 1 ? true : false
+                          staticClass: "h6 post__author-name fn",
+                          attrs: { href: "#" }
+                        },
+                        [_vm._v(_vm._s(_vm.challenge.user.name))]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "post__date" }, [
+                        _c(
+                          "time",
+                          {
+                            staticClass: "published",
+                            attrs: { datetime: "2017-03-24T18:18" }
                           },
-                          attrs: { href: "javascript:void(0);" },
-                          on: {
-                            click: function($event) {
-                              return _vm.updateLike(_vm.challenge.id)
-                            }
-                          }
+                          [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.challenge.created_at) +
+                                "\n                                "
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "post__location" }, [
+                        _vm._v(
+                          _vm._s(_vm.challenge.campaign) +
+                            ", " +
+                            _vm._s(_vm.challenge.location)
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "post-thumb" }, [
+                      _c("img", {
+                        attrs: {
+                          src: _vm.challenge.image,
+                          alt: _vm.challenge.user.name
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "post-content-wrap" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "control-block-button post-control-button post-additional-info inline-items"
                         },
                         [
-                          _c("svg", { staticClass: "olymp-heart-icon" }, [
-                            _c("use", {
-                              attrs: {
-                                "xlink:href":
-                                  "assets/svg-icons/sprites/icons.svg#olymp-heart-icon"
+                          _c(
+                            "a",
+                            {
+                              staticClass: "post-add-icon inline-items",
+                              class: {
+                                active:
+                                  _vm.challenge.isUserLiked == 1 ? true : false
+                              },
+                              attrs: { href: "javascript:void(0);" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.updateLike(_vm.challenge.id)
+                                }
                               }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c("span", [_vm._v(_vm._s(_vm.challenge.likes))])
+                            },
+                            [
+                              _c("svg", { staticClass: "olymp-heart-icon" }, [
+                                _c("use", {
+                                  attrs: {
+                                    "xlink:href":
+                                      "assets/svg-icons/sprites/icons.svg#olymp-heart-icon"
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("span", [_vm._v(_vm._s(_vm.challenge.likes))])
+                            ]
+                          )
                         ]
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "post-content" }, [
-                    _vm._v(
-                      "\n                                " +
-                        _vm._s(_vm.challenge.description) +
-                        "\n                            "
-                    )
-                  ])
-                ])
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _c("Comments", {
-            attrs: {
-              comment_type: "challenge",
-              comment_type_id: _vm.selectedChallengeId
-            }
-          })
-        ],
-        1
-      ),
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "post-content" }, [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(_vm.challenge.description) +
+                            "\n                            "
+                        )
+                      ])
+                    ])
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("Comments", {
+                attrs: {
+                  comment_type: "challenge",
+                  comment_type_id: _vm.selectedChallengeId
+                }
+              })
+            ],
+            1
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "div",
@@ -65406,7 +65326,7 @@ var render = function() {
                           {
                             staticClass: "post-category bg-primary",
                             staticStyle: { "margin-right": "5px" },
-                            attrs: { href: "javascript:;" }
+                            attrs: { href: "#" }
                           },
                           [_vm._v(_vm._s(category.title))]
                         )
@@ -65460,7 +65380,7 @@ var render = function() {
                                 _vm._v(
                                   "\n                                            " +
                                     _vm._s(item.created_at) +
-                                    "\n                                        "
+                                    "\n\n                                        "
                                 )
                               ]
                             )
@@ -65783,7 +65703,11 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "post__location" }, [
-                                  _vm._v("Malaysia")
+                                  _vm._v(
+                                    _vm._s(item.campaign) +
+                                      ", " +
+                                      _vm._s(item.location)
+                                  )
                                 ])
                               ])
                             ],
@@ -67162,20 +67086,13 @@ var render = function() {
                                     [_vm._v(_vm._s(item.name))]
                                   ),
                                   _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "contributor-location",
-                                      attrs: { href: "javascript:void(0);" }
-                                    },
-                                    [
-                                      _vm._v(
-                                        _vm._s(item.campaign) +
-                                          "," +
-                                          _vm._s(item.location)
-                                      )
-                                    ]
-                                  ),
+                                  _c("p", { staticClass: "text" }, [
+                                    _vm._v(
+                                      _vm._s(item.campaign) +
+                                        ",  " +
+                                        _vm._s(item.location)
+                                    )
+                                  ]),
                                   _vm._v(" "),
                                   _c(
                                     "div",
@@ -67261,20 +67178,13 @@ var render = function() {
                                     [_vm._v(_vm._s(item.name))]
                                   ),
                                   _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "contributor-location",
-                                      attrs: { href: "javascript:void(0);" }
-                                    },
-                                    [
-                                      _vm._v(
-                                        _vm._s(item.campaign) +
-                                          "," +
-                                          _vm._s(item.location)
-                                      )
-                                    ]
-                                  ),
+                                  _c("p", { staticClass: "text" }, [
+                                    _vm._v(
+                                      _vm._s(item.campaign) +
+                                        ",  " +
+                                        _vm._s(item.location)
+                                    )
+                                  ]),
                                   _vm._v(" "),
                                   _c(
                                     "div",
@@ -67368,7 +67278,7 @@ var render = function() {
                             "data-popup-target": ".playlist-popup"
                           }
                         },
-                        [_vm._v("Show All")]
+                        [_vm._v("Let's meet all our Quirky Innovators!")]
                       )
                     ],
                     1
@@ -68510,231 +68420,6 @@ var render = function() {
     ],
     1
   )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=template&id=7ef7e3a9&scoped=true&":
-/*!*******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=template&id=7ef7e3a9&scoped=true& ***!
-  \*******************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" },
-        [
-          _c("div", { staticClass: "ui-block" }, [
-            _c("div", { staticClass: "top-header" }, [
-              _c("div", { staticClass: "top-header-thumb" }, [
-                _c("img", {
-                  staticClass: "top-header-thumb",
-                  staticStyle: { height: "400px" },
-                  attrs: { src: _vm.user.background_image, alt: _vm.user.name }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "profile-section" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col col-lg-5 col-md-5 col-sm-12 col-12" },
-                    [
-                      _c("ul", { staticClass: "profile-menu" }, [
-                        _c(
-                          "li",
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                attrs: {
-                                  to: {
-                                    name: "Friends",
-                                    params: {
-                                      id: _vm.user.id,
-                                      slug: _vm.user.slug
-                                    }
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n\n                                                Friends\n                                            "
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "control-block-button" }, [
-                  _vm.$store.state.userId !== _vm.user.id
-                    ? _c(
-                        "span",
-                        {
-                          staticClass: "notification-icon",
-                          on: {
-                            click: function($event) {
-                              return _vm.toggleFollow(_vm.user.id)
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "accept-request",
-                              class: {
-                                follow:
-                                  _vm.user.is_following == 0 ? true : false,
-                                unfollow:
-                                  _vm.user.is_following == 1 ? true : false
-                              },
-                              attrs: { href: "javascript:void(0);" }
-                            },
-                            [
-                              _c(
-                                "span",
-                                { staticClass: "icon-add without-text" },
-                                [
-                                  _c(
-                                    "svg",
-                                    { staticClass: "olymp-happy-face-icon" },
-                                    [
-                                      _c("use", {
-                                        attrs: {
-                                          "xlink:href":
-                                            "assets/svg-icons/sprites/icons.svg#olymp-happy-face-icon"
-                                        }
-                                      })
-                                    ]
-                                  )
-                                ]
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isSameUser
-                    ? _c(
-                        "div",
-                        { staticClass: "btn btn-control bg-primary more" },
-                        [
-                          _c("svg", { staticClass: "olymp-settings-icon" }, [
-                            _c("use", {
-                              attrs: {
-                                "xlink:href":
-                                  "assets/svg-icons/sprites/icons.svg#olymp-settings-icon"
-                              }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "ul",
-                            {
-                              staticClass:
-                                "more-dropdown more-with-triangle triangle-bottom-right"
-                            },
-                            [
-                              _c(
-                                "li",
-                                [
-                                  _c(
-                                    "router-link",
-                                    {
-                                      staticClass: "nav-link",
-                                      attrs: { to: "/change-password" }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                                Change Password\n                                            "
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "li",
-                                [
-                                  _c(
-                                    "router-link",
-                                    {
-                                      staticClass: "nav-link",
-                                      attrs: { to: "/edit-profile" }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                                Edit Personal Information\n                                            "
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    : _vm._e()
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "top-header-author" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "author-thumb",
-                    attrs: { href: "javascript:void(0);" }
-                  },
-                  [
-                    _c("img", {
-                      staticClass: "user-thumb",
-                      attrs: { src: _vm.user.image, alt: _vm.user.name }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "author-content" }, [
-                  _c(
-                    "a",
-                    { staticClass: "h4 author-name", attrs: { href: "#" } },
-                    [_vm._v(_vm._s(_vm.user.name))]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "country" }, [
-                    _vm._v(_vm._s(_vm.user.location))
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ]
-      )
-    ])
-  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -75001,8 +74686,8 @@ var render = function() {
                   isUserLoggedIn: _vm.userLogin,
                   isSameUser: _vm.isSameUser,
                   loadCurrentUserActivity: true,
-                  profileIdToLoad: _vm.userId,
-                  specificUserRecords: false
+                  profileIdToLoad: _vm.currentProfileId,
+                  specificUserRecords: true
                 }
               }),
               _vm._v(" "),
@@ -75135,7 +74820,38 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "profile-section" }, [
-                _vm._m(0),
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col col-lg-5 col-md-5 col-sm-12 col-12" },
+                    [
+                      _c("ul", { staticClass: "profile-menu" }, [
+                        _c(
+                          "li",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "nav-link",
+                                attrs: {
+                                  to: {
+                                    name: "ProfileEuraka",
+                                    params: {
+                                      id: _vm.user.id,
+                                      slug: _vm.user.slug
+                                    }
+                                  }
+                                }
+                              },
+                              [_vm._v("Timeline")]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    ]
+                  )
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "control-block-button" }, [
                   _vm.$store.state.userId !== _vm.user.id
@@ -75278,7 +74994,7 @@ var render = function() {
                   _c("div", { staticClass: "country" }, [
                     _vm._v(
                       _vm._s(_vm.user.campaign) +
-                        "," +
+                        ", " +
                         _vm._s(_vm.user.location)
                     )
                   ])
@@ -75291,18 +75007,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col col-lg-5 col-md-5 col-sm-12 col-12" }, [
-        _c("ul", { staticClass: "profile-menu" })
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -75552,7 +75257,7 @@ var render = function() {
                       attrs: {
                         to: {
                           name: "Friends",
-                          params: { id: _vm.userId, slug: _vm.userSlug }
+                          params: { id: _vm.currentProfileId }
                         }
                       }
                     },
@@ -76258,7 +75963,7 @@ var staticRenderFns = [
                 _vm._v(" "),
                 _c("p", [
                   _vm._v(
-                    "Welcome to your account dashboard! Here you’ll find everything you need to change your profile\n                            information, settings, read notifications and requests, view your latest messages, change your pasword and much\n                            more! Also you can create or manage your own favourite page, have fun!"
+                    "Welcome to your account dashboard! Here you’ll find everything you need to change your profile information, upload images to your profile, read notifications, change your password. Have fun!"
                   )
                 ])
               ])
@@ -76465,7 +76170,7 @@ var render = function() {
   return _c(
     "span",
     [
-      _c("PersonalHeader", {
+      _c("ProfileHeader", {
         attrs: {
           CurrentUser: _vm.user,
           isUserLoggedIn: _vm.userLogin,
@@ -76549,7 +76254,8 @@ var render = function() {
                   totalItems: "4",
                   CurrentUser: _vm.user,
                   isUserLoggedIn: _vm.userLogin,
-                  isSameUser: _vm.isSameUser
+                  isSameUser: _vm.isSameUser,
+                  currentProfileId: _vm.currentProfileId
                 }
               })
             ],
@@ -86821,93 +86527,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/pages/profile/PersonalHeader.vue":
-/*!******************************************************************!*\
-  !*** ./resources/js/components/pages/profile/PersonalHeader.vue ***!
-  \******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PersonalHeader_vue_vue_type_template_id_7ef7e3a9_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PersonalHeader.vue?vue&type=template&id=7ef7e3a9&scoped=true& */ "./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=template&id=7ef7e3a9&scoped=true&");
-/* harmony import */ var _PersonalHeader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PersonalHeader.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _PersonalHeader_vue_vue_type_style_index_0_id_7ef7e3a9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PersonalHeader.vue?vue&type=style&index=0&id=7ef7e3a9&scoped=true&lang=css& */ "./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=style&index=0&id=7ef7e3a9&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _PersonalHeader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PersonalHeader_vue_vue_type_template_id_7ef7e3a9_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PersonalHeader_vue_vue_type_template_id_7ef7e3a9_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  "7ef7e3a9",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/pages/profile/PersonalHeader.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalHeader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PersonalHeader.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalHeader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=style&index=0&id=7ef7e3a9&scoped=true&lang=css&":
-/*!***************************************************************************************************************************!*\
-  !*** ./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=style&index=0&id=7ef7e3a9&scoped=true&lang=css& ***!
-  \***************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalHeader_vue_vue_type_style_index_0_id_7ef7e3a9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PersonalHeader.vue?vue&type=style&index=0&id=7ef7e3a9&scoped=true&lang=css& */ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=style&index=0&id=7ef7e3a9&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalHeader_vue_vue_type_style_index_0_id_7ef7e3a9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalHeader_vue_vue_type_style_index_0_id_7ef7e3a9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalHeader_vue_vue_type_style_index_0_id_7ef7e3a9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalHeader_vue_vue_type_style_index_0_id_7ef7e3a9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalHeader_vue_vue_type_style_index_0_id_7ef7e3a9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=template&id=7ef7e3a9&scoped=true&":
-/*!*************************************************************************************************************!*\
-  !*** ./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=template&id=7ef7e3a9&scoped=true& ***!
-  \*************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalHeader_vue_vue_type_template_id_7ef7e3a9_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PersonalHeader.vue?vue&type=template&id=7ef7e3a9&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=template&id=7ef7e3a9&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalHeader_vue_vue_type_template_id_7ef7e3a9_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalHeader_vue_vue_type_template_id_7ef7e3a9_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/components/pages/profile/Photos.vue":
 /*!**********************************************************!*\
   !*** ./resources/js/components/pages/profile/Photos.vue ***!
@@ -86988,7 +86607,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ProfileEuraka_vue_vue_type_template_id_49a1f01c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProfileEuraka.vue?vue&type=template&id=49a1f01c& */ "./resources/js/components/pages/profile/ProfileEuraka.vue?vue&type=template&id=49a1f01c&");
 /* harmony import */ var _ProfileEuraka_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProfileEuraka.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/profile/ProfileEuraka.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _ProfileEuraka_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProfileEuraka.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/pages/profile/ProfileEuraka.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -86996,7 +86617,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _ProfileEuraka_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _ProfileEuraka_vue_vue_type_template_id_49a1f01c___WEBPACK_IMPORTED_MODULE_0__["render"],
   _ProfileEuraka_vue_vue_type_template_id_49a1f01c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -87025,6 +86646,22 @@ component.options.__file = "resources/js/components/pages/profile/ProfileEuraka.
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileEuraka_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ProfileEuraka.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/ProfileEuraka.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileEuraka_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/profile/ProfileEuraka.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/pages/profile/ProfileEuraka.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileEuraka_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ProfileEuraka.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/ProfileEuraka.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileEuraka_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileEuraka_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileEuraka_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileEuraka_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileEuraka_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -87627,7 +87264,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _profile_vue_vue_type_template_id_bb634486___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./profile.vue?vue&type=template&id=bb634486& */ "./resources/js/components/pages/profile/profile.vue?vue&type=template&id=bb634486&");
 /* harmony import */ var _profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./profile.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/profile/profile.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _profile_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./profile.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/pages/profile/profile.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -87635,7 +87274,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _profile_vue_vue_type_template_id_bb634486___WEBPACK_IMPORTED_MODULE_0__["render"],
   _profile_vue_vue_type_template_id_bb634486___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -87664,6 +87303,22 @@ component.options.__file = "resources/js/components/pages/profile/profile.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./profile.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/profile.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/profile/profile.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/pages/profile/profile.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_profile_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./profile.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/profile.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_profile_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_profile_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_profile_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_profile_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_dist_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_profile_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -88384,7 +88039,7 @@ __webpack_require__.r(__webpack_exports__);
   }
 }, {
   name: 'Friends',
-  path: '/friends/:id/:slug',
+  path: '/friends/:id',
   component: _components_pages_profile_Friends__WEBPACK_IMPORTED_MODULE_5__["default"],
   meta: {
     requiresAuth: true,

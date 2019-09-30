@@ -398,9 +398,9 @@ class User extends Authenticatable
             $item_data['item_id'] = $challenge->id;
             $item_data['item_slug'] = $challenge->slug;
         }
-        else if ($type == 'winner') {
-            $challenge = \App\Challenge::where('id', $data->challenge_id)->first();
-        }
+//        else if ($type == 'winner') {
+//            $challenge = \App\Challenge::where('id', $data->challenge_id)->first();
+//        }
 
         return $item_data;
 

@@ -8,9 +8,7 @@
                 <div class="col col-lg-8 m-auto col-md-8 col-sm-12 col-12">
                     <div class="main-header-content">
                         <h1>Your Account Dashboard</h1>
-                        <p>Welcome to your account dashboard! Here you’ll find everything you need to change your profile
-                            information, settings, read notifications and requests, view your latest messages, change your pasword and much
-                            more! Also you can create or manage your own favourite page, have fun!</p>
+                        <p>Welcome to your account dashboard! Here you’ll find everything you need to change your profile information, upload images to your profile, read notifications, change your password. Have fun!</p>
                     </div>
                 </div>
             </div>

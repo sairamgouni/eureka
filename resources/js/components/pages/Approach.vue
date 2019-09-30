@@ -68,7 +68,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col col-xl-10 m-auto col-lg-10 col-md-12 col-sm-12 col-12">
-                        <router-link  to="/contributors" class="btn btn-primary btn-lg " data-toggle="modal" data-target="#registration-login-form-popup">Start Making Friends Now!
+                        <router-link  to="/contributors" class="btn btn-primary btn-lg " data-toggle="modal" data-target="#registration-login-form-popup">Meet the Creative Idea Strategists
                         </router-link>
 <!--                        <a href="#" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#registration-login-form-popup">Start Making Friends Now!</a>-->
                     </div>
@@ -117,7 +117,7 @@
 					</span>
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
         </div>

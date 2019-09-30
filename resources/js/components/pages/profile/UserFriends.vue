@@ -20,18 +20,10 @@
 						<li class="all-users" v-if="remainingFriends>0">
 <!--							<a href="#">+{{remainingFriends}}</a>-->
                             <router-link
-                                :to="{ name: 'Friends', params: { id: userId, slug: userSlug } }"
+                                :to="{ name: 'Friends', params: { id: currentProfileId } }"
                                 class="">+{{remainingFriends}}
                             </router-link>
 
-
-<!--                            <router-link-->
-
-<!--                                :to="{ name: 'Friends',-->
-<!--										 params: { id: item.id, slug: item.slug } }" >+-->
-
-<!--                                {{remainingFriends}}-->
-<!--                            </router-link>-->
 						</li>
 					</ul>
 
@@ -50,6 +42,7 @@
                 baseUrl: '',
                 userLogin: false,
                 userId:'',
+                currentProfileId:'',
                 userSlug:'',
                 userImage:'',
                 userName:'',
@@ -65,7 +58,7 @@
                 // bodyFormData.set('password', this.form.password);
                 this.axios({
                         method: 'get',
-                        url: this.baseUrl + 'friends/getFriendsList/'+this.totalItems+'?userId='+this.currentProfileId,
+                       url: this.baseUrl + 'friends/getFriendsList/'+this.totalItems+'?userId='+this.currentProfileId,
                         data: bodyFormData
                     })
                     .then((response) => {
