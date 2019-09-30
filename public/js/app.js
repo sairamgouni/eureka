@@ -6308,8 +6308,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ProfileEuraka',
@@ -6538,6 +6536,184 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         return loader.hide();
       });
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "PersonalHeader",
+  props: ["CurrentUser", "isUserLoggedIn", "isSameUser"],
+  data: function data() {
+    return {
+      currentProfileId: "",
+      user: {}
+    };
+  },
+  methods: {
+    toggleFollow: function toggleFollow(userId) {
+      var _this = this;
+
+      var loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.file
+      }); // console.log('index '+index);
+
+      var bodyFormData = new FormData();
+      bodyFormData.set("item_id", userId);
+      this.axios({
+        method: "post",
+        url: "friends/toggle-follow",
+        data: bodyFormData
+      }).then(function (response) {
+        loader.hide();
+        var like_value = response.data;
+
+        if (_this.user.id == userId) {
+          if (like_value == 1) {
+            _this.user.is_following = 1;
+
+            _this.$toast.open({
+              message: "Following Updated",
+              type: "success"
+            });
+          } else {
+            _this.user.is_following = 0;
+
+            _this.$toast.open({
+              message: "UnFollowing Updated",
+              type: "success"
+            });
+          }
+        }
+      })["catch"](function (response) {
+        console.log("in response methods");
+        console.log(response);
+        loader.hide();
+      });
+    },
+    getUserDetails: function getUserDetails(userId) {
+      var _this2 = this;
+
+      var bodyFormData = new FormData();
+      bodyFormData.set("userId", userId);
+      this.axios({
+        method: "get",
+        url: "user/get-profile/" + userId,
+        data: bodyFormData
+      }).then(function (response) {
+        _this2.user = response.data;
+      })["catch"](function (response) {
+        console.log("in profile header exception"); // console.log(response);
+        // loader.hide();
+      });
+    }
+  },
+  created: function created() {
+    this.currentProfileId = this.$route.params.id;
+    this.getUserDetails(this.currentProfileId);
   }
 });
 
@@ -39876,7 +40052,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.top-header-author {\n    max-width: 500px!important;\n}\n", ""]);
+exports.push([module.i, "\n.unfollow[data-v-7ef7e3a9] {\r\n    background-color: #9ca0a3;\n}\n.follow[data-v-7ef7e3a9] {\r\n    background-color: #38a9ff;\n}\r\n", ""]);
 
 // exports
 
@@ -68057,7 +68233,6 @@ var render = function() {
                       _c("div", { staticClass: "friend-avatar" }, [
                         _c("div", { staticClass: "author-thumb" }, [
                           _c("img", {
-                            staticStyle: { width: "100px", height: "100px" },
                             attrs: { src: item.image, alt: item.name }
                           })
                         ]),
@@ -68433,6 +68608,223 @@ var render = function() {
     ],
     1
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=template&id=7ef7e3a9&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/profile/PersonalHeader.vue?vue&type=template&id=7ef7e3a9&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" },
+        [
+          _c("div", { staticClass: "ui-block" }, [
+            _c("div", { staticClass: "top-header" }, [
+              _c("div", { staticClass: "top-header-thumb" }, [
+                _c("img", {
+                  staticClass: "top-header-thumb",
+                  staticStyle: { height: "400px" },
+                  attrs: { src: _vm.user.background_image, alt: _vm.user.name }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "profile-section" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col col-lg-5 col-md-5 col-sm-12 col-12" },
+                    [
+                      _c("ul", { staticClass: "profile-menu" }, [
+                        _c(
+                          "li",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                attrs: {
+                                  to: {
+                                    name: "Friends",
+                                    params: {
+                                      id: _vm.user.id,
+                                      slug: _vm.user.slug
+                                    }
+                                  }
+                                }
+                              },
+                              [_vm._v("Friends")]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "control-block-button" }, [
+                  _vm.$store.state.userId !== _vm.user.id
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "notification-icon",
+                          on: {
+                            click: function($event) {
+                              return _vm.toggleFollow(_vm.user.id)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "accept-request",
+                              class: {
+                                follow:
+                                  _vm.user.is_following == 0 ? true : false,
+                                unfollow:
+                                  _vm.user.is_following == 1 ? true : false
+                              },
+                              attrs: { href: "javascript:void(0);" }
+                            },
+                            [
+                              _c(
+                                "span",
+                                { staticClass: "icon-add without-text" },
+                                [
+                                  _c(
+                                    "svg",
+                                    { staticClass: "olymp-happy-face-icon" },
+                                    [
+                                      _c("use", {
+                                        attrs: {
+                                          "xlink:href":
+                                            "assets/svg-icons/sprites/icons.svg#olymp-happy-face-icon"
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isSameUser
+                    ? _c(
+                        "div",
+                        { staticClass: "btn btn-control bg-primary more" },
+                        [
+                          _c("svg", { staticClass: "olymp-settings-icon" }, [
+                            _c("use", {
+                              attrs: {
+                                "xlink:href":
+                                  "assets/svg-icons/sprites/icons.svg#olymp-settings-icon"
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "ul",
+                            {
+                              staticClass:
+                                "more-dropdown more-with-triangle triangle-bottom-right"
+                            },
+                            [
+                              _c(
+                                "li",
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      staticClass: "nav-link",
+                                      attrs: { to: "/change-password" }
+                                    },
+                                    [_vm._v("Change Password")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "li",
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      staticClass: "nav-link",
+                                      attrs: { to: "/edit-profile" }
+                                    },
+                                    [_vm._v("Edit Personal Information")]
+                                  )
+                                ],
+                                1
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "top-header-author personal-header-image" },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "author-thumb",
+                      attrs: { href: "javascript:void(0);" }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "user-thumb",
+                        attrs: { src: _vm.user.image, alt: _vm.user.name }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "author-content" }, [
+                    _c(
+                      "a",
+                      { staticClass: "h4 author-name", attrs: { href: "#" } },
+                      [_vm._v(_vm._s(_vm.user.name))]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "country" }, [
+                      _vm._v(_vm._s(_vm.user.location))
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ])
+        ]
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
