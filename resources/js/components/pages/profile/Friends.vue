@@ -63,9 +63,7 @@
 						<div class="friend-avatar">
 
 							<div class="author-thumb">
-								<img
-								 style="width: 100px; height: 100px;"
-								:src="item.image" :alt="item.name">
+								<img :src="item.image" :alt="item.name">
 							</div>
 							<div class="author-content">
 								<router-link

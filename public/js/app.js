@@ -6469,8 +6469,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ProfileEuraka',
@@ -6788,12 +6786,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'PersonalHeader',
-  props: ['CurrentUser', 'isUserLoggedIn', 'isSameUser'],
+  name: "PersonalHeader",
+  props: ["CurrentUser", "isUserLoggedIn", "isSameUser"],
   data: function data() {
     return {
-      currentProfileId: '',
+      currentProfileId: "",
       user: {}
     };
   },
@@ -6806,10 +6824,10 @@ __webpack_require__.r(__webpack_exports__);
       }); // console.log('index '+index);
 
       var bodyFormData = new FormData();
-      bodyFormData.set('item_id', userId);
+      bodyFormData.set("item_id", userId);
       this.axios({
-        method: 'post',
-        url: 'friends/toggle-follow',
+        method: "post",
+        url: "friends/toggle-follow",
         data: bodyFormData
       }).then(function (response) {
         loader.hide();
@@ -6820,20 +6838,20 @@ __webpack_require__.r(__webpack_exports__);
             _this.user.is_following = 1;
 
             _this.$toast.open({
-              message: 'Following Updated',
-              type: 'success'
+              message: "Following Updated",
+              type: "success"
             });
           } else {
             _this.user.is_following = 0;
 
             _this.$toast.open({
-              message: 'UnFollowing Updated',
-              type: 'success'
+              message: "UnFollowing Updated",
+              type: "success"
             });
           }
         }
       })["catch"](function (response) {
-        console.log('in response methods');
+        console.log("in response methods");
         console.log(response);
         loader.hide();
       });
@@ -6842,15 +6860,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var bodyFormData = new FormData();
-      bodyFormData.set('userId', userId);
+      bodyFormData.set("userId", userId);
       this.axios({
-        method: 'get',
-        url: 'user/get-profile/' + userId,
+        method: "get",
+        url: "user/get-profile/" + userId,
         data: bodyFormData
       }).then(function (response) {
         _this2.user = response.data;
       })["catch"](function (response) {
-        console.log('in profile header exception'); // console.log(response);
+        console.log("in profile header exception"); // console.log(response);
         // loader.hide();
       });
     }
@@ -40030,7 +40048,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.unfollow[data-v-7ef7e3a9]{ background-color: #9ca0a3;\n}\n.follow[data-v-7ef7e3a9]{ background-color: #38a9ff;\n}\n", ""]);
+exports.push([module.i, "\n.unfollow[data-v-7ef7e3a9] {\r\n    background-color: #9ca0a3;\n}\n.follow[data-v-7ef7e3a9] {\r\n    background-color: #38a9ff;\n}\r\n", ""]);
 
 // exports
 
@@ -66290,7 +66308,6 @@ var render = function() {
                       _c("div", { staticClass: "friend-avatar" }, [
                         _c("div", { staticClass: "author-thumb" }, [
                           _c("img", {
-                            staticStyle: { width: "100px", height: "100px" },
                             attrs: { src: item.image, alt: item.name }
                           })
                         ]),
@@ -66712,11 +66729,7 @@ var render = function() {
                                   }
                                 }
                               },
-                              [
-                                _vm._v(
-                                  "\n\n                                                Friends\n                                            "
-                                )
-                              ]
+                              [_vm._v("Friends")]
                             )
                           ],
                           1
@@ -66806,11 +66819,7 @@ var render = function() {
                                       staticClass: "nav-link",
                                       attrs: { to: "/change-password" }
                                     },
-                                    [
-                                      _vm._v(
-                                        "\n                                                Change Password\n                                            "
-                                      )
-                                    ]
+                                    [_vm._v("Change Password")]
                                   )
                                 ],
                                 1
@@ -66825,11 +66834,7 @@ var render = function() {
                                       staticClass: "nav-link",
                                       attrs: { to: "/edit-profile" }
                                     },
-                                    [
-                                      _vm._v(
-                                        "\n                                                Edit Personal Information\n                                            "
-                                      )
-                                    ]
+                                    [_vm._v("Edit Personal Information")]
                                   )
                                 ],
                                 1
@@ -66842,33 +66847,37 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "top-header-author" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "author-thumb",
-                    attrs: { href: "javascript:void(0);" }
-                  },
-                  [
-                    _c("img", {
-                      staticClass: "user-thumb",
-                      attrs: { src: _vm.user.image, alt: _vm.user.name }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "author-content" }, [
+              _c(
+                "div",
+                { staticClass: "top-header-author personal-header-image" },
+                [
                   _c(
                     "a",
-                    { staticClass: "h4 author-name", attrs: { href: "#" } },
-                    [_vm._v(_vm._s(_vm.user.name))]
+                    {
+                      staticClass: "author-thumb",
+                      attrs: { href: "javascript:void(0);" }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "user-thumb",
+                        attrs: { src: _vm.user.image, alt: _vm.user.name }
+                      })
+                    ]
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "country" }, [
-                    _vm._v(_vm._s(_vm.user.location))
+                  _c("div", { staticClass: "author-content" }, [
+                    _c(
+                      "a",
+                      { staticClass: "h4 author-name", attrs: { href: "#" } },
+                      [_vm._v(_vm._s(_vm.user.name))]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "country" }, [
+                      _vm._v(_vm._s(_vm.user.location))
+                    ])
                   ])
-                ])
-              ])
+                ]
+              )
             ])
           ])
         ]
