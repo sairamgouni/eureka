@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="top-header-author personal-header-image">
+                        <div class="top-header-author personal-header-image class-11">
                             <a href="javascript:void(0);" class="author-thumb">
                                 <img class="user-thumb" :src="user.image" :alt="user.name" />
                             </a>
