@@ -32,7 +32,7 @@
 
 
                         <div class="form-group with-button">
-                            <input class="form-control" type="text" placeholder="Blog Posts......" v-model="search">
+                            <input class="form-control" type="text" placeholder="Challenges.." v-model="search">
                             <button @click.prevent="searchchallenges()">
                                 <svg class="olymp-magnifying-glass-icon">
                                     <use
@@ -66,8 +66,8 @@
                                     <router-link
                                                                                 :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
                                                                                 class="h4 post-title">
-
-                                                                                {{item.title}}
+                                        {{item.title.length > 35 ? item.title.substring(0,35)+'..' : item.title}}
+<!--                                                                                {{item.title}}-->
                                                                             </router-link>
 
                                     <div class="author-date">

@@ -89,10 +89,10 @@
                    :key="index">
                   <div class="ui-block responsive-flex">
                       <div class="ui-block-title">
-                          <div class="h6 title">See All Contributors!!</div>
+                          <div class="h6 title">Let's meet all our Quirky Innovators!</div>
 
                           <div class="align-right">
-                              <router-link :to="{name:'Users',params:{country_id:item.country.id}}" class="js-open-popup btn btn-md-2 btn-border-think custom-color c-grey" data-popup-target=".playlist-popup">Let's meet all our Quirky Innovators!</router-link>
+                              <router-link :to="{name:'Users',params:{country_id:item.country.id}}" class="js-open-popup btn btn-md-2 btn-border-think custom-color c-grey" data-popup-target=".playlist-popup">View All</router-link>
 <!--                              <a href="#" class="js-open-popup btn btn-md-2 btn-border-think custom-color c-grey" data-popup-target=".playlist-popup">View Badges</a>-->
 
                           </div>

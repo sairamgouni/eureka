@@ -20,6 +20,14 @@
                                             class="nav-link"
                                         >Timeline</router-link>
                                     </li>
+                                    <li>
+                                        <router-link
+                                            :to="{  name: 'Friends',
+                                           params: { id: currentProfileId } }"
+                                            class="nav-link"
+                                        >Friends</router-link>
+                                    </li>
+
 								</ul>
 							</div>
 						</div>

@@ -204,4 +204,8 @@
     .active_title{
         color:#e91d24;
     }
+
+    .friend-item-content {
+       padding: 0;
+    }
 </style>

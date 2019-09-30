@@ -8822,6 +8822,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ProfileHeader',
   props: ['CurrentUser', 'isUserLoggedIn', 'isSameUser'],
@@ -39811,7 +39819,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.custom-file-input.is-invalid~.custom-file-label, .custom-select.is-invalid, .form-control.is-invalid, .was-validated .custom-file-input:invalid~.custom-file-label, .was-validated .custom-select:invalid, .was-validated .form-control:invalid {\n    border-color: rgba(154, 159, 191, 0.13);\n}\n", ""]);
+exports.push([module.i, "\n.custom-file-input.is-invalid~.custom-file-label, .custom-select.is-invalid, .form-control.is-invalid, .was-validated .custom-file-input:invalid~.custom-file-label, .was-validated .custom-select:invalid, .was-validated .form-control:invalid {\n    border-color: rgba(154, 159, 191, 0.13);\n}\n.multiselect__tag {\n    background: #e91d24!important;\n}\n.multiselect__option--highlight {\n    background: #e91d24!important;\n}\n", ""]);
 
 // exports
 
@@ -39849,7 +39857,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.active_title[data-v-4eeaef89]{\n    color:#e91d24;\n}\n", ""]);
+exports.push([module.i, "\n.active_title[data-v-4eeaef89]{\n    color:#e91d24;\n}\n.friend-item-content[data-v-4eeaef89] {\n   padding: 0;\n}\n", ""]);
 
 // exports
 
@@ -62451,7 +62459,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group with-button" }, [
           _c("input", {
             staticClass: "form-control js-user-search",
-            attrs: { placeholder: "Search people or Challenges", type: "text" }
+            attrs: { placeholder: "Search People or Challenges", type: "text" }
           })
         ])
       ]
@@ -65563,7 +65571,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", placeholder: "Blog Posts......" },
+                  attrs: { type: "text", placeholder: "Challenges.." },
                   domProps: { value: _vm.search },
                   on: {
                     input: function($event) {
@@ -65665,9 +65673,13 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n\n                                                                                " +
-                                      _vm._s(item.title) +
-                                      "\n                                                                            "
+                                    "\n                                        " +
+                                      _vm._s(
+                                        item.title.length > 35
+                                          ? item.title.substring(0, 35) + ".."
+                                          : item.title
+                                      ) +
+                                      "\n"
                                   )
                                 ]
                               ),
@@ -66702,6 +66714,7 @@ var render = function() {
                           staticClass: "mt-3",
                           attrs: {
                             required: "",
+                            required: "",
                             "tag-placeholder": "Add this as new tag",
                             placeholder: "Search or add a tag",
                             label: "name",
@@ -67258,7 +67271,7 @@ var render = function() {
               _c("div", { staticClass: "ui-block responsive-flex" }, [
                 _c("div", { staticClass: "ui-block-title" }, [
                   _c("div", { staticClass: "h6 title" }, [
-                    _vm._v("See All Contributors!!")
+                    _vm._v("Let's meet all our Quirky Innovators!")
                   ]),
                   _vm._v(" "),
                   _c(
@@ -67278,7 +67291,7 @@ var render = function() {
                             "data-popup-target": ".playlist-popup"
                           }
                         },
-                        [_vm._v("Let's meet all our Quirky Innovators!")]
+                        [_vm._v("View All")]
                       )
                     ],
                     1
@@ -74844,6 +74857,26 @@ var render = function() {
                                 }
                               },
                               [_vm._v("Timeline")]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "nav-link",
+                                attrs: {
+                                  to: {
+                                    name: "Friends",
+                                    params: { id: _vm.currentProfileId }
+                                  }
+                                }
+                              },
+                              [_vm._v("Friends")]
                             )
                           ],
                           1

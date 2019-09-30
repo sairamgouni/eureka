@@ -284,6 +284,7 @@ class UsersController extends Controller
             ->select('title AS name', 'image', 'id', 'id as search_type', 'slug')
             ->simplePaginate($paginateLength);
 
+
         $result = collect($users->items());
         $result = $result->merge($challenges->items());
         $result = collect($result->sortBy('name')->values()->all());

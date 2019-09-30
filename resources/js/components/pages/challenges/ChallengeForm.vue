@@ -104,7 +104,7 @@
 
                             <multiselect required
                                 class="mt-3"
-                                v-model="form.selectedList" tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="code" :options="optionsList" :multiple="true" :taggable="true" @tag="addTag" aria-required="true"></multiselect>
+                                v-model="form.selectedList" required  tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="code" :options="optionsList" :multiple="true" :taggable="true" @tag="addTag" aria-required="true"></multiselect>
 
                             <!--    <b-form-group label="Categories"  class="mt-2 checkbox">
                                  <b-form-checkbox-group
@@ -339,5 +339,11 @@
  <style>
      .custom-file-input.is-invalid~.custom-file-label, .custom-select.is-invalid, .form-control.is-invalid, .was-validated .custom-file-input:invalid~.custom-file-label, .was-validated .custom-select:invalid, .was-validated .form-control:invalid {
          border-color: rgba(154, 159, 191, 0.13);
+     }
+     .multiselect__tag {
+         background: #e91d24!important;
+     }
+     .multiselect__option--highlight {
+         background: #e91d24!important;
      }
  </style>
