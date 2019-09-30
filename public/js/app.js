@@ -75002,37 +75002,41 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "top-header-author" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "author-thumb",
-                    attrs: { href: "javascript:void(0);" }
-                  },
-                  [
-                    _c("img", {
-                      staticClass: "user-thumb",
-                      attrs: { src: _vm.user.image, alt: _vm.user.name }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "author-content" }, [
+              _c(
+                "div",
+                { staticClass: "top-header-author personal-header-image" },
+                [
                   _c(
                     "a",
-                    { staticClass: "h4 author-name", attrs: { href: "#" } },
-                    [_vm._v(_vm._s(_vm.user.name))]
+                    {
+                      staticClass: "author-thumb",
+                      attrs: { href: "javascript:void(0);" }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "user-thumb",
+                        attrs: { src: _vm.user.image, alt: _vm.user.name }
+                      })
+                    ]
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "country" }, [
-                    _vm._v(
-                      _vm._s(_vm.user.campaign) +
-                        ", " +
-                        _vm._s(_vm.user.location)
-                    )
+                  _c("div", { staticClass: "author-content" }, [
+                    _c(
+                      "a",
+                      { staticClass: "h4 author-name", attrs: { href: "#" } },
+                      [_vm._v(_vm._s(_vm.user.name))]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "country" }, [
+                      _vm._v(
+                        _vm._s(_vm.user.campaign) +
+                          ", " +
+                          _vm._s(_vm.user.location)
+                      )
+                    ])
                   ])
-                ])
-              ])
+                ]
+              )
             ])
           ])
         ]
