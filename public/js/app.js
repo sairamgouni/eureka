@@ -3566,6 +3566,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ChallengeDetails",
@@ -4969,6 +4970,8 @@ __webpack_require__.r(__webpack_exports__);
             selectedStatus: 'Active',
             activeFrom: ''
           };
+
+          _this.$parent.$refs.activityfeed.loadActivities();
 
           _this.$toast.open({
             message: 'Challenge Created ',
@@ -9906,6 +9909,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ActivityFeed',
   data: function data() {
@@ -11113,6 +11118,8 @@ __webpack_require__.r(__webpack_exports__);
             }
           }
         }
+
+        _this.$parent.$refs.activityfeed.loadActivities();
       })["catch"](function (response) {
         console.log("in response methods");
         console.log(response); // loader.hide();
@@ -39950,7 +39957,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.unfollow[data-v-6d6251fb] {\r\n  background-color: #9ca0a3;\n}\n.follow[data-v-6d6251fb] {\r\n  background-color: #38a9ff;\n}\r\n", ""]);
+exports.push([module.i, "\n.unfollow[data-v-6d6251fb] {\n  background-color: #9ca0a3;\n}\n.follow[data-v-6d6251fb] {\n  background-color: #38a9ff;\n}\n", ""]);
 
 // exports
 
@@ -65318,14 +65325,11 @@ var render = function() {
                     "hentry blog-post blog-post-v3 featured-post-item"
                 },
                 [
-                  _c(
-                    "div",
-                    { staticClass: "post-thumb" },
-                    [
-                      _c("img", {
-                        attrs: { src: item.image, alt: item.title }
-                      }),
-                      _vm._v(" "),
+                  _c("div", { staticClass: "post-thumb" }, [
+                    _c("img", { attrs: { src: item.image, alt: item.title } }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
                       _vm._l(item.categories, function(category) {
                         return _c(
                           "a",
@@ -65336,10 +65340,10 @@ var render = function() {
                           },
                           [_vm._v(_vm._s(category.title))]
                         )
-                      })
-                    ],
-                    2
-                  ),
+                      }),
+                      0
+                    )
+                  ]),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -65929,7 +65933,7 @@ var render = function() {
               staticClass:
                 "col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12"
             },
-            [_c("ActivityFeed")],
+            [_c("ActivityFeed", { ref: "activityfeed" })],
             1
           )
         ])
@@ -76358,11 +76362,9 @@ var render = function() {
                   )
                 ]
               ),
-              _vm._v(
-                "\n\t\t\t\t\t\t\t " +
-                  _vm._s(item.message) +
-                  "\n\n\t\t\t\t\t\t\t"
-              ),
+              _vm._v(" "),
+              _c("div", { domProps: { innerHTML: _vm._s(item.message) } }),
+              _vm._v(" "),
               _c("span", { staticClass: "notification-date" }, [
                 _c(
                   "time",
@@ -77457,7 +77459,7 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("span", { staticClass: "chat-message-item" }, [
-                  _vm._v("8 Friends in Common")
+                  _vm._v(_vm._s(item.mutual) + " Friends in Common")
                 ])
               ],
               1

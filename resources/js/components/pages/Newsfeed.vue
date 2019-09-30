@@ -73,7 +73,7 @@
 		<!-- <Birthday /> -->
 
 
-		<ActivityFeed></ActivityFeed>
+		<ActivityFeed ref="activityfeed"></ActivityFeed>
 
 
 

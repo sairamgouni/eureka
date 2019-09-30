@@ -260,6 +260,7 @@
                                 selectedStatus:'Active',
                                 activeFrom:'' ,
                             };
+                            this.$parent.$refs.activityfeed.loadActivities();
                             this.$toast.open({
                                 message: 'Challenge Created ',
                                 type: 'success'

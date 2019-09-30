@@ -19,7 +19,7 @@
             :to="{ name: 'ProfileEuraka', params: { id: item.id, slug: item.slug } }"
             class="h6 notification-friend"
           >{{item.name}}</router-link>
-          <span class="chat-message-item">8 Friends in Common</span>
+          <span class="chat-message-item">{{item.mutual}} Friends in Common</span>
         </div>
         <span class="notification-icon" @click="toggleFollow(item.id)">
           <a
@@ -94,6 +94,7 @@ export default {
               }
             }
           }
+          this.$parent.$refs.activityfeed.loadActivities();
         })
         .catch(function(response) {
           console.log("in response methods");

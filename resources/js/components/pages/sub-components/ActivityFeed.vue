@@ -20,7 +20,9 @@
                                           class="h6 notification-friend">
 						 							{{item.username}}
 							</router-link>
-							 {{item.message}}
+                            <div v-html="item.message">
+
+                            </div>
 
 							<span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{item.created_at}}</time></span>
 

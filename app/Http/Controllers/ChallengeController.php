@@ -318,7 +318,7 @@ class ChallengeController extends Controller
             // $toFollow->notify(new \App\Notifications\UserFollowed($user));
         }
 
-        $log_message = ' is ' . $liked . ' ' . $toFollow->name;
+        $log_message = ' is ' . $liked . ' ' . '<a href="/#/profile/'.$toFollow->id.'/'.$toFollow->slug.'">'.$toFollow->name.'</a>';
         activity()
             ->performedOn($toFollow)
             ->log($log_message);
@@ -374,9 +374,10 @@ class ChallengeController extends Controller
             $comment->update(['winner' => '1']);
             $comment->user->notify(new ChallengeWinner($comment));
             $comment->user->givePoint(new \App\Gamify\Points\ChallengeWinner($comment));
+
             activity()
                 ->performedOn($comment)
-                ->log("Marked " . $comment->user->name . " as the winner of " . $comment->challenge->title);
+                ->log("Marked " .'<a href="/#/profile/'.$comment->user->id.'/'.$comment->user->slug.'">'.$comment->user->name.'</a>' . " as the winner of " . '<a href="/#/challenge-details/'.$comment->challenge->id.'/'.$comment->challenge->slug.'">'.$comment->challenge->title.'</a>');
         } else {
             $comment->update(['winner' => '0']);
             $comment->user->undoPoint(new\App\Gamify\Points\ChallengeWinner($comment));

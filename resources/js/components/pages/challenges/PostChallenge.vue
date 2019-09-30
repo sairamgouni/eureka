@@ -59,7 +59,7 @@
 
     	name="active_from"
     	v-model="form.activeFrom"
-      
+
     	placeholder="Active from"
     	class="mt-3"></datepicker>
     </b-col>
@@ -68,7 +68,7 @@
 
     	name="active_to"
     	v-model="form.activeTo"
-      
+
     	placeholder="Active To"
     	class="mt-3"></datepicker>
     </b-col>
@@ -124,7 +124,7 @@
                 });
 
                 // this.showDismissibleAlert = false
-              
+
 
                 var bodyFormData = new FormData();
                 bodyFormData.set('title', this.form.title);

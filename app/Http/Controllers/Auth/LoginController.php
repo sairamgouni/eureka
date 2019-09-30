@@ -163,6 +163,8 @@ class LoginController extends Controller
 
     public function myTestCode()
     {
+
+        die('here');
         $users = \App\User::get();
         $count = 0;
         foreach ($users as $user) {

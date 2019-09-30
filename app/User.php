@@ -287,13 +287,42 @@ class User extends Authenticatable
             ->get()
             ->pluck('followable_id')
             ->toArray();
-
-        $list = \App\User::whereNotIn('id', $following_users)
+        $usersfollowings = $this->followers(User::class)->get();
+        $list = \App\User::with('followings')->whereNotIn('id', $following_users)
             ->where('id', '!=', $this->id)
             ->limit($limit)->get();
-        return \App\User::processFrendSuggestions($list);
+        return \App\User::processFrends($list, $usersfollowings);
     }
 
+    public static function processFrends($friends, $usersfollowings)
+    {
+        $user = \Auth::user();
+        $list = [];
+        foreach ($friends as $friend) {
+            $friendfollowings = $friend->followers(User::class)->get();
+            $mutual = $usersfollowings->intersect($friendfollowings);
+            $item['id'] = $friend->id;
+            $item['name'] = $friend->name;
+            $item['slug'] = $friend->slug;
+            $item['about'] = $friend->about;
+            $item['mutual'] = $mutual->count();
+            $item['friendfollowers'] = $friendfollowings;
+            $item['usersfollowers'] = $usersfollowings;
+            $item['challenges'] = $friend->challenges()->count();
+            $item['following'] = $friend->followings(User::class)->get()->count();
+            $item['followers'] = $friend->followers(User::class)->get()->count();
+            $item['image'] = $friend->getProfileImage();
+            $item['background_image'] = $friend->getBackgroundImage();
+            $item['is_following'] = (int)$user->isFollowing($friend);
+            $item['location'] = $friend->country->title;
+            $item['reputation'] = $friend->reputation;
+            $item['campaign'] = $friend->campaign->campaign;
+            $item['member_from'] = date('M Y', strtotime($user->updated_at));
+
+            $list[] = $item;
+        }
+        return $list;
+    }
     public static function processFrendSuggestions($friends)
     {
         $user = \Auth::user();
@@ -323,7 +352,7 @@ class User extends Authenticatable
     public function getFriendsList($limit = 5)
     {
         $following_users = $this->followings()->limit($limit)->get();
-        return \App\User::processFrendSuggestions($following_users);
+        return \App\User::processFrendSuggestions($following_users,);
 
     }
 
