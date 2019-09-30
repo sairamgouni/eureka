@@ -6308,8 +6308,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ProfileEuraka',
@@ -68057,7 +68055,6 @@ var render = function() {
                       _c("div", { staticClass: "friend-avatar" }, [
                         _c("div", { staticClass: "author-thumb" }, [
                           _c("img", {
-                            staticStyle: { width: "100px", height: "100px" },
                             attrs: { src: item.image, alt: item.name }
                           })
                         ]),
@@ -68079,9 +68076,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n\t\t\t\t\t\t\t\t" +
+                                  "\r\n\t\t\t\t\t\t\t\t" +
                                     _vm._s(item.name) +
-                                    "\n\t\t\t\t\t\t\t\t"
+                                    "\r\n\t\t\t\t\t\t\t\t"
                                 )
                               ]
                             ),
@@ -68173,9 +68170,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n\t\t\t\t\t\t\t\t\t\t" +
+                                    "\r\n\t\t\t\t\t\t\t\t\t\t" +
                                       _vm._s(item.about) +
-                                      "\n\t\t\t\t\t\t\t\t\t"
+                                      "\r\n\t\t\t\t\t\t\t\t\t"
                                   )
                                 ]
                               ),

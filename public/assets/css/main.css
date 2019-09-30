@@ -16149,11 +16149,12 @@ input[type=checkbox] {
 .btn.unfollow {
     background-color: #38a9ff;
     border-color: #38a9ff; }
-.personal-header-image img{
+
+.personal-header-image img {
     width: 120px;
-    height: 120px;
-}
-.friend-item-content .friend-avatar img{
+    height: 120px; }
+
+.friend-item-content .friend-avatar img {
     background: white;
     width: 90px;
     height: 90px;
