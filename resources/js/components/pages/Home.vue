@@ -32,7 +32,7 @@
 
 
                         <div class="form-group with-button">
-                            <input class="form-control" type="text" placeholder="Challenges.." v-model="search">
+                            <input class="form-control" type="text" placeholder="Search" v-model="search">
                             <button @click.prevent="searchchallenges()">
                                 <svg class="olymp-magnifying-glass-icon">
                                     <use

@@ -65512,7 +65512,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", placeholder: "Challenges.." },
+                  attrs: { type: "text", placeholder: "Search" },
                   domProps: { value: _vm.search },
                   on: {
                     input: function($event) {
