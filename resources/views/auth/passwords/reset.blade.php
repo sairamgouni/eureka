@@ -41,7 +41,7 @@
         <div class="content form op2">
 
             <div id="loginfrm">
-                <form method="POST" name="login-form" id="login-"  action="password/reset">
+                <form method="POST" name="login-form" id="login-" action="{{ route('password.reset') }}">
                     <h3>Reset Password</h3>
 
                     {{ csrf_field() }}

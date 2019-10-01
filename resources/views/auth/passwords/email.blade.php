@@ -39,7 +39,7 @@
                     <div class="form-group row">
                          <p>
                         <label for="user_login">
-                            <input type="text" name="email" id="user_login" class="input" value="" size="20"
+                            <input type="text" name="email" id="email" class="input" value="" size="20"
                                    placeholder="Email" required/>
                         </label>
                     </p>

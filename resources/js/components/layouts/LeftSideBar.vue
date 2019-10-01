@@ -101,7 +101,7 @@
                     </li>
 
                     <li>
-                        <a v-if="isadmin()"  href="http://localhost/eurekaadmin/public/login" class="nav-link" target="_blank">
+                        <a v-if="isadmin()"  href="https://eureka.teledirectgroup.com/admin/challenges" class="nav-link" target="_blank">
 
 
                             <svg version="1.1" class="left-menu-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve" data-toggle="tooltip" data-placement="right"   data-original-title="Settings">
@@ -257,7 +257,7 @@
                     </li>
                     <li>
                     <li>
-                            <a v-if="userLevel=='admin'"  href="http://localhost:8000/admin/challenges" class="nav-link" target="_blank">
+                            <a v-if="userLevel=='admin'"  href="https://eureka.teledirectgroup.com/admin/challenges" class="nav-link" target="_blank">
                             <svg version="1.1" class="left-menu-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve" data-toggle="tooltip" data-placement="right"   data-original-title="Settings">
 						<g>
 							<path d="M30.64,14.01l-0.7-0.29c0.09-0.8,0.09-1.61,0-2.41l0.7-0.29c0.49-0.2,0.88-0.59,1.08-1.08c0.2-0.49,0.2-1.03,0-1.53

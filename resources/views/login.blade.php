@@ -76,7 +76,7 @@
                     </p>
                     <p>
 
-                            <a href="password/reset" title="Password Lost and Found"
+                            <a href="{{route('password.reset')}}" title="Password Lost and Found"
                                class="frgt-password" style="cursor:pointer">Forgot password?</a>
 
                     </p>

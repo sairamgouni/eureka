@@ -27,9 +27,9 @@ Route::post('portal/logout', 'Auth\LoginController@logout');
 Route::get('home', 'Auth\LoginController@setLocalStorage');
 Route::get('portal/mytest', 'Auth\LoginController@myTestCode');
 
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+Route::get('password/forgot', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+Route::get('password/reset', 'Auth\ResetPasswordController@showResetForm')->name('password.reset.token');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 

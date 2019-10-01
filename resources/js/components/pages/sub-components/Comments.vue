@@ -53,11 +53,6 @@
                                    :class="{'text-danger':comment.winner}"></i>
 
 							</a>
-                             <a href="#" class="reply">
-                                <i class="fas fa-reply"></i>
-                                Reply
-                            </a>
-
                              <ul class="comments-list style-3 mt-3">
 
                     <li class="comment-item comment-reply-item"

@@ -10571,11 +10571,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Comments',
   props: ['comment_type', 'comment_type_id'],
@@ -62756,7 +62751,8 @@ var render = function() {
                       {
                         staticClass: "nav-link",
                         attrs: {
-                          href: "http://localhost/eurekaadmin/public/login",
+                          href:
+                            "https://eureka.teledirectgroup.com/admin/challenges",
                           target: "_blank"
                         }
                       },
@@ -63070,7 +63066,8 @@ var render = function() {
                       {
                         staticClass: "nav-link",
                         attrs: {
-                          href: "http://localhost:8000/admin/challenges",
+                          href:
+                            "https://eureka.teledirectgroup.com/admin/challenges",
                           target: "_blank"
                         }
                       },
@@ -76650,8 +76647,6 @@ var render = function() {
                 )
               : _vm._e(),
             _vm._v(" "),
-            _vm._m(1, true),
-            _vm._v(" "),
             _c(
               "ul",
               { staticClass: "comments-list style-3 mt-3" },
@@ -76666,7 +76661,7 @@ var render = function() {
                     staticClass: "comment-item comment-reply-item"
                   },
                   [
-                    _vm._m(2, true),
+                    _vm._m(1, true),
                     _vm._v(" "),
                     _c("div", { staticClass: "comments-content" }, [
                       _c("div", { staticClass: "post__author author vcard" }, [
@@ -76728,7 +76723,7 @@ var render = function() {
                             "col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
                         },
                         [
-                          _vm._m(3, true),
+                          _vm._m(2, true),
                           _vm._v(" "),
                           _c("input", {
                             attrs: {
@@ -76741,7 +76736,7 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _vm._m(4, true)
+                      _vm._m(3, true)
                     ])
                   ]
                 )
@@ -76762,7 +76757,7 @@ var render = function() {
               "form",
               { staticClass: "comments-form", on: { submit: _vm.onSubmit } },
               [
-                _vm._m(5),
+                _vm._m(4),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
                   _c(
@@ -76833,17 +76828,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "post__author-thumb" }, [
       _c("img", { attrs: { src: "assets/img/avatar1.jpg", alt: "author" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "reply", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "fas fa-reply" }),
-      _vm._v(
-        "\n                                Reply\n                            "
-      )
     ])
   },
   function() {
