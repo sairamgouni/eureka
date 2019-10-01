@@ -43,12 +43,6 @@
 						</router-link>
 
 					</div>
-
-					<div class="ui-block-title">
-						<router-link to="/post-challenge" class="h6 title">
-							Create Challenge
-						</router-link>
-					</div>
 				</div>
 
 				<!-- ... end Your Profile  -->

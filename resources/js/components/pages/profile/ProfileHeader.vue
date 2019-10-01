@@ -41,24 +41,6 @@
 							</a>
 						</span>
 
-
-							<div class="btn btn-control bg-primary more"  v-if="isSameUser">
-								<svg class="olymp-settings-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-settings-icon"></use></svg>
-
-								<ul class="more-dropdown more-with-triangle triangle-bottom-right">
-
-									<li>
-										<router-link to="/change-password" class="nav-link">
-										Change Password
-										</router-link>
-									</li>
-									<li>
-										<router-link to="/edit-profile" class="nav-link">
-											Edit Personal Information
-										</router-link>
-									</li>
-								</ul>
-							</div>
 						</div>
 					</div>
 					<div class="top-header-author personal-header-image">

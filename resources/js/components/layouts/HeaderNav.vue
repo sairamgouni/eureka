@@ -47,15 +47,6 @@
                                         </router-link>
                                     </li>
                                     <li>
-                                        <router-link to="/post-challenge" class="nav-link">
-                                            <svg class="olymp-star-icon left-menu-icon" data-toggle="tooltip"
-                                                 data-placement="right" data-original-title="FAV PAGE">
-                                                <use
-                                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-star-icon"></use>
-                                            </svg>
-
-                                            <span>Create Challenge</span>
-                                        </router-link>
                                     </li>
                                     <li @click="logout()">
                                         <a href="javascript:void(0);">
