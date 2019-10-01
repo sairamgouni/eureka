@@ -101,7 +101,7 @@
                     </li>
 
                     <li>
-                        <a v-if="userLevel=='admin'"  href="http://localhost/eurekaadmin/public/login" class="nav-link" target="_blank">
+                        <a v-if="isadmin()"  href="http://localhost/eurekaadmin/public/login" class="nav-link" target="_blank">
 
 
                             <svg version="1.1" class="left-menu-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve" data-toggle="tooltip" data-placement="right"   data-original-title="Settings">
@@ -328,6 +328,21 @@
                 userLevel:'',
                 notifications:[],
             }
+        },
+        methods:{
+            isadmin() {
+              let role = this.$store.state.userRole;
+              let roleArray = [];
+              let admin = false;
+                role.forEach((value,key)=>{
+                   roleArray.push(value.name);
+                });
+              if(roleArray.indexOf('admin') !== -1) {
+                  admin = true;
+              }
+              console.log('leftsidebar',admin);
+              return admin;
+            },
         },
                 created(){
             this.userLogin = this.$store.getters.getLogin;

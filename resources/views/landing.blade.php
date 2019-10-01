@@ -355,7 +355,7 @@
         assetUrl: "{{asset('/')}}"
     };
 {{--    {{dd(auth()->user()->load('campaign'))}}--}}
-    let USER = JSON.parse(`@Json(auth()->user()->load('campaign'))`);
+    let USER = JSON.parse(`@Json(auth()->user()->load(['campaign','role']))`);
     window.localStorage.setItem('user', JSON.stringify(USER));
     console.log(USER);
 

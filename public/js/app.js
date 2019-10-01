@@ -2454,6 +2454,23 @@ __webpack_require__.r(__webpack_exports__);
       notifications: []
     };
   },
+  methods: {
+    isadmin: function isadmin() {
+      var role = this.$store.state.userRole;
+      var roleArray = [];
+      var admin = false;
+      role.forEach(function (value, key) {
+        roleArray.push(value.name);
+      });
+
+      if (roleArray.indexOf('admin') !== -1) {
+        admin = true;
+      }
+
+      console.log('leftsidebar', admin);
+      return admin;
+    }
+  },
   created: function created() {
     this.userLogin = this.$store.getters.getLogin;
     this.userId = this.$store.getters.getUserId;
@@ -62733,7 +62750,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("li", [
-                _vm.userLevel == "admin"
+                _vm.isadmin()
                   ? _c(
                       "a",
                       {
@@ -65602,8 +65619,8 @@ var render = function() {
                                   _vm._v(
                                     "\n                                        " +
                                       _vm._s(
-                                        item.title.length > 35
-                                          ? item.title.substring(0, 35) + ".."
+                                        item.title.length > 25
+                                          ? item.title.substring(0, 45) + ".."
                                           : item.title
                                       ) +
                                       "\n"

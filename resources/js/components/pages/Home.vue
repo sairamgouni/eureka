@@ -66,7 +66,7 @@
                                     <router-link
                                                                                 :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
                                                                                 class="h4 post-title">
-                                        {{item.title.length > 35 ? item.title.substring(0,35)+'..' : item.title}}
+                                        {{item.title.length > 25 ? item.title.substring(0,45)+'..' : item.title}}
 <!--                                                                                {{item.title}}-->
                                                                             </router-link>
 

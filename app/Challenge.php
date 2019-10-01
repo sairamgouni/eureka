@@ -281,10 +281,11 @@ class Challenge extends Model
 
     public function getImageResizeFile()
     {
+
         $default_image = 'storage/challenges/default.png';
         // return $default_image;
-        $image_path = 'storage/challenges/resize/' . $this->image;
-        if ($this->image) {
+        $image_path = 'storage/challenges/resize/' . $this->attributes['image'];
+        if ($this->attributes['image']) {
             if (file_exists(public_path() . '/' . $image_path))
                 return $image_path;
         }
