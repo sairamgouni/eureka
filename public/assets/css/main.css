@@ -16159,3 +16159,28 @@ input[type=checkbox] {
     width: 90px;
     height: 90px;
 }
+
+.post-thumb__tags {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.featured-post-item .post-category.post-thumb__tag-item {
+    position: static;
+    margin-bottom: 0;
+    margin-left: 5px;
+    border-radius: 3px;
+}
+
+.featured-post-item .post-category.post-thumb__tag-item:first-child {
+    margin-left: 0;
+}
