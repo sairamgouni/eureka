@@ -65864,7 +65864,7 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "ui-block" }, [
-                _c("div", { staticClass: "news-feed-form" }, [
+                _c("div", { staticClass: "news-feed-form newsfeed-input" }, [
                   _c("form", [
                     _c(
                       "div",

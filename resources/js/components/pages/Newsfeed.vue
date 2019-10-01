@@ -12,7 +12,7 @@
 
 				<!-- News Feed Form  -->
 
-				<div class="news-feed-form">
+				<div class="news-feed-form newsfeed-input">
 					<!-- Nav tabs -->
 
                     <!-- Tab panes -->

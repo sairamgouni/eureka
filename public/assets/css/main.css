@@ -16184,3 +16184,22 @@ input[type=checkbox] {
 .featured-post-item .post-category.post-thumb__tag-item:first-child {
     margin-left: 0;
 }
+
+.newsfeed-input .control-label {
+    top: 23px;
+}
+@media(min-width: 768px) {
+    .newsfeed-input .control-label {
+        top: 21px;
+    }
+}
+@media(min-width: 1024px) {
+    .newsfeed-input .control-label {
+        top: 24px;
+    }
+}
+@media(min-width: 1199px) {
+    .newsfeed-input .control-label {
+        top: 30px;
+    }
+}
