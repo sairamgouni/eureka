@@ -104,15 +104,6 @@
 
 							<ul class="account-settings">
 								<li>
-									<a href="29-YourAccount-AccountSettings.html">
-
-										<svg class="olymp-menu-icon"><use xlink:href="{{asset('assets/svg-icons/sprites/icons.svg')}}#olymp-menu-icon"></use></svg>
-
-										<span>Profile Settings</span>
-									</a>
-								</li>
-
-								<li>
 									<a href="{{URL_USERS_LOGOUT}}">
 										<svg class="olymp-logout-icon"><use xlink:href="{{asset('assets/svg-icons/sprites/icons.svg')}}#olymp-logout-icon"></use></svg>
 
