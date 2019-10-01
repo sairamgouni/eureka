@@ -229,8 +229,11 @@ class User extends Authenticatable
     public function processUpload($request, $user)
     {
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('users/thumbs');
-            $user->image = $path;
+            $resize = \Image::make($request->image)->encode('jpg');
+            $hash = md5($resize->__toString()) . '.jpg';
+            $path = 'public/users/thumbs/' . $hash;
+            \Storage::disk('local')->put($path, $resize, 'public');
+            $user->image = $hash;
             $response = $user->save();
             return $response;
         }
@@ -441,7 +444,7 @@ class User extends Authenticatable
         // return $default_image;
 
 
-        $image_path = 'storage/'.$this->attributes['image'];
+        $image_path = 'storage/users/thumbs/'.$this->attributes['image'];
 
         if ($this->attributes['image']) {
             if (file_exists(public_path() . '/' . $image_path))

@@ -115,11 +115,11 @@ class UsersController extends Controller
             $url = "";
             if ($field_name == 'image') {
                 $resize = \Image::make($path)->resize(124, 124)->encode('jpg');
-                $hash = md5($resize->__toString());
-                $path = "users/thumbs/{$hash}.jpg";
+                $hash = md5($resize->__toString()) . '.jpg';
+                $path = 'public/users/thumbs/' . $hash;
 
-                $resize->save(public_path($path));
-                $url = "/" . $path;
+                \Storage::disk('local')->put($path, $resize, 'public');
+                $url = $hash;
             } elseif ($field_name == 'background_image') {
                 $resize = \Image::make($path)->resize(1078, 360)->encode('jpg');
                 $hash = md5($resize->__toString());

@@ -131,5 +131,10 @@
             background-color: #212529;
             border-color: #212529;
         }
+        .btn-primary:hover {
+            color: #fff;
+            background-color: #212529;
+            border-color: #0062cc;
+        }
     </style>
 @endsection

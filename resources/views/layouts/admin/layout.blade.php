@@ -95,7 +95,7 @@
 			<div class="author-page author vcard inline-items more">
 				<div class="author-thumb">
 					<img alt="author" src="{{auth()->user()->image}}" class="avatar">
-					<span class="icon-status online"></span>
+
 					<div class="more-dropdown more-with-triangle">
 						<div class="mCustomScrollbar" data-mcs-theme="dark">
 							<div class="ui-block-title ui-block-title-small">
