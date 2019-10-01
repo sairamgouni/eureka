@@ -352,7 +352,7 @@ class User extends Authenticatable
     public function getFriendsList($limit = 5)
     {
         $following_users = $this->followings()->limit($limit)->get();
-        return \App\User::processFrendSuggestions($following_users,);
+        return \App\User::processFrendSuggestions($following_users);
 
     }
 
