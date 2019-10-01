@@ -30,4 +30,8 @@ class ForgotPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+    public function sendResetLinkEmail($method, $parameters)
+    {
+
+    }
 }

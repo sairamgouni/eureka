@@ -612,8 +612,8 @@
                             <div class="post-thumb">
 
                                 <img :src="item.image" :alt="item.title">
-                                <div>
-                                    <a href="#" class="post-category bg-primary"  v-for="category in item.categories" style="margin-right: 5px;">{{ category.title }}</a>
+                                <div class="post-thumb__tags">
+                                    <a href="#" class="post-category bg-primary post-thumb__tag-item"  v-for="category in item.categories">{{ category.title }}</a>
                                 </div>
 
                             </div>

@@ -124,7 +124,7 @@
 
                                         name="active_from"
                                         v-model="form.activeFrom"
-                                        :disabled-dates="disabledDates"
+                                        :disabled-dates="disabledDatesStart"
                                         placeholder="Active from"
                                         @input="activefromdate()"
                                         class="mt-3" required></datepicker>
@@ -178,6 +178,9 @@
                 userLogin : false,
                 disabledDates: {
                     to: '', // Disable all dates up to specific date
+                },
+                disabledDatesStart: {
+                    to: '', // Disable all dates up to specific date
                 }
             }
         },
@@ -186,9 +189,12 @@
 
         },
         mounted() {
-            //
+            let currentdate = new Date();
+            currentdate = currentdate.setDate(currentdate.getDate()-1);
+            this.disabledDatesStart.to =  new Date(currentdate);
         },
         updated() {
+
         },
         computed: {
 
@@ -284,6 +290,7 @@
 
         },
         created() {
+
 
             this.userLogin = this.$store.getters.getLogin;
 

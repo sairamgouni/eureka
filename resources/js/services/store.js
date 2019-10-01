@@ -28,6 +28,7 @@ export default new Vuex.Store({
         userAbout: getJSONFromLocalStorage('user').about ,
         userNickname: getJSONFromLocalStorage('user').nickname ,
         userLevel: getJSONFromLocalStorage('user').level ,
+        userRole: getJSONFromLocalStorage('user').role ,
         userCampaign: getJSONFromLocalStorage('user').campaign ,
         baseUrl: 'http://localhost:8000/',
         isPost:'',

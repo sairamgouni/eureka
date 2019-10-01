@@ -4260,20 +4260,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -4895,6 +4881,10 @@ __webpack_require__.r(__webpack_exports__);
       disabledDates: {
         to: '' // Disable all dates up to specific date
 
+      },
+      disabledDatesStart: {
+        to: '' // Disable all dates up to specific date
+
       }
     };
   },
@@ -4902,7 +4892,10 @@ __webpack_require__.r(__webpack_exports__);
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"],
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
   },
-  mounted: function mounted() {//
+  mounted: function mounted() {
+    var currentdate = new Date();
+    currentdate = currentdate.setDate(currentdate.getDate() - 1);
+    this.disabledDatesStart.to = new Date(currentdate);
   },
   updated: function updated() {},
   computed: {},
@@ -65330,12 +65323,13 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
+                      { staticClass: "post-thumb__tags" },
                       _vm._l(item.categories, function(category) {
                         return _c(
                           "a",
                           {
-                            staticClass: "post-category bg-primary",
-                            staticStyle: { "margin-right": "5px" },
+                            staticClass:
+                              "post-category bg-primary post-thumb__tag-item",
                             attrs: { href: "#" }
                           },
                           [_vm._v(_vm._s(category.title))]
@@ -65863,7 +65857,7 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "ui-block" }, [
-                _c("div", { staticClass: "news-feed-form" }, [
+                _c("div", { staticClass: "news-feed-form newsfeed-input" }, [
                   _c("form", [
                     _c(
                       "div",
@@ -66747,7 +66741,7 @@ var render = function() {
                                   staticClass: "mt-3",
                                   attrs: {
                                     name: "active_from",
-                                    "disabled-dates": _vm.disabledDates,
+                                    "disabled-dates": _vm.disabledDatesStart,
                                     placeholder: "Active from",
                                     required: ""
                                   },
@@ -77458,9 +77452,11 @@ var render = function() {
                   [_vm._v(_vm._s(item.name))]
                 ),
                 _vm._v(" "),
-                _c("span", { staticClass: "chat-message-item" }, [
-                  _vm._v(_vm._s(item.mutual) + " Friends in Common")
-                ])
+                item.mutual > 0
+                  ? _c("span", { staticClass: "chat-message-item" }, [
+                      _vm._v(_vm._s(item.mutual) + " Friends in Common")
+                    ])
+                  : _vm._e()
               ],
               1
             ),
@@ -88212,6 +88208,7 @@ var getJSONFromLocalStorage = function getJSONFromLocalStorage(key) {
     userAbout: getJSONFromLocalStorage('user').about,
     userNickname: getJSONFromLocalStorage('user').nickname,
     userLevel: getJSONFromLocalStorage('user').level,
+    userRole: getJSONFromLocalStorage('user').role,
     userCampaign: getJSONFromLocalStorage('user').campaign,
     baseUrl: 'http://localhost:8000/',
     isPost: ''

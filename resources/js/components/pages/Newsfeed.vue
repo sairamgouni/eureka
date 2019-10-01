@@ -12,7 +12,7 @@
 
 				<!-- News Feed Form  -->
 
-				<div class="news-feed-form">
+				<div class="news-feed-form newsfeed-input">
 					<!-- Nav tabs -->
 
                     <!-- Tab panes -->
@@ -28,21 +28,7 @@
                 </div>
 
                 <!-- ... end News Feed Form  -->			</div>
-		<!--  <div role="tablist " v-if="userLogin">
-		    <b-card no-body class="mb-1">
-		      <b-card-header header-tag="header" class="p-1 " role="tab">
-		        <b-button block href="#" v-b-toggle.accordion-1 variant="info" class="btn btn-purple btn-lg full-width color-white" style="color:white;">Post Challange</b-button>
-		      </b-card-header>
-		      <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
-		        <b-card-body>
-		          <PostStatus />
-		        </b-card-body>
-		      </b-collapse>
-		    </b-card>
-		  </div> -->
-<!--    <router-link to="/post-challenge">-->
-<!--                    <a href="javascript:void(0);" class="btn btn-primary btn-md-1 mt-1 post-button">Post Challenge</a>-->
-<!--              </router-link>-->
+
 		<ActivityItem ref="activityItem"/>
 
 			<a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="items-to-load.html"
