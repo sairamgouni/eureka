@@ -124,12 +124,12 @@
 
 					</div>
 				</div>
-				<a href="#" class="author-name fn">
-					<div class="author-title">
-					 <svg class="olymp-dropdown-arrow-icon"><use xlink:href="{{asset('assets/svg-icons/sprites/icons.svg')}}#olymp-dropdown-arrow-icon"></use></svg>
-					</div>
-
-				</a>
+                <a href="#" class="author-name fn">
+                    <div class="author-title">
+                        {{ Auth::user()->name }} <svg class="olymp-dropdown-arrow-icon"><use xlink:href="{{asset('assets/svg-icons/sprites/icons.svg')}}#olymp-dropdown-arrow-icon"></use></svg>
+                    </div>
+                    <span class="author-subtitle">{{ Auth::user()->campaign->campaign }}</span>
+                </a>
 			</div>
 
 		</div>
