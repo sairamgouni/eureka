@@ -446,7 +446,7 @@ class ChallengeController extends Controller
             })
             ->editColumn('image', function ($row) {
 
-                return '<img width="100px" src="' . asset('storage/' . $row->image) . '">';
+                return '<img width="100px" src="' . asset( $row->image) . '">';
             })
             ->rawColumns(['categories', 'action', 'image'])
             ->make(true);

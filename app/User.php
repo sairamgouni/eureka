@@ -434,9 +434,18 @@ class User extends Authenticatable
         return $item_data;
 
     }
-    public function getImageAttribute($value)
+    public function getImageAttribute()
     {
-        return $value ?? '/users/thumbs/user.png';
+
+        $default_image = 'users/thumbs/user.png';
+        // return $default_image;
+        $image_path = 'users/thumbs/' . $this->attributes['image'];
+        if ($this->attributes['image']) {
+            if (file_exists(public_path() . '/' . $image_path))
+                return asset($image_path);
+        }
+
+        return asset($default_image);
     }
 
 }

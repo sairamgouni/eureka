@@ -332,10 +332,7 @@ class UsersController extends Controller
             })
             ->editColumn('image', function($row){
 
-                return '<img width="100px" src="'.asset('storage/'.$row->image).'">';
-            })  ->editColumn('image', function($row){
-
-                return '<img width="100px" src="'.asset('storage/'.$row->image).'">';
+                return '<img width="100px" src="'.$row->image.'">';
             })
             ->editColumn('status', function ($row) {
                 if ($row->status == 1) {
