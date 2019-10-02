@@ -30,18 +30,20 @@
 							</div>
                             <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                 <div class="form-group">
-                                    <label class="control-label">Code</label>
-
-                                    <input class="form-control" type="text" name="code" placeholder="Code here">
+                                    <label class="control-label">code</label>
+                                    {!!Form::select('department_name', $code, old('department_name'))!!}
+                                </div>
+                                @if ($errors->has('department_name'))
+                                    <span class="invalid-input">
+              <strong>{{ $errors->first('department_name') }}</strong>
+              </span>
+                                @endif
                                 </div>
 
                             </div>
 
                             <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-								<!-- <div class="form-group">
-									<label class="control-label">Image</label>
-									<input class="form-control" type="file" name="image" placeholder="Choose Optional Tags">
-								</div> -->
+
 							</div>
 								<input type="hidden" name="id" value=""  class="form-control">
 								<input type="hidden" name="slug" value=""  class="form-control">

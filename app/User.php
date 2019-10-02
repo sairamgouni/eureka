@@ -109,7 +109,7 @@ class User extends Authenticatable
      */
     public function campaign()
     {
-        return $this->belongsTo(Campaign::class, 'cid');
+        return $this->belongsTo(Campaign::class, 'department_name','department_name');
     }
 
 

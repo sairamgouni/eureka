@@ -31,7 +31,7 @@ class Campaign extends Model
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('title')
+            ->generateSlugsFrom('campaign')
             ->saveSlugsTo('slug');
     }
 
@@ -58,10 +58,11 @@ class Campaign extends Model
     // M3cjk*BBR,ib
     public function doSaveOperation($request, $record)
     {
+
          $static_object     = (new self);
 
           $record->campaign    = $request->campaign;
-          $record->code    = $request->code;
+          $record->department_name    = $request->department_name;
           $record->created_by = \Auth::user()->id;
 		  $response = $record->save();
           return $response;
@@ -132,5 +133,11 @@ class Campaign extends Model
     public static function getCampaigns()
     {
        return \App\Campaign::get()->pluck('campaign','id');
+    }
+
+    public static function getcode()
+    {
+        return \App\User::select('department_name')->groupBy('department_name')->get();
+
     }
 }

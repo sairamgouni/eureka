@@ -23,8 +23,10 @@ class CampaignController extends Controller
     {
 
         $campaigns = \App\Campaign::pluck('campaign', 'id');
+        $code = \App\Campaign::getcode('department_name')->pluck('department_name','department_name');
         $data['title'] = 'Add Campaigne';
         $data['campaigns'] = $campaigns;
+        $data['code'] = $code;
     	return view('admin.campaigns.add',$data);
     }
 
@@ -72,7 +74,7 @@ class CampaignController extends Controller
         return redirect('admin/campaigns');
     }
     public function data(){
-        $category = Campaign::select('eureka_campaigns.id','eureka_campaigns.campaign','eureka_campaigns.code','eureka_campaigns.slug');
+        $category = Campaign::select('eureka_campaigns.id','eureka_campaigns.campaign','eureka_campaigns.department_name','eureka_campaigns.slug');
         return DataTables::eloquent($category)
             ->addColumn('action', function($row){
                 return '<a href="' . route('campaign_edit', $row->slug) . '" class="btn btn-success">Edit</a>

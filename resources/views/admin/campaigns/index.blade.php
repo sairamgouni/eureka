@@ -26,7 +26,7 @@
                     <div class="ui-block-title bg-blue">
                         <h6 class="title c-white">Campaign List</h6>
                         <div class="align-right">
-{{--                            <a href="{{route('campaign_add')}}" class="btn btn-primary btn-md-2">New Campaign</a>--}}
+                            <a href="{{route('campaign_add')}}" class="btn btn-primary btn-md-2">New Campaign</a>
                         </div>
                     </div>
                     <div class="ui-block-content">
@@ -35,7 +35,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Title</th>
-                                <th scope="col">Code</th>
+                                <th scope="col">Department Name</th>
                                 <th scope="col">Action</th>
                             </tr>
                             </thead>
@@ -71,7 +71,7 @@
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'campaign', name: 'campaign'},
-                {data: 'code', name: 'code'},
+                {data: 'department_name', name: 'department_name'},
                 {data: 'action', name: 'action', "searchable": false, "sortable": false}
             ]
         });
