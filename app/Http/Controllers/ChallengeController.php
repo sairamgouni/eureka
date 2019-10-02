@@ -191,7 +191,7 @@ class ChallengeController extends Controller
             $challenger->notify(new \App\Notifications\ChallengeLiked($challange, $user));
         }
 
-        $log_message = ' has ' . $liked . ' the challenge ' . $challange->title;
+        $log_message = ' has ' . $liked . ' the challenge ' . '<a href="/#/challenge-details/'.$challange->id.'/'.$challange->slug.'">'.$challange->title.'</a>';
         activity()
             ->performedOn($challange)
             ->log($log_message);
@@ -224,9 +224,11 @@ class ChallengeController extends Controller
             'parent_id' => $request->input('replay') ?? null
         ]);
         if ($request->input('replay'))
-            $log_message = ' has commented on challenge ' . $challenge->title; // replay log message
-        else
-            $log_message = ' has commented on challenge ' . $challenge->title; // normal comment log message
+
+        $log_message = ' has commented on challenge '. '<a href="/#/challenge-details/'.$challenge->id.'/'.$challenge->slug.'">'.$challenge->title.'</a>';
+
+    else
+            $log_message = ' has commented on challenge ' .'<a href="/#/challenge-details/'.$challenge->id.'/'.$challenge->slug.'">'.$challenge->title.'</a>'; // normal comment log message
 
         activity()
             ->performedOn($challenge)
@@ -356,7 +358,8 @@ class ChallengeController extends Controller
             $comment->user->givePoint(new ChallengeFinalized($comment));
             activity()
                 ->performedOn($comment)
-                ->log("added " . $comment->user->name . " to the finalized list");
+            ->log(" has selected " .'<a href="/#/profile/'.$comment->user->id.'/'.$comment->user->slug.'">'.$comment->user->name.'</a>' . " as one of the Finalist for the challenge ". '<a href="/#/challenge-details/'.$comment->challenge->id.'/'.$comment->challenge->slug.'">'.$comment->challenge->title.'</a>');
+
         } else {
             $comment->update(['finalized' => '0']);
             $comment->user->undoPoint(new ChallengeFinalized($comment));
@@ -377,7 +380,7 @@ class ChallengeController extends Controller
 
             activity()
                 ->performedOn($comment)
-                ->log("Marked " .'<a href="/#/profile/'.$comment->user->id.'/'.$comment->user->slug.'">'.$comment->user->name.'</a>' . " as the winner of " . '<a href="/#/challenge-details/'.$comment->challenge->id.'/'.$comment->challenge->slug.'">'.$comment->challenge->title.'</a>');
+                ->log("has selected " .'<a href="/#/profile/'.$comment->user->id.'/'.$comment->user->slug.'">'.$comment->user->name.'</a>' . " as the winner for the challenge " . '<a href="/#/challenge-details/'.$comment->challenge->id.'/'.$comment->challenge->slug.'">'.$comment->challenge->title.'</a>');
         } else {
             $comment->update(['winner' => '0']);
             $comment->user->undoPoint(new\App\Gamify\Points\ChallengeWinner($comment));

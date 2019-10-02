@@ -78,7 +78,7 @@ class Challenge extends Model
         // return $response;
         $user = \Auth::user();
 
-        $log_message = ' has posted a new challenge ' . $record->title;
+        $log_message = ' has posted a new challenge ' . '<a href="/#/challenge-details/'.$record->id.'/'.$record->slug.'">'.$record->title.'</a>';
         activity()
             ->performedOn($record)
             ->log($log_message);
