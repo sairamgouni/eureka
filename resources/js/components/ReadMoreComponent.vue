@@ -3,8 +3,8 @@
 		<p>
             {{formattedString}}
           <span v-show="text.length > maxChars">
-			<a :href="link" id="readmore" v-show="!isReadMore" v-on:click="triggerReadMore($event, true)">{{moreStr}}</a>
-			<a :href="link" id="readmore" v-show="isReadMore" v-on:click="triggerReadMore($event, false)">{{lessStr}}</a>
+			<a :href="link" id="readmore" v-show="!isReadMore" v-on:click="triggerReadMore($event, true)" class="show" style="color:#094472">{{moreStr}}</a>
+			<a :href="link" id="readmore" v-show="isReadMore" v-on:click="triggerReadMore($event, false)" class="show"style="color:#094472">{{lessStr}}</a>
 		</span>
         </p>
 
@@ -65,3 +65,8 @@
 		}
 	}
 </script>
+<style>
+    .show{
+        color: #094472;
+    }
+</style>

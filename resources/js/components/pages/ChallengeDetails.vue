@@ -500,7 +500,7 @@
                             </div>
 
                             <div class="post-content">
-                                <read-more more-str="Show more" :text="challenge.description" less-str="Show more" :max-chars="300"></read-more>
+                                <read-more more-str="See more" :text="challenge.description" less-str="See less" :max-chars="300"></read-more>
 
                             </div>
 

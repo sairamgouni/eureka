@@ -132,7 +132,7 @@
                     {{item.title}}
                 </a>
                 <p>
-                    <read-more more-str="Show more" :text="item.description" less-str="Show more" :max-chars="300"></read-more>
+                    <read-more more-str="See more" :text="item.description" less-str="See less" :max-chars="300"></read-more>
                 </p>
 
                 <div class="post-thumb">
