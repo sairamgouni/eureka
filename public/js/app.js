@@ -65581,7 +65581,10 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "post-thumb" }, [
                           _c("img", {
-                            staticStyle: { width: "391px", height: "276px" },
+                            staticStyle: {
+                              width: "337.98px",
+                              height: "240.36px"
+                            },
                             attrs: { src: item.resizeImage, alt: item.title }
                           }),
                           _vm._v(" "),

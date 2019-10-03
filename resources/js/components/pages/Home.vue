@@ -59,7 +59,7 @@
                                 <span>Completed</span>
                             </div>
                             <div class="post-thumb">
-                                <img style="width: 391px; height: 276px;" :src="item.resizeImage" :alt="item.title">
+                                <img style="width: 337.98px; height: 240.36px;" :src="item.resizeImage" :alt="item.title">
 
                                 <div class="post-content">
                                     <a href="javascript:;" class="post-category bg-primary" v-for="category in item.categories" style="margin-right: 5px;">{{ category.title }}</a>

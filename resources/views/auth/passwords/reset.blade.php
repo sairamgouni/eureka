@@ -24,7 +24,7 @@
 <body class="body_css">
 <div class="main">
     <div id="particles-js" style="position: relative">
-        <img src="{{asset('assets/login-assets/img/logo-white.svg')}}" alt="" class="logo" style="top: -51px;">
+        <img src="{{asset('assets/login-assets/img/eureka-logo-horizontal.svg')}}" alt="" class="logo" style="top: -51px;">
         <div style="text-align: center;
                           color: #fff;
                           position: absolute;

@@ -30,9 +30,12 @@
 
     <div class="row login-cont">
         <div class="content form op2">
-
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
             <div id="loginfrm">
-
                 <form method="POST" name="login-form" id="login-"  action="{{ route('password.email') }}">
                     @csrf
 

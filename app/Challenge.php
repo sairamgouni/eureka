@@ -142,7 +142,6 @@ class Challenge extends Model
      */
     public function processUpload($request, $record)
     {
-
 //        if ($request->hasFile('image')) {
 //            $path = $request->file('image')->store('challenges');
 //            $record->image = $path;
@@ -150,7 +149,7 @@ class Challenge extends Model
 //            return $response;
 //        }
         if ($request->hasFile('image')) {
-            $resize = \Image::make($request->image)->resize(338, 238)->encode('jpg');
+            $resize = \Image::make($request->image)->resize(337.98, 240.36)->encode('jpg');
             $hash = md5($resize->__toString()) . '.jpg';
             $path = 'public/challenges/resize/' . $hash;
             Storage::disk('local')->put($path, $resize, 'public');
