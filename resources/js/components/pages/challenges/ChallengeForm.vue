@@ -104,7 +104,7 @@
 
                             <multiselect required
                                 class="mt-3"
-                                v-model="form.selectedList" required  tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="code" :options="optionsList" :multiple="true" :taggable="true" @tag="addTag" aria-required="true" :hide-selected="true" v-on:input="limiter"></multiselect>
+                                v-model="form.selectedList" required  tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="code" :options="optionsList" :multiple="true" :taggable="true" @tag="addTag" aria-required="true" :hide-selected="true" v-on:input="limiter" :limit="3" ></multiselect>
 
                             <!--    <b-form-group label="Categories"  class="mt-2 checkbox">
                                  <b-form-checkbox-group

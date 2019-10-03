@@ -133,7 +133,6 @@
                 </a>
                 <p>
                     <read-more more-str="Show more" :text="item.description" less-str="Show more" :max-chars="300"></read-more>
-
                 </p>
 
                 <div class="post-thumb">
@@ -209,6 +208,7 @@
 </template>
 
 <script>
+
     export default {
         name: 'ActivityItem',
         props: ['CurrentUser', 'isUserLoggedIn',
@@ -402,7 +402,7 @@
                         // loader.hide();
                     });
             },
-        }
+        },
 
     }
 </script>

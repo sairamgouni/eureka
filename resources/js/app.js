@@ -36,9 +36,9 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 import Loading from 'vue-loading-overlay';
 
 Vue.use(Loading);
-import ReadMore from 'vue-read-more';
+import ReadMore from './components/ReadMoreComponent';
 
-Vue.use(ReadMore);
+// Vue.use(ReadMore);
 
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/index.css';
@@ -52,6 +52,7 @@ import 'vue-multiselect/dist/vue-multiselect.min.css'
 
 // register globally
 Vue.component('multiselect', Multiselect)
+Vue.component('read-more', ReadMore)
 
 
 import InfiniteLoading from 'vue-infinite-loading';
