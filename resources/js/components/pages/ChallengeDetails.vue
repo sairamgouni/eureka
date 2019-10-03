@@ -500,8 +500,10 @@
                             </div>
 
                             <div class="post-content">
-                                {{challenge.description}}
+                                <read-more more-str="Show more" :text="challenge.description" less-str="Show more" :max-chars="300"></read-more>
+
                             </div>
+
                         </div>
 
 
@@ -675,6 +677,7 @@
 
 <script>
     import Comments from './sub-components/Comments';
+
     export default {
         name: "ChallengeDetails",
         components: {Comments},
@@ -840,5 +843,6 @@
     .active_bg {
         background: #e91d24;
     }
+
 
 </style>

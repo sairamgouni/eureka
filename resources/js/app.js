@@ -6,6 +6,7 @@ import App from './components/App';
 import routes from './routes/routes';
 import store from './services/store';
 import VueSweetalert2 from 'vue-sweetalert2';
+
 window.Vue=Vue;
 
 
@@ -35,6 +36,9 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 import Loading from 'vue-loading-overlay';
 
 Vue.use(Loading);
+import ReadMore from 'vue-read-more';
+
+Vue.use(ReadMore);
 
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/index.css';

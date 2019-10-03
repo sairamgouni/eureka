@@ -131,7 +131,9 @@
                 <a href="javascript:;" @click="challengedetail(item)" class="h4 title">
                     {{item.title}}
                 </a>
-                <p>{{item.description}}
+                <p>
+                    <read-more more-str="Show more" :text="item.description" less-str="Show more" :max-chars="300"></read-more>
+
                 </p>
 
                 <div class="post-thumb">
