@@ -25,7 +25,6 @@
 <div class="main">
     <div id="particles-js" style="position: relative">
         <img src="{{asset('assets/login-assets/img/eureka-logo-horizontal.svg')}}" alt="" class="logo" style="top: -51px;height: 200px;width: 200px">
-
     </div>
 
     <div class="row login-cont">
@@ -35,6 +34,7 @@
                     {{ session('status') }}
                 </div>
             @endif
+
             <div id="loginfrm">
                 <form method="POST" name="login-form" id="login-"  action="{{ route('password.email') }}">
                     @csrf

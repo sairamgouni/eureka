@@ -43,8 +43,9 @@ class MailResetPasswordNotification extends Notification
 
         return (new MailMessage)
             ->subject('Password Change Request')
+            ->greeting('Dear '.$notifiable->name)
             ->line('We have received a password change request for your account.')
-            ->action('If you made this request, then please click', $link)
+            ->action('Reset Password', $link)
             ->line('If you did not ask to change your password, then please ignore this email. Another user may have entered your email by mistake. No changes will be made to your account..');
     }
 
