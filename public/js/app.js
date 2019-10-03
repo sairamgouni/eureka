@@ -4908,6 +4908,12 @@ __webpack_require__.r(__webpack_exports__);
   updated: function updated() {},
   computed: {},
   methods: {
+    limiter: function limiter(e) {
+      if (e.length > 3) {
+        console.log(' you can only select two', e);
+        e.pop();
+      }
+    },
     activefromdate: function activefromdate() {
       console.log('sdate', this.form.activeFrom);
       this.disabledDates.to = new Date(this.form.activeFrom);
@@ -66668,7 +66674,7 @@ var render = function() {
                             taggable: true,
                             "aria-required": "true"
                           },
-                          on: { tag: _vm.addTag },
+                          on: { tag: _vm.addTag, input: _vm.limiter },
                           model: {
                             value: _vm.form.selectedList,
                             callback: function($$v) {
