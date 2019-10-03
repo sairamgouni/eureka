@@ -24,17 +24,7 @@
 <body class="body_css">
 <div class="main">
     <div id="particles-js" style="position: relative">
-        <img src="{{asset('assets/login-assets/img/eureka-logo-horizontal.svg')}}" alt="" class="logo" style="top: -51px;">
-        <div style="text-align: center;
-                          color: #fff;
-                          position: absolute;
-                          top: 44%;
-                          margin-top: 50px;
-                          width: 100%;
-                          font-size: 16px;
-                          font-weight: bold; ">
-            EUREKA
-        </div>
+        <img src="{{asset('assets/login-assets/img/eureka-logo-horizontal.svg')}}" alt="" class="logo" style="top: -51px;height: 200px;width: 200px">
     </div>
 
     <div class="row login-cont">
@@ -70,7 +60,9 @@
                     </div>
 
                     <div>
-                        <button type="submit" class="btn btn-default submit">Reset Password</button>
+                        <p class="submit" style="width:1000px;text-align:center;">
+                            <input type="submit" name="fp_submit" id="fp_submit" value="Reset Passwordd"/>
+                        </p>
                     </div>
 
                     <div class="clearfix"></div>
@@ -80,10 +72,6 @@
                         <div class="clearfix"></div>
                         <br />
 
-                        <div>
-                            <h1><i class="fa fa-paw"></i> Larashop Admin Panel</h1>
-                            <p>©2017 All Rights Reserved.</p>
-                        </div>
                     </div>
                 </form>
             </div>
