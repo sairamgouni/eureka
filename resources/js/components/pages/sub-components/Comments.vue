@@ -29,9 +29,33 @@
                             </div>
 
                             <p class="comment">{{comment.comment}}</p>
-<!--                            v-if="$parent.challenge.isAuthor && $parent.challenge.user.id != comment.user_id"-->
+
+                            <div class="post__author author vcard inline-items child-comment-update-form"
+                                 v-if="comment.hasOwnProperty('edit_open') && comment.edit_open">
+                                <form @submit.prevent="updateComment" :class="'col-md-11 offset-md-1'">
+
+                        <div class="row">
+                            <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"></label>
+                                    <textarea class="form-control" name="comment_text" required rows="1"
+                                              placeholder="" v-html="comment.comment"></textarea>
+                                </div>
+                                <input type="hidden" name="comment_id" :value="comment.id" required>
+                            </div>
+
+                            <div class="col-12 text-right">
+                                    <button type="submit" class="btn btn-primary btn-sm">Update
+                                 </button>
+                            </div>
+
+                        </div>
+                    </form>
+                            </div>
+                            <!--                            v-if="$parent.challenge.isAuthor && $parent.challenge.user.id != comment.user_id"-->
                             <a href="javascript:void(0)" class="post-add-icon inline-items"
-                               @click="ownerLike(comment,index)"  v-if="$parent.challenge.isAuthor && $parent.challenge.user.id != comment.user_id">
+                               @click="ownerLike(comment,index)"
+                               v-if="$parent.challenge.isAuthor && $parent.challenge.user.id != comment.user_id">
                                 <i class="fas fa-thumbs-up" :id="`owner_like_${comment.id}`"
                                    :class="{'text-danger':!!comment.like_count}"></i>
 
@@ -53,6 +77,25 @@
                                    :class="{'text-danger':comment.winner}"></i>
 
 							</a>
+
+                             <a href="javascript:void(0)" class="comment-action" @click="replyToggle(comment,index)">
+                                <i class="fas fa-reply"></i>
+                                Reply
+                            </a>
+
+                              <a href="javascript:void(0)" class="comment-action"
+                                 @click="editComment(comment,index)"
+                                 v-if="user.id == comment.user_id">
+                                <i class="fas fa-edit"></i>
+                                Edit
+                            </a>
+
+                              <a href="javascript:void(0)" class="comment-action"
+                                 @click="deleteComment(comment,index)"
+                                 v-if="user.id == comment.user_id || $parent.challenge.user.id == comment.user_id">
+                                <i class="fas fa-trash"></i>
+                                Delete
+                            </a>
                              <ul class="comments-list style-3 mt-3">
 
                     <li class="comment-item comment-reply-item"
@@ -63,7 +106,7 @@
                         </div>
 
                         <div class="comments-content">
-                            <div class="post__author author vcard">
+                            <div class="post__author author vcard inline-items">
 
                                 <div class="author-date">
                                     <a class="h6 post__author-name fn" href="#">{{childComments.user.name}}</a>
@@ -73,16 +116,87 @@
                                         </time>
                                     </div>
                                 </div>
+                                <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+								<ul class="more-dropdown">
+									<li>
+										<a href="#">Edit Post</a>
+									</li>
+									<li>
+										<a href="#">Delete Post</a>
+									</li>
+									<li>
+										<a href="#">Turn Off Notifications</a>
+									</li>
+									<li>
+										<a href="#">Select as Featured</a>
+									</li>
+								</ul>
+							</div>
+
+                                <!--                                <div class="btn-group">-->
+
+                                <!--                                    <a class="more" href="javascript:void(0)" data-toggle="dropdown">-->
+                                <!--                                        <svg class="olymp-three-dots-icon">-->
+                                <!--                                        <use-->
+                                <!--                                            xlink:href="assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>-->
+                                <!--                                        </svg>-->
+                                <!--                                    </a>-->
+
+                                <!--                                    <div class="dropdown-menu">-->
+                                <!--                                        <a class="dropdown-item" href="#">Edit</a>-->
+                                <!--                                        <a class="dropdown-item" href="#">Delete</a>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
 
                             </div>
 
                             <p>{{childComments.comment}}</p>
 
+
+
+                             <a href="javascript:void(0)" class="comment-action"
+                                @click="editComment(childComments,childIndex,comment,index)"
+                                v-if="user.id == childComments.user_id">
+                                <i class="fas fa-edit"></i>
+                                Edit
+                            </a>
+
+                              <a href="javascript:void(0)" class="comment-action"
+                                 @click="deleteComment(childComments,index)"
+                                 v-if="user.id == childComments.user_id || $parent.challenge.user.id == childComments.user_id">
+                                <i class="fas fa-trash"></i>
+                                Delete
+                            </a>
+
                         </div>
+
+                        <div class="post__author author vcard inline-items child-comment-update-form"
+                             v-if="childComments.hasOwnProperty('edit_open') && childComments.edit_open">
+                                <form @submit.prevent="updateComment" :class="'col-md-11 offset-md-1'">
+
+                        <div class="row">
+                            <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label">Update Comment</label>
+                                    <textarea class="form-control" name="comment_text" required rows="1"
+                                              placeholder="" v-html="childComments.comment"></textarea>
+                                </div>
+                                <input type="hidden" name="comment_id" :value="childComments.id" required>
+                            </div>
+
+                            <div class="col-12 text-right">
+                                    <button type="submit" class="btn btn-primary btn-sm">Update
+                                 </button>
+                            </div>
+
+                        </div>
+                    </form>
+                            </div>
                     </li>
                              </ul>
 
-                            <div class="post__author author vcard inline-items">
+                            <div class="post__author author vcard inline-items"
+                                 v-if="comment.hasOwnProperty('reply_open') && comment.reply_open">
                                 <form @submit="onSubmit"
                                       :class="comment.child_comments.length?'col-md-11 offset-md-1':'col-12 pl-0'">
 
@@ -117,7 +231,8 @@
               <a href="#" class="btn btn-grey btn-md mb60 mt60">Load More Comments...</a>
           </div> -->
 
-                <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" v-if="!winner">
+                <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                     v-if="!winner && $parent.challenge.can_comment">
                     <form @submit="onSubmit" class="comments-form">
                         <div class="crumina-module crumina-heading with-title-decoration">
                             <h5 class="heading-title">Write a Comment</h5>
@@ -140,15 +255,28 @@
 
 
                 </div>
-
+<b-modal id="comment_edit" title="Title">
+    <p class="my-4">Comment Edit </p>
+  </b-modal>
 
         <!-- Pagination -->
 	</span>
 </template>
 
 <style lang="scss">
+    .modal-backdrop {
+        background-color: #00000075;
+    }
+
     .comments-list .comment-item {
         padding: 0px 15px;
+
+        .comments-content {
+            .post__author {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
 
         .comment {
             margin-bottom: 5px;
@@ -206,6 +334,10 @@
             }
         }
     }
+
+    .comment-action {
+        margin-right: 20px;
+    }
 </style>
 
 <script>
@@ -216,7 +348,8 @@
             return {
                 comment_text: '',
                 comments: [],
-                winner: false
+                winner: false,
+                user: USER
             }
         },
         watch: {
@@ -294,12 +427,12 @@
             ownerLike(comment, index) {
                 if (comment.winner)
                     return this.$toast.open({
-                        message: "Actions can't be process. The challenge already have a winner.",
+                        message: "<h5>Actions can't be process. The challenge already have a winner.</h5>",
                         type: 'warning'
                     });
                 if (comment.like_count)
                     this.$swal({
-                        title: 'Are you sure you want to remove your Like?',
+                        title: '<h5>Are you sure you want to remove your Like?</h5>',
                         text: comment.finalized ? "This will also unselect this Idea as Finalist. " : "",
                         type: 'warning',
                         showCancelButton: true,
@@ -352,8 +485,8 @@
                     });
                 if (comment.finalized)
                     this.$swal({
-                        title: 'Are you sure you want to remove your chosen Finalist?',
-                        text: comment.winner ? "It will also remove from Winner  " : "",
+                        title: '<h5>Are you sure you want to remove your chosen Finalist?</h5>',
+                        text: comment.winner ? "<h5>It will also remove from Winner </h5> " : "",
                         type: 'warning',
                         showCancelButton: true,
                         // confirmButtonColor: '#e91d24',
@@ -409,8 +542,8 @@
                         type: 'warning'
                     });
                 this.$swal({
-                    title: '"Are you sure you want to choose this Idea as Winner?\n' +
-                        'Once you have selected the winner, you cannot change your selection anymore."',
+                    title: '<h5>Are you sure you want to choose this Idea as Winner?\n' +
+                        'Once you have selected the winner, you cannot change your selection anymore.</h5>',
                     type: 'warning',
                     showCancelButton: true,
                     // confirmButtonColor: '#e91d24',
@@ -452,6 +585,105 @@
                     }
                 });
             },
+            replyToggle(comment, index) {
+                if (comment.hasOwnProperty('reply_open')) comment.reply_open = !comment.reply_open; else comment.reply_open = true;
+
+                this.$set(this.comments, index, comment);
+            },
+            editComment(comment, index, parent, parentIndex) {
+                if (comment.hasOwnProperty('edit_open')) comment.edit_open = !comment.edit_open; else comment.edit_open = true;
+                if (!parent) {
+                    this.$set(this.comments, index, comment);
+                    console.log('parent comment');
+                } else {
+                    parent.child_comments[index] = comment;
+                    this.$set(this.comments, parentIndex, parent);
+                    console.log('child comment edit');
+                }
+            },
+            deleteComment(comment, index) {
+                this.$swal({
+                    title: "Are you sure you want to delete this comment?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    // confirmButtonColor: '#e91d24',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: 'Delete'
+                }).then((result) => {
+                    if (result.value) {
+                        if (comment && comment.id)
+                            this.axios.delete(`${APP.baseUrl}/challenges/comment/${comment.id}`).then((response) => {
+                                if (response.status === 200) {
+                                    if (response.data != 0 && response.data != true && response.data) {
+                                        console.log('child comment removed');
+                                        this.$set(this.comments, index, response.data);
+                                    } else if (response.data == true) {
+                                        console.log('parent comment removed');
+                                        this.comments.splice(this.comments.indexOf(comment), 1);
+
+                                    }
+
+                                    this.$toast.open({
+                                        message: response.data ? 'Comment Deleted' : "Can't delete comment",
+                                        type: 'success'
+                                    });
+                                } else
+                                    this.$toast.open({
+                                        message: 'Something went wrong!',
+                                        type: 'error'
+                                    });
+                            }).catch((error) => {
+
+                            })
+                    }
+                });
+            },
+            updateComment(evt) {
+                if (!$(evt.target)[0].checkValidity()) {
+                    this.$toast.open({
+                        message: 'Comment can\'t be empty',
+                        type: 'error'
+                    });
+                    return false;
+                }
+
+                let loader = this.$loading.show({
+                    container: this.fullPage ? null : this.$refs.file,
+                });
+
+                // this.showDismissibleAlert = false
+                evt.preventDefault();
+
+                let bodyFormData = new FormData(evt.target);
+                if (!bodyFormData.get('comment_text'))
+                    bodyFormData.set('comment_text', this.comment_text);
+
+                bodyFormData.set('_method', 'PATCH');
+                if (bodyFormData.get('comment_text') && bodyFormData.get('comment_id'))
+                    this.axios.post(APP.baseUrl + '/challenges/update-comment/' + bodyFormData.get('comment_id'), bodyFormData)
+                        .then((response) => {
+                            loader.hide();
+                            if (response.status == 200) {
+                                this.comment_text = '';
+                                this.$toast.open({
+                                    message: 'Comment updated..! ',
+                                    type: 'success'
+                                });
+                                // this.$set(this.$parent.challenge, 'ideas', this.$parent.challenge.ideas + 1)
+                                // this.$parent.challenge.ideas=
+                                this.loadComments();
+                            } else {
+                                this.$toast.open({
+                                    message: 'Comment not posted',
+                                    type: 'error'
+                                });
+                                loader.hide();
+                            }
+                        })
+                        .catch(function (response) {
+                            loader.hide();
+                        });
+            }
             //     toggleownerwin(comment, index){
             //     if (comment && comment.id)
             //         this.axios.post(`${APP.baseUrl}/challenges/comment/${comment.id}/owner-win`).then((response) => {
@@ -490,9 +722,9 @@
             this.loadComments();
         },
         updated() {
-            let isPost=this.$store.getters.getIsPost;
+            let isPost = this.$store.getters.getIsPost;
             if (isPost !== 'yes')
-            window.document.getElementById('comment-box').scrollIntoView(false);
+                window.document.getElementById('comment-box').scrollIntoView(false);
         }
     }
 </script>

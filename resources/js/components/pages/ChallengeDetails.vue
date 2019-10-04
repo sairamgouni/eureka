@@ -15,7 +15,7 @@
                         <div class="post-milestone-progress">
                             <div class="post-milestone-progress">
                                 <ul class="progress-stage-wrapper clearfix">
-                                    <li class="progress-stage-item" :class="challenge.is_valid_challenge?'in-progress':'completed'">
+                                    <li class="progress-stage-item" :class="challenge.is_valid_challenge?'in-progress':'not-started'">
                                         <div class="icon icon-lightbulb">
                                             <div class="style-empty">
                                                 <svg viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -117,7 +117,7 @@
                                             <span>{{challenge.ideas}}</span> ideas
                                         </div>
                                     </li>
-                                    <li class="progress-stage-item" :class="challenge.game_time?'in-progress':'completed'">
+                                    <li class="progress-stage-item" :class="challenge.game_time?'in-progress':'not-started'">
                                         <div class="icon icon-puzzle">
                                             <div class="style-empty">
                                                 <svg viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
@@ -785,6 +785,11 @@
         mounted(){
             this.getChallenges();
 
+        },
+        computed:{
+            class() {
+                return darkMode ? 'dark-theme' : 'light-theme';
+            }
         },
         created() {
             this.selectedChallengeId = this.$route.params.id;

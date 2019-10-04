@@ -286,7 +286,7 @@
         },
         methods: {
             searchchallenges(){
-                fetch('/search?q='+this.search)
+                fetch('/challenge/search?q='+this.search)
                     .then(res => res.json())
                     .then(res =>{
                         this.challenges = res;

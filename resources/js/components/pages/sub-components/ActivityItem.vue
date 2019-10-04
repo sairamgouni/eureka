@@ -113,7 +113,7 @@
                     <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
                         <ul class="more-dropdown">
                             <li>
-                                <a href="#">Edit Post</a>
+                                <a href="javascript:;" @click="postChallengeedit">Edit Post</a>
                             </li>
                             <li>
                                 <a href="#">Delete Post</a>
@@ -268,6 +268,10 @@
             $(window).off('scroll');
         },
         methods: {
+            postChallengeedit() {
+                this.$refs.challenge.showModal();
+                // this.$router.push('/post-challenge');
+            },
             challengedetail(item) {
                 this.$store.commit('setIsPost', 'yes' );
                this.$router.push({name: 'ChallengeDetails', params: { id: item.id, slug: item.slug }});

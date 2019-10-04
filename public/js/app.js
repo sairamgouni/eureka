@@ -3753,6 +3753,11 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.getChallenges();
   },
+  computed: {
+    "class": function _class() {
+      return darkMode ? 'dark-theme' : 'light-theme';
+    }
+  },
   created: function created() {
     var _this3 = this;
 
@@ -4098,7 +4103,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     searchchallenges: function searchchallenges() {
       var _this2 = this;
 
-      fetch('/search?q=' + this.search).then(function (res) {
+      fetch('/challenge/search?q=' + this.search).then(function (res) {
         return res.json();
       }).then(function (res) {
         _this2.challenges = res;
@@ -4784,6 +4789,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -10288,6 +10305,9 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     $(window).off('scroll');
   },
   methods: {
+    postChallengeedit: function postChallengeedit() {
+      this.$refs.challenge.showModal(); // this.$router.push('/post-challenge');
+    },
     challengedetail: function challengedetail(item) {
       this.$store.commit('setIsPost', 'yes');
       this.$router.push({
@@ -10653,6 +10673,138 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Comments',
   props: ['comment_type', 'comment_type_id'],
@@ -10660,7 +10812,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       comment_text: '',
       comments: [],
-      winner: false
+      winner: false,
+      user: USER
     };
   },
   watch: {
@@ -10734,11 +10887,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       if (comment.winner) return this.$toast.open({
-        message: "Actions can't be process. The challenge already have a winner.",
+        message: "<h5>Actions can't be process. The challenge already have a winner.</h5>",
         type: 'warning'
       });
       if (comment.like_count) this.$swal({
-        title: 'Are you sure you want to remove your Like?',
+        title: '<h5>Are you sure you want to remove your Like?</h5>',
         text: comment.finalized ? "This will also unselect this Idea as Finalist. " : "",
         type: 'warning',
         showCancelButton: true,
@@ -10792,8 +10945,8 @@ __webpack_require__.r(__webpack_exports__);
         type: 'warning'
       });
       if (comment.finalized) this.$swal({
-        title: 'Are you sure you want to remove your chosen Finalist?',
-        text: comment.winner ? "It will also remove from Winner  " : "",
+        title: '<h5>Are you sure you want to remove your chosen Finalist?</h5>',
+        text: comment.winner ? "<h5>It will also remove from Winner </h5> " : "",
         type: 'warning',
         showCancelButton: true,
         // confirmButtonColor: '#e91d24',
@@ -10847,7 +11000,7 @@ __webpack_require__.r(__webpack_exports__);
         type: 'warning'
       });
       this.$swal({
-        title: '"Are you sure you want to choose this Idea as Winner?\n' + 'Once you have selected the winner, you cannot change your selection anymore."',
+        title: '<h5>Are you sure you want to choose this Idea as Winner?\n' + 'Once you have selected the winner, you cannot change your selection anymore.</h5>',
         type: 'warning',
         showCancelButton: true,
         // confirmButtonColor: '#e91d24',
@@ -10886,7 +11039,137 @@ __webpack_require__.r(__webpack_exports__);
           })["catch"](function (error) {});
         }
       });
-    }
+    },
+    replyToggle: function replyToggle(comment, index) {
+      if (comment.hasOwnProperty('reply_open')) comment.reply_open = !comment.reply_open;else comment.reply_open = true;
+      this.$set(this.comments, index, comment);
+    },
+    editComment: function editComment(comment, index, parent, parentIndex) {
+      if (comment.hasOwnProperty('edit_open')) comment.edit_open = !comment.edit_open;else comment.edit_open = true;
+
+      if (!parent) {
+        this.$set(this.comments, index, comment);
+        console.log('parent comment');
+      } else {
+        parent.child_comments[index] = comment;
+        this.$set(this.comments, parentIndex, parent);
+        console.log('child comment edit');
+      }
+    },
+    deleteComment: function deleteComment(comment, index) {
+      var _this8 = this;
+
+      this.$swal({
+        title: "Are you sure you want to delete this comment?",
+        type: 'warning',
+        showCancelButton: true,
+        // confirmButtonColor: '#e91d24',
+        // cancelButtonColor: '#d33',
+        confirmButtonText: 'Delete'
+      }).then(function (result) {
+        if (result.value) {
+          if (comment && comment.id) _this8.axios["delete"]("".concat(APP.baseUrl, "/challenges/comment/").concat(comment.id)).then(function (response) {
+            if (response.status === 200) {
+              if (response.data != 0 && response.data != true && response.data) {
+                console.log('child comment removed');
+
+                _this8.$set(_this8.comments, index, response.data);
+              } else if (response.data == true) {
+                console.log('parent comment removed');
+
+                _this8.comments.splice(_this8.comments.indexOf(comment), 1);
+              }
+
+              _this8.$toast.open({
+                message: response.data ? 'Comment Deleted' : "Can't delete comment",
+                type: 'success'
+              });
+            } else _this8.$toast.open({
+              message: 'Something went wrong!',
+              type: 'error'
+            });
+          })["catch"](function (error) {});
+        }
+      });
+    },
+    updateComment: function updateComment(evt) {
+      var _this9 = this;
+
+      if (!$(evt.target)[0].checkValidity()) {
+        this.$toast.open({
+          message: 'Comment can\'t be empty',
+          type: 'error'
+        });
+        return false;
+      }
+
+      var loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.file
+      }); // this.showDismissibleAlert = false
+
+      evt.preventDefault();
+      var bodyFormData = new FormData(evt.target);
+      if (!bodyFormData.get('comment_text')) bodyFormData.set('comment_text', this.comment_text);
+      bodyFormData.set('_method', 'PATCH');
+      if (bodyFormData.get('comment_text') && bodyFormData.get('comment_id')) this.axios.post(APP.baseUrl + '/challenges/update-comment/' + bodyFormData.get('comment_id'), bodyFormData).then(function (response) {
+        loader.hide();
+
+        if (response.status == 200) {
+          _this9.comment_text = '';
+
+          _this9.$toast.open({
+            message: 'Comment updated..! ',
+            type: 'success'
+          }); // this.$set(this.$parent.challenge, 'ideas', this.$parent.challenge.ideas + 1)
+          // this.$parent.challenge.ideas=
+
+
+          _this9.loadComments();
+        } else {
+          _this9.$toast.open({
+            message: 'Comment not posted',
+            type: 'error'
+          });
+
+          loader.hide();
+        }
+      })["catch"](function (response) {
+        loader.hide();
+      });
+    } //     toggleownerwin(comment, index){
+    //     if (comment && comment.id)
+    //         this.axios.post(`${APP.baseUrl}/challenges/comment/${comment.id}/owner-win`).then((response) => {
+    //             if (response.status === 200) {
+    //
+    //                 if (response.data) {
+    //                     comment.winner = 1;
+    //                     this.$set(this.$parent.challenge, 'winner', this.$parent.challenge.winner);
+    //                     $(`#owner_win_${comment.id}`).addClass('text-danger');
+    //                 } else {
+    //                     this.$set(this.$parent.challenge, 'winner', this.$parent.challenge.winner);
+    //                     $(`#owner_win_${comment.id}`).removeClass('text-danger');
+    //                     comment.winner = 0;
+    //                 }
+    //
+    //                 // if (comment.winner)
+    //                 this.winner = comment.winner;
+    //
+    //                 this.$set(this.comments, index, comment);
+    //
+    //                 this.$toast.open({
+    //                     message: response.data ? 'Marked as Winner' : 'Removed from winner',
+    //                     type: 'success'
+    //                 });
+    //             } else
+    //                 this.$toast.open({
+    //                     message: 'Something went wrong!',
+    //                     type: 'error'
+    //                 });
+    //         }).catch((error) => {
+    //
+    //         })
+    // }
+
   },
   created: function created() {
     this.loadComments();
@@ -39688,7 +39971,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".comments-list .comment-item {\n  padding: 0px 15px;\n}\n.comments-list .comment-item .comment {\n  margin-bottom: 5px;\n}\n.comments-list .comment-item .likes-count {\n  margin-top: 2px;\n}\n.comments-list .comment-item .tick_count {\n  margin-top: 2px;\n}\n.comments-list .comment-item .win_count {\n  margin-top: 2px;\n}\n.comments-list .comment-item .text-danger {\n  color: #f92552 !important;\n}\n.comments-list.style-3 .comment-item {\n  background-color: transparent;\n  border-bottom: 1px solid #ccc6;\n  margin-bottom: 15px;\n}\n.comments-list.style-3 .post__author-thumb img {\n  width: 35px;\n  height: 35px;\n}\n.replay-form-group {\n  /*height: 50px;*/\n  margin: 0;\n}\n.replay-form-group textarea {\n  min-height: 70px !important;\n}\n.comment-reply-item .post__author {\n  margin-bottom: 10px;\n}\n@media only screen and (max-width: 460px) {\n.comment-reply-item .author-date {\n    /*display: block;*/\n    margin-bottom: 10px;\n}\n}", ""]);
+exports.push([module.i, ".modal-backdrop {\n  background-color: #00000075;\n}\n.comments-list .comment-item {\n  padding: 0px 15px;\n}\n.comments-list .comment-item .comments-content .post__author {\n  display: flex;\n  justify-content: space-between;\n}\n.comments-list .comment-item .comment {\n  margin-bottom: 5px;\n}\n.comments-list .comment-item .likes-count {\n  margin-top: 2px;\n}\n.comments-list .comment-item .tick_count {\n  margin-top: 2px;\n}\n.comments-list .comment-item .win_count {\n  margin-top: 2px;\n}\n.comments-list .comment-item .text-danger {\n  color: #f92552 !important;\n}\n.comments-list.style-3 .comment-item {\n  background-color: transparent;\n  border-bottom: 1px solid #ccc6;\n  margin-bottom: 15px;\n}\n.comments-list.style-3 .post__author-thumb img {\n  width: 35px;\n  height: 35px;\n}\n.replay-form-group {\n  /*height: 50px;*/\n  margin: 0;\n}\n.replay-form-group textarea {\n  min-height: 70px !important;\n}\n.comment-reply-item .post__author {\n  margin-bottom: 10px;\n}\n@media only screen and (max-width: 460px) {\n.comment-reply-item .author-date {\n    /*display: block;*/\n    margin-bottom: 10px;\n}\n}\n.comment-action {\n  margin-right: 20px;\n}", ""]);
 
 // exports
 
@@ -64313,7 +64596,7 @@ var render = function() {
                                 staticClass: "progress-stage-item",
                                 class: _vm.challenge.is_valid_challenge
                                   ? "in-progress"
-                                  : "completed"
+                                  : "not-started"
                               },
                               [
                                 _c(
@@ -64549,7 +64832,7 @@ var render = function() {
                                 staticClass: "progress-stage-item",
                                 class: _vm.challenge.game_time
                                   ? "in-progress"
-                                  : "completed"
+                                  : "not-started"
                               },
                               [
                                 _c("div", { staticClass: "icon icon-puzzle" }, [
@@ -76569,7 +76852,24 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _vm._m(0, true)
+              _c("ul", { staticClass: "more-dropdown" }, [
+                _c("li", [
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "javascript:;" },
+                      on: { click: _vm.postChallengeedit }
+                    },
+                    [_vm._v("Edit Post")]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(0, true),
+                _vm._v(" "),
+                _vm._m(1, true),
+                _vm._v(" "),
+                _vm._m(2, true)
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -76728,18 +77028,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("ul", { staticClass: "more-dropdown" }, [
-      _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Edit Post")])]),
-      _vm._v(" "),
-      _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Delete Post")])]),
-      _vm._v(" "),
-      _c("li", [
-        _c("a", { attrs: { href: "#" } }, [_vm._v("Turn Off Notifications")])
-      ]),
-      _vm._v(" "),
-      _c("li", [
-        _c("a", { attrs: { href: "#" } }, [_vm._v("Select as Featured")])
-      ])
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Delete Post")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Turn Off Notifications")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Select as Featured")])
     ])
   }
 ]
@@ -76764,304 +77070,608 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("span", [
-    _c(
-      "div",
-      { staticClass: "crumina-module crumina-heading with-title-decoration" },
-      [
-        _c("h5", { staticClass: "heading-title" }, [
-          _vm._v("Comments (" + _vm._s(_vm.comments.length) + ")")
-        ])
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "ul",
-      { staticClass: "comments-list style-3" },
-      _vm._l(_vm.comments, function(comment, index) {
-        return _c("li", { key: comment.id, staticClass: "comment-item" }, [
-          _vm._m(0, true),
-          _vm._v(" "),
-          _c("div", { staticClass: "comments-content" }, [
-            _c("div", { staticClass: "post__author author vcard" }, [
-              _c("div", { staticClass: "author-date" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "h6 post__author-name fn",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v(_vm._s(comment.user.name))]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "post__date" }, [
-                  _c(
-                    "time",
-                    {
-                      staticClass: "published",
-                      attrs: { datetime: "2004-07-24T18:18" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                                            " +
-                          _vm._s(comment.created_at) +
-                          "\n                                        "
-                      )
-                    ]
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "comment" }, [
-              _vm._v(_vm._s(comment.comment))
-            ]),
-            _vm._v(" "),
-            _vm.$parent.challenge.isAuthor &&
-            _vm.$parent.challenge.user.id != comment.user_id
-              ? _c(
-                  "a",
-                  {
-                    staticClass: "post-add-icon inline-items",
-                    attrs: { href: "javascript:void(0)" },
-                    on: {
-                      click: function($event) {
-                        return _vm.ownerLike(comment, index)
-                      }
-                    }
-                  },
-                  [
-                    _c("i", {
-                      staticClass: "fas fa-thumbs-up",
-                      class: { "text-danger": !!comment.like_count },
-                      attrs: { id: "owner_like_" + comment.id }
-                    })
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.$parent.challenge.isAuthor &&
-            comment.like_count &&
-            _vm.$parent.challenge.user.id != comment.user_id
-              ? _c(
-                  "a",
-                  {
-                    staticClass: "post-add-icon inline-items",
-                    attrs: { href: "javascript:void(0)" },
-                    on: {
-                      click: function($event) {
-                        return _vm.ownertick(comment)
-                      }
-                    }
-                  },
-                  [
-                    _c("i", {
-                      staticClass: "fas fa-check ",
-                      class: { "text-danger": comment.finalized },
-                      attrs: { id: "owner_tick_" + comment.id }
-                    })
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.$parent.challenge.isAuthor &&
-            comment.finalized &&
-            (!_vm.winner || comment.winner) &&
-            _vm.$parent.challenge.user.id != comment.user_id
-              ? _c(
-                  "a",
-                  {
-                    staticClass: "post-add-icon inline-items",
-                    attrs: { href: "javascript:void(0)" },
-                    on: {
-                      click: function($event) {
-                        return _vm.ownerwin(comment, index)
-                      }
-                    }
-                  },
-                  [
-                    _c("i", {
-                      staticClass: "fas fa-trophy ",
-                      class: { "text-danger": comment.winner },
-                      attrs: { id: "owner_win_" + comment.id }
-                    })
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "ul",
-              { staticClass: "comments-list style-3 mt-3" },
-              _vm._l(comment.child_comments, function(
-                childComments,
-                childIndex
-              ) {
-                return _c(
-                  "li",
-                  {
-                    key: childComments.id,
-                    staticClass: "comment-item comment-reply-item"
-                  },
-                  [
-                    _vm._m(1, true),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "comments-content" }, [
-                      _c("div", { staticClass: "post__author author vcard" }, [
-                        _c("div", { staticClass: "author-date" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "h6 post__author-name fn",
-                              attrs: { href: "#" }
-                            },
-                            [_vm._v(_vm._s(childComments.user.name))]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "post__date" }, [
-                            _c(
-                              "time",
-                              {
-                                staticClass: "published",
-                                attrs: { datetime: "2004-07-24T18:18" }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                            " +
-                                    _vm._s(childComments.created_at) +
-                                    "\n                                        "
-                                )
-                              ]
-                            )
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [_vm._v(_vm._s(childComments.comment))])
-                    ])
-                  ]
-                )
-              }),
-              0
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "post__author author vcard inline-items" },
-              [
-                _c(
-                  "form",
-                  {
-                    class: comment.child_comments.length
-                      ? "col-md-11 offset-md-1"
-                      : "col-12 pl-0",
-                    on: { submit: _vm.onSubmit }
-                  },
-                  [
-                    _c("div", { staticClass: "row" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
-                        },
-                        [
-                          _vm._m(2, true),
-                          _vm._v(" "),
-                          _c("input", {
-                            attrs: {
-                              type: "hidden",
-                              name: "replay",
-                              required: ""
-                            },
-                            domProps: { value: comment.id }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm._m(3, true)
-                    ])
-                  ]
-                )
-              ]
-            )
+  return _c(
+    "span",
+    [
+      _c(
+        "div",
+        { staticClass: "crumina-module crumina-heading with-title-decoration" },
+        [
+          _c("h5", { staticClass: "heading-title" }, [
+            _vm._v("Comments (" + _vm._s(_vm.comments.length) + ")")
           ])
-        ])
-      }),
-      0
-    ),
-    _vm._v(" "),
-    !_vm.winner
-      ? _c(
-          "div",
-          { staticClass: "col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" },
-          [
-            _c(
-              "form",
-              { staticClass: "comments-form", on: { submit: _vm.onSubmit } },
-              [
-                _vm._m(4),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "ul",
+        { staticClass: "comments-list style-3" },
+        _vm._l(_vm.comments, function(comment, index) {
+          return _c("li", { key: comment.id, staticClass: "comment-item" }, [
+            _vm._m(0, true),
+            _vm._v(" "),
+            _c("div", { staticClass: "comments-content" }, [
+              _c("div", { staticClass: "post__author author vcard" }, [
+                _c("div", { staticClass: "author-date" }, [
                   _c(
+                    "a",
+                    {
+                      staticClass: "h6 post__author-name fn",
+                      attrs: { href: "#" }
+                    },
+                    [_vm._v(_vm._s(comment.user.name))]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "post__date" }, [
+                    _c(
+                      "time",
+                      {
+                        staticClass: "published",
+                        attrs: { datetime: "2004-07-24T18:18" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                            " +
+                            _vm._s(comment.created_at) +
+                            "\n                                        "
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "comment" }, [
+                _vm._v(_vm._s(comment.comment))
+              ]),
+              _vm._v(" "),
+              comment.hasOwnProperty("edit_open") && comment.edit_open
+                ? _c(
                     "div",
                     {
                       staticClass:
-                        "col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                        "post__author author vcard inline-items child-comment-update-form"
                     },
                     [
-                      _c("div", { staticClass: "form-group label-floating" }, [
-                        _c("label", { staticClass: "control-label" }, [
-                          _vm._v("Your Comment")
-                        ]),
-                        _vm._v(" "),
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.comment_text,
-                              expression: "comment_text"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            name: "comment_text",
-                            placeholder: "",
-                            required: ""
-                          },
-                          domProps: { value: _vm.comment_text },
+                      _c(
+                        "form",
+                        {
+                          class: "col-md-11 offset-md-1",
                           on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.comment_text = $event.target.value
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.updateComment($event)
                             }
                           }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary w-100",
-                          attrs: { type: "submit", id: "comment-box" }
                         },
                         [
-                          _vm._v(
-                            "Post your Comment\n                                 "
-                          )
+                          _c("div", { staticClass: "row" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "form-group label-floating is-empty"
+                                  },
+                                  [
+                                    _c("label", {
+                                      staticClass: "control-label"
+                                    }),
+                                    _vm._v(" "),
+                                    _c("textarea", {
+                                      staticClass: "form-control",
+                                      attrs: {
+                                        name: "comment_text",
+                                        required: "",
+                                        rows: "1",
+                                        placeholder: ""
+                                      },
+                                      domProps: {
+                                        innerHTML: _vm._s(comment.comment)
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("input", {
+                                  attrs: {
+                                    type: "hidden",
+                                    name: "comment_id",
+                                    required: ""
+                                  },
+                                  domProps: { value: comment.id }
+                                })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _vm._m(1, true)
+                          ])
                         ]
                       )
                     ]
                   )
-                ])
-              ]
-            )
-          ]
-        )
-      : _vm._e()
-  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.$parent.challenge.isAuthor &&
+              _vm.$parent.challenge.user.id != comment.user_id
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "post-add-icon inline-items",
+                      attrs: { href: "javascript:void(0)" },
+                      on: {
+                        click: function($event) {
+                          return _vm.ownerLike(comment, index)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fas fa-thumbs-up",
+                        class: { "text-danger": !!comment.like_count },
+                        attrs: { id: "owner_like_" + comment.id }
+                      })
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.$parent.challenge.isAuthor &&
+              comment.like_count &&
+              _vm.$parent.challenge.user.id != comment.user_id
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "post-add-icon inline-items",
+                      attrs: { href: "javascript:void(0)" },
+                      on: {
+                        click: function($event) {
+                          return _vm.ownertick(comment)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fas fa-check ",
+                        class: { "text-danger": comment.finalized },
+                        attrs: { id: "owner_tick_" + comment.id }
+                      })
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.$parent.challenge.isAuthor &&
+              comment.finalized &&
+              (!_vm.winner || comment.winner) &&
+              _vm.$parent.challenge.user.id != comment.user_id
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "post-add-icon inline-items",
+                      attrs: { href: "javascript:void(0)" },
+                      on: {
+                        click: function($event) {
+                          return _vm.ownerwin(comment, index)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fas fa-trophy ",
+                        class: { "text-danger": comment.winner },
+                        attrs: { id: "owner_win_" + comment.id }
+                      })
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "comment-action",
+                  attrs: { href: "javascript:void(0)" },
+                  on: {
+                    click: function($event) {
+                      return _vm.replyToggle(comment, index)
+                    }
+                  }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-reply" }),
+                  _vm._v(
+                    "\n                                Reply\n                            "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _vm.user.id == comment.user_id
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "comment-action",
+                      attrs: { href: "javascript:void(0)" },
+                      on: {
+                        click: function($event) {
+                          return _vm.editComment(comment, index)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-edit" }),
+                      _vm._v(
+                        "\n                                Edit\n                            "
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.user.id == comment.user_id ||
+              _vm.$parent.challenge.user.id == comment.user_id
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "comment-action",
+                      attrs: { href: "javascript:void(0)" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteComment(comment, index)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-trash" }),
+                      _vm._v(
+                        "\n                                Delete\n                            "
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "comments-list style-3 mt-3" },
+                _vm._l(comment.child_comments, function(
+                  childComments,
+                  childIndex
+                ) {
+                  return _c(
+                    "li",
+                    {
+                      key: childComments.id,
+                      staticClass: "comment-item comment-reply-item"
+                    },
+                    [
+                      _vm._m(2, true),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "comments-content" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "post__author author vcard inline-items"
+                          },
+                          [
+                            _c("div", { staticClass: "author-date" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "h6 post__author-name fn",
+                                  attrs: { href: "#" }
+                                },
+                                [_vm._v(_vm._s(childComments.user.name))]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "post__date" }, [
+                                _c(
+                                  "time",
+                                  {
+                                    staticClass: "published",
+                                    attrs: { datetime: "2004-07-24T18:18" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                            " +
+                                        _vm._s(childComments.created_at) +
+                                        "\n                                        "
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "more" }, [
+                              _c(
+                                "svg",
+                                { staticClass: "olymp-three-dots-icon" },
+                                [
+                                  _c("use", {
+                                    attrs: {
+                                      "xlink:href":
+                                        "assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _vm._m(3, true)
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(childComments.comment))]),
+                        _vm._v(" "),
+                        _vm.user.id == childComments.user_id
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "comment-action",
+                                attrs: { href: "javascript:void(0)" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.editComment(
+                                      childComments,
+                                      childIndex,
+                                      comment,
+                                      index
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "fas fa-edit" }),
+                                _vm._v(
+                                  "\n                                Edit\n                            "
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.user.id == childComments.user_id ||
+                        _vm.$parent.challenge.user.id == childComments.user_id
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "comment-action",
+                                attrs: { href: "javascript:void(0)" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.deleteComment(
+                                      childComments,
+                                      index
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "fas fa-trash" }),
+                                _vm._v(
+                                  "\n                                Delete\n                            "
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      childComments.hasOwnProperty("edit_open") &&
+                      childComments.edit_open
+                        ? _c(
+                            "div",
+                            {
+                              staticClass:
+                                "post__author author vcard inline-items child-comment-update-form"
+                            },
+                            [
+                              _c(
+                                "form",
+                                {
+                                  class: "col-md-11 offset-md-1",
+                                  on: {
+                                    submit: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.updateComment($event)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("div", { staticClass: "row" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "form-group label-floating is-empty"
+                                          },
+                                          [
+                                            _c(
+                                              "label",
+                                              { staticClass: "control-label" },
+                                              [_vm._v("Update Comment")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("textarea", {
+                                              staticClass: "form-control",
+                                              attrs: {
+                                                name: "comment_text",
+                                                required: "",
+                                                rows: "1",
+                                                placeholder: ""
+                                              },
+                                              domProps: {
+                                                innerHTML: _vm._s(
+                                                  childComments.comment
+                                                )
+                                              }
+                                            })
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          attrs: {
+                                            type: "hidden",
+                                            name: "comment_id",
+                                            required: ""
+                                          },
+                                          domProps: { value: childComments.id }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm._m(4, true)
+                                  ])
+                                ]
+                              )
+                            ]
+                          )
+                        : _vm._e()
+                    ]
+                  )
+                }),
+                0
+              ),
+              _vm._v(" "),
+              comment.hasOwnProperty("reply_open") && comment.reply_open
+                ? _c(
+                    "div",
+                    { staticClass: "post__author author vcard inline-items" },
+                    [
+                      _c(
+                        "form",
+                        {
+                          class: comment.child_comments.length
+                            ? "col-md-11 offset-md-1"
+                            : "col-12 pl-0",
+                          on: { submit: _vm.onSubmit }
+                        },
+                        [
+                          _c("div", { staticClass: "row" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                              },
+                              [
+                                _vm._m(5, true),
+                                _vm._v(" "),
+                                _c("input", {
+                                  attrs: {
+                                    type: "hidden",
+                                    name: "replay",
+                                    required: ""
+                                  },
+                                  domProps: { value: comment.id }
+                                })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _vm._m(6, true)
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                : _vm._e()
+            ])
+          ])
+        }),
+        0
+      ),
+      _vm._v(" "),
+      !_vm.winner && _vm.$parent.challenge.can_comment
+        ? _c(
+            "div",
+            {
+              staticClass: "col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+            },
+            [
+              _c(
+                "form",
+                { staticClass: "comments-form", on: { submit: _vm.onSubmit } },
+                [
+                  _vm._m(7),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "form-group label-floating" },
+                          [
+                            _c("label", { staticClass: "control-label" }, [
+                              _vm._v("Your Comment")
+                            ]),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.comment_text,
+                                  expression: "comment_text"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                name: "comment_text",
+                                placeholder: "",
+                                required: ""
+                              },
+                              domProps: { value: _vm.comment_text },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.comment_text = $event.target.value
+                                }
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary w-100",
+                            attrs: { type: "submit", id: "comment-box" }
+                          },
+                          [
+                            _vm._v(
+                              "Post your Comment\n                                 "
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("b-modal", { attrs: { id: "comment_edit", title: "Title" } }, [
+        _c("p", { staticClass: "my-4" }, [_vm._v("Comment Edit ")])
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -77076,8 +77686,50 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 text-right" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary btn-sm", attrs: { type: "submit" } },
+        [_vm._v("Update\n                                 ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "post__author-thumb" }, [
       _c("img", { attrs: { src: "assets/img/avatar1.jpg", alt: "author" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "more-dropdown" }, [
+      _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Edit Post")])]),
+      _vm._v(" "),
+      _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Delete Post")])]),
+      _vm._v(" "),
+      _c("li", [
+        _c("a", { attrs: { href: "#" } }, [_vm._v("Turn Off Notifications")])
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _c("a", { attrs: { href: "#" } }, [_vm._v("Select as Featured")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 text-right" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary btn-sm", attrs: { type: "submit" } },
+        [_vm._v("Update\n                                 ")]
+      )
     ])
   },
   function() {

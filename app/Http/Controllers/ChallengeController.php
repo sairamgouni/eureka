@@ -461,4 +461,25 @@ class ChallengeController extends Controller
         $status = \App\Challenge::where('slug', $slug)->delete();
         return ['status' => $status, 'message' => 'record_deleted_successfully'];
     }
+
+    public function deleteComment(Comment $comment)
+    {
+        if ($comment->user_id == Auth::id() || $comment->challenge->user_id == Auth::id()) {
+            $delete = $comment->delete();
+            if ($comment->parent_id)
+                return response()->json($comment->comment()->with('childComments.user', 'user')
+                    ->withCount('like')
+                    ->whereNull('parent_id')->first());
+            else  return response()->json($delete);
+        } else return response()->json(0);
+    }
+
+    public function updateComment(Request $request, Comment $comment)
+    {
+        return response()->json(
+            $comment->update([
+                'comment' => $request->input('comment_text')
+            ])
+        );
+    }
 }

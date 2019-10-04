@@ -58,6 +58,7 @@ Route::post('challenges/toggle-like', 'ChallengeController@toggleLike');
 Route::post('challenges/comment/{comment_id}/owner-like', 'ChallengeController@toggleCommentOwnerLike');
 Route::post('challenges/comment/{comment_id}/owner-tick', 'ChallengeController@toggleCommentOwnertick');
 Route::post('challenges/comment/{comment_id}/owner-win', 'ChallengeController@toggleCommentOwnerwin');
+Route::delete('challenges/comment/{comment}', 'ChallengeController@deleteComment');
 
 Route::get('/posts','ChallengeController@gechallenge');
 //    $user = \Auth::user();
@@ -65,7 +66,7 @@ Route::get('/posts','ChallengeController@gechallenge');
 //return $post_json;
 
 
-
+Route::patch('challenges/update-comment/{comment}', 'ChallengeController@updateComment');
 Route::post('challenges/store-comment', 'ChallengeController@postComment');
 Route::get('challenges/comments', 'ChallengeController@getComments');
 Route::get('friends/getSuggestions/{total?}', 'ChallengeController@getFriendSuggestions');
@@ -95,7 +96,7 @@ Route::get('search/{searchParameter}','UsersController@searchUsers');
 
 Route::get('api/users', 'UsersController@getusers');
 Route::post('search-user', 'UsersController@getusers');
-Route::get('search', 'ChallengeController@search');
+Route::get('challenge/search', 'ChallengeController@search');
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

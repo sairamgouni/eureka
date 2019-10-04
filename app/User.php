@@ -294,6 +294,7 @@ class User extends Authenticatable
         $usersfollowings = $this->followers(User::class)->get();
         $list = \App\User::with('followings')->whereNotIn('id', $following_users)
             ->where('id', '!=', $this->id)
+//            ->where('campaign', '=', $this->campaign)
             ->limit($limit)->get();
         return \App\User::processFrends($list, $usersfollowings);
     }
