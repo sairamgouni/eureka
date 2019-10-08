@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Challenge;
 use App\Comment;
+use App\Gamify\Points\ChallengeCreated;
 use App\Gamify\Points\ChallengeFinalized;
 use App\User;
 use Illuminate\Http\Request;
@@ -95,33 +96,6 @@ class ChallengeController extends Controller
 
     public function getList(Request $request)
     {
-        //        $user = null;
-//        $userId = null;
-//        $type = 'all';
-//        if ($request->has('userId')) {
-//            $userId = $request->userId;
-//            $user = User::where('id', '=', $userId)->first();
-//            $type = $request->recordsType;
-//        }
-//
-//        if (!$user)
-//            $user = \Auth::user();
-//        $level = '';
-//        if ($user) {
-//            $role = $user->role()->first();
-//            // dd($role);
-//            $level = '';
-//            if ($role) {
-//                if ($role->id == 1) {
-//                    $isAdmin = 1;
-//                    $level = 'admin';
-//                } else {
-//                    $level = 'user';
-//                }
-//            }
-//        }
-
-        // $challenges = \App\Challenge::with(['user','categories']);
 
         $challenges = Challenge::when($request->input('type') && $request->input('type') !== 'all', function ($query) use ($request) {
             $query->whereHas('challengeCategories', function ($q) use ($request) {
@@ -210,25 +184,53 @@ class ChallengeController extends Controller
         return response()->json($challanges);
     }
 
+    public function updateChallenge(Request $request, $id)
+    {
+
+        $challanges = \App\Challenge::find($id);
+
+        $response = $challanges->doSaveOperation($request, $challanges);
+        // return $response;
+        $user = \Auth::user();
+
+        $log_message = ' has updated challenge ' . '<a href="/#/challenge-details/'.$challanges->id.'/'.$challanges->slug.'">'.$challanges->title.'</a>';
+        activity()
+            ->performedOn($challanges)
+            ->log($log_message);
+
+        if ($response)
+            return ['success' => 1, 'object' => $challanges];
+        else
+            return ['success' => 1, 'messsage' => 'update failed'];
+    }
+
     public function postComment(Request $request)
     {
         $challenge = Challenge::findOrFail($request->input('challenge_id'));
 
         $user = Auth::user();
 
-        $challenge->comments()->create([
+        $comment = $challenge->comments()->create([
             'user_id' => $user->id,
             'comment' => $request->input('comment_text'),
             'comment_id' => $challenge->id,
             'comment_type' => Challenge::class,
             'parent_id' => $request->input('replay') ?? null
         ]);
+
+        if ($request->has('attachment')) {
+            $path = $request->file('attachment')->storeAs(
+                'challenge/' . $challenge->id . '/comment/' . $comment->id . '/', $request->file('attachment')->getClientOriginalName()
+            );
+
+            $comment->attachments()->create(['path' => $path]);
+        }
         if ($request->input('replay'))
 
-        $log_message = ' has commented on challenge '. '<a href="/#/challenge-details/'.$challenge->id.'/'.$challenge->slug.'">'.$challenge->title.'</a>';
+            $log_message = ' has commented on challenge ' . '<a href="/#/challenge-details/' . $challenge->id . '/' . $challenge->slug . '">' . $challenge->title . '</a>';
 
-    else
-            $log_message = ' has commented on challenge ' .'<a href="/#/challenge-details/'.$challenge->id.'/'.$challenge->slug.'">'.$challenge->title.'</a>'; // normal comment log message
+        else
+            $log_message = ' has commented on challenge ' . '<a href="/#/challenge-details/' . $challenge->id . '/' . $challenge->slug . '">' . $challenge->title . '</a>'; // normal comment log message
 
         activity()
             ->performedOn($challenge)
@@ -242,7 +244,6 @@ class ChallengeController extends Controller
 
         $challenger->notify(new \App\Notifications\CommentAdded($challenge, $user));
         return response()->json(['success' => 1, 'message' => 'Comment Posted']);
-
 
     }
 
@@ -426,7 +427,6 @@ class ChallengeController extends Controller
     }
     public function search(Request $request)
     {
-
         $data= $request->all();
         $search = $data['q'];
         return Challenge::where('title', 'like', '%' . $search . '%')->get();
@@ -481,5 +481,11 @@ class ChallengeController extends Controller
                 'comment' => $request->input('comment_text')
             ])
         );
+    }
+
+    public function deleteChallenge(Request $request, $id)
+    {
+        Challenge::destroy($id);
+        return ['status' => 200, 'message' => 'challenge deleted successfully'];
     }
 }

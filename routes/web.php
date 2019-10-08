@@ -54,11 +54,14 @@ Route::post('challenges/create', 'ChallengeController@saveRecord');
 Route::get('challenges/getlist', 'ChallengeController@getList');
 Route::get('challenges/getlists', 'ChallengeController@getLists');
 Route::get('challenges/getDetails', 'ChallengeController@show');
+Route::post('challenges/update/{id}', 'ChallengeController@updateChallenge');
+Route::post('challenges/delete/{id}', 'ChallengeController@deleteChallenge');
 Route::post('challenges/toggle-like', 'ChallengeController@toggleLike');
 Route::post('challenges/comment/{comment_id}/owner-like', 'ChallengeController@toggleCommentOwnerLike');
 Route::post('challenges/comment/{comment_id}/owner-tick', 'ChallengeController@toggleCommentOwnertick');
 Route::post('challenges/comment/{comment_id}/owner-win', 'ChallengeController@toggleCommentOwnerwin');
 Route::delete('challenges/comment/{comment}', 'ChallengeController@deleteComment');
+
 
 Route::get('/posts','ChallengeController@gechallenge');
 //    $user = \Auth::user();
@@ -74,6 +77,7 @@ Route::get('challenges/getChallenges/{total?}', 'ChallengeController@getChalleng
 Route::get('friends/getFriendsList/{total?}', 'ChallengeController@getFriends');
 Route::post('friends/toggle-follow', 'ChallengeController@toggleFollow');
 Route::get('user/followers-list', 'UsersController@getFollowers');
+Route::get('users/activities', 'UsersController@getUserActivities');
 Route::get('users-list/{country}', 'UsersController@getUsersByCountry');
 
 

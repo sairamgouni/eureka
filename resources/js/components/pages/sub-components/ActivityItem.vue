@@ -1,96 +1,8 @@
 <template>
     <div id="newsfeed-items-grid">
-        <!--        <div class="ui-block" v-for="(item, index) in challenges" :key="index">-->
-        <!--			<span>-->
-        <!--					<article class="hentry post video">-->
-
-        <!--						<div class="post__author author vcard inline-items">-->
-        <!--							<img :src="item.user.image" :alt="item.user.name">-->
-
-        <!--							<div class="author-date">-->
-
-        <!--								 <router-link-->
-        <!--                                     :to="{ name: 'ProfileEuraka', params: { id: item.user.id, slug: item.user.slug } }"-->
-        <!--                                     class="h6 post__author-name fn">-->
-
-
-        <!--									{{item.user.name}}-->
-        <!--								</router-link>-->
-
-        <!--								<div class="post__date">-->
-        <!--									<time class="published" datetime="2004-07-24T18:18">-->
-        <!--										{{item.created_at}}-->
-        <!--									</time>-->
-        <!--								</div>-->
-        <!--							</div>-->
-        <!--							<br>-->
-        <!--						</div>-->
-
-        <!--						<div class="post-video">-->
-        <!--							<div class="video-thumb">-->
-        <!--								<img class="challenge-image" :src="item.image" :alt="item.title">-->
-
-        <!--							</div>-->
-
-        <!--							<div class="video-content">-->
-        <!--								<router-link-->
-        <!--                                    :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"-->
-        <!--                                    class="h4 title">-->
-        <!--								{{item.title}}-->
-        <!--							</router-link>-->
-        <!--								<p>{{item.description}}-->
-        <!--								</p>-->
-        <!--                                &lt;!&ndash; <a href="#" class="link-site">YOUTUBE.COM</a> &ndash;&gt;-->
-        <!--							</div>-->
-        <!--						</div>-->
-
-        <!--						<div class="post-additional-info inline-items">-->
-
-        <!--							<a href="javascript:void(0);" @click="updateLike(item.id);"-->
-        <!--                               class="post-add-icon inline-items"-->
-        <!--                               v-bind:class="{ active: (item.isUserLiked==1)? true : false }"-->
-        <!--                            >-->
-        <!--								<svg class="olymp-heart-icon"><use-->
-        <!--                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>-->
-        <!--								<span>{{item.likes}}</span>-->
-        <!--							</a>-->
-
-        <!--							<div class="comments-shared">-->
-        <!--								<a href="javascript:void(0);" class="post-add-icon inline-items">-->
-        <!--									<svg class="olymp-speech-balloon-icon"><use-->
-        <!--                                        xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>-->
-        <!--									<span>{{item.comments}}</span>-->
-        <!--								</a>-->
-        <!--							</div>-->
-        <!--						</div>-->
-
-        <!--						<div class="control-block-button post-control-button">-->
-
-        <!--							<a href="javascript:void(0);" class="btn btn-control"-->
-        <!--                               @click="updateLike(item.id);"-->
-        <!--                               v-bind:class="{ active_bg: (item.isUserLiked==1)? true : false }">-->
-        <!--								<svg class="olymp-like-post-icon"><use-->
-        <!--                                    xlink:href="assets/svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>-->
-        <!--							</a>-->
-
-        <!--                            	<router-link-->
-        <!--                                    :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"-->
-        <!--                                    class="btn btn-control">-->
-        <!--                                    <svg class="olymp-comments-post-icon">-->
-        <!--                                        <use-->
-        <!--                                            xlink:href="assets/svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>-->
-
-        <!--							</router-link>-->
-        <!--						</div>-->
-
-        <!--					</article>-->
-        <!--					</span>-->
-        <!--        </div>-->
-
-
         <div class="ui-block" v-for="(item, index) in challenges" :key="index">
 
-            <article class="hentry post has-post-thumbnail">
+            <article class="hentry post has-post-thumbnail thumb-full-width">
 
                 <div class="post__author author vcard inline-items">
                     <img :src="item.user.image" :alt="item.user.name">
@@ -99,8 +11,6 @@
                         <router-link
                             :to="{ name: 'ProfileEuraka', params: { id: item.user.id, slug: item.user.slug } }"
                             class="h6 post__author-name fn">
-
-
                             {{item.user.name}}
                         </router-link>
                         <div class="post__date">
@@ -110,19 +20,13 @@
                         </div>
                     </div>
 
-                    <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                    <div class="more" v-if="item.user.id == userId"><svg class="olymp-three-dots-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
                         <ul class="more-dropdown">
                             <li>
-                                <a href="javascript:;" @click="postChallengeedit">Edit Post</a>
+                                <a href="javascript:;" @click="postChallengeedit(item.id)">Edit Post</a>
                             </li>
-                            <li>
-                                <a href="#">Delete Post</a>
-                            </li>
-                            <li>
-                                <a href="#">Turn Off Notifications</a>
-                            </li>
-                            <li>
-                                <a href="#">Select as Featured</a>
+                            <li v-if="item.comments == 0">
+                                <a href="javascript:;" @click="deleteChallenge(item.id)" >Delete Post</a>
                             </li>
                         </ul>
                     </div>
@@ -152,15 +56,6 @@
                         <span>{{item.likes}}</span>
                     </a>
 
-
-
-
-                    <!--                    <div class="names-people-likes">-->
-                    <!--                        <a href="#">Jimmy</a>, <a href="#">Andrea</a> and-->
-                    <!--                        <br>47 more liked this-->
-                    <!--                    </div>-->
-
-
                     <div class="comments-shared">
                         <a
                             href="javascript:;"
@@ -189,8 +84,8 @@
                     </a>
 
                     <a
-                       href="javascript:;"
-                       @click="challengemessage(item)"
+                        href="javascript:;"
+                        @click="challengemessage(item)"
                         class="btn btn-control">
                         <svg class="olymp-comments-post-icon">
                             <use
@@ -203,13 +98,14 @@
         </div>
 
         <!--        <infinite-loading @infinite="infiniteHandler"></infinite-loading>-->
-
+<challenge-edit-form ref="challengeedit" v-on:output="output" :actionObject="actionObject"></challenge-edit-form>
     </div>
 </template>
 
 <script>
-
+    import ChallengeEditForm from '../challenges/ChallengeEditForm';
     export default {
+
         name: 'ActivityItem',
         props: ['CurrentUser', 'isUserLoggedIn',
             'isSameUser', 'loadCurrentUserActivity',
@@ -228,34 +124,21 @@
                 recordsUserId: '',
                 sort_by: 'desc',
                 hasMore: false,
-                infinite: false
+                infinite: false,
 
+                actionObject: {
+                    id: null
+                },
             }
         },
-         created() {
-        //     console.log(USER.username,'hereinactivity item');
-        //     // this.userLogin = this.$store.getters.getLogin;
-        //     // this.userId = this.$store.getters.getUserId;
-        //
-        //     this.$store.commit('setLogin', true);
-        //     this.$store.commit('setUserId', this.userId);
-        //     this.$store.commit('setName', USER.name);
-        //     this.$store.commit('setUserName', USER.username);
-        //     // this.$store.commit('setUserImage', response.data.user.image);
-        //     this.$store.commit('setUserEmail', USER ? USER.email : '');
-        //     this.$store.commit('setUserSlug', this.userSlug);
-        //     this.$store.commit('setUserNickname', USER ? USER.nickname : '');
-        //     this.$store.commit('setUserAbout', USER ? USER.about : '');
-        //     this.$store.commit('setUserLevel', USER ? USER.level : '');
-        //
-        //     this.$store.commit('setUserImage', this.UserImage);
-        //     this.$store.commit('setUserBackgroundImage', this.userBackgroundImage);
-        //     //
-             this.loadPosts();
+        components:{
+            ChallengeEditForm
+        },
+        created() {
+            this.loadPosts();
         },
         mounted() {
             window.onscroll = (ev) => {
-
                 if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
                     if (this.hasMore && this.infinite) {
                         this.loadPosts(this.page);
@@ -268,46 +151,67 @@
             $(window).off('scroll');
         },
         methods: {
-            postChallengeedit() {
-                this.$refs.challenge.showModal();
-                // this.$router.push('/post-challenge');
+            deleteChallenge(itemid) {
+                this.$swal({
+                    title: "<h5>Are you sure you want to delete this Challenge?</h5>",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Delete'
+                }).then((result) => {
+                    if (result.value) {
+                            this.axios.post('challenges/delete/' + itemid).then((response) => {
+                                if (response.status == '200') {
+                                    this.$parent.$refs.activityItem.loadPosts();
+                                    loader.hide();
+                                    this.$toast.open({
+                                        message: 'challenge deleted successfully',
+                                        type: 'info'
+                                    });
+                                } else {
+                                    loader.hide();
+                                }
+                            }).catch((error) => {
+
+                            })
+                    }
+                });
+
+            },
+            postChallengeedit(itemid) {
+                this.actionObject.id = itemid;
+                this.$refs.challengeedit.showModal();
+            },
+            output(massege) {
+                this.loadPosts();
             },
             challengedetail(item) {
                 this.$store.commit('setIsPost', 'yes' );
-               this.$router.push({name: 'ChallengeDetails', params: { id: item.id, slug: item.slug }});
+                this.$router.push({name: 'ChallengeDetails', params: { id: item.id, slug: item.slug }});
             },
             challengemessage(item) {
                 this.$store.commit('setIsPost', 'no' );
-               this.$router.push({ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } });
+                this.$router.push({ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } });
             },
             loadPosts(page = '1') {
                 console.log('loadposts');
                 let loader = this.$loading.show({
                     container: this.fullPage ? null : this.$refs.file,
                 });
-
                 this.recordsUserId = this.userId;
                 this.type = 'all';
-
                 if (this.isSameUser != undefined) {
                     this.recordsUserId = this.profileIdToLoad;
                 }
-
                 if (this.specificUserRecords != undefined) {
                     if (this.specificUserRecords)
                         this.type = 'specific';
                 }
-
                 if (!this.infinite && page != '1')
                     return false;
-
                 this.infinite = false;
-
-
                 this.axios.get(`${APP.baseUrl}/challenges/getlist?userId=${this.recordsUserId}&recordsType=${this.type}&sort_by=${this.sort_by}&page=${page}`)
                     .then((response) => {
                         loader.hide();
-
                         if (response.status == 200) {
                             if (response.data.current_page == 1) {
                                 this.challenges = response.data.data;
@@ -317,7 +221,6 @@
                             this.hasMore = response.data.has_more;
                             this.infinite = this.hasMore;
                             this.page = response.data.next_page;
-
                         } else if (response.status == 401) {
                             // console.log('in 401 response');
                             // this.$store.dispatch('destroyAccess');
@@ -335,7 +238,6 @@
                     });
             },
             infiniteHandler($state) {
-
                 if (this.challenges.length == 0) {
                     // $state.loaded();
                     $state.complete();
@@ -346,18 +248,15 @@
                         page: this.page
                     },
                 }).then((response) => {
-
                     if (response.status == 200) {
                         this.page += 1;
                         this.challenges.push(...new Set([...this.challenges, ...response.data.list]));
-
                         $state.loaded();
                     } else {
                         $state.complete();
                     }
                 });
             },
-
             updateLike(itemId) {
                 // console.log('index '+index);
                 if (!this.userLogin) {
@@ -378,10 +277,8 @@
                     .then((response) => {
                         // loader.hide();
                         let like_value = response.data;
-
                         // console.log('liked: '+itemId);
                         for (let index = 0; index < this.challenges.length; index++) {
-
                             // console.log('in loop with index: '+this.challenges[index].id);
                             if (this.challenges[index].id == itemId) {
                                 console.log('like_value: ' + like_value);
@@ -393,12 +290,10 @@
                                     if (this.challenges[index].likes > 0) {
                                         this.challenges[index].likes -= 1;
                                         this.challenges[index].isUserLiked = 0;
-
                                     }
                                 }
                             }
                         }
-
                     })
                     .catch(function (response) {
                         console.log('in ativityItemView Exception');
@@ -407,7 +302,6 @@
                     });
             },
         },
-
     }
 </script>
 
@@ -416,11 +310,9 @@
         fill: #e91d24;
         color: #e91d24;
     }
-
     .active_bg {
         background: #e91d24;
     }
-
     .challenge-image {
         width: 197px;
         height: 194px;

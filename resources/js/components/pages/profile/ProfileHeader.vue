@@ -27,6 +27,13 @@
                                             class="nav-link"
                                         >Friends</router-link>
                                     </li>
+                                    <li>
+                                        <router-link
+                                            :to="{  name: 'Activity',
+                                           params: { id: currentProfileId } }"
+                                            class="nav-link"
+                                        >Activity</router-link>
+                                    </li>
 
 								</ul>
 							</div>

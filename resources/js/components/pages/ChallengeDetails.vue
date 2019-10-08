@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12"  v-if="challenge">
+            <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12" v-if="challenge">
 
                 <div class="ui-block mb60">
 
@@ -9,21 +9,24 @@
 
                     <article class="hentry blog-post single-post single-post-v3">
                         <h1 class="post-title">{{challenge.title}}</h1>
-<!--                        <a href="#" class="post-category bg-primary">Digital</a>-->
-                        <a href="javascript:;" class="post-category bg-primary" v-for="category in challenge.categories" style="margin-right: 5px;">{{ category.title }}</a>
+                        <!--                        <a href="#" class="post-category bg-primary">Digital</a>-->
+                        <a href="javascript:;" class="post-category bg-primary" v-for="category in challenge.categories"
+                           style="margin-right: 5px;">{{ category.title }}</a>
 
                         <div class="post-milestone-progress">
                             <div class="post-milestone-progress">
                                 <ul class="progress-stage-wrapper clearfix">
-                                    <li class="progress-stage-item" :class="challenge.is_valid_challenge?'in-progress':'not-started'">
+                                    <li class="progress-stage-item"
+                                        :class="ideaStatusClass">
                                         <div class="icon icon-lightbulb">
                                             <div class="style-empty">
-                                                <svg viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                                                <svg viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
+                                                     xml:space="preserve">
                                                     <g>
                                                         <path class="st0" d="M196.3,136.5c-14.1,0-25.6,11.5-25.6,25.6c0,14.1,11.5,25.6,25.6,25.6h25.6v-25.6
                                                             C221.9,148,210.4,136.5,196.3,136.5z"/>
                                                         <path class="st0"
-                                                            d="M239,486.4c0,4.7,3.8,8.5,8.5,8.5h17.1c4.7,0,8.5-3.8,8.5-8.5v-8.5H239V486.4z"/>
+                                                              d="M239,486.4c0,4.7,3.8,8.5,8.5,8.5h17.1c4.7,0,8.5-3.8,8.5-8.5v-8.5H239V486.4z"/>
                                                         <path class="st0" d="M341.3,162.1c0-14.1-11.5-25.6-25.6-25.6c-14.1,0-25.6,11.5-25.6,25.6v25.6h25.6
                                                             C329.8,187.7,341.3,176.2,341.3,162.1z"/>
                                                         <path class="st1" d="M272.9,202.8h2v2v119.5c0.2,3.7,3.1,6.5,6.7,6.5c3.6,0,6.5-2.9,6.5-6.5V204.8v-2h2h25.6
@@ -66,12 +69,14 @@
                                                 </svg>
                                             </div>
                                             <div class="style-filled">
-                                                <svg viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                                                <svg viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
+                                                     xml:space="preserve">
                                                     <path class="st0" d="M93.3,144.9c0,0,15.3-123.3,163.7-136.7c0,0,125-5.3,160.3,142c0,0,25.3,105.2-92,190.7c0,0-13.2,20-8.6,24.7
                                                     s30.6,8.7,6.6,32c0,0,21.3,20-0.7,35.3c0,0,26,30-9.3,40h-123c0,0-20.3-24.7-4.9-36.7c0,0-19.3-18.7,1.3-36c0,0-20.1-26,10.6-36
                                                     c0,0-1.3-22-25.6-39.3C171.7,324.9,81.3,271.5,93.3,144.9z"/>
                                                     <g>
-                                                        <path class="st0" d="M237,485.7c0,6.2,4.2,11.2,9.5,11.2h19.1c5.3,0,9.5-5,9.5-11.2v-11.2H237V485.7z"/>
+                                                        <path class="st0"
+                                                              d="M237,485.7c0,6.2,4.2,11.2,9.5,11.2h19.1c5.3,0,9.5-5,9.5-11.2v-11.2H237V485.7z"/>
                                                         <path class="st1" d="M272.9,202.8h2v2v119.5c0.2,3.7,3.1,6.5,6.7,6.5c3.6,0,6.5-2.9,6.5-6.5V204.8v-2h2h25.6
                                                         c22.4,0,40.7-18.3,40.7-40.7c0-22.4-18.3-40.7-40.7-40.7S275,139.7,275,162.1v25.6v2h-2h-34.1h-2v-2v-25.6
                                                         c0-22.4-18.3-40.7-40.7-40.7c-22.4,0-40.7,18.3-40.7,40.7c0,22.4,18.3,40.7,40.7,40.7h25.6h2v2v119.5c0,3.6,2.9,6.5,6.5,6.5
@@ -117,7 +122,8 @@
                                             <span>{{challenge.ideas}}</span> ideas
                                         </div>
                                     </li>
-                                    <li class="progress-stage-item" :class="challenge.game_time?'in-progress':'not-started'">
+                                    <li class="progress-stage-item"
+                                        :class="likeStatusClass">
                                         <div class="icon icon-puzzle">
                                             <div class="style-empty">
                                                 <svg viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
@@ -221,8 +227,10 @@
                                                                 c9.6,0,17.6-7.9,17.6-17.6v-74.6v-2.1h2.1h66c2.6,0,4.7,2.1,4.7,4.7v5.5v0.1v0.1c-0.1,1.1-0.5,2-1.3,2.9
                                                                 c-5.9,8.5-8.4,19.2-6.8,29.4c3.8,19.9,21.2,34.4,41.5,34.4c0.2,0,0.4,0,0.6,0h13.4c0.2,0,0.4,0,0.6,0c20.2,0,37.7-14.5,41.5-34.4
                                                                 c1.6-10.4-0.8-20.8-6.7-29.4c-0.6-0.9-1.1-1.8-1.3-2.9v-0.1v-0.1v-5.5c0-2.6,2.1-4.7,4.7-4.7H496h2.1V264.6z"/>
-                                                            <rect x="35.3" y="52.4" class="st2" width="12.9" height="12.9"/>
-                                                            <rect x="35.3" y="86.7" class="st2" width="12.9" height="90"/>
+                                                            <rect x="35.3" y="52.4" class="st2" width="12.9"
+                                                                  height="12.9"/>
+                                                            <rect x="35.3" y="86.7" class="st2" width="12.9"
+                                                                  height="90"/>
                                                         </g>
                                                     </g>
                                                 </svg>
@@ -233,7 +241,8 @@
                                             <span>{{challenge.game_time}}</span> ideas
                                         </div>
                                     </li>
-                                    <li class="progress-stage-item" :class="challenge.finalized?'in-progress':'not-started'">
+                                    <li class="progress-stage-item"
+                                        :class="finalizedStatusClass">
                                         <div class="icon icon-podium">
                                             <div class="style-empty">
                                                 <div class="bg">
@@ -243,7 +252,7 @@
                                                         <g>
                                                             <defs>
                                                                 <rect id="SVGID_1_" x="-141.2" y="-193" width="832.5"
-                                                                    height="374.7"/>
+                                                                      height="374.7"/>
                                                             </defs>
                                                             <clipPath id="SVGID_2_">
                                                                 <use xlink:href="#SVGID_1_" style="overflow:visible;"/>
@@ -253,12 +262,12 @@
                                                         <g>
                                                             <defs>
                                                                 <rect id="SVGID_3_" x="-141.2" y="590.1" width="832.5"
-                                                                    height="386"/>
+                                                                      height="386"/>
                                                             </defs>
-                                                                    <clipPath id="SVGID_4_">
+                                                            <clipPath id="SVGID_4_">
                                                                 <use xlink:href="#SVGID_3_" style="overflow:visible;"/>
                                                             </clipPath>
-                                                                    <circle class="st1" cx="318.3" cy="383" r="368.2"/>
+                                                            <circle class="st1" cx="318.3" cy="383" r="368.2"/>
                                                         </g>
                                                     </svg>
                                                 </div>
@@ -284,7 +293,7 @@
                                                             l-7.1-3.8l-37.9-20c-0.8-0.4-1.8-0.7-2.8-0.7s-2,0.2-2.8,0.7l-38,20l-7.1,3.7l1.3-7.9l7.4-45.2c0.3-1.9-0.4-3.9-1.8-5.3l-30.6-29.8
                                                             l-5.8-5.7L186.3,82.3z"/>
                                                         <path class="st0"
-                                                            d="M296,453h-40c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6S299.3,453,296,453z"/>
+                                                              d="M296,453h-40c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6S299.3,453,296,453z"/>
                                                     </g>
                                                 </svg>
                                             </div>
@@ -296,22 +305,22 @@
                                                         <g>
                                                             <defs>
                                                                 <rect id="SVGID_1_" x="-141.2" y="-193" width="832.5"
-                                                                    height="374.7"/>
+                                                                      height="374.7"/>
                                                             </defs>
                                                             <clipPath id="SVGID_2_">
                                                                 <use xlink:href="#SVGID_1_" style="overflow:visible;"/>
                                                             </clipPath>
                                                             <circle class="st0" cx="316.3" cy="383" r="368.2"/>
                                                         </g>
-                                                                <g>
+                                                        <g>
                                                             <defs>
                                                                 <rect id="SVGID_3_" x="-141.2" y="590.1" width="832.5"
-                                                                    height="386"/>
+                                                                      height="386"/>
                                                             </defs>
-                                                                    <clipPath id="SVGID_4_">
+                                                            <clipPath id="SVGID_4_">
                                                                 <use xlink:href="#SVGID_3_" style="overflow:visible;"/>
                                                             </clipPath>
-                                                                    <circle class="st1" cx="318.3" cy="383" r="368.2"/>
+                                                            <circle class="st1" cx="318.3" cy="383" r="368.2"/>
                                                         </g>
                                                     </svg>
                                                 </div>
@@ -324,28 +333,30 @@
                                                                 L334.7,82.8z"/>
                                                         </g>
                                                     </g>
-                                                            <g>
+                                                    <g>
                                                         <g id="XMLID_1_">
                                                             <g>
-                                                                <rect x="340" y="345" class="st0" width="158.3" height="154.8"/>
+                                                                <rect x="340" y="345" class="st0" width="158.3"
+                                                                      height="154.8"/>
                                                                 <rect x="178.3" y="238" class="st0" width="154.4"
-                                                                    height="261.8"/>
-                                                                <rect x="14" y="305" class="st0" width="155.4" height="194.8"/>
+                                                                      height="261.8"/>
+                                                                <rect x="14" y="305" class="st0" width="155.4"
+                                                                      height="194.8"/>
                                                             </g>
                                                         </g>
                                                     </g>
                                                     <g>
                                                         <circle class="st1" cx="216" cy="459" r="6"/>
-                                                            <path class="st1" d="M236,285h10h4v4v60v4h-4h-10c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6s-2.7-6-6-6h-10h-4v-4v-70
+                                                        <path class="st1" d="M236,285h10h4v4v60v4h-4h-10c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6s-2.7-6-6-6h-10h-4v-4v-70
                                                         c0-3.3-2.7-6-6-6h-20c-3.3,0-6,2.7-6,6S232.7,285,236,285z"/>
-                                                            <path class="st1" d="M73,445h40c3.3,0,6-2.7,6-6s-2.7-6-6-6H83h-4v-4v-20v-4h4h30c3.3,0,6-2.7,6-6v-40c0-3.3-2.7-6-6-6H73
+                                                        <path class="st1" d="M73,445h40c3.3,0,6-2.7,6-6s-2.7-6-6-6H83h-4v-4v-20v-4h4h30c3.3,0,6-2.7,6-6v-40c0-3.3-2.7-6-6-6H73
                                                         c-3.3,0-6,2.7-6,6s2.7,6,6,6h30h4v4v20v4h-4H73c-3.3,0-6,2.7-6,6v40C67,442.3,69.7,445,73,445z"/>
-                                                            <path class="st1" d="M399,425h30h4v4v20v4h-4h-30c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6v-80c0-3.3-2.7-6-6-6h-40
+                                                        <path class="st1" d="M399,425h30h4v4v20v4h-4h-30c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6v-80c0-3.3-2.7-6-6-6h-40
                                                         c-3.3,0-6,2.7-6,6s2.7,6,6,6h30h4v4v20v4h-4h-30c-3.3,0-6,2.7-6,6S395.7,425,399,425z"/>
-                                                            <path class="st1" d="M502,333H346h-4v-4v-93c0-3.3-2.7-6-6-6H176c-3.3,0-6,2.7-6,6v53v4h-4H10c-3.3,0-6,2.7-6,6v203
+                                                        <path class="st1" d="M502,333H346h-4v-4v-93c0-3.3-2.7-6-6-6H176c-3.3,0-6,2.7-6,6v53v4h-4H10c-3.3,0-6,2.7-6,6v203
                                                         c0,3.3,2.7,6,6,6h166h160h166c3.3,0,6-2.7,6-6V339C508,335.7,505.3,333,502,333z M170,309v183v4h-4H20h-4v-4V309v-4h4h146h4V309z
                                                         M330,246v246v4h-4H186h-4v-4V246v-4h4h140h4V246z M496,349v143v4h-4H346h-4v-4V349v-4h4h146h4V349z"/>
-                                                            <path class="st1" d="M161.2,83.7l41.4,40.3l1.5,1.5l-0.3,2.1l-9.8,59.9c-0.4,2.2,0.6,4.5,2.4,5.8c1,0.7,2.3,1.1,3.5,1.1
+                                                        <path class="st1" d="M161.2,83.7l41.4,40.3l1.5,1.5l-0.3,2.1l-9.8,59.9c-0.4,2.2,0.6,4.5,2.4,5.8c1,0.7,2.3,1.1,3.5,1.1
                                                         c1,0,1.9-0.2,2.8-0.7l51.1-26.9l1.9-1l1.9,1l51.1,26.9c0.8,0.4,1.7,0.6,2.8,0.6c1.3,0,2.4-0.4,3.4-1.1l0.1,0l0.1,0
                                                         c1.8-1.3,2.7-3.6,2.4-5.8l-9.8-59.9l-0.3-2.1l1.5-1.5L350,83.5c1.6-1.5,2.1-3.9,1.5-6.1c-0.7-2.2-2.6-3.8-4.8-4.1l0,0l0,0
                                                         l-56.9-8.3l-2.1-0.3l-0.9-2L261.1,7.5c-1-2.1-3.1-3.5-5.5-3.5c-2.3,0-4.4,1.3-5.5,3.5l-25.6,55.3l-0.9,2l-2.1,0.3l-56.9,8.3l0,0
@@ -353,8 +364,8 @@
                                                         l3.6,7.8l18.8,40.6c0.8,1.9,2.5,3.1,4.6,3.4l42.2,6.1l8,1.2l-5.8,5.7L296.5,119c-1.4,1.4-2.1,3.4-1.7,5.3l7.4,45.2l1.3,7.9
                                                         l-7.1-3.8l-37.9-20c-0.8-0.4-1.8-0.7-2.8-0.7s-2,0.2-2.8,0.7l-38,20l-7.1,3.7l1.3-7.9l7.4-45.2c0.3-1.9-0.4-3.9-1.8-5.3l-30.6-29.8
                                                         l-5.8-5.7L186.3,82.3z"/>
-                                                            <path class="st1"
-                                                                d="M296,453h-40c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6S299.3,453,296,453z"/>
+                                                        <path class="st1"
+                                                              d="M296,453h-40c-3.3,0-6,2.7-6,6s2.7,6,6,6h40c3.3,0,6-2.7,6-6S299.3,453,296,453z"/>
 											        </g>
                                                 </svg>
                                             </div>
@@ -364,10 +375,12 @@
                                             <span>{{challenge.finalized}}</span> ideas
                                         </div>
                                     </li>
-                                    <li class="progress-stage-item" :class="challenge.winner?'in-progress':'not-started'">
+                                    <li class="progress-stage-item"
+                                        :class="winnerStatusClass">
                                         <div class="icon icon-winner">
                                             <div class="style-empty">
-                                                <svg viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                                                <svg viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
+                                                     xml:space="preserve">
                                                     <g>
                                                         <path class="st0" d="M275.7,441.8v-0.6v-1.5h-1.5h-36.5h-1.5v1.5v0.6c0,18.4-15,33.3-33.3,33.3c-10.9,0-19.7,8.9-19.7,19.7v0.6v1.5
                                                             h1.5h142.7h1.5v-1.5v-0.6c0-10.9-8.9-19.7-19.7-19.7C290.7,475.1,275.7,460.2,275.7,441.8z"/>
@@ -409,7 +422,8 @@
                                                 </svg>
                                             </div>
                                             <div class="style-filled">
-                                                <svg viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                                                <svg viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
+                                                     xml:space="preserve">
                                                     <g id="XMLID_1_">
                                                         <g>
                                                             <path class="st0" d="M484,96.8v53.1c0,29.8-11.6,58-32.6,79.3c-21,21.3-48.9,33.2-78.7,33.6l-0.8,0l-0.4,0.6
@@ -456,7 +470,17 @@
                                             </div>
                                         </div>
                                         <div class="title">Winner's Circle</div>
-                                        <div class="idea-number">
+                                        <div class="idea-number" v-if="challenge.winuser !=null">
+                                            <div class="author-thumb">
+                                                <img :src="challenge.winuser.image"  class="avatar">
+                                            </div>
+                                            <span>
+                                                <router-link
+                                                :to="{ name: 'ProfileEuraka', params: { id: challenge.winuser.id, slug: challenge.winuser.slug } }"
+                                                class="h6 post__author-name fn">
+                                            {{challenge.winuser.name}}
+                                        </router-link>
+                                              </span>
                                         </div>
                                     </li>
                                 </ul>
@@ -490,22 +514,23 @@
                                    class="post-add-icon inline-items"
                                    v-bind:class="{ active: (challenge.isUserLiked==1)? true : false }"
                                 >
-                                    <svg class="olymp-heart-icon"><use
-                                        xlink:href="assets/svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
+                                    <svg class="olymp-heart-icon">
+                                        <use
+                                            xlink:href="assets/svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
+                                    </svg>
                                     <span>{{challenge.likes}}</span>
                                 </a>
-
 
 
                             </div>
 
                             <div class="post-content">
-                                <read-more more-str="See more" :text="challenge.description" less-str="See less" :max-chars="300"></read-more>
+                                <read-more more-str="See more" :text="challenge.description" less-str="See less"
+                                           :max-chars="300"></read-more>
 
                             </div>
 
                         </div>
-
 
 
                     </article>
@@ -523,89 +548,11 @@
                 <!-- ... end Pagination -->
 
             </div>
-<!--            <div v-for="list in lists">-->
-<!--                   <h1>{{lists.title}}</h1>-->
-<!--            </div>-->
-<!--            <div class="col col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12" v-for="(task, index) in list">-->
-<!--                <aside class="blog-post-wrap">-->
 
-<!--                    <div class="ui-block">-->
+            <div class="col col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                <aside class="blog-post-wrap" v-for="(item, index) in posts" :key="index">
 
-<!--                        &lt;!&ndash; Post &ndash;&gt;-->
-
-<!--                        <article class="hentry blog-post blog-post-v3 featured-post-item">-->
-
-<!--                            <div class="post-thumb">-->
-
-<!--                                <a href="#" class="post-category bg-primary"></a>-->
-<!--                            </div>-->
-
-<!--                            <div class="post-content">-->
-
-<!--                                <div class="author-date">-->
-<!--                                    by-->
-<!--                                    <a class="h6 post__author-name fn" href="#">{{task.name}}</a>-->
-<!--                                    <div class="post__date">-->
-<!--                                        <time class="published" datetime="2017-03-24T18:18">-->
-<!--                                            -->
-<!--                                        </time>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-
-<!--                                <a href="#" class="h4 post-title">{{task.title}}</a>-->
-
-<!--                                <div class="post-additional-info inline-items">-->
-
-<!--                                    <div class="friends-harmonic-wrap">-->
-<!--                                        <ul class="friends-harmonic">-->
-<!--                                            <li>-->
-<!--                                                <a href="#">-->
-<!--                                                    <img src="img/icon-chat26.png" alt="icon">-->
-<!--                                                </a>-->
-<!--                                            </li>-->
-<!--                                            <li>-->
-<!--                                                <a href="#">-->
-<!--                                                    <img src="img/icon-chat27.png" alt="icon">-->
-<!--                                                </a>-->
-<!--                                            </li>-->
-<!--                                            <li>-->
-<!--                                                <a href="#">-->
-<!--                                                    <img src="img/icon-chat2.png" alt="icon">-->
-<!--                                                </a>-->
-<!--                                            </li>-->
-<!--                                        </ul>-->
-<!--                                        <div class="names-people-likes">-->
-<!--                                            206-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-
-<!--                                    <div class="comments-shared">-->
-<!--                                        <a href="#" class="post-add-icon inline-items">-->
-<!--                                            <svg class="olymp-speech-balloon-icon">-->
-<!--                                                <use xlink:href="svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>-->
-<!--                                            </svg>-->
-<!--                                            <span>97</span>-->
-<!--                                        </a>-->
-<!--                                    </div>-->
-
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                        </article>-->
-
-<!--                        &lt;!&ndash; ... end Post &ndash;&gt;-->
-
-<!--                    </div>-->
-
-
-
-<!--                </aside>-->
-<!--            </div>-->
-<!--    {{this.posts | json}}-->
-            <div class="col col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12" >
-                <aside class="blog-post-wrap"  v-for="(item, index) in posts" :key="index">
-
-                    <div class="ui-block">
+                    <div class="ui-block"  v-if="item.id != selectedChallengeId">
 
                         <!-- Pos    t -->
 
@@ -615,7 +562,8 @@
 
                                 <img :src="item.image" :alt="item.title">
                                 <div class="post-thumb__tags">
-                                    <a href="#" class="post-category bg-primary post-thumb__tag-item"  v-for="category in item.categories">{{ category.title }}</a>
+                                    <a href="#" class="post-category bg-primary post-thumb__tag-item"
+                                       v-for="category in item.categories">{{ category.title }}</a>
                                 </div>
 
                             </div>
@@ -640,7 +588,9 @@
                                 </div>
 
 
-                                <router-link :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }" class="h4 title">
+                                <router-link
+                                    :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
+                                    class="h4 title">
                                     {{item.title}}
                                 </router-link>
 
@@ -652,13 +602,14 @@
                                         class="post-add-icon inline-items">
                                         <svg class="olymp-speech-balloon-icon">
                                             <use
-                                                xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>
+                                                xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
+                                        </svg>
                                         <span>{{item.comments}}</span>
                                     </router-link>
 
-                                    </div>
-
                                 </div>
+
+                            </div>
 
 
                         </article>
@@ -666,7 +617,6 @@
                         <!-- ... end Post -->
 
                     </div>
-
 
 
                 </aside>
@@ -687,11 +637,61 @@
                 selectedChallengeSlug: '',
                 selectedChallengeId: '',
                 challenge: '',
-                posts:[],
+                posts: [],
 
             }
         },
-        methods:{
+        computed: {
+            ideaStatusClass() {
+                if (this.challenge && this.challenge.is_started) {
+                    if (this.challenge.winner || !this.challenge.can_comment || this.challenge.game_time || this.challenge.ideas)
+                        return 'completed';
+                    else
+                        return 'in-progress';
+                } else {
+                    return 'not-started';
+                }
+            },
+            likeStatusClass() {
+                if (this.challenge && this.challenge.ideas) {
+                    if (this.challenge.winner || (!this.challenge.can_comment) || this.challenge.finalized || this.challenge.game_time)
+                        return 'completed';
+                    else
+                        return 'in-progress';
+                } else {
+                    return 'not-started';
+                }
+            },
+            // finalizedStatusClass() {
+            //     if (this.challenge && this.challenge.is_started && this.challenge.game_time) {
+            //         return this.challenge.winner ? 'completed' : 'in-progress';
+            //     } else {
+            //         return 'not-started';
+            //     }
+            // },
+            finalizedStatusClass() {
+                if (this.challenge && this.challenge.is_started && this.challenge.game_time) {
+                    if (!this.challenge.can_comment || this.challenge.finalized)
+                        return 'completed';
+                    else
+                        return 'in-progress';
+                } else {
+                    return 'not-started';
+                }
+            },
+            winnerStatusClass() {
+                if (this.challenge && this.challenge.is_started && this.challenge.finalized) {
+                    if (this.challenge.winner)
+                        return 'completed';
+                    else if (this.challenge.finalized)
+                    //if at least on finalized or like
+                        return 'in-progress';
+                } else {
+                    return 'not-started';
+                }
+            }
+        },
+        methods: {
             updateLike(itemId) {
                 // console.log('index '+index);
                 if (!this.userLogin) {
@@ -753,18 +753,16 @@
                     data: bodyFormData
                 })
                     .then((response) => {
-                         loader.hide();
+                        loader.hide();
 
-                        if (response.status==200) {
+                        if (response.status == 200) {
                             // console.log(response);
                             // alert(response);
                             this.posts = response.data.list;
 
-                             console.log("sairam",this.posts);
+                            console.log("sairam", this.posts);
 
-                        }
-                        else if(response.status==401)
-                        {
+                        } else if (response.status == 401) {
                             console.log('in 401 response');
                             this.$store.dispatch('destroyAccess');
                             this.$toast.open({
@@ -772,24 +770,18 @@
                                 type: 'success'
                             });
                             this.$router.push('/login');
-                        }
-                        else {
+                        } else {
                             console.log('inelse boy');
                         }
                     })
-                    .catch(function(response) {
+                    .catch(function (response) {
                         loader.hide();
                     });
             },
         },
-        mounted(){
+        mounted() {
             this.getChallenges();
 
-        },
-        computed:{
-            class() {
-                return darkMode ? 'dark-theme' : 'light-theme';
-            }
         },
         created() {
             this.selectedChallengeId = this.$route.params.id;
@@ -836,8 +828,8 @@
 </script>
 
 <style scoped>
-    .post-content{
-        font-size: .875rem!important;
+    .post-content {
+        font-size: .875rem !important;
     }
 
     .active {
@@ -848,6 +840,8 @@
     .active_bg {
         background: #e91d24;
     }
-
+    .author-thumb img {
+        width: 35px !important;
+    }
 
 </style>

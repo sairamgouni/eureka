@@ -4,6 +4,7 @@ import Newsfeed from "../components/pages/Newsfeed";
 import ProfileEuraka from "../components/pages/profile/ProfileEuraka";
 import About from "../components/pages/profile/About";
 import Friends from "../components/pages/profile/Friends";
+import Activity from "../components/pages/profile/Activity";
 import Notifications from "../components/pages/profile/Notifications";
 import Photos from "../components/pages/profile/Photos";
 import EditPersonalInformation from "../components/pages/profile/edit/EditPersonalInformation";
@@ -79,6 +80,15 @@ export default [
         meta : {
             requiresAuth:true,
             title: "Friends"
+        }
+    },
+    {
+        name: 'Activity',
+        path: '/activity/:id',
+        component: Activity,
+        meta : {
+            requiresAuth:true,
+            title: "Activity"
         }
     },
     {

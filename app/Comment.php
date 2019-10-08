@@ -20,11 +20,6 @@ class Comment extends Model
         'winner',
     ];
 
-    /**
-     * To get the all child comments for a parent comment
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function challenge()
     {
         return $this->belongsTo(Challenge::class);
@@ -58,6 +53,7 @@ class Comment extends Model
     {
         return $this->morphOne(Like::class, 'like')->whereUserId(\Auth::id());
     }
+
     public function ownerCommenttick()
     {
         return $this->morphOne(Like::class, 'like')->whereUserId(\Auth::id());
@@ -67,8 +63,14 @@ class Comment extends Model
     {
         return $this->morphOne(Tick::class, 'tick')->whereUserId(\Auth::id());
     }
+
     public function win()
     {
         return $this->morphOne(Win::class, 'win')->whereUserId(\Auth::id());
+    }
+
+    public function attachments()
+    {
+        return $this->hasMany(CommentAttachment::class, 'comment_id');
     }
 }

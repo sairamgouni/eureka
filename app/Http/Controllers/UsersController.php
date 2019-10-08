@@ -149,15 +149,20 @@ class UsersController extends Controller
         return response()->json($users);
     }
 
-    public function getActivities(Request $request, $user_id = '')
+    public function getActivities(Request $request, $user_id = null)
     {
+
         $user = null;
         if ($user_id)
             $user = \App\User::where('id', '=', $user_id)->first();
         if (!$user)
             $user = \Auth::user();
-
-        $activities = Activity::orderBy('id', 'desc')->paginate(10);
+        if($user_id){
+            $activities = Activity::orderBy('id', 'desc')->where('causer_id', $user_id)->paginate(10);
+        }
+        else{
+            $activities = Activity::orderBy('id', 'desc')->paginate(10);
+        }
 
         $data = $this->processActivities($activities);
 
@@ -366,6 +371,42 @@ class UsersController extends Controller
         $data= $request->all();
         $search = $data['q'];
         return User::where('name', 'like', '%' . $search . '%')->get();
+    }
+
+    public function getUserActivities(Request $request)
+    {
+
+        $userId = null;
+        $user = null;
+        if ($request->has('userId')) {
+            $userId = $request->userId;
+            $user = \App\User::where('id', '=', $userId)->first();
+        }
+        $activities = Activity::orderBy('id', 'desc')->get();
+dd($activities);
+//       $data = $this->processUserActivities($activities);
+        return response()->json($data);
+
+    }
+
+    public function processUserActivities($activities)
+    {
+        $list = [];
+        foreach ($activities as $activity) {
+            $user = \App\User::where('id', '=', $activity->causer_id)->first();
+//          dd($user);
+            $item['id'] = $activity->id;
+            $item['username'] = $user->name;
+            $item['image'] = $user->getProfileImage();
+            $item['user_id'] = $user->id;
+            $item['user_slug'] = $user->slug;
+            $item['profile_link'] = '$user->getProfilePath()';
+            $item['message'] = $activity->description;
+            $item['created_at'] = \Carbon\Carbon::createFromTimeStamp(strtotime($activity->created_at))->diffForHumans();
+            $list[] = $item;
+        }
+
+        return $list;
     }
 
 

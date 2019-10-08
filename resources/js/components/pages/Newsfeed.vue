@@ -10,17 +10,13 @@
 		<main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
             <div class="ui-block">
 
-				<!-- News Feed Form  -->
-
 				<div class="news-feed-form newsfeed-input">
-					<!-- Nav tabs -->
 
-                    <!-- Tab panes -->
                       <form>
 
 								<div class="form-group with-icon label-floating is-empty">
 									<label class="control-label">Create Your Challenge here...</label>
-									<textarea class="form-control" placeholder="" row="2" @click="postChallenge"></textarea>
+									<textarea class="form-control" placeholder="" row="2" @click="postChallenge" readonly></textarea>
 								<span class="material-input"></span></div>
 
 
@@ -134,5 +130,8 @@
     }
     .label-floating.with-icon .form-control, .label-floating.with-icon input, .label-floating.with-icon textarea {
         padding-left: 30px !important;
+    }
+    .form-control:disabled, .form-control[readonly] {
+        background-color: #f1f1f100 !important;
     }
 </style>

@@ -78,7 +78,7 @@ class Challenge extends Model
         // return $response;
         $user = \Auth::user();
 
-        $log_message = ' has posted a new challenge ' . '<a href="/#/challenge-details/'.$record->id.'/'.$record->slug.'">'.$record->title.'</a>';
+        $log_message = ' has posted a new challenge ' . '<a href="/#/challenge-details/' . $record->id . '/' . $record->slug . '">' . $record->title . '</a>';
         activity()
             ->performedOn($record)
             ->log($log_message);
@@ -101,15 +101,12 @@ class Challenge extends Model
         $record->title = $request->title;
         $record->slug = $request->slug;
         $record->description = $request->description;
-        $record->image = $request->image;
         $record->status = $request->status;
         $record->category_id = 0;
-        $record->active_from = date('Y-m-d');
-        $record->active_to = date('Y-m-d', strtotime($record->active_from . '+30 days'));
-        // $record->active_from   = date("Y-m-d H:i:s", strtotime( $request->active_from));
-        // $record->active_to   = date("Y-m-d H:i:s", strtotime( $request->active_to));
+
+        $record->active_from = Date::createFromFormat('D M d Y H:i:s e+', $request->active_from)->startOfDay();
+        $record->active_to = Date::createFromFormat('D M d Y H:i:s e+', $request->active_to)->endOfDay();
         $record->description = $request->description;
-        // dd(explode(",", $request->categories));
         $record->created_by = \Auth::user()->id;
         $response = $record->save();
         $record->categories()->sync(explode(",", $request->categories));
@@ -227,7 +224,7 @@ class Challenge extends Model
 
     public function categories()
     {
-        return $this->belongsToMany('\App\Category');
+        return $this->belongsToMany('\App\Category', 'category_challenge', 'challenge_id','category_id');
     }
 
     public static function prepareAjaxData($records)
@@ -239,17 +236,19 @@ class Challenge extends Model
             $item['title'] = $record->title;
             $item['slug'] = $record->slug;
             $item['location'] = $record->user->country->title;
-            $item['campaign'] = $record->user->campaign->campaign;
+            $item['campaign'] = @$record->user->campaign->campaign;
             $item['image'] = $record->image;
             $item['resizeImage'] = $record->getImageResizeFile();
             $item['status'] = $record->status;
             $item['description'] = $record->description;
             $item['likes'] = $record->likers()->count();
             $item['comments'] = $record->comments()->count();
+//            $item['comments'] = $record->comments()->count();
             $startDate = Date::parse($record->active_from);
             $endDate = Date::parse($record->active_to);
             $item['can_comment'] = now()->isBetween($startDate, $endDate, true);
             $item['is_valid_challenge'] = $endDate->isFuture();
+            $item['is_started'] = $startDate->isPast();
             $item['ideas'] = $record->comments()
                 ->whereBetween('created_at', [Date::parse($record->active_from), Date::parse($record->active_to)])
                 ->count();
@@ -257,8 +256,13 @@ class Challenge extends Model
             $item['game_time'] = Like::whereIn('like_id', $record->comments()->pluck('id'))->whereUserId($record->created_by)->count();
             $item['finalized'] = $record->comments()->whereFinalized(1)->count();
             $item['winner'] = $record->comments()->whereWinner(1)->count();
+            $item['winuser'] = Comment:: select('*')->join('users', 'users.id', '=', 'comments.user_id')
+                ->whereChallengeId($record->id)
+                ->whereWinner(1)
+                ->first();
             $item['categories'] = $record->categories;
-
+            $item['active_from'] =$startDate;
+            $item['active_to'] = $endDate->subDay(1);
 
             if ($user) {
                 $item['isUserLiked'] = (int)$user->hasLiked($record);
@@ -356,6 +360,8 @@ class Challenge extends Model
 
         return $default_image;
     }
+
+
 
 
 }
