@@ -111,7 +111,7 @@
                 bodyFormData.set('userId', userId);
                 this.axios({
                     method: 'get',
-                    url: 'user/get-profile/'+currentProfileId,
+                    url: 'user/get-profile/'+this.userId,
                     data: bodyFormData
                 })
                     .then((response) => {
@@ -138,7 +138,7 @@
                 // bodyFormData.set('challent_id', this.comment_type_id);
                 this.axios({
                     method: 'get',
-                    url: APP.baseUrl + '/activities/get-list/'+this.userId,
+                    url: APP.baseUrl + '/activities/get-list/'+this.currentProfileId,
                     data: bodyFormData
                 })
                     .then((response) => {

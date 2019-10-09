@@ -6547,7 +6547,7 @@ __webpack_require__.r(__webpack_exports__);
       bodyFormData.set('userId', userId);
       this.axios({
         method: 'get',
-        url: 'user/get-profile/' + currentProfileId,
+        url: 'user/get-profile/' + this.userId,
         data: bodyFormData
       }).then(function (response) {
         if (response.status == 200) {
@@ -6572,7 +6572,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.axios({
         method: 'get',
-        url: APP.baseUrl + '/activities/get-list/' + this.userId,
+        url: APP.baseUrl + '/activities/get-list/' + this.currentProfileId,
         data: bodyFormData
       }).then(function (response) {
         console.log(response.data.success);
