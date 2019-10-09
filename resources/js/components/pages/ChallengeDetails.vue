@@ -643,8 +643,8 @@
         },
         computed: {
             ideaStatusClass() {
-                if (this.challenge && this.challenge.is_started) {
-                    if (this.challenge.winner || !this.challenge.can_comment || this.challenge.game_time || this.challenge.ideas)
+                if (this.challenge && this.challenge.ideas) {
+                    if (this.challenge.winner || !this.challenge.can_comment || this.challenge.game_time)
                         return 'completed';
                     else
                         return 'in-progress';
@@ -653,8 +653,8 @@
                 }
             },
             likeStatusClass() {
-                if (this.challenge && this.challenge.ideas) {
-                    if (this.challenge.winner || (!this.challenge.can_comment) || this.challenge.finalized || this.challenge.game_time)
+                if (this.challenge && this.challenge.game_time) {
+                    if (this.challenge.winner || (!this.challenge.can_comment) || this.challenge.finalized)
                         return 'completed';
                     else
                         return 'in-progress';
@@ -670,8 +670,8 @@
             //     }
             // },
             finalizedStatusClass() {
-                if (this.challenge && this.challenge.is_started && this.challenge.game_time) {
-                    if (!this.challenge.can_comment || this.challenge.finalized)
+                if (this.challenge && this.challenge.is_started && this.challenge.finalized) {
+                    if (!this.challenge.can_comment || this.challenge.winner)
                         return 'completed';
                     else
                         return 'in-progress';
@@ -680,7 +680,7 @@
                 }
             },
             winnerStatusClass() {
-                if (this.challenge && this.challenge.is_started && this.challenge.finalized) {
+                if (this.challenge && this.challenge.is_started && this.challenge.winner) {
                     if (this.challenge.winner)
                         return 'completed';
                     else if (this.challenge.finalized)
