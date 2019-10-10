@@ -248,7 +248,7 @@
           </div> -->
 
                 <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
-                     v-if="!winner && $parent.challenge.can_comment || $parent.challenge.active_to < $parent.challenge.today">
+                     v-if="!winner && $parent.challenge.can_comment && $parent.challenge.active_to < $parent.challenge.today">
                     <form @submit="onSubmit" class="comment-form inline-items" enctype="multipart/form-data">
 
 						<div class="post__author author vcard inline-items">
