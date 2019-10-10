@@ -11,11 +11,11 @@
 
                     <li class="comment-item" v-for="(comment, index) in comments" :key="comment.id">
                         <div class="post__author-thumb">
-                            <img src="assets/img/avatar1.jpg" alt="author">
+                            <img :src="comment.user.image"  alt="author">
                         </div>
 
                         <div class="comments-content">
-                            <div class="post__author author vcard">
+                            <div class="post__author author vcard inline-items">
 
                                 <div class="author-date">
                                     <a class="h6 post__author-name fn" href="#">{{comment.user.name}}</a>
@@ -43,14 +43,25 @@
                                 Delete
                             </a>
 									</li>
+
 								</ul>
 							</div>
 
                             </div>
 
-
                             <p class="comment">{{comment.comment}}</p>
+                             <div class="more"><svg class="olymp-three-dots-icon"><use
+                                 xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+								<ul class="more-dropdown">
 
+								</ul>
+							</div>
+                               <div class="more"><svg class="olymp-three-dots-icon"><use
+                                   xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+								<ul class="more-dropdown">
+
+								</ul>
+							</div>
 
                             <div class="attachment-container d-flex mb-3"
                                  v-if="comment.attachments && comment.attachments.length">
@@ -118,7 +129,7 @@
                         v-for="(childComments, childIndex) in comment.child_comments"
                         :key="childComments.id">
                         <div class="post__author-thumb">
-                            <img src="assets/img/avatar1.jpg" alt="author">
+                            <img :src="childComments.user.image" alt="author">
                         </div>
 
                         <div class="comments-content">
@@ -232,11 +243,16 @@
                             </div>
 
                         </div>
+
+
+
+<!--							<img src="img/author-page.jpg" alt="author">-->
+
+
                     </form>
                             </div>
 
 
-                        </div>
 
                     </li>
 
@@ -272,8 +288,6 @@
 						</div>
 
 						<button class="btn btn-md-2 btn-primary">Post Comment</button>
-
-						<button class="btn btn-md-2 btn-border-think c-grey btn-transparent custom-color">Cancel</button>
 
 					</form>
 <!--                    <form @submit="onSubmit" class="comments-form" enctype="multipart/form-data">-->
@@ -353,6 +367,16 @@
         background-color: transparent;
         border-bottom: 1px solid #ccc6;
         margin-bottom: 15px;
+    }
+    .comment-form textarea {
+        /*min-height: 60px;*/
+        /*height: 60px;*/
+        /*transition: all .3s ease;*/
+        background-color: transparent;
+        border-bottom: 1px solid #615C5C;
+        border-top:1px solid #615C5C;
+        border-left:1px solid #615C5C;
+        border-right:1px solid #615C5C;
     }
 
     .comments-list.style-3 .post__author-thumb img {
