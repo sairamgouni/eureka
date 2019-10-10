@@ -17,9 +17,14 @@
                         <div class="author-date" v-else>
                             Expiring on: <a href="javascript:;" style="color:#000000;">{{moment(challenge.active_to).format('DD MMMM YYYY')}} (+{{challenge.daysleft}})</a>
                         </div>
+                        <div>
+                            <p>
 
-                        <a href="javascript:;" class="post-category bg-primary" v-for="category in challenge.categories"
-                           style="margin-right: 5px;">{{ category.title }}</a>
+                            </p>
+                            <a href="javascript:;" class="post-category bg-primary" v-for="category in challenge.categories"
+                               style="margin-right: 5px;">{{ category.title }}</a>
+                        </div>
+
 
                         <div class="post-milestone-progress">
                             <div class="post-milestone-progress">
@@ -483,11 +488,7 @@
                                                 <img :src="challenge.winuser.image"  class="avatar">
                                             </div>
                                             <span>
-                                                <router-link
-                                                :to="{ name: 'ProfileEuraka', params: { id: challenge.winuser.id, slug: challenge.winuser.slug } }"
-                                                class="h6 post__author-name fn">
                                             {{challenge.winuser.name}}
-                                        </router-link>
                                               </span>
                                         </div>
                                     </li>
