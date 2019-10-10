@@ -34,6 +34,7 @@
         "bootstrap-vue": "^2.0.0-rc.27",
         "moment": "^2.24.0",
         "selectize": "^0.12.6",
+        "tiptap": "^1.26.3",
         "vue-infinite-loading": "^2.4.4",
         "vue-loading-overlay": "^3.2.0",
         "vue-multiselect": "^2.1.6",
@@ -41,6 +42,7 @@
         "vue-select2": "^0.2.6",
         "vue-sweetalert2": "^2.1.1",
         "vue-toast-notification": "0.0.2",
+        "vue2-editor": "^2.10.2",
         "vuejs-datepicker": "^1.6.2",
         "vuex": "^3.1.1",
         "vuex-persistedstate": "^2.5.4"

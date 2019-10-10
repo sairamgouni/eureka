@@ -27,7 +27,7 @@
                                             class="nav-link"
                                         >Friends</router-link>
                                     </li>
-                                    <li>
+                                    <li v-if=" $store.state.userId == currentProfileId">
                                         <router-link
                                             :to="{  name: 'Activity',
                                            params: { id: currentProfileId } }"

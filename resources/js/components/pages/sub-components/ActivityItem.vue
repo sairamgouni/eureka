@@ -35,6 +35,16 @@
                 <a href="javascript:;" @click="challengedetail(item)" class="h4 title">
                     {{item.title}}
                 </a>
+                <p  v-if="item.active_to < item.today">
+
+                    Expired on: <a href="javascript:;" style="color:#000000;">{{moment(item.active_to).format('DD MMMM YYYY')}}</a>
+                </p>
+                <p v-else>
+
+                    Expiring on: <a href="javascript:;" style="color:#000000;">{{moment(item.active_to).format('DD MMMM YYYY')}} (+{{item.daysleft}})</a>
+
+                </p>
+
                 <p>
                     <read-more more-str="See more" :text="item.description" less-str="See less" :max-chars="300"></read-more>
                 </p>
@@ -151,6 +161,9 @@
             $(window).off('scroll');
         },
         methods: {
+            moment(date) {
+                return moment(date);
+            },
             deleteChallenge(itemid) {
                 this.$swal({
                     title: "<h5>Are you sure you want to delete this Challenge?</h5>",

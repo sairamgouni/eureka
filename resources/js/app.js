@@ -6,6 +6,8 @@ import App from './components/App';
 import routes from './routes/routes';
 import store from './services/store';
 import VueSweetalert2 from 'vue-sweetalert2';
+import VueEditor from "vue2-editor";
+
 
 window.Vue=Vue;
 
@@ -24,6 +26,7 @@ const sweetAlertOptions = {
  */
 Vue.use(VueSweetalert2, sweetAlertOptions);
 Vue.use(VueRouter);
+Vue.use(VueEditor);
 Vue.use(VueAxios, axios);
 //bootstrap vue
 import BootstrapVue from 'bootstrap-vue';

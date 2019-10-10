@@ -206,6 +206,7 @@ class ChallengeController extends Controller
 
     public function postComment(Request $request)
     {
+
         $challenge = Challenge::findOrFail($request->input('challenge_id'));
 
         $user = Auth::user();
@@ -220,7 +221,7 @@ class ChallengeController extends Controller
 
         if ($request->has('attachment')) {
             $path = $request->file('attachment')->storeAs(
-                'challenge/' . $challenge->id . '/comment/' . $comment->id . '/', $request->file('attachment')->getClientOriginalName()
+                'challenges/' . $challenge->id . '/comment/' . $comment->id . '/', $request->file('attachment')->getClientOriginalName()
             );
 
             $comment->attachments()->create(['path' => $path]);
@@ -249,11 +250,12 @@ class ChallengeController extends Controller
 
     public function getComments(Request $request)
     {
-        $comments = Comment::with('childComments.user', 'user')
+        $comments = Comment::with('childComments.user', 'user','attachments')
             ->withCount('like')
             ->whereChallengeId($request->input('challenge_id'))
             ->whereNull('parent_id')
             ->get();
+//        dd($comments);
         return response()->json(['comments' => $comments, 'winner' => $comments->where('winner', 1)->count()]);
     }
     public function getFriendSuggestions(Request $request, $total = 5)

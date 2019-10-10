@@ -51,14 +51,13 @@
             <div class="row sorting-container" id="posts-grid-1" data-layout="masonry" v-if="challenges && challenges.length">
                 <div class="col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 sorting-item" v-for="(item, index) in challenges">
                     <div class="ui-block">
-
-                        <!-- Post -->
-
                         <article class="hentry blog-post blog-post-v1">
+
                             <div class="post-ribbon" v-if="item.winner == 1">
                                 <span>Completed</span>
                             </div>
                             <div class="post-thumb">
+
                                 <img style="width: 337.98px; height: 240.36px;" :src="item.resizeImage" :alt="item.title">
 
                                 <div class="post-content">
@@ -78,6 +77,8 @@
                                                 {{item.created_at}}
                                             </time>
                                         </div>
+                                    </div>
+                                    <div class="author-date">
                                         <div class="post__location">{{item.campaign}}, {{item.location}}</div>
                                     </div>
                                 </div>
@@ -176,6 +177,9 @@
             $(window).off('scroll');
         },
         methods: {
+            moment(date) {
+                return moment(date);
+            },
             searchChallenges(){
                 fetch('/challenge/search?q='+this.search)
                     .then(res => res.json())
@@ -339,5 +343,8 @@
     .challenge-image {
         width: 197px;
         height: 194px;
+    }
+    .blog-post .post__location {
+        margin-left: 0px;
     }
 </style>

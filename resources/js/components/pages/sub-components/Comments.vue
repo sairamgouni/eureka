@@ -25,31 +25,6 @@
                                         </time>
                                     </div>
                                 </div>
-<!--                                 <div class="btn-group">-->
-
-<!--                                                                <a class="more" href="javascript:void(0)"-->
-<!--                                                                   data-toggle="dropdown">-->
-<!--                                                                    <svg class="olymp-three-dots-icon">-->
-<!--                                                                    <use-->
-<!--                                                                        xlink:href="assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>-->
-<!--                                                                    </svg>-->
-<!--                                                                </a>-->
-
-<!--                                                                <div class="dropdown-menu">-->
-<!--                                                                    <a class="dropdown-item comment-action"-->
-<!--                                                                       href="javascript:void(0)"-->
-<!--                                                                       @click="editComment(comment,index)"-->
-<!--                                                                       v-if="user.id == comment.user_id">Edit</a>-->
-
-<!--                                                                       <a href="javascript:void(0)"-->
-<!--                                                                          class="dropdown-item comment-action"-->
-<!--                                                                          @click="deleteComment(comment,index)"-->
-<!--                                                                          v-show="!comment.like_count"-->
-<!--                                                                          v-if="user.id == comment.user_id || $parent.challenge.isAuthor">-->
-<!--                                Delete-->
-<!--                            </a>-->
-<!--                                                                </div>-->
-<!--                                                            </div>-->
                                  <div class="more" v-show="!comment.like_count"><svg class="olymp-three-dots-icon"><use
                                      xlink:href="assets/svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
 								<ul class="more-dropdown">
@@ -79,8 +54,7 @@
 
                             <div class="attachment-container d-flex mb-3"
                                  v-if="comment.attachments && comment.attachments.length">
-                           <div class="attachmemt mr-2">
-                                <img :src="attachment.url" class="img-thumbnail" alt="Attachment"
+                                <img :src="attachment.path" class="img-thumbnail" alt="Attachment"
                                      v-for="attachment in comment.attachments" :key="attachment.id">
                            </div>
                             </div>
@@ -98,14 +72,6 @@
                                 </div>
                                 <input type="hidden" name="comment_id" :value="comment.id" required>
                             </div>
-                            <!--                            <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">-->
-                            <!--                                <div class="form-group is-empty">-->
-                            <!--                                    <label class="control-label"></label>-->
-                            <!--                                    <input type="file" name="attachment" :id="`attachment_${comment.id}`"-->
-                            <!--                                           class="form-control">-->
-                            <!--                                </div>-->
-                            <!--                                <input type="hidden" name="comment_id" :value="comment.id" required>-->
-                            <!--                            </div>-->
 
                             <div class="col-12 text-right">
                                     <button type="submit" class="btn btn-primary btn-sm">Update
@@ -283,40 +249,44 @@
 
                 <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
                      v-if="!winner && $parent.challenge.can_comment">
-<!--                    <form @submit="onSubmit" class="comment-form inline-items" enctype="multipart/form-data">-->
+                    <form @submit="onSubmit" class="comment-form inline-items" enctype="multipart/form-data">
 
-<!--						<div class="post__author author vcard inline-items">-->
-<!--&lt;!&ndash;							<img src="img/author-page.jpg" alt="author">&ndash;&gt;-->
+						<div class="post__author author vcard inline-items">
+<!--							<img src="img/author-page.jpg" alt="author">-->
 
-<!--							<div class="form-group with-icon-right ">-->
-<!--								<textarea class="form-control" v-model="comment_text" name="comment_text" placeholder=""></textarea>-->
-<!--								<div class="add-options-message">-->
-<!--                                    <label for="attachment">-->
-<!--										<svg class="olymp-camera-icon">-->
-<!--											<use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-camera-icon"></use>-->
-<!--										</svg>-->
-<!--                                    <input type="file" name="attachment" :id="attachment" style="display: none">-->
-<!--                                    </label>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</div>-->
+							<div class="form-group with-icon-right ">
+								<textarea class="form-control" v-model="comment_text" name="comment_text" placeholder="" required></textarea>
+								<div class="add-options-message">
+                                    <div>
+                                       <label for="attachment">
+										<svg class="olymp-camera-icon">
+											<use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-camera-icon"></use>
+										</svg>
 
-<!--						<button class="btn btn-md-2 btn-primary">Post Comment</button>-->
+                                    </label>
+                                        <input type="file" name="attachment" style="display: none" id="attachment" @change="attachment">
+                                    </div>
 
-<!--						<button class="btn btn-md-2 btn-border-think c-grey btn-transparent custom-color">Cancel</button>-->
+								</div>
+							</div>
+						</div>
 
-<!--					</form>-->
-                    <form @submit="onSubmit" class="comments-form" enctype="multipart/form-data">
-                        <div class="crumina-module crumina-heading with-title-decoration">
-                            <h5 class="heading-title">Write a Comment</h5>
-                        </div>
-                        <div class="row">
-                            <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group label-floating is-empty">
-                                    <label class="control-label">Your Comment</label>
-                                    <textarea v-model="comment_text" name="comment_text" class="form-control"
-                                              placeholder="" required></textarea>
-                                </div>
+						<button class="btn btn-md-2 btn-primary">Post Comment</button>
+
+						<button class="btn btn-md-2 btn-border-think c-grey btn-transparent custom-color">Cancel</button>
+
+					</form>
+<!--                    <form @submit="onSubmit" class="comments-form" enctype="multipart/form-data">-->
+<!--                        <div class="crumina-module crumina-heading with-title-decoration">-->
+<!--                            <h5 class="heading-title">Write a Comment</h5>-->
+<!--                        </div>-->
+<!--                        <div class="row">-->
+<!--                            <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">-->
+<!--                                <div class="form-group label-floating is-empty">-->
+<!--                                    <label class="control-label">Your Comment</label>-->
+<!--                                    <textarea v-model="comment_text" name="comment_text" class="form-control"-->
+<!--                                              placeholder="" required></textarea>-->
+<!--                                </div>-->
 
 <!--                                                                <div class="form-group">-->
 <!--                                                                    <label class="control-label"></label>-->
@@ -324,11 +294,11 @@
 <!--                                                                           class="form-control">-->
 <!--                                                                </div>-->
 
-                                    <button type="submit" class="btn btn-primary w-100" id="comment-box">Post your Comment
-                                    </button>
-                            </div>
-                        </div>
-                    </form>
+<!--                                    <button type="submit" class="btn btn-primary w-100" id="comment-box">Post your Comment-->
+<!--                                    </button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </form>-->
 
                     <!-- ... end Comment Form -->
 
@@ -437,7 +407,8 @@
                 comment_text: '',
                 comments: [],
                 winner: false,
-                user: USER
+                user: USER,
+                file: null
             }
         },
         watch: {
@@ -446,6 +417,11 @@
             }
         },
         methods: {
+            attachment(evt) {
+                let files = evt.target.files || evt.dataTransfer.files;
+                this.file = files[0];
+                console.log(this.file,'image');
+            },
             onSubmit(evt) {
                 if (!$(evt.target)[0].checkValidity()) {
                     this.$toast.open({
@@ -466,6 +442,8 @@
                 if (!bodyFormData.get('comment_text'))
                     bodyFormData.set('comment_text', this.comment_text);
                 bodyFormData.set('challenge_id', this.comment_type_id);
+                if (this.file)
+                    bodyFormData.set('attachment', this.file);
                 if (bodyFormData.get('comment_text'))
                     this.axios.post(APP.baseUrl + '/challenges/store-comment', bodyFormData)
                         .then((response) => {

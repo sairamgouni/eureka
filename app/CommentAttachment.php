@@ -11,10 +11,10 @@ class CommentAttachment extends Model
         'path'
     ];
 
-    protected $appends = ['url'];
+//    protected $appends = ['path'];
 
-    public function getUrlAttribute()
+    public function getPathAttribute()
     {
-        return url(\Storage::url($this->path));
+        return asset('storage/'.$this->attributes['path']);
     }
 }

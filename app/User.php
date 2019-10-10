@@ -291,12 +291,36 @@ class User extends Authenticatable
             ->get()
             ->pluck('followable_id')
             ->toArray();
+
         $usersfollowings = $this->followers(User::class)->get();
-        $list = \App\User::with('followings')->whereNotIn('id', $following_users)
-            ->where('id', '!=', $this->id)
-//            ->where('campaign', '=', $this->campaign)
+
+        $list = \App\User::with('followings','campaign','country')
+            ->select('users.id','users.image','users.slug','users.about','users.department_name','users.rid','users.cid','users.name','users.reputation')
+            ->join('eureka_campaigns','eureka_campaigns.department_name','=','users.department_name')
+            ->where('users.id', '!=', $this->id)
+            ->where('eureka_campaigns.department_name',auth()->user()->department_name)
+            ->whereNotIn('users.id', function($query) {
+                $query->select('followable_id')
+                    ->from('followables')->where('user_id',auth()->user()->id);
+            })
+//            ->whereNotIn('users.id', $following_users)
             ->limit($limit)->get();
-        return \App\User::processFrends($list, $usersfollowings);
+
+        if($list->count() > 0) {
+            return \App\User::processFrends($list, $usersfollowings);
+        } else
+            {
+                $following_users = $this->followings()->select('followables.followable_id')
+                    ->get()
+                    ->pluck('followable_id')
+                    ->toArray();
+                $usersfollowings = $this->followers(User::class)->get();
+                $list = \App\User::with('followings')->whereNotIn('id', $following_users)
+                    ->where('id', '!=', $this->id)
+//            ->where('campaign', '=', $this->campaign)
+                    ->limit($limit)->get();
+                return \App\User::processFrends($list, $usersfollowings);
+}
     }
 
     public static function processFrends($friends, $usersfollowings)
@@ -321,7 +345,7 @@ class User extends Authenticatable
             $item['is_following'] = (int)$user->isFollowing($friend);
             $item['location'] = $friend->country->title;
             $item['reputation'] = $friend->reputation;
-            $item['campaign'] = $friend->campaign->campaign;
+            $item['campaign'] =  $friend->campaign;
             $item['member_from'] = date('M Y', strtotime($user->updated_at));
 
             $list[] = $item;
@@ -352,6 +376,7 @@ class User extends Authenticatable
         }
         return $list;
     }
+
 
 
     public function getFriendsList($limit = 5)

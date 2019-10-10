@@ -263,6 +263,9 @@ class Challenge extends Model
             $item['categories'] = $record->categories;
             $item['active_from'] =$startDate;
             $item['active_to'] = $endDate->subDay(1);
+            $item['today'] = $mytime =Carbon::now();
+
+            $item['daysleft'] =$endDate->diffForHumans(null, true).' remaining';
 
             if ($user) {
                 $item['isUserLiked'] = (int)$user->hasLiked($record);

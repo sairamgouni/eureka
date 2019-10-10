@@ -9,7 +9,15 @@
 
                     <article class="hentry blog-post single-post single-post-v3">
                         <h1 class="post-title">{{challenge.title}}</h1>
-                        <!--                        <a href="#" class="post-category bg-primary">Digital</a>-->
+
+                        <div class="author-date" v-if="challenge.active_to < challenge.today">
+                            Expired on: <a href="javascript:;" style="color:#000000;">{{moment(challenge.active_to).format('DD MMMM YYYY')}}</a>
+                        </div>
+
+                        <div class="author-date" v-else>
+                            Expiring on: <a href="javascript:;" style="color:#000000;">{{moment(challenge.active_to).format('DD MMMM YYYY')}} (+{{challenge.daysleft}})</a>
+                        </div>
+
                         <a href="javascript:;" class="post-category bg-primary" v-for="category in challenge.categories"
                            style="margin-right: 5px;">{{ category.title }}</a>
 
@@ -639,6 +647,7 @@
                 challenge: '',
                 posts: [],
 
+
             }
         },
         computed: {
@@ -692,6 +701,9 @@
             }
         },
         methods: {
+            moment(date) {
+                return moment(date);
+            },
             updateLike(itemId) {
                 // console.log('index '+index);
                 if (!this.userLogin) {
@@ -843,5 +855,6 @@
     .author-thumb img {
         width: 35px !important;
     }
+    a {font-size: 12px}
 
 </style>
