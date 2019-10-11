@@ -18,7 +18,7 @@ class UserFollowed extends Notification
      * @return void
      */
     public $followed_by = null;
-    
+
     public function __construct( User $user)
     {
          $this->followed_by = $user;
@@ -32,7 +32,7 @@ class UserFollowed extends Notification
      */
     public function via($notifiable)
     {
-       return ['database'];
+       return ['mail'];
     }
 
     /**

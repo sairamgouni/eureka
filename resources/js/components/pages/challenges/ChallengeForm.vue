@@ -102,7 +102,7 @@
                             ></b-form-file>
 
 
-                            <multiselect required
+                            <multiselect
                                          class="mt-3"
                                          v-model="form.selectedList"
                                          required
@@ -116,7 +116,10 @@
                                          @tag="addTag"
                                          aria-required="true"
                                          :hide-selected="true"
-                                         v-on:input="limiter" :limit="3" ></multiselect>
+                                         :max="3" >
+                                <template slot="maxElements" slot-scope="props">
+                                   <span class="option_title">maximum 3 allowed</span></template>
+                            </multiselect>
 
                             <!--    <b-form-group label="Categories"  class="mt-2 checkbox">
                                  <b-form-checkbox-group
@@ -369,5 +372,8 @@
     }
     .multiselect__option--highlight {
         background: #e91d24!important;
+    }
+    .multiselect__tags{
+        width: 426px !important;
     }
 </style>

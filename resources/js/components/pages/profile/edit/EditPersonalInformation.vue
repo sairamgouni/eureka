@@ -223,7 +223,7 @@ export default {
                               this.$store.commit('setUserBackgroundImage', response.data.background_image );
                               this.$store.commit('setUserImage', response.data.image );
 
-                                this.userImage = this.$store.getters.getUserImage.replace('/users/thumbs/', '');
+                                this.userImage = this.$store.getters.getUserImage.replace(APP.baseUrl+'/storage/users/thumbs/', '');
 					            this.userBackgroundImage = this.$store.getters.getUserBackgroundImage.replace('/users/backgrounds/', '');
 					            // this.userName = this.$store.getters.getUserName;
 					  			this.userAbout = this.form.about;
@@ -256,7 +256,7 @@ export default {
             this.userLogin = this.$store.getters.getLogin;
             this.userId = this.$store.getters.getUserId;
             this.userSlug = this.$store.getters.getUserSlug;
-            this.userImage = this.$store.getters.getUserImage.replace('/users/thumbs/', '');
+            this.userImage = this.$store.getters.getUserImage.replace(APP.baseUrl+'/storage/users/thumbs/', '');
             this.userBackgroundImage = this.$store.getters.getUserBackgroundImage.replace('/users/backgrounds/', '');
             this.userEmail = this.$store.getters.getUserEmail;
             this.userAbout = this.$store.getters.getUserAbout;
