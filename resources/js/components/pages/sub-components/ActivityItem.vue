@@ -326,4 +326,13 @@
         width: 197px;
         height: 194px;
     }
+    .blog-post .post__author-name {
+        font-size: 13px !important;
+    }
+
+    .blog-post .author-date {
+        text-transform: capitalize;
+        font-size: 13px;
+
+    }
 </style>

@@ -6,14 +6,13 @@
                 <div class="ui-block mb60">
 
                     <!-- Single Post -->
-
-                    <article class="hentry blog-post single-post single-post-v3">
+                    <article class="hentry blog-post single-post single-post-v3 ">
                         <h1 class="post-title">{{challenge.title}}</h1>
                         <div class="author-date" v-if="challenge.active_to < challenge.today">
-                            Expired On: <a href="javascript:;" class="h6 post__author-name fn">{{moment(challenge.active_to).format('DD MMMM YYYY')}}</a>
+                            Expired On: <a href="javascript:;" class="h5 post__author-name fn">{{moment(challenge.active_to).format('DD MMMM YYYY')}}</a>
                         </div>
                         <div class="author-date" v-else>
-                           Expiring  On <a href="javascript:;" class="h6 post__author-name fn">{{moment(challenge.active_to).format('DD MMMM YYYY')}} (+{{challenge.daysleft}})</a>
+                           Expiring  On <a href="javascript:;" class="h5 post__author-name fn">{{moment(challenge.active_to).format('DD MMMM YYYY')}} (+{{challenge.daysleft}})</a>
                         </div>
                         <div>
                             <p>
@@ -857,6 +856,15 @@
     a {font-size: 12px}
     .single-post h1, .single-post h2, .single-post h3, .single-post h4, .single-post h5, .single-post h6, .single-post .h1, .single-post .h2, .single-post .h3, .single-post .h4, .single-post .h5, .single-post .h6, .single-post p {
         line-height: 0.5 !important;
+    }
+    .blog-post .post__author-name {
+        font-size: 13px !important;
+    }
+
+    .blog-post .author-date {
+        text-transform: capitalize;
+        font-size: 13px;
+
     }
 
 </style>
