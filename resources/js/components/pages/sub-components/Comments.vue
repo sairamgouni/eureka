@@ -287,7 +287,7 @@
 							</div>
 						</div>
 
-						<button class="btn btn-md-2 btn-primary">Post Comment</button>
+						<button class="btn btn-md-2 btn-primary" id="comment-box">Post Comment</button>
 
 					</form>
 <!--                    <form @submit="onSubmit" class="comments-form" enctype="multipart/form-data">-->
@@ -448,10 +448,10 @@
             },
             onSubmit(evt) {
                 if (!$(evt.target)[0].checkValidity()) {
-                    this.$toast.open({
-                        message: 'Comment can\'t be empty',
-                        type: 'error'
-                    });
+                    // this.$toast.open({
+                    //     message: 'Comment can\'t be empty',
+                    //     type: 'error'
+                    // });
                     return false;
                 }
 
@@ -474,10 +474,10 @@
                             loader.hide();
                             if (response.status == 200) {
                                 this.comment_text = '';
-                                this.$toast.open({
-                                    message: 'Comment posted..! ',
-                                    type: 'success'
-                                });
+                                // this.$toast.open({
+                                //     message: 'Comment posted..! ',
+                                //     type: 'success'
+                                // });
                                 this.$set(this.$parent.challenge, 'ideas', this.$parent.challenge.ideas + 1)
                                 // this.$parent.challenge.ideas=
                                 this.loadComments();
@@ -553,11 +553,11 @@
                             }
                             this.$set(this.comments, index, comment);
 
-                            this.$toast.open({
-
-                                message: response.data ? 'Comment Liked' : 'Comment un liked',
-                                type: 'success'
-                            });
+                            // this.$toast.open({
+                            //
+                            //     message: response.data ? 'Comment Liked' : 'Comment un liked',
+                            //     type: 'success'
+                            // });
                         } else
                             this.$toast.open({
                                 message: 'Something went wrong!',
@@ -611,10 +611,10 @@
 
                             this.$set(this.comments, index, comment);
 
-                            this.$toast.open({
-                                message: response.data ? 'Added to the finalize list' : 'Removed from the finalize list',
-                                type: 'success'
-                            });
+                            // this.$toast.open({
+                            //     message: response.data ? 'Added to the finalize list' : 'Removed from the finalize list',
+                            //     type: 'success'
+                            // });
                         } else
                             this.$toast.open({
                                 message: 'Something went wrong!',
@@ -660,10 +660,10 @@
 
                                     this.$set(this.comments, index, comment);
 
-                                    this.$toast.open({
-                                        message: response.data ? 'Marked as Winner' : 'Removed from winner',
-                                        type: 'success'
-                                    });
+                                    // this.$toast.open({
+                                    //     message: response.data ? 'Marked as Winner' : 'Removed from winner',
+                                    //     type: 'success'
+                                    // });
                                 } else
                                     this.$toast.open({
                                         message: 'Something went wrong!',
@@ -713,10 +713,10 @@
 
                                     }
 
-                                    this.$toast.open({
-                                        message: response.data ? 'Comment Deleted' : "Can't delete comment",
-                                        type: 'success'
-                                    });
+                                    // this.$toast.open({
+                                    //     message: response.data ? 'Comment Deleted' : "Can't delete comment",
+                                    //     type: 'success'
+                                    // });
                                 } else
                                     this.$toast.open({
                                         message: 'Something went wrong!',
@@ -755,10 +755,10 @@
                             loader.hide();
                             if (response.status == 200) {
                                 this.comment_text = '';
-                                this.$toast.open({
-                                    message: 'Comment updated..! ',
-                                    type: 'success'
-                                });
+                                // this.$toast.open({
+                                //     message: 'Comment updated..! ',
+                                //     type: 'success'
+                                // });
                                 // this.$set(this.$parent.challenge, 'ideas', this.$parent.challenge.ideas + 1)
                                 // this.$parent.challenge.ideas=
                                 this.loadComments();

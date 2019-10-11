@@ -98,18 +98,18 @@
                             if(like_value==1)
                             {
                                 this.user.is_following = 1;
-                                this.$toast.open({
-                                    message: 'Following Updated',
-                                    type: 'success'
-                                });
+                                // this.$toast.open({
+                                //     message: 'Following Updated',
+                                //     type: 'success'
+                                // });
                             }
                             else
                             {
                                 this.user.is_following = 0;
-                                this.$toast.open({
-                                    message: 'Unfollowing Updated',
-                                    type: 'success'
-                                });
+                                // this.$toast.open({
+                                //     message: 'Unfollowing Updated',
+                                //     type: 'success'
+                                // });
                             }
                         }
                     })

@@ -14,7 +14,6 @@
                                 id="title"
                                 type="text"
                                 v-model="form.title"
-                                required
                                 placeholder="Title" />
                             </b-form-group>
 
@@ -23,7 +22,6 @@
                                 id="description"
                                 v-model="form.description"
                                 placeholder="Enter description..."
-                                required
                             ></b-form-textarea>
 
                             <b-form-file
@@ -37,7 +35,7 @@
                             <span>{{challengeimage()}}</span>
 
 
-                            <multiselect required
+                            <multiselect
                                 class="mt-3"
                                 v-model="form.selectedList"
                                          tag-placeholder="Add this as new tag"
@@ -49,7 +47,11 @@
                                          :taggable="true"
                                          @tag="addTag"
                                          aria-required="true"
-                                         :hide-selected="true"></multiselect>
+                                         :hide-selected="true"
+                                             :max="3">
+                                <template slot="maxElements" slot-scope="props">
+                                    <span class="option_title">maximum 3 allowed</span></template>
+                            </multiselect>
 
 
                             <b-row	>
@@ -91,6 +93,8 @@
     import Datepicker from 'vuejs-datepicker';
     import Multiselect from 'vue-multiselect';
     import  moment from 'moment';
+    import { required, minLength, between } from 'vuelidate/lib/validators'
+
 
     export default {
         props: {
@@ -124,6 +128,14 @@
                     to: '', // Disable all dates up to specific date
                 },
 
+            }
+        },
+        validations: {
+            title: {
+                required
+            },
+            description: {
+                required
             }
         },
         components: {
@@ -207,10 +219,10 @@
                         loader.hide();
                         console.log(response.data,'in response');
                         if (response.data.success==1) {
-                            this.$toast.open({
-                                message: 'Challenge Update ',
-                                type: 'success'
-                            });
+                            // this.$toast.open({
+                            //     message: 'Challenge Update ',
+                            //     type: 'success'
+                            // });
                             this.hideModal();
                             this.$emit('output','success');
 

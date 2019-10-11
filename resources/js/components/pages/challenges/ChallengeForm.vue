@@ -81,7 +81,7 @@
 
 
                             <b-form-textarea
-                                class="mt-2"
+                                class="mt-2 "
                                 id="description"
                                 v-model="form.description"
                                 placeholder="Enter description..."
@@ -171,11 +171,14 @@
 <script>
     import Datepicker from 'vuejs-datepicker';
     import Multiselect from 'vue-multiselect';
+    import { required } from 'vuelidate/lib/validators'
+
 
     export default {
         data () {
             return {
                 modalId: 'challenge',
+                description:'',
                 form: {
                     title: '',
                     description: '',
@@ -197,6 +200,11 @@
                 disabledDatesStart: {
                     to: '', // Disable all dates up to specific date
                 }
+            }
+        },
+        validations: {
+            description: {
+                required
             }
         },
         components: {
@@ -286,10 +294,10 @@
                                 activeFrom:'' ,
                             };
                             this.$parent.$refs.activityfeed.loadActivities();
-                            this.$toast.open({
-                                message: 'Challenge Created ',
-                                type: 'success'
-                            });
+                            // this.$toast.open({
+                            //     message: 'Challenge Created ',
+                            //     type: 'success'
+                            // });
 
                             this.hideModal();
                             this.$emit('output','success');

@@ -101,10 +101,10 @@
                         // loader.hide();
                         if (response.status == 200) {
                             USER = response.data.user;
-                            this.$toast.open({
-                                message: 'password Updated',
-                                type: 'success'
-                            });
+                            // this.$toast.open({
+                            //     message: 'password Updated',
+                            //     type: 'success'
+                            // });
                             this.$router.push('/');
 
 

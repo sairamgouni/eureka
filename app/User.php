@@ -411,7 +411,7 @@ class User extends Authenticatable
         $list = [];
         foreach ($notifications as $item) {
             $data = $item->data;
-            if (!count($data))
+            if (!count(array($data)))
                 continue;
             $data = $data[0]?? $data;
             $data['read_at'] = !!$item->read_at;

@@ -1,4 +1,5 @@
 <template>
+<div>
     <div class="container">
         <div class="row">
             <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -32,7 +33,7 @@
 
 
                         <div class="form-group with-button">
-                            <input class="form-control" type="text" placeholder="Search" v-model="search">
+                            <input class="form-control" type="text" placeholder="Search" v-model="challengesSearch">
                             <button @click.prevent="searchChallenges()">
                                 <svg class="olymp-magnifying-glass-icon">
                                     <use
@@ -46,49 +47,49 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container">
+        <div class="row sorting-container" id="posts-grid-1" data-layout="masonry" v-if="challenges && challenges.length">
+            <div class="col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 sorting-item" v-for="(item, index) in challenges">
+                <div class="ui-block">
+                    <article class="hentry blog-post blog-post-v1">
 
-        <div class="container">
-            <div class="row sorting-container" id="posts-grid-1" data-layout="masonry" v-if="challenges && challenges.length">
-                <div class="col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 sorting-item" v-for="(item, index) in challenges">
-                    <div class="ui-block">
-                        <article class="hentry blog-post blog-post-v1">
+                        <div class="post-ribbon" v-if="item.winner == 1">
+                            <span>Completed</span>
+                        </div>
+                        <div class="post-thumb">
 
-                            <div class="post-ribbon" v-if="item.winner == 1">
-                                <span>Completed</span>
-                            </div>
-                            <div class="post-thumb">
+                            <img style="width: 337.98px; height: 240.36px;" :src="item.resizeImage" :alt="item.title">
 
-                                <img style="width: 337.98px; height: 240.36px;" :src="item.resizeImage" :alt="item.title">
+                            <div class="post-content">
+                                <a href="javascript:;" class="post-category bg-primary" v-for="category in item.categories" style="margin-right: 5px;">{{ category.title }}</a>
+                                <router-link
+                                    :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
+                                    class="h4 post-title">
+                                    {{item.title.length > 25 ? item.title.substring(0,45)+'..' : item.title}}
+                                    <!--                                                                                {{item.title}}-->
+                                </router-link>
 
-                                <div class="post-content">
-                                    <a href="javascript:;" class="post-category bg-primary" v-for="category in item.categories" style="margin-right: 5px;">{{ category.title }}</a>
-                                    <router-link
-                                                                                :to="{ name: 'ChallengeDetails', params: { id: item.id, slug: item.slug } }"
-                                                                                class="h4 post-title">
-                                        {{item.title.length > 25 ? item.title.substring(0,45)+'..' : item.title}}
-<!--                                                                                {{item.title}}-->
-                                                                            </router-link>
-
-                                    <div class="author-date">
-                                        by
-                                        <a class="h6 post__author-name fn" href="#">{{item.user.name}}</a>
-                                        <div class="post__date">
-                                            <time class="published" datetime="2017-03-24T18:18">
-                                                {{item.created_at}}
-                                            </time>
-                                        </div>
-                                    </div>
-                                    <div class="author-date">
-                                        <div class="post__location">{{item.campaign}}, {{item.location}}</div>
+                                <div class="author-date">
+                                    by
+                                    <a class="h6 post__author-name fn" href="#">{{item.user.name}}</a>
+                                    <div class="post__date">
+                                        <time class="published" datetime="2017-03-24T18:18">
+                                            {{item.created_at}}
+                                        </time>
                                     </div>
                                 </div>
+                                <div class="author-date">
+                                    <div class="post__location">{{item.campaign}}, {{item.location}}</div>
+                                </div>
                             </div>
+                        </div>
 
-                            <div class="post-additional-info inline-items">
+                        <div class="post-additional-info inline-items">
 
-                                <div class="friends-harmonic-wrap">
-                                    <ul class="friends-harmonic">
-                                        <li>
+                            <div class="friends-harmonic-wrap">
+                                <ul class="friends-harmonic">
+                                    <li>
                                         <a href="javascript:void(0);" @click="updateLike(item.id);"
                                            class="post-add-icon inline-items"
                                            v-bind:class="{ active: (item.isUserLiked==1)? true : false }"
@@ -101,32 +102,32 @@
                                         </a>
                                     </li>
 
-                                    </ul>
-                                    <div class="names-people-likes">
-                                        {{item.likes}}
-                                    </div>
+                                </ul>
+                                <div class="names-people-likes">
+                                    {{item.likes}}
                                 </div>
-
-                                <div class="comments-shared">
-                                    <a href="#" class="post-add-icon inline-items">
-                                        <svg class="olymp-speech-balloon-icon">
-                                            <use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
-                                        </svg>
-                                        <span>{{item.comments}}</span>
-                                    </a>
-                                </div>
-
                             </div>
 
-                        </article>
+                            <div class="comments-shared">
+                                <a href="#" class="post-add-icon inline-items">
+                                    <svg class="olymp-speech-balloon-icon">
+                                        <use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
+                                    </svg>
+                                    <span>{{item.comments}}</span>
+                                </a>
+                            </div>
 
-                        <!-- ... end Post -->
-                    </div>
+                        </div>
+
+                    </article>
+
+                    <!-- ... end Post -->
                 </div>
             </div>
         </div>
 
     </div>
+</div>
 </template>
 
 <script>
@@ -180,13 +181,12 @@
             moment(date) {
                 return moment(date);
             },
-            searchChallenges(){
-                fetch('/challenge/search?q='+this.search)
+            searchChallenges() {
+                fetch('/challenge/search?q='+this.challengesSearch)
                     .then(res => res.json())
                     .then(res =>{
-                        console.log(res,'challaneges search')
                         this.challenges = res;
-                        this.search ='';
+                        this.challengesSearch ='';
 
                     })
                     .catch(err => {

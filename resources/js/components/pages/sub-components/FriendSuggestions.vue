@@ -78,18 +78,18 @@ export default {
             if (this.list[index].id == itemId) {
               if (like_value == 1) {
                 this.list[index].is_following = 1;
-                this.$toast.open({
-                  message: "Following Updated",
-                  type: "success"
-                });
+                // this.$toast.open({
+                //   message: "Following Updated",
+                //   type: "success"
+                // });
                 break;
               } else {
                 if (this.list[index].is_following == 1) {
                   this.list[index].is_following = 0;
-                  this.$toast.open({
-                    message: "Unfollowing Updated",
-                    type: "success"
-                  });
+                  // this.$toast.open({
+                  //   message: "Unfollowing Updated",
+                  //   type: "success"
+                  // });
                 }
               }
             }

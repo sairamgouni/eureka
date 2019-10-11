@@ -7,11 +7,12 @@ import routes from './routes/routes';
 import store from './services/store';
 import VueSweetalert2 from 'vue-sweetalert2';
 import VueEditor from "vue2-editor";
+import Vuelidate from 'vuelidate'
 
 
 window.Vue=Vue;
 
-
+Vue.use(Vuelidate)
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import 'vue-toast-notification/dist/index.css';

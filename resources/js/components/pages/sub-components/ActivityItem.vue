@@ -35,16 +35,12 @@
                 <a href="javascript:;" @click="challengedetail(item)" class="h4 title">
                     {{item.title}}
                 </a>
-                <p  v-if="item.active_to < item.today">
-
-                    Expired on: <a href="javascript:;" style="color:#000000;">{{moment(item.active_to).format('DD MMMM YYYY')}}</a>
-                </p>
-                <p v-else>
-
-                    Expiring on: <a href="javascript:;" style="color:#000000;">{{moment(item.active_to).format('DD MMMM YYYY')}} (+{{item.daysleft}})</a>
-
-                </p>
-
+                <div class="author-date" v-if="item.active_to < item.today">
+                    Expired On <a href="javascript:;" class="h6 post__author-name fn">{{moment(item.active_to).format('DD MMMM YYYY')}}</a>
+                </div>
+                <div class="author-date" v-else>
+                    Expiring On <a href="javascript:;" class="h6 post__author-name fn">{{moment(item.active_to).format('DD MMMM YYYY')}} (+{{item.daysleft}})</a>
+                </div>
                 <p>
                     <read-more more-str="See more" :text="item.description" less-str="See less" :max-chars="300"></read-more>
                 </p>

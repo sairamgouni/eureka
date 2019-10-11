@@ -9,13 +9,11 @@
 
                     <article class="hentry blog-post single-post single-post-v3">
                         <h1 class="post-title">{{challenge.title}}</h1>
-
                         <div class="author-date" v-if="challenge.active_to < challenge.today">
-                            Expired on: <a href="javascript:;" style="color:#000000;">{{moment(challenge.active_to).format('DD MMMM YYYY')}}</a>
+                            Expired On: <a href="javascript:;" class="h6 post__author-name fn">{{moment(challenge.active_to).format('DD MMMM YYYY')}}</a>
                         </div>
-
                         <div class="author-date" v-else>
-                            Expiring on: <a href="javascript:;" style="color:#000000;">{{moment(challenge.active_to).format('DD MMMM YYYY')}} (+{{challenge.daysleft}})</a>
+                           Expiring  On <a href="javascript:;" class="h6 post__author-name fn">{{moment(challenge.active_to).format('DD MMMM YYYY')}} (+{{challenge.daysleft}})</a>
                         </div>
                         <div>
                             <p>
@@ -857,5 +855,8 @@
         width: 35px !important;
     }
     a {font-size: 12px}
+    .single-post h1, .single-post h2, .single-post h3, .single-post h4, .single-post h5, .single-post h6, .single-post .h1, .single-post .h2, .single-post .h3, .single-post .h4, .single-post .h5, .single-post .h6, .single-post p {
+        line-height: 0.5 !important;
+    }
 
 </style>

@@ -20,22 +20,20 @@
 
             <div class="mCustomScrollbar" data-mcs-theme="dark">
 
-                <div class="control-block">`
+                <div class="control-block">
                     <div class="author-page author vcard inline-items">
                         <div class="author-thumb">
                             <img :alt="userName" :src="userImage" class="avatar">
-                            <span class="icon-status online"></span>
                         </div>
-                        <a href="#" class="author-name fn">
+                        <router-link
+                            :to="{ name: 'ProfileEuraka', params: { id: userId, slug: userSlug } }"
+                            class="nav-link author-name fn">
+
                             <div class="author-title">
-                                James Spiegel
-                                <svg class="olymp-dropdown-arrow-icon">
-                                    <use
-                                        :xlink:href="`assets/svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon`"></use>
-                                </svg>
+                                {{name.length > 8 ? name.substring(0,8)+'..' : name}} <svg class="olymp-dropdown-arrow-icon"><use xlink:href="assets/svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"></use></svg>
                             </div>
-                            <span class="author-subtitle">SPACE COWBOY</span>
-                        </a>
+                            <span class="author-subtitle">{{ userCampaign.campaign}}</span>
+                        </router-link>
                     </div>
                 </div>
 
@@ -182,10 +180,11 @@
                 userImage: '',
                 userName: '',
                 userLevel: '',
-                notifications: [],
+                name:'',
             }
         },
         methods:{
+
             logout() {
 
                 // evt.preventDefault();
@@ -206,19 +205,24 @@
                     });
                 // console.log('logout ended');
             },
-            created() {
-                this.userLogin = this.$store.getters.getLogin;
-                this.userId = this.$store.getters.getUserId;
-                this.userSlug = this.$store.getters.getUserSlug;
-                this.userImage = this.$store.getters.getUserImage;
-                this.userName = this.$store.getters.getUserName;
-                this.userLevel = this.$store.getters.getUserLevel;
-                this.userCampaign = this.$store.getters.getUserCampaign;
-            }
+
+        },
+        created() {
+            console.log(this.$store.getters.getName,'usernamehere');
+            this.userLogin = this.$store.getters.getLogin;
+            this.userId = this.$store.getters.getUserId;
+            this.userSlug = this.$store.getters.getUserSlug;
+            this.userImage = this.$store.getters.getUserImage;
+            this.userName = this.$store.getters.getUserName;
+            this.userLevel = this.$store.getters.getUserLevel;
+            this.name = this.$store.getters.getName;
+            this.userCampaign = this.$store.getters.getUserCampaign;
         }
     }
 </script>
 
 <style scoped>
-
+    .author-thumb img {
+        width: 35px !important;
+    }
 </style>

@@ -162,7 +162,10 @@ class ChallengeController extends Controller
             $challenger = \App\User::where('id', '=', $challange->created_by)->first();
             $challenger->givePoint(new \App\Gamify\Points\ChallengeLiked($challange));
 
-            $challenger->notify(new \App\Notifications\ChallengeLiked($challange, $user));
+            if($challenger->id != $user->id){
+                $challenger->notify(new \App\Notifications\ChallengeLiked($challange, $user));
+            }
+
         }
 
         $log_message = ' has ' . $liked . ' the challenge ' . '<a href="/#/challenge-details/'.$challange->id.'/'.$challange->slug.'">'.$challange->title.'</a>';
@@ -243,7 +246,10 @@ class ChallengeController extends Controller
         $challenger = \App\User::where('id', '=', $challenge->created_by)->first();
         $challenger->givePoint(new \App\Gamify\Points\ChallengeCommented($challenge));
 
-        $challenger->notify(new \App\Notifications\CommentAdded($challenge, $user));
+        if($challenger->id != $user->id){
+            $challenger->notify(new \App\Notifications\CommentAdded($challenge, $user));
+
+        }
         return response()->json(['success' => 1, 'message' => 'Comment Posted']);
 
     }

@@ -32,7 +32,7 @@ class ChallengeWinner extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database','mail'];
     }
 
     /**

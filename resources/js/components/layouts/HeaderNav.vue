@@ -141,9 +141,9 @@
                     data: data
                 })
                     .then((response) => {
-                        // console.log('got notifications');
+                       console.log('got notifications');
                         this.notifications = response.data.notifications;
-                        // console.log(response);
+                     console.log(response);
                     });
             },
         },

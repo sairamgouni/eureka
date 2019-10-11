@@ -228,10 +228,10 @@ export default {
 					            // this.userName = this.$store.getters.getUserName;
 					  			this.userAbout = this.form.about;
 					            this.userNickname = this.form.nickname;
-                            this.$toast.open({
-                                message: 'Profile Updated',
-                                type: 'success'
-                            });
+                            // this.$toast.open({
+                            //     message: 'Profile Updated',
+                            //     type: 'success'
+                            // });
                             setTimeout(()=>{
                                 this.$router. push({name:'ProfileEuraka', params:{id: this.userId, slug: this.userSlug }});
                             },500)
